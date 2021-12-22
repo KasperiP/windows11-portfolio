@@ -1,0 +1,6 @@
+.container {
+	background-image: url('/images/wallpaper.jpg');
+	background-size: cover;
+	height: 100%;
+	background-position: center;
+}
