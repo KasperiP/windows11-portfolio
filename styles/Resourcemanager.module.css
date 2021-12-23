@@ -1,0 +1,93 @@
+.container {
+	position: absolute;
+	height: calc(100% - 50px);
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 100;
+}
+.resourcemanager {
+	background-color: #191919;
+	width: 55rem;
+	height: 35rem;
+	max-width: 95%;
+	border-radius: 10px;
+}
+
+.nav {
+	background-color: #202020;
+	border-radius: 10px 10px 0 0;
+	height: 5.2rem;
+}
+.top {
+	display: flex;
+	justify-content: space-between;
+	padding: 5px;
+	height: 2.5rem;
+}
+.topContainer {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+}
+.iconContainer {
+	display: flex;
+	align-items: center;
+	gap: 32px;
+	color: #fff;
+	padding-right: 10px;
+}
+.manage {
+	display: flex;
+	color: #fff;
+	height: 2.7rem;
+	align-items: center;
+	gap: 5px;
+	padding-left: 20px;
+}
+.manageNew,
+.manageSort,
+.manageView {
+	height: 100%;
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	padding-right: 10px;
+}
+.manageNew,
+.manageView {
+	border-right: 2px solid #32323285;
+}
+.manageSort {
+	border-left: 2px solid #32323285;
+	padding-left: 10px;
+}
+.manageActions {
+	display: flex;
+	gap: 20px;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+.manageMore {
+	margin-left: 10px;
+}
+.navigate {
+	display: flex;
+	justify-content: space-between;
+}
+.navigatePath {
+	display: flex;
+	color: #fff;
+	border: 2px solid #32323285;
+	height: 100%;
+	width: 60%;
+	align-items: center;
+	justify-content: space-between;
+}
+.arrows {
+	display: flex;
+	align-items: center;
+	color: #fff;
+	width: 10%;
+}

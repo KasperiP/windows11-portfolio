@@ -1,28 +1,6 @@
 .container {
-    background-image: url("/images/wallpaper.jpg");
-    background-size: cover;
-    height: 100%;
-    background-position: center;
-    padding: 5px;
-}
-.content {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-gap: 5px;
-}
-.item {
-    height: 60px;
-    width: 80px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    padding: 0 5px 0 5px;
-    text-align: center;
-    border-radius: 5px;
-}
-
-.item p {
-    color: white;
-    font-size: 0.7rem;
+	background-image: url('/images/wallpaper.jpg');
+	background-size: cover;
+	height: 100%;
+	background-position: center;
 }

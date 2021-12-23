@@ -1,4 +1,6 @@
 .container {
 	height: calc(100vh - 50px);
-	background-color: blue;
+	background-image: url('/images/wallpaper.jpg');
+	background-size: cover;
+	background-position: center;
 }

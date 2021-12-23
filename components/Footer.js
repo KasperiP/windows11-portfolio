@@ -89,7 +89,7 @@ function Footer() {
 					<BsMic />
 				</dir>
 				<dir className={styles.language}>
-					<p>FIN</p>
+					<p>ENG</p>
 				</dir>
 				<div className={styles.icon}>
 					<AiOutlineWifi />

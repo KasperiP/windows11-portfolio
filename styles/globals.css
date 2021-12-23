@@ -4,3 +4,8 @@
 	box-sizing: border-box;
 	font-family: 'Open Sans', sans-serif;
 }
+
+p {
+	color: #fff;
+	font-size: 0.7rem;
+}
