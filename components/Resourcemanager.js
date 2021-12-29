@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from '../styles/Resourcemanager.module.scss';
 import {
 	VscChromeMinimize,
@@ -21,11 +21,15 @@ import { GrRefresh } from 'react-icons/gr';
 import { IoMdRefresh } from 'react-icons/io';
 import { useRouter } from 'next/router';
 
-function Resourcemanager() {
+function Resourcemanager(props) {
 	const router = useRouter();
 
 	const [maximised, setMaximised] = useState(false);
 	const [closed, setClosed] = useState(false);
+
+	// Dropdowns
+	const [quickaccess, setQuickaccess] = useState(true);
+	const [thisPC, setThisPC] = useState(true);
 
 	const handleMaximize = () => {
 		setMaximised(!maximised);
@@ -40,17 +44,21 @@ function Resourcemanager() {
 	};
 
 	return (
-		<div className={styles.container}>
-			<section
-				className={styles.main}
-				style={
-					maximised
-						? { height: '100%', width: '100%', borderRadius: '0' }
-						: closed
-						? { opacity: '0' }
-						: {}
-				}
-			>
+		<div
+			className={styles.container}
+			style={
+				maximised && !closed
+					? {
+							height: '100%',
+							width: '100%',
+							borderRadius: '0',
+					  }
+					: closed
+					? { opacity: '0' }
+					: {}
+			}
+		>
+			<section className={styles.main}>
 				<nav>
 					<section className={styles.top}>
 						<div className={styles.topContainer}>
@@ -60,7 +68,7 @@ function Resourcemanager() {
 								width={20}
 								height={20}
 							/>
-							<p>Projects</p>
+							<p>{props.folder}</p>
 						</div>
 						<div className={styles.iconContainer}>
 							<div className={styles.icon}>
@@ -148,7 +156,7 @@ function Resourcemanager() {
 								height={20}
 							/>
 							<AiFillCaretRight />
-							<p>projects</p>
+							<p>{props.folder}</p>
 						</div>
 						<div className={styles.right}>
 							<RiArrowDropDownLine />
@@ -157,12 +165,158 @@ function Resourcemanager() {
 					</div>
 					<div className={styles.navigateSearch}>
 						<VscSearch />
-						<p>Search: projects</p>
+						<p>Search: {props.folder}</p>
 					</div>
 				</section>
 				<section className={styles.contentArea}>
-					<div className={styles.sidebar}></div>
-					<div className={styles.content}></div>
+					<div className={styles.sidebar}>
+						<div
+							className={styles.navigationDropdown}
+							onClick={() => setQuickaccess(!quickaccess)}
+						>
+							<RiArrowDropDownLine />
+							<Image
+								src="/icons/quickaccess.ico"
+								alt="ico"
+								width={16}
+								height={16}
+							/>
+							<p>Quick access</p>
+						</div>
+						{quickaccess && (
+							<>
+								<div className={styles.navigationItem}>
+									<Image
+										src="/icons/desktop.ico"
+										alt="ico"
+										width={16}
+										height={16}
+									/>
+									<p>Desktop</p>
+								</div>
+								<div className={styles.navigationItem}>
+									<Image
+										src="/icons/downloads.ico"
+										alt="ico"
+										width={16}
+										height={16}
+									/>
+									<p>Downloads</p>
+								</div>
+								<div className={styles.navigationItem}>
+									<Image
+										src="/icons/documents.ico"
+										alt="ico"
+										width={16}
+										height={16}
+									/>
+									<p>Documents</p>
+								</div>
+								<div className={styles.navigationItem}>
+									<Image
+										src="/icons/pictures.ico"
+										alt="ico"
+										width={16}
+										height={16}
+									/>
+									<p>Pictures</p>
+								</div>
+							</>
+						)}
+						<div
+							className={styles.navigationDropdown}
+							onClick={() => setThisPC(!thisPC)}
+						>
+							<RiArrowDropDownLine />
+							<Image
+								src="/icons/computer.ico"
+								alt="ico"
+								width={16}
+								height={16}
+							/>
+							<p>This PC</p>
+						</div>
+						{thisPC && (
+							<>
+								{' '}
+								<div className={styles.navigationItem}>
+									<Image
+										src="/icons/desktop.ico"
+										alt="ico"
+										width={16}
+										height={16}
+									/>
+									<p>Desktop</p>
+								</div>
+								<div className={styles.navigationItem}>
+									<Image
+										src="/icons/downloads.ico"
+										alt="ico"
+										width={16}
+										height={16}
+									/>
+									<p>Downloads</p>
+								</div>
+								<div className={styles.navigationItem}>
+									<Image
+										src="/icons/documents.ico"
+										alt="ico"
+										width={16}
+										height={16}
+									/>
+									<p>Documents</p>
+								</div>
+								<div className={styles.navigationItem}>
+									<Image
+										src="/icons/pictures.ico"
+										alt="ico"
+										width={16}
+										height={16}
+									/>
+									<p>Pictures</p>
+								</div>
+								<div className={styles.navigationItem}>
+									<Image
+										src="/icons/videos.ico"
+										alt="ico"
+										width={16}
+										height={16}
+									/>
+									<p>Videos</p>
+								</div>
+								<div className={styles.navigationItem}>
+									<Image
+										src="/icons/music.ico"
+										alt="ico"
+										width={16}
+										height={16}
+									/>
+									<p>Music</p>
+								</div>
+								<div className={styles.navigationItem}>
+									<Image
+										src="/icons/cdrive.ico"
+										alt="ico"
+										width={16}
+										height={16}
+									/>
+									<p>250GB SSD</p>
+								</div>
+								<div className={styles.navigationItem}>
+									<Image
+										src="/icons/drive.ico"
+										alt="ico"
+										width={16}
+										height={16}
+									/>
+									<p>1TB SSD</p>
+								</div>
+							</>
+						)}
+					</div>
+					<div className={styles.content}>
+						<p>Hello</p>
+					</div>
 				</section>
 			</section>
 		</div>
