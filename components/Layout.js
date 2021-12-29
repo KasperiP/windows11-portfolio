@@ -1,5 +1,5 @@
 import styles from '../styles/Layout.module.css';
-import Footer from './Footer';
+import Footer from '../components/footer/Footer';
 
 function Layout({ children }) {
 	return (

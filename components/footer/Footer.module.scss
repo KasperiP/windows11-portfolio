@@ -39,7 +39,10 @@
 	font-size: 0.75em;
 	font-weight: 400;
 }
-
+.icon:not(:active) span {
+	/* now keep red background for 1s */
+	transition: all 0.1s ease-in-out;
+}
 .icon:hover,
 .dateIcons:hover,
 .language:hover,

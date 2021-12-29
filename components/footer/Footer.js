@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import React from 'react';
-import styles from '../styles/Footer.module.css';
+import styles from './Footer.module.scss';
 import { AiOutlineWifi } from 'react-icons/ai';
 import { BsVolumeUp, BsMic } from 'react-icons/bs';
 import { IoIosArrowUp } from 'react-icons/io';
@@ -11,7 +11,7 @@ function Footer() {
 			<section className={styles.iconContainer}>
 				<div className={styles.icon}>
 					<Image
-						src={'/images/windows.png'}
+						src={'/icons/windows.ico'}
 						width={25}
 						height={25}
 						alt="logo"

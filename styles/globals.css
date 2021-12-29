@@ -3,6 +3,18 @@
 	margin: 0;
 	box-sizing: border-box;
 	font-family: 'Open Sans', sans-serif;
+
+	/* Unselect */
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+
+	/*
+	  Introduced in Internet Explorer 10.
+	  See http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
+	*/
+	-ms-user-select: none;
+	user-select: none;
 }
 
 p {

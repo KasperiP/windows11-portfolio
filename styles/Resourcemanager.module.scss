@@ -12,7 +12,7 @@
 	width: 55rem;
 	height: 35rem;
 	border-radius: 10px;
-	transition: all 0.1s ease-in-out;
+	transition: all 0.15s ease-in-out;
 
 	nav {
 		background-color: #202020;
@@ -120,19 +120,66 @@
 .navigate {
 	display: flex;
 	justify-content: space-between;
+	margin-top: 8px;
+	margin-bottom: 8px;
+	height: 30px;
 }
 .navigatePath {
 	display: flex;
 	color: #fff;
-	border: 2px solid #32323285;
+	border: 1px solid #32323285;
 	height: 100%;
-	width: 60%;
+	width: calc(100% - 20rem - 7rem);
 	align-items: center;
 	justify-content: space-between;
+
+	.left {
+		padding-left: 5px;
+		display: flex;
+		align-items: center;
+		svg {
+			font-size: 0.8rem;
+		}
+	}
+	.right {
+		display: flex;
+		gap: 5px;
+		padding-right: 5px;
+	}
+}
+.navigateSearch {
+	width: 20rem;
+	display: flex;
+	color: #fff;
+	border: 1px solid #32323285;
+	height: 100%;
+	align-items: center;
+	justify-content: flex-start;
+	gap: 10px;
+	margin-left: 10px;
+	padding-left: 5px;
+	margin-right: 10px;
+
+	svg,
+	p {
+		color: gray;
+	}
 }
 .arrows {
 	display: flex;
 	align-items: center;
 	color: #fff;
-	width: 10%;
+	width: 7rem;
+	justify-content: space-between;
+	padding: 0 10px 0 10px;
+}
+
+.contentArea {
+	height: calc(100% - 5.2rem - 46px);
+	border-radius: 0 0 15px 15px;
+}
+.sidebar {
+	height: 100%;
+	border-radius: 0 0 0 15px;
+	width: 13rem;
 }

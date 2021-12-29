@@ -25,8 +25,18 @@ function Resourcemanager() {
 	const router = useRouter();
 
 	const [maximised, setMaximised] = useState(false);
+	const [closed, setClosed] = useState(false);
+
 	const handleMaximize = () => {
 		setMaximised(!maximised);
+	};
+
+	const handleClose = () => {
+		// Setclosed(!closed) then wait for animation to finish then redirect
+		setClosed(!closed);
+		setTimeout(() => {
+			router.push('/');
+		}, 250);
 	};
 
 	return (
@@ -36,6 +46,8 @@ function Resourcemanager() {
 				style={
 					maximised
 						? { height: '100%', width: '100%', borderRadius: '0' }
+						: closed
+						? { opacity: '0' }
 						: {}
 				}
 			>
@@ -62,7 +74,7 @@ function Resourcemanager() {
 							</div>
 							<div
 								className={styles.iconClose}
-								onClick={() => router.push('/')}
+								onClick={handleClose}
 							>
 								<VscChromeClose />
 							</div>
@@ -118,36 +130,40 @@ function Resourcemanager() {
 							</div>
 						</div>
 					</section>
-					<section className={styles.navigate}>
-						<div className={styles.arrows}>
-							<HiArrowLeft />
-							<HiArrowRight />
-							<RiArrowDropDownLine />
-							<HiArrowUp />
-						</div>
-						<div className={styles.navigatePath}>
-							<div className={styles.navigatePathLeft}>
-								{' '}
-								<Image
-									src="/icons/folder.ico"
-									alt="ico"
-									width={20}
-									height={20}
-								/>
-								<AiFillCaretRight />
-								<p>projects</p>
-							</div>
-							<div>
-								<RiArrowDropDownLine />
-								<IoMdRefresh />
-							</div>
-						</div>
-						<div className={styles.navigateSearch}>
-							<VscSearch />
-							<input type="text" placeholder="Search: projects" />
-						</div>
-					</section>
 				</nav>
+				<section className={styles.navigate}>
+					<div className={styles.arrows}>
+						<HiArrowLeft />
+						<HiArrowRight />
+						<RiArrowDropDownLine />
+						<HiArrowUp />
+					</div>
+					<div className={styles.navigatePath}>
+						<div className={styles.left}>
+							{' '}
+							<Image
+								src="/icons/folder.ico"
+								alt="ico"
+								width={20}
+								height={20}
+							/>
+							<AiFillCaretRight />
+							<p>projects</p>
+						</div>
+						<div className={styles.right}>
+							<RiArrowDropDownLine />
+							<IoMdRefresh />
+						</div>
+					</div>
+					<div className={styles.navigateSearch}>
+						<VscSearch />
+						<p>Search: projects</p>
+					</div>
+				</section>
+				<section className={styles.contentArea}>
+					<div className={styles.sidebar}></div>
+					<div className={styles.content}></div>
+				</section>
 			</section>
 		</div>
 	);
