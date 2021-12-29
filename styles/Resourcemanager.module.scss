@@ -7,24 +7,53 @@
 	justify-content: center;
 	z-index: 100;
 }
-.resourcemanager {
+.main {
 	background-color: #191919;
 	width: 55rem;
 	height: 35rem;
-	max-width: 95%;
 	border-radius: 10px;
+	transition: all 0.1s ease-in-out;
+
+	nav {
+		background-color: #202020;
+		border-radius: 10px 10px 0 0;
+		height: 5.2rem;
+	}
 }
 
-.nav {
-	background-color: #202020;
-	border-radius: 10px 10px 0 0;
-	height: 5.2rem;
-}
+// Top section
 .top {
 	display: flex;
 	justify-content: space-between;
-	padding: 5px;
-	height: 2.5rem;
+	padding-left: 5px;
+	height: 2rem;
+
+	.icon {
+		padding: 0 10px 0 10px;
+		height: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		cursor: pointer;
+
+		&:hover {
+			background-color: #2e2e2e;
+		}
+	}
+
+	.iconClose {
+		height: 100%;
+		display: flex;
+		align-items: center;
+		border-radius: 0 10px 0 0;
+		padding-right: 15px;
+		padding-left: 14px;
+		cursor: pointer;
+
+		&:hover {
+			background-color: #ff0000;
+		}
+	}
 }
 .topContainer {
 	display: flex;
@@ -34,17 +63,33 @@
 .iconContainer {
 	display: flex;
 	align-items: center;
-	gap: 32px;
+	gap: 5px;
 	color: #fff;
-	padding-right: 10px;
 }
+
+// Management section
 .manage {
 	display: flex;
 	color: #fff;
-	height: 2.7rem;
+	height: 3.2rem;
 	align-items: center;
 	gap: 5px;
-	padding-left: 20px;
+	padding-left: 10px;
+	padding-bottom: 5px;
+
+	.icon {
+		padding: 10px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 5px;
+		gap: 5px;
+		cursor: pointer;
+
+		&:hover {
+			background-color: #2e2e2e;
+		}
+	}
 }
 .manageNew,
 .manageSort,
@@ -57,15 +102,15 @@
 }
 .manageNew,
 .manageView {
-	border-right: 2px solid #32323285;
+	border-right: 1px solid #32323285;
 }
 .manageSort {
-	border-left: 2px solid #32323285;
+	border-left: 1px solid #32323285;
 	padding-left: 10px;
 }
 .manageActions {
 	display: flex;
-	gap: 20px;
+	gap: 5px;
 	margin-left: 10px;
 	margin-right: 10px;
 }

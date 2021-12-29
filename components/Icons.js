@@ -1,15 +1,15 @@
 import React from 'react';
-import styles from '../styles/Icons.module.css';
+import styles from '../styles/Icons.module.scss';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 function Icons() {
 	const router = useRouter();
 	return (
-		<div className={styles.content}>
-			<div
-				className={`elements selecto-area ${styles.wrapper}`}
-				id="selecto1"
-			>
+		<div
+			className={`elements selecto-area ${styles.container}`}
+			id="selecto1"
+		>
+			<div className={styles.wrapper}>
 				<div
 					className={styles.item}
 					onClick={() => router.push('/projects')}

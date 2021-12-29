@@ -1,6 +1,6 @@
 import Image from 'next/image';
-import React from 'react';
-import styles from '../styles/Resourcemanager.module.css';
+import React, { useState } from 'react';
+import styles from '../styles/Resourcemanager.module.scss';
 import {
 	VscChromeMinimize,
 	VscChromeMaximize,
@@ -9,7 +9,7 @@ import {
 } from 'react-icons/vsc';
 import { AiFillCaretRight, AiOutlinePlusCircle } from 'react-icons/ai';
 import { RiArrowDropDownLine } from 'react-icons/ri';
-import { BsScissors } from 'react-icons/bs';
+import { BsScissors, BsTrash } from 'react-icons/bs';
 import { MdContentCopy } from 'react-icons/md';
 import { MdContentPaste } from 'react-icons/md';
 import { FiMoreHorizontal } from 'react-icons/fi';
@@ -19,13 +19,28 @@ import { FaRegShareSquare } from 'react-icons/fa';
 import { HiArrowLeft, HiArrowRight, HiArrowUp } from 'react-icons/hi';
 import { GrRefresh } from 'react-icons/gr';
 import { IoMdRefresh } from 'react-icons/io';
+import { useRouter } from 'next/router';
 
 function Resourcemanager() {
+	const router = useRouter();
+
+	const [maximised, setMaximised] = useState(false);
+	const handleMaximize = () => {
+		setMaximised(!maximised);
+	};
+
 	return (
 		<div className={styles.container}>
-			<section className={styles.resourcemanager}>
-				<nav className={styles.nav}>
-					<div className={styles.top}>
+			<section
+				className={styles.main}
+				style={
+					maximised
+						? { height: '100%', width: '100%', borderRadius: '0' }
+						: {}
+				}
+			>
+				<nav>
+					<section className={styles.top}>
 						<div className={styles.topContainer}>
 							<Image
 								src="/icons/folder.ico"
@@ -36,39 +51,74 @@ function Resourcemanager() {
 							<p>Projects</p>
 						</div>
 						<div className={styles.iconContainer}>
-							<VscChromeMinimize />
-							<VscChromeMaximize />
-							<VscChromeClose />
+							<div className={styles.icon}>
+								<VscChromeMinimize />
+							</div>
+							<div
+								className={styles.icon}
+								onClick={handleMaximize}
+							>
+								<VscChromeMaximize />
+							</div>
+							<div
+								className={styles.iconClose}
+								onClick={() => router.push('/')}
+							>
+								<VscChromeClose />
+							</div>
 						</div>
-					</div>
-					<div className={styles.manage}>
+					</section>
+					<section className={styles.manage}>
 						<div className={styles.manageNew}>
-							<AiOutlinePlusCircle />
-							<p>New</p>
-							<RiArrowDropDownLine />
+							<div className={styles.icon}>
+								<AiOutlinePlusCircle />
+								<p>New</p>
+								<RiArrowDropDownLine />
+							</div>
 						</div>
 						<div className={styles.manageActions}>
-							<BsScissors />
-							<MdContentCopy />
-							<MdContentPaste />
-							<BiRename />
-							<FaRegShareSquare />
+							<div className={styles.icon}>
+								<BsScissors />
+							</div>
+							<div className={styles.icon}>
+								<MdContentCopy />
+							</div>
+							<div className={styles.icon}>
+								<MdContentPaste />
+							</div>
+							<div className={styles.icon}>
+								<BiRename />
+							</div>
+							<div className={styles.icon}>
+								<FaRegShareSquare />
+							</div>
+							<div className={styles.icon}>
+								<BsTrash />
+							</div>
 						</div>
 						<div className={styles.manageSort}>
-							<BiSortAlt2 />
-							<p>Sort</p>
-							<RiArrowDropDownLine />
+							<div className={styles.icon}>
+								{' '}
+								<BiSortAlt2 />
+								<p>Sort</p>
+								<RiArrowDropDownLine />
+							</div>
 						</div>
 						<div className={styles.manageView}>
-							<GiHamburgerMenu />
-							<p>View</p>
-							<RiArrowDropDownLine />
+							<div className={styles.icon}>
+								{' '}
+								<GiHamburgerMenu />
+								<p>View</p>
+								<RiArrowDropDownLine />
+							</div>
 						</div>
 						<div className={styles.manageMore}>
-							<FiMoreHorizontal />
+							<div className={styles.icon}>
+								<FiMoreHorizontal />
+							</div>
 						</div>
-					</div>
-					<div className={styles.navigate}>
+					</section>
+					<section className={styles.navigate}>
 						<div className={styles.arrows}>
 							<HiArrowLeft />
 							<HiArrowRight />
@@ -96,7 +146,7 @@ function Resourcemanager() {
 							<VscSearch />
 							<input type="text" placeholder="Search: projects" />
 						</div>
-					</div>
+					</section>
 				</nav>
 			</section>
 		</div>
