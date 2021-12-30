@@ -7,6 +7,9 @@
 	position: absolute;
 	z-index: 1000;
 	width: 100%;
+
+	background-image: url('/images/darknoice.png');
+	border-top: 1px solid #3f3f3f;
 }
 .iconContainer {
 	display: flex;

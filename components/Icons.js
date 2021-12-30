@@ -1,10 +1,50 @@
-import React from 'react';
 import styles from '../styles/Icons.module.scss';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import Selecto from 'react-selecto';
+import { useEffect, useRef, useState } from 'react';
+
+const ESCAPE_KEYS = ['46', 'Delete'];
+
+const useEventListener = (eventName, handler, element) => {
+	if (typeof window !== 'undefined') element = window;
+	const savedHandler = useRef();
+
+	useEffect(() => {
+		savedHandler.current = handler;
+	}, [handler]);
+
+	useEffect(() => {
+		const eventListener = (event) => savedHandler.current(event);
+		element.addEventListener(eventName, eventListener);
+		return () => {
+			element.removeEventListener(eventName, eventListener);
+		};
+	}, [eventName, element]);
+};
+
 function Icons() {
 	const router = useRouter();
+
+	// Function to add deleted classname to every element with className selected
+	const handleDelete = () => {
+		const selected = document.querySelectorAll(`.selected`);
+		selected.forEach((element) => {
+			if (!element.classList.contains('recycleBin')) {
+				element.classList.add(`${styles.deleted}`);
+				element.classList.add('deleted');
+			}
+		});
+	};
+
+	// Listen for delete key press and when deleted add deleted className to div
+	const handler = ({ key }) => {
+		if (ESCAPE_KEYS.includes(String(key))) {
+			handleDelete();
+		}
+	};
+	useEventListener('keydown', handler);
+
 	return (
 		<>
 			<Selecto
@@ -17,9 +57,11 @@ function Icons() {
 				onSelect={(e) => {
 					e.added.forEach((el) => {
 						el.classList.add(`${styles.selected}`);
+						el.classList.add(`selected`);
 					});
 					e.removed.forEach((el) => {
 						el.classList.remove(`${styles.selected}`);
+						el.classList.remove(`selected`);
 					});
 				}}
 			></Selecto>
@@ -90,7 +132,7 @@ function Icons() {
 						<p>Videos</p>
 					</div>
 
-					<div className={`${styles.item} selectoItem`}>
+					<div className={`${styles.item} selectoItem recycleBin`}>
 						<Image
 							src="/icons/trashcan.ico"
 							alt="icon"

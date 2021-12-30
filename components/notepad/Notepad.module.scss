@@ -9,7 +9,7 @@
 	z-index: 1000;
 	width: 55rem;
 	height: 35rem;
-	background-color: #191919;
+	background-color: #272727;
 	border-radius: 10px;
 
 	transition: all 0.15s ease-in-out;
@@ -22,7 +22,8 @@
 	nav {
 		background-color: #202020;
 		border-radius: 10px 10px 0 0;
-		height: 5.2rem;
+		height: 4.8rem;
+		border-bottom: 1px solid #1d1d1d;
 	}
 }
 
@@ -72,11 +73,71 @@
 	color: #fff;
 }
 
+.navButtons {
+	display: flex;
+	height: 2.5rem;
+	align-items: center;
+
+	& > * {
+		cursor: pointer;
+		font-size: 0.9rem;
+		font-weight: 300;
+		padding: 10px;
+		border-radius: 5px;
+		&:hover {
+			background-color: #2e2e2e;
+		}
+	}
+}
+
 @keyframes fadeIn {
 	0% {
 		opacity: 0;
 	}
 	100% {
 		opacity: 1;
+	}
+}
+
+.textarea {
+	height: calc(100% - 4.8rem - 2rem);
+	padding: 10px;
+
+	textarea {
+		height: 100%;
+		width: 100%;
+		outline: none;
+		border: none;
+		background-color: transparent;
+		color: white;
+		resize: none;
+		user-select: auto;
+	}
+}
+
+.footer {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	background-color: #202020;
+	border-top: 1px solid #1d1d1d;
+	height: 2rem;
+	border-radius: 0 0 15px 15px;
+	display: flex;
+	justify-content: space-between;
+	p {
+		font-size: 0.8rem;
+		color: gray;
+		padding: 5px 10px 5px 10px;
+		margin: 5px 0 5px 0;
+		display: flex;
+		align-items: center;
+	}
+	& > div {
+		display: flex;
+		gap: 15px;
+	}
+	& > div:nth-child(2) p {
+		border-left: 1px solid gray;
 	}
 }
