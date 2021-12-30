@@ -27,6 +27,18 @@ function Icons() {
 				<div className={`selecto-area ${styles.wrapper}`} id="selecto1">
 					<div
 						className={`${styles.item} selectoItem`}
+						onClick={() => router.push('/about')}
+					>
+						<Image
+							src="/icons/notes.ico"
+							alt="icon"
+							width={40}
+							height={40}
+						></Image>
+						<p>About me</p>
+					</div>
+					<div
+						className={`${styles.item} selectoItem`}
 						onClick={() => router.push('/projects')}
 					>
 						<Image
@@ -38,7 +50,10 @@ function Icons() {
 						<p>Projects</p>
 					</div>
 
-					<div className={`${styles.item} selectoItem`}>
+					<div
+						className={`${styles.item} selectoItem`}
+						onClick={() => router.push('/tools')}
+					>
 						<Image
 							src="/icons/folder.ico"
 							alt="icon"
@@ -46,6 +61,15 @@ function Icons() {
 							height={40}
 						></Image>
 						<p>Tools</p>
+					</div>
+					<div className={`${styles.item} selectoItem`}>
+						<Image
+							src="/icons/links.ico"
+							alt="icon"
+							width={40}
+							height={40}
+						></Image>
+						<p>Links</p>
 					</div>
 					<div className={`${styles.item} selectoItem`}>
 						<Image
@@ -65,15 +89,7 @@ function Icons() {
 						></Image>
 						<p>Videos</p>
 					</div>
-					<div className={`${styles.item} selectoItem`}>
-						<Image
-							src="/icons/contacts.ico"
-							alt="icon"
-							width={40}
-							height={40}
-						></Image>
-						<p>Links</p>
-					</div>
+
 					<div className={`${styles.item} selectoItem`}>
 						<Image
 							src="/icons/trashcan.ico"

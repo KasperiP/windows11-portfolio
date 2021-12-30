@@ -198,6 +198,10 @@
 	border-radius: 0 0 15px 0;
 }
 
+.child {
+	margin: 0 10px 0 10px;
+}
+
 @keyframes fadeIn {
 	0% {
 		opacity: 0;
@@ -235,5 +239,39 @@
 
 	&:hover {
 		background-color: #2e2e2e;
+	}
+}
+
+.topNav {
+	display: flex;
+	width: 100%;
+	padding-right: 10px;
+
+	& > * {
+		border-right: 1px solid #32323285;
+		padding: 5px;
+	}
+	& > *:hover {
+		background-color: #2e2e2e;
+	}
+
+	.name {
+		width: 40%;
+		padding-left: 10px;
+	}
+	.dateModified {
+		width: 25%;
+
+		padding-left: 10px;
+	}
+	.type {
+		width: 25%;
+
+		padding-left: 10px;
+	}
+	.size {
+		width: 10%;
+
+		padding-left: 10px;
 	}
 }

@@ -314,7 +314,24 @@ function Resourcemanager(props) {
 							</>
 						)}
 					</div>
-					<div className={styles.content}>{props.component}</div>
+					<div className={styles.content}>
+						<div className={styles.topNav}>
+							<div className={styles.name}>
+								<p>Name</p>
+							</div>
+
+							<div className={styles.dateModified}>
+								<p>Date modified</p>
+							</div>
+							<div className={styles.type}>
+								<p>Type</p>
+							</div>
+							<div className={styles.size}>
+								<p>Size</p>
+							</div>
+						</div>
+						<div className={styles.child}>{props.component}</div>
+					</div>
 				</section>
 			</section>
 		</div>

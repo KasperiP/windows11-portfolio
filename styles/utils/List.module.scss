@@ -1,0 +1,33 @@
+.listItemContainer {
+	display: flex;
+	flex-direction: column;
+}
+.listItem {
+	display: flex;
+	cursor: pointer;
+	padding: 5px 10px 5px 10px;
+
+	&:hover {
+		background-color: #2e2e2e;
+	}
+}
+.listItemName {
+	display: flex;
+	gap: 5px;
+	align-items: center;
+	width: 40%;
+}
+.listItemDateModified {
+	width: 25%;
+	padding-left: 5px;
+}
+.listItemType {
+	width: 25%;
+	padding-left: 5px;
+}
+.listItemSize {
+	width: 10%;
+	display: flex;
+	justify-content: flex-end;
+	padding-right: 5px;
+}

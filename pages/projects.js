@@ -1,7 +1,8 @@
+import Image from 'next/image';
 import React from 'react';
 import Icons from '../components/Icons';
 import Resourcemanager from '../components/Resourcemanager';
-import styles from '../styles/Projects.module.scss';
+import styles from '../styles//utils/List.module.scss';
 
 function projects({ data }) {
 	const content = () => {
@@ -26,12 +27,33 @@ function projects({ data }) {
 
 		return (
 			<>
-				<div>
+				<div className={styles.listItemContainer}>
 					{filteredData.map((project) => (
-						<div className={styles.project} key={project.id}>
-							<p>{project.name}</p>
-							<p>{getDate(project.updated_at)}</p>
-							<p>Link</p>
+						<div
+							className={styles.listItem}
+							key={project.id}
+							onClick={() =>
+								window.open(
+									project.html_url,
+									'_blank',
+									'noopener,noreferrer'
+								)
+							}
+						>
+							<div className={styles.listItemName}>
+								<Image
+									src="/icons/github.ico"
+									alt="icon"
+									width={16}
+									height={16}
+								></Image>
+								<p>{project.name}</p>
+							</div>
+							<p className={styles.listItemDateModified}>
+								{getDate(project.updated_at)}
+							</p>
+							<p className={styles.listItemType}>Link</p>
+							<p className={styles.listItemSize}>1kt</p>
 						</div>
 					))}
 				</div>
@@ -39,8 +61,12 @@ function projects({ data }) {
 		);
 	};
 	return (
-		<div className={styles.container}>
-			<Resourcemanager folder="Projects" component={content()} />
+		<div style={{ height: '100%' }}>
+			<Resourcemanager
+				folder="Projects"
+				component={content()}
+				topNav={true}
+			/>
 			<Icons />
 		</div>
 	);
