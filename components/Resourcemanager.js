@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styles from '../styles/Resourcemanager.module.scss';
 import {
 	VscChromeMinimize,
@@ -314,9 +314,7 @@ function Resourcemanager(props) {
 							</>
 						)}
 					</div>
-					<div className={styles.content}>
-						<p>Hello</p>
-					</div>
+					<div className={styles.content}>{props.component}</div>
 				</section>
 			</section>
 		</div>
