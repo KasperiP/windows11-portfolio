@@ -24,6 +24,7 @@ const useEventListener = (eventName, handler, element) => {
 };
 
 function Icons() {
+	const [deleted, setDeleted] = useState(false);
 	const router = useRouter();
 
 	// Function to add deleted classname to every element with className selected
@@ -33,6 +34,7 @@ function Icons() {
 			if (!element.classList.contains('recycleBin')) {
 				element.classList.add(`${styles.deleted}`);
 				element.classList.add('deleted');
+				setDeleted(true);
 			}
 		});
 	};
@@ -133,12 +135,21 @@ function Icons() {
 					</div>
 
 					<div className={`${styles.item} selectoItem recycleBin`}>
-						<Image
-							src="/icons/trashcan.ico"
-							alt="icon"
-							width={40}
-							height={40}
-						></Image>
+						{deleted ? (
+							<Image
+								src="/icons/trashcanFull.ico"
+								alt="icon"
+								width={40}
+								height={40}
+							></Image>
+						) : (
+							<Image
+								src="/icons/trashcan.ico"
+								alt="icon"
+								width={40}
+								height={40}
+							></Image>
+						)}
 						<p>Recycle Bin</p>
 					</div>
 				</div>
