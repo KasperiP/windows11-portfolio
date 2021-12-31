@@ -94,6 +94,35 @@ function Resourcemanager(props) {
 								<AiOutlinePlusCircle />
 								<p>New</p>
 								<RiArrowDropDownLine />
+								<div className={styles.manageDropdown}>
+									<div>
+										<Image
+											src="/icons/folder.ico"
+											height={20}
+											width={20}
+											alt="ico"
+										/>
+										<p>Folder</p>
+									</div>
+									<div>
+										<Image
+											src="/icons/folder.ico"
+											height={20}
+											width={20}
+											alt="ico"
+										/>
+										<p>Folder</p>
+									</div>
+									<div>
+										<Image
+											src="/icons/link.ico"
+											height={20}
+											width={20}
+											alt="ico"
+										/>
+										<p>Link</p>
+									</div>
+								</div>
 							</div>
 						</div>
 						<div className={styles.manageActions}>
@@ -122,6 +151,35 @@ function Resourcemanager(props) {
 								<BiSortAlt2 />
 								<p>Sort</p>
 								<RiArrowDropDownLine />
+								<div className={styles.manageDropdown}>
+									<div>
+										<Image
+											src="/icons/folder.ico"
+											height={20}
+											width={20}
+											alt="ico"
+										/>
+										<p>Folder</p>
+									</div>
+									<div>
+										<Image
+											src="/icons/folder.ico"
+											height={20}
+											width={20}
+											alt="ico"
+										/>
+										<p>Folder</p>
+									</div>
+									<div>
+										<Image
+											src="/icons/link.ico"
+											height={20}
+											width={20}
+											alt="ico"
+										/>
+										<p>Link</p>
+									</div>
+								</div>
 							</div>
 						</div>
 						<div className={styles.manageView}>
@@ -130,11 +188,69 @@ function Resourcemanager(props) {
 								<GiHamburgerMenu />
 								<p>View</p>
 								<RiArrowDropDownLine />
+								<div className={styles.manageDropdown}>
+									<div>
+										<Image
+											src="/icons/folder.ico"
+											height={20}
+											width={20}
+											alt="ico"
+										/>
+										<p>Homo</p>
+									</div>
+									<div>
+										<Image
+											src="/icons/folder.ico"
+											height={20}
+											width={20}
+											alt="ico"
+										/>
+										<p>Folder</p>
+									</div>
+									<div>
+										<Image
+											src="/icons/link.ico"
+											height={20}
+											width={20}
+											alt="ico"
+										/>
+										<p>Link</p>
+									</div>
+								</div>
 							</div>
 						</div>
 						<div className={styles.manageMore}>
 							<div className={styles.icon}>
 								<FiMoreHorizontal />
+								<div className={styles.manageDropdown}>
+									<div>
+										<Image
+											src="/icons/folder.ico"
+											height={20}
+											width={20}
+											alt="ico"
+										/>
+										<p>Folder</p>
+									</div>
+									<div>
+										<Image
+											src="/icons/folder.ico"
+											height={20}
+											width={20}
+											alt="ico"
+										/>
+										<p>Folder</p>
+									</div>
+									<div>
+										<Image
+											src="/icons/link.ico"
+											height={20}
+											width={20}
+											alt="ico"
+										/>
+										<p>Link</p>
+									</div>
+								</div>
 							</div>
 						</div>
 					</section>

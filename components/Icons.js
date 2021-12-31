@@ -1,8 +1,8 @@
 import styles from '../styles/Icons.module.scss';
 import Image from 'next/image';
-import { useRouter } from 'next/router';
 import Selecto from 'react-selecto';
 import { useEffect, useRef, useState } from 'react';
+import Link from 'next/link';
 
 const ESCAPE_KEYS = ['46', 'Delete'];
 
@@ -25,7 +25,6 @@ const useEventListener = (eventName, handler, element) => {
 
 function Icons() {
 	const [deleted, setDeleted] = useState(false);
-	const router = useRouter();
 
 	// Function to add deleted classname to every element with className selected
 	const handleDelete = () => {
@@ -69,43 +68,40 @@ function Icons() {
 			></Selecto>
 			<div className={`elements ${styles.container}`}>
 				<div className={`selecto-area ${styles.wrapper}`} id="selecto1">
-					<div
-						className={`${styles.item} selectoItem`}
-						onClick={() => router.push('/about')}
-					>
-						<Image
-							src="/icons/notes.ico"
-							alt="icon"
-							width={40}
-							height={40}
-						></Image>
-						<p>About me</p>
-					</div>
-					<div
-						className={`${styles.item} selectoItem`}
-						onClick={() => router.push('/projects')}
-					>
-						<Image
-							src="/icons/folder.ico"
-							alt="icon"
-							width={40}
-							height={40}
-						></Image>
-						<p>Projects</p>
-					</div>
+					<Link href={'/about'} passHref>
+						<div className={`${styles.item} selectoItem`}>
+							<Image
+								src="/icons/notes.ico"
+								alt="icon"
+								width={40}
+								height={40}
+							></Image>
+							<p>About me</p>
+						</div>
+					</Link>
+					<Link href={'/projects'} passHref>
+						<div className={`${styles.item} selectoItem`}>
+							<Image
+								src="/icons/folder.ico"
+								alt="icon"
+								width={40}
+								height={40}
+							></Image>
+							<p>Projects</p>
+						</div>
+					</Link>
 
-					<div
-						className={`${styles.item} selectoItem`}
-						onClick={() => router.push('/tools')}
-					>
-						<Image
-							src="/icons/folder.ico"
-							alt="icon"
-							width={40}
-							height={40}
-						></Image>
-						<p>Tools</p>
-					</div>
+					<Link href={'/tools'} passHref>
+						<div className={`${styles.item} selectoItem`}>
+							<Image
+								src="/icons/folder.ico"
+								alt="icon"
+								width={40}
+								height={40}
+							></Image>
+							<p>Tools</p>
+						</div>
+					</Link>
 					<div className={`${styles.item} selectoItem`}>
 						<Image
 							src="/icons/links.ico"

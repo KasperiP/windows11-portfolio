@@ -6,12 +6,6 @@ import styles from '../styles//utils/List.module.scss';
 
 function projects({ data }) {
 	const content = () => {
-		// Remove forks from data
-		const filteredData = data.filter(
-			(project) =>
-				project.fork === false &&
-				project.full_name !== 'KasperiP/KasperiP'
-		);
 		// Get date string of updated_at as format DD.MM.YYYY HH.MM
 		const getDate = (date) => {
 			const dateString = new Date(date).toLocaleDateString('en-GB', {
@@ -28,7 +22,7 @@ function projects({ data }) {
 		return (
 			<>
 				<div className={styles.listItemContainer}>
-					{filteredData.map((project) => (
+					{data.map((project) => (
 						<div
 							className={styles.listItem}
 							key={project.id}
@@ -74,13 +68,17 @@ function projects({ data }) {
 
 export async function getStaticProps() {
 	const res = await fetch(`https://api.github.com/users/KasperiP/repos`);
-	const data = await res.json();
+	const data = (await res.json()).filter(
+		(project) =>
+			project.fork === false && project.full_name !== 'KasperiP/KasperiP'
+	);
 
 	if (!data) {
 		return {
 			notFound: true,
 		};
 	}
+
 	return {
 		props: { data }, // will be passed to the page component as props
 	};
