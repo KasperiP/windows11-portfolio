@@ -14,7 +14,7 @@ function projects({ data }) {
 				hour: '2-digit',
 				minute: '2-digit',
 			});
-			return dateString.replace(',', '').replaceAll('/', '.');
+			return dateString.replace(',', '');
 		};
 
 		const formatSize = (size) => {
