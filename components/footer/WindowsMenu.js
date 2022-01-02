@@ -5,13 +5,7 @@ import { IoIosArrowForward } from 'react-icons/io';
 import { VscSearch } from 'react-icons/vsc';
 import styles from './Footer.module.scss';
 
-function WindowsMenu({
-	setClosed,
-	setIsClosed,
-	winMenu,
-	setWinMenu,
-	handleWinMenu,
-}) {
+function WindowsMenu({ isClosed, winMenu, handleWinMenu }) {
 	const node = useRef();
 
 	const handleClickOutside = (e) => {
@@ -41,7 +35,7 @@ function WindowsMenu({
 	return (
 		<div
 			className={styles.overflow}
-			/* 			style={isClosed ? { display: 'none' } : { display: 'block' }} */
+			style={isClosed ? { display: 'none' } : { display: 'block' }}
 		>
 			<div
 				ref={node}

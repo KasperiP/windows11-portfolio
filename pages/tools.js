@@ -22,7 +22,7 @@ function tools() {
 						<p className={styles.listItemDateModified}>
 							30.12.2021 04:02
 						</p>
-						<p className={styles.listItemType}>Link</p>
+						<p className={styles.listItemType}>Shortcut</p>
 						<p className={styles.listItemSize}>2kt</p>
 					</div>
 				</div>
@@ -40,7 +40,7 @@ function tools() {
 						<p className={styles.listItemDateModified}>
 							30.12.2021 04:02
 						</p>
-						<p className={styles.listItemType}>Link</p>
+						<p className={styles.listItemType}>Shortcut</p>
 						<p className={styles.listItemSize}>2kt</p>
 					</div>
 				</div>
@@ -58,7 +58,7 @@ function tools() {
 						<p className={styles.listItemDateModified}>
 							30.12.2021 04:02
 						</p>
-						<p className={styles.listItemType}>Link</p>
+						<p className={styles.listItemType}>Shortcut</p>
 						<p className={styles.listItemSize}>2kt</p>
 					</div>
 				</div>
@@ -76,7 +76,7 @@ function tools() {
 						<p className={styles.listItemDateModified}>
 							30.12.2021 04:02
 						</p>
-						<p className={styles.listItemType}>Link</p>
+						<p className={styles.listItemType}>Shortcut</p>
 						<p className={styles.listItemSize}>2kt</p>
 					</div>
 				</div>
@@ -94,7 +94,7 @@ function tools() {
 						<p className={styles.listItemDateModified}>
 							30.12.2021 04:02
 						</p>
-						<p className={styles.listItemType}>Link</p>
+						<p className={styles.listItemType}>Shortcut</p>
 						<p className={styles.listItemSize}>2kt</p>
 					</div>
 				</div>

@@ -6,10 +6,20 @@ import { BsVolumeUp, BsMic } from 'react-icons/bs';
 import { IoIosArrowForward, IoIosArrowUp } from 'react-icons/io';
 import { VscSearch } from 'react-icons/vsc';
 import WindowsMenu from './WindowsMenu';
+import Error from '../error/Error';
 
 function Footer() {
 	const [winMenu, setWinMenu] = useState(false);
 	const [isClosed, setIsClosed] = useState(true);
+	const [error, setError] = useState('');
+
+	const handleError = (error) => {
+		document.body.style.cursor = 'wait';
+		setTimeout(() => {
+			document.body.style.cursor = 'default';
+			setError(error);
+		}, 1000);
+	};
 
 	const handleWinMenu = () => {
 		if (winMenu) {
@@ -20,6 +30,7 @@ function Footer() {
 		} else {
 			setIsClosed(false);
 
+			//TODO: Wtf is this? Must be a better solution for this
 			setTimeout(() => {
 				setWinMenu(true);
 			}, 1);
@@ -28,6 +39,9 @@ function Footer() {
 
 	return (
 		<>
+			{error && error !== '' && (
+				<Error error={error} setError={setError} />
+			)}
 			<div className={styles.container}>
 				<section className={styles.iconContainer}>
 					<div
@@ -51,7 +65,10 @@ function Footer() {
 							alt="logo"
 						/>
 					</div>
-					<div className={styles.icon}>
+					<div
+						className={styles.icon}
+						onClick={() => handleError('Firefox')}
+					>
 						{' '}
 						<Image
 							src={'/icons/firefox.ico'}
@@ -60,7 +77,10 @@ function Footer() {
 							alt="logo"
 						/>
 					</div>
-					<div className={styles.icon}>
+					<div
+						className={styles.icon}
+						onClick={() => handleError('Spotify')}
+					>
 						{' '}
 						<Image
 							src={'/icons/spotify.ico'}
@@ -69,7 +89,10 @@ function Footer() {
 							alt="logo"
 						/>
 					</div>
-					<div className={styles.icon}>
+					<div
+						className={styles.icon}
+						onClick={() => handleError('Steam')}
+					>
 						{' '}
 						<Image
 							src={'/icons/steam.ico'}
@@ -78,7 +101,10 @@ function Footer() {
 							alt="logo"
 						/>
 					</div>
-					<div className={styles.icon}>
+					<div
+						className={styles.icon}
+						onClick={() => handleError('Discord')}
+					>
 						{' '}
 						<Image
 							src={'/icons/discord.ico'}
@@ -87,7 +113,12 @@ function Footer() {
 							alt="logo"
 						/>
 					</div>
-					<div className={styles.icon}>
+					<div
+						className={styles.icon}
+						onClick={() =>
+							handleError('Visual Studio Code - Insiders')
+						}
+					>
 						{' '}
 						<Image
 							src={'/icons/vscode.ico'}
@@ -128,9 +159,7 @@ function Footer() {
 			</div>
 			<WindowsMenu
 				isClosed={isClosed}
-				setIsClosed={setIsClosed}
 				winMenu={winMenu}
-				setWinMenu={setWinMenu}
 				handleWinMenu={handleWinMenu}
 			/>
 		</>
