@@ -45,9 +45,6 @@ function Notepad(props) {
 							height: 'calc(100% - 50px)',
 							width: '100%',
 							borderRadius: '0',
-							left: '0',
-							top: '0',
-							transform: 'translateX(0)',
 					  }
 					: closed
 					? { opacity: '0' }

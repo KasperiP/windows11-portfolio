@@ -2,7 +2,7 @@
 	position: absolute;
 	left: 50%;
 	top: 50%;
-	transform: translate(-50%, -50%);
+	transform: translate(-50%, calc(-50% - 25px));
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -270,6 +270,7 @@
 	display: flex;
 	width: 100%;
 	padding-right: 10px;
+	padding-left: 10px;
 
 	& > * {
 		border-right: 1px solid #32323285;
@@ -285,17 +286,14 @@
 	}
 	.dateModified {
 		width: 25%;
-
 		padding-left: 10px;
 	}
 	.type {
 		width: 25%;
-
 		padding-left: 10px;
 	}
 	.size {
 		width: 10%;
-
 		padding-left: 10px;
 	}
 }

@@ -49,7 +49,7 @@ function Resourcemanager(props) {
 			style={
 				maximised && !closed
 					? {
-							height: '100%',
+							height: 'calc(100% - 50px)',
 							width: '100%',
 							borderRadius: '0',
 					  }
@@ -106,21 +106,12 @@ function Resourcemanager(props) {
 									</div>
 									<div>
 										<Image
-											src="/icons/folder.ico"
+											src="/icons/notes.ico"
 											height={20}
 											width={20}
 											alt="ico"
 										/>
-										<p>Folder</p>
-									</div>
-									<div>
-										<Image
-											src="/icons/link.ico"
-											height={20}
-											width={20}
-											alt="ico"
-										/>
-										<p>Link</p>
+										<p>File</p>
 									</div>
 								</div>
 							</div>
@@ -177,7 +168,7 @@ function Resourcemanager(props) {
 											width={20}
 											alt="ico"
 										/>
-										<p>Link</p>
+										<p>Shortcut</p>
 									</div>
 								</div>
 							</div>
@@ -214,7 +205,7 @@ function Resourcemanager(props) {
 											width={20}
 											alt="ico"
 										/>
-										<p>Link</p>
+										<p>Shortcut</p>
 									</div>
 								</div>
 							</div>
@@ -248,7 +239,7 @@ function Resourcemanager(props) {
 											width={20}
 											alt="ico"
 										/>
-										<p>Link</p>
+										<p>Shortcut</p>
 									</div>
 								</div>
 							</div>

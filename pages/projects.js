@@ -19,6 +19,14 @@ function projects({ data }) {
 			return dateString.replace(',', '').replaceAll('/', '.');
 		};
 
+		// Function to format kilobytes to megabytes if needed
+		const formatSize = (size) => {
+			if (size > 1024) {
+				return `${(size / 1024).toFixed(2)} MB`;
+			}
+			return `${size} KB`;
+		};
+
 		return (
 			<>
 				<div className={styles.listItemContainer}>
@@ -46,8 +54,10 @@ function projects({ data }) {
 							<p className={styles.listItemDateModified}>
 								{getDate(project.updated_at)}
 							</p>
-							<p className={styles.listItemType}>Link</p>
-							<p className={styles.listItemSize}>1kt</p>
+							<p className={styles.listItemType}>Shortcut</p>
+							<p className={styles.listItemSize}>
+								{formatSize(project.size)}
+							</p>
 						</div>
 					))}
 				</div>

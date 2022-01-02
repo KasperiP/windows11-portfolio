@@ -1,14 +1,23 @@
 .listItemContainer {
 	display: flex;
 	flex-direction: column;
+	margin-top: 3px;
 }
 .listItem {
 	display: flex;
 	cursor: pointer;
-	padding: 5px 10px 5px 10px;
-
+	padding: 5px 0 5px;
+	border-radius: 2px;
 	&:hover {
 		background-color: #2e2e2e;
+	}
+
+	div,
+	p {
+		display: flex;
+		align-items: center;
+		padding-top: 1px;
+		padding-bottom: 1px;
 	}
 }
 .listItemName {
@@ -16,14 +25,15 @@
 	gap: 5px;
 	align-items: center;
 	width: 40%;
+	padding-left: 5px;
 }
 .listItemDateModified {
 	width: 25%;
-	padding-left: 5px;
+	padding-left: 10px;
 }
 .listItemType {
 	width: 25%;
-	padding-left: 5px;
+	padding-left: 10px;
 }
 .listItemSize {
 	width: 10%;

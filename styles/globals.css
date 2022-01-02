@@ -5,17 +5,7 @@
 	font-family: 'Open Sans', sans-serif;
 
 	/* Unselect */
-	-moz-user-select: none;
-	-khtml-user-select: none;
-	-webkit-user-select: none;
-
-	/*
-	  Introduced in Internet Explorer 10.
-	  See http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
-	*/
-	-ms-user-select: none;
 	user-select: none;
-
 	scrollbar-color: #9f9f9f #2c2c2c;
 	scrollbar-width: thin;
 }
@@ -30,7 +20,7 @@ textarea::-webkit-scrollbar {
 }
 
 textarea::-webkit-scrollbar-track {
-	-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+	box-shadow: inset 0 0 6px rgb(0 0 0 / 30%);
 }
 
 textarea::-webkit-scrollbar-thumb {
