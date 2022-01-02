@@ -1,14 +1,15 @@
 import Image from 'next/image';
-import React, { useState } from 'react';
+import { useRef, useState } from 'react';
 import styles from './Footer.module.scss';
 import { AiOutlinePoweroff, AiOutlineWifi } from 'react-icons/ai';
 import { BsVolumeUp, BsMic } from 'react-icons/bs';
 import { IoIosArrowForward, IoIosArrowUp } from 'react-icons/io';
 import { VscSearch } from 'react-icons/vsc';
+import WindowsMenu from './WindowsMenu';
 
 function Footer() {
 	const [winMenu, setWinMenu] = useState(false);
-	const [isClosed, setIsClosed] = useState(false);
+	const [isClosed, setIsClosed] = useState(true);
 
 	const handleWinMenu = () => {
 		if (winMenu) {
@@ -30,7 +31,7 @@ function Footer() {
 			<div className={styles.container}>
 				<section className={styles.iconContainer}>
 					<div
-						className={styles.icon}
+						className={`${styles.icon} windowsIcon`}
 						onClick={() => handleWinMenu()}
 					>
 						<Image
@@ -38,6 +39,7 @@ function Footer() {
 							width={25}
 							height={25}
 							alt="logo"
+							className="windowsIcon"
 						/>
 					</div>
 					<div className={styles.icon}>
@@ -124,150 +126,13 @@ function Footer() {
 					</div>
 				</section>
 			</div>
-			<div
-				className={styles.overflow}
-				style={isClosed ? { display: 'none' } : { display: 'block' }}
-			>
-				<div
-					className={styles.winMenu}
-					style={
-						winMenu
-							? { transform: 'translateY(0)' }
-							: {
-									transform: 'translateY(200%)',
-							  }
-					}
-				>
-					<div className={styles.winMenuContainer}>
-						<div className={styles.winMenuSearch}>
-							<div className={styles.inputWithIcon}>
-								<VscSearch />
-								<input
-									type="text"
-									placeholder="Type here to search"
-								/>
-							</div>
-						</div>
-						<div className={styles.winMenuPinned}>
-							<div>
-								<div className={styles.winMenuPinnedTop}>
-									<h2>Pinned</h2>
-									<div>
-										<p>All apps</p>
-										<IoIosArrowForward />
-									</div>
-								</div>
-								<div className={styles.winMenuPinnedBottom}>
-									<div>
-										<Image
-											src="/icons/fileExplorer.ico"
-											alt="img"
-											width={40}
-											height={40}
-										></Image>
-										<p>File Explorer</p>
-									</div>
-									<div>
-										<Image
-											src="/icons/pictures.ico"
-											alt="img"
-											width={40}
-											height={40}
-										></Image>
-										<p>Photos</p>
-									</div>
-									<div>
-										<Image
-											src="/icons/firefox.ico"
-											alt="img"
-											width={40}
-											height={40}
-										></Image>
-										<p>Firefox</p>
-									</div>
-								</div>
-							</div>
-							<div>
-								{' '}
-								<div className={styles.winMenuPinnedTop}>
-									<h2>Recommended</h2>
-									<div>
-										<p>More</p>
-										<IoIosArrowForward />
-									</div>
-								</div>
-								<div
-									className={styles.winMenuRecommendedBottom}
-								>
-									<div
-										className={
-											styles.winMenuRecommendedItem
-										}
-									>
-										<div>
-											<Image
-												src="/icons/fileExplorer.ico"
-												alt="img"
-												width={40}
-												height={40}
-											></Image>
-											<p>File Explorer</p>
-										</div>
-										<div>
-											<Image
-												src="/icons/pictures.ico"
-												alt="img"
-												width={40}
-												height={40}
-											></Image>
-											<p>Photos</p>
-										</div>
-									</div>
-									<div
-										className={
-											styles.winMenuRecommendedItem
-										}
-									>
-										<div>
-											<Image
-												src="/icons/firefox.ico"
-												alt="img"
-												width={40}
-												height={40}
-											></Image>
-											<p>Firefox</p>
-										</div>
-										<div>
-											<Image
-												src="/icons/firefox.ico"
-												alt="img"
-												width={40}
-												height={40}
-											></Image>
-											<p>Firefox</p>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div className={styles.winMenuFooter}>
-						<div>
-							<Image
-								src="/images/windowsUser.png"
-								alt=""
-								width={30}
-								height={30}
-							></Image>
-							<p>kassq</p>
-						</div>
-						<div>
-							<AiOutlinePoweroff />
-						</div>
-					</div>
-					<div className={styles.winMenuBg} />
-				</div>
-			</div>
+			<WindowsMenu
+				isClosed={isClosed}
+				setIsClosed={setIsClosed}
+				winMenu={winMenu}
+				setWinMenu={setWinMenu}
+				handleWinMenu={handleWinMenu}
+			/>
 		</>
 	);
 }
