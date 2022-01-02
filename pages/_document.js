@@ -4,9 +4,8 @@ import { Html, Head, Main, NextScript } from 'next/document';
 
 export default function Document() {
 	return (
-		<Html lang="fi">
+		<Html lang="en">
 			<Head>
-				{/* Fonts */}
 				<link rel="preconnect" href="https://fonts.googleapis.com" />
 				<link
 					rel="preconnect"

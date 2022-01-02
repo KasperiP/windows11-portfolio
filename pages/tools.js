@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import React from 'react';
-import Icons from '../components/Icons';
-import Resourcemanager from '../components/Resourcemanager';
+import Icons from '../components/icons/Icons';
+import Resourcemanager from '../components/resourceManager/Resourcemanager';
 import styles from '../styles/utils/List.module.scss';
 
 function tools() {
@@ -102,7 +102,7 @@ function tools() {
 		);
 	};
 	return (
-		<div className={styles.container}>
+		<div style={{ height: '100%' }}>
 			<Resourcemanager
 				folder="Tools"
 				topNav={true}

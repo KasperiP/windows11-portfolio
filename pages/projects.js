@@ -1,12 +1,11 @@
 import Image from 'next/image';
 import React from 'react';
-import Icons from '../components/Icons';
-import Resourcemanager from '../components/Resourcemanager';
+import Icons from '../components/icons/Icons';
+import Resourcemanager from '../components/resourceManager/Resourcemanager';
 import styles from '../styles//utils/List.module.scss';
 
 function projects({ data }) {
 	const content = () => {
-		// Get date string of updated_at as format DD.MM.YYYY HH.MM
 		const getDate = (date) => {
 			const dateString = new Date(date).toLocaleDateString('en-GB', {
 				year: 'numeric',
@@ -15,11 +14,9 @@ function projects({ data }) {
 				hour: '2-digit',
 				minute: '2-digit',
 			});
-			// remove , from dateString
 			return dateString.replace(',', '').replaceAll('/', '.');
 		};
 
-		// Function to format kilobytes to megabytes if needed
 		const formatSize = (size) => {
 			if (size > 1024) {
 				return `${(size / 1024).toFixed(2)} MB`;
@@ -90,7 +87,7 @@ export async function getStaticProps() {
 	}
 
 	return {
-		props: { data }, // will be passed to the page component as props
+		props: { data },
 	};
 }
 

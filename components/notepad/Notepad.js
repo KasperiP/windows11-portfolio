@@ -12,17 +12,12 @@ function Notepad(props) {
 
 	const [maximised, setMaximised] = useState(false);
 	const [closed, setClosed] = useState(false);
-
 	const [text, setText] = useState(props.text);
 
 	// onChange text handler
 	const handleChange = (e) => {
 		setText(e.target.value);
 	};
-
-	// Dropdowns
-	const [quickaccess, setQuickaccess] = useState(true);
-	const [thisPC, setThisPC] = useState(true);
 
 	const handleMaximize = () => {
 		setMaximised(!maximised);

@@ -1,5 +1,5 @@
 import React from 'react';
-import Icons from '../components/Icons';
+import Icons from '../components/icons/Icons';
 import Notepad from '../components/notepad/Notepad';
 
 function about() {

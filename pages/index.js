@@ -1,10 +1,9 @@
-import styles from '../styles/Index.module.css';
-import Icons from '../components/Icons';
+import Icons from '../components/icons/Icons';
 
 export default function Home() {
 	return (
 		<>
-			<div className={styles.container}>
+			<div style={{ height: '100%' }}>
 				<Icons />
 			</div>
 		</>

@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import React, { useState } from 'react';
-import styles from '../styles/Resourcemanager.module.scss';
+import styles from './Resourcemanager.module.scss';
 import {
 	VscChromeMinimize,
 	VscChromeMaximize,
@@ -17,7 +17,6 @@ import { GiHamburgerMenu } from 'react-icons/gi';
 import { BiRename, BiSortAlt2 } from 'react-icons/bi';
 import { FaRegShareSquare } from 'react-icons/fa';
 import { HiArrowLeft, HiArrowRight, HiArrowUp } from 'react-icons/hi';
-import { GrRefresh } from 'react-icons/gr';
 import { IoMdRefresh } from 'react-icons/io';
 import { useRouter } from 'next/router';
 
@@ -27,7 +26,6 @@ function Resourcemanager(props) {
 	const [maximised, setMaximised] = useState(false);
 	const [closed, setClosed] = useState(false);
 
-	// Dropdowns
 	const [quickaccess, setQuickaccess] = useState(true);
 	const [thisPC, setThisPC] = useState(true);
 
@@ -36,7 +34,6 @@ function Resourcemanager(props) {
 	};
 
 	const handleClose = () => {
-		// Setclosed(!closed) then wait for animation to finish then redirect
 		setClosed(!closed);
 		setTimeout(() => {
 			router.push('/');

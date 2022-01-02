@@ -1,4 +1,4 @@
-import styles from '../styles/Icons.module.scss';
+import styles from './Icons.module.scss';
 import Image from 'next/image';
 import Selecto from 'react-selecto';
 import { useEffect, useRef, useState } from 'react';
@@ -26,7 +26,6 @@ const useEventListener = (eventName, handler, element) => {
 function Icons() {
 	const [deleted, setDeleted] = useState(false);
 
-	// Function to add deleted classname to every element with className selected
 	const handleDelete = () => {
 		const selected = document.querySelectorAll(`.selected`);
 		selected.forEach((element) => {
@@ -38,7 +37,6 @@ function Icons() {
 		});
 	};
 
-	// Listen for delete key press and when deleted add deleted className to div
 	const handler = ({ key }) => {
 		if (ESCAPE_KEYS.includes(String(key))) {
 			handleDelete();

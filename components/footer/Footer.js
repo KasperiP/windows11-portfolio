@@ -1,10 +1,9 @@
 import Image from 'next/image';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import styles from './Footer.module.scss';
-import { AiOutlinePoweroff, AiOutlineWifi } from 'react-icons/ai';
+import { AiOutlineWifi } from 'react-icons/ai';
 import { BsVolumeUp, BsMic } from 'react-icons/bs';
-import { IoIosArrowForward, IoIosArrowUp } from 'react-icons/io';
-import { VscSearch } from 'react-icons/vsc';
+import { IoIosArrowUp } from 'react-icons/io';
 import WindowsMenu from './WindowsMenu';
 import Error from '../error/Error';
 

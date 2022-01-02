@@ -1,11 +1,18 @@
 import Image from 'next/image';
-import React from 'react';
+import { useEffect } from 'react';
 import { VscChromeClose } from 'react-icons/vsc';
 import styles from './Error.module.scss';
+
 function Error(props) {
 	const handleClose = () => {
 		props.setError('');
 	};
+
+	useEffect(() => {
+		let audio = new Audio('/sounds/error.mp3');
+		audio.play();
+	}, []);
+
 	return (
 		<>
 			<div className={styles.errorContainer}>
