@@ -154,7 +154,7 @@ function WindowsMenu({ isClosed, winMenu, handleWinMenu }) {
 				<div className={styles.winMenuFooter}>
 					<div>
 						<Image
-							src="/images/windowsUser.png"
+							src="/images/windowsUser.webp"
 							alt=""
 							width={30}
 							height={30}
