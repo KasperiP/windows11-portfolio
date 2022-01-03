@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import Image from 'next/image';
 import React from 'react';
 import Icons from '../components/icons/Icons';
@@ -102,14 +103,19 @@ function tools() {
 		);
 	};
 	return (
-		<div style={{ height: '100%' }}>
-			<Resourcemanager
-				folder="Tools"
-				topNav={true}
-				component={content()}
-			/>
-			<Icons />
-		</div>
+		<>
+			<Head>
+				<title>kassq - tools</title>
+			</Head>
+			<div style={{ height: '100%' }}>
+				<Resourcemanager
+					folder="Tools"
+					topNav={true}
+					component={content()}
+				/>
+				<Icons />
+			</div>
+		</>
 	);
 }
 

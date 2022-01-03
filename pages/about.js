@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import React from 'react';
 import Icons from '../components/icons/Icons';
 import Notepad from '../components/notepad/Notepad';
@@ -20,10 +21,15 @@ function about() {
 	};
 
 	return (
-		<div style={{ height: '100%' }}>
-			<Notepad name="About me" text={() => aboutMe()} />
-			<Icons />
-		</div>
+		<>
+			<Head>
+				<title>kassq - about</title>
+			</Head>
+			<div style={{ height: '100%' }}>
+				<Notepad name="About me" text={() => aboutMe()} />
+				<Icons />
+			</div>
+		</>
 	);
 }
 

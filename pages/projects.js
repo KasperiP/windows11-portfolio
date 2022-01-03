@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import Image from 'next/image';
 import React from 'react';
 import Icons from '../components/icons/Icons';
@@ -62,14 +63,19 @@ function projects({ data }) {
 		);
 	};
 	return (
-		<div style={{ height: '100%' }}>
-			<Resourcemanager
-				folder="Projects"
-				component={content()}
-				topNav={true}
-			/>
-			<Icons />
-		</div>
+		<>
+			<Head>
+				<title>kassq - projects</title>
+			</Head>
+			<div style={{ height: '100%' }}>
+				<Resourcemanager
+					folder="Projects"
+					component={content()}
+					topNav={true}
+				/>
+				<Icons />
+			</div>
+		</>
 	);
 }
 
