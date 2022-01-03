@@ -28,16 +28,16 @@ export default function Document() {
 					name="keywords"
 					content="kassq, kasperi, coding, development"
 				/>
-				<link rel="canonical" href="https://www.kassq.xyz" />
+				<link rel="canonical" href="https://www.kassq.dev" />
 				<meta name="”robots”" content="index, follow" />
 
 				{/* OpenGraph */}
 				<meta property="og:title" content="Kassq" />
 				<meta property="og:type" content="website" />
-				<meta property="og:url" content="https://www.kassq.xyz" />
+				<meta property="og:url" content="https://www.kassq.dev" />
 				<meta
 					property="og:image"
-					content="https://www.kassq.xyz/images/logo.webp"
+					content="https://www.kassq.dev/images/logo.webp"
 				/>
 				<meta
 					property="og:description"
