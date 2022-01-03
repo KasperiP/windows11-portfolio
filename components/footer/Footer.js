@@ -1,8 +1,8 @@
 import Image from 'next/image';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './Footer.module.scss';
 import { AiOutlineWifi } from 'react-icons/ai';
-import { BsVolumeUp, BsMic } from 'react-icons/bs';
+import { BsVolumeUp } from 'react-icons/bs';
 import { IoIosArrowUp } from 'react-icons/io';
 import WindowsMenu from './WindowsMenu';
 import Error from '../error/Error';
@@ -35,6 +35,23 @@ function Footer() {
 			}, 1);
 		}
 	};
+
+	const [hourStr, setHourStr] = useState('');
+	const [dateStr, setDateStr] = useState('');
+
+	useEffect(() => {
+		setInterval(() => {
+			if (typeof navigator !== 'undefined') {
+				setHourStr(
+					new Date().toLocaleTimeString(navigator.language, {
+						hour: '2-digit',
+						minute: '2-digit',
+					})
+				);
+				setDateStr(new Date().toLocaleDateString(navigator.language));
+			}
+		}, 1000);
+	}, []);
 
 	return (
 		<>
@@ -140,9 +157,6 @@ function Footer() {
 					<dir className={styles.icon}>
 						<IoIosArrowUp />
 					</dir>
-					<dir className={styles.microphone}>
-						<BsMic />
-					</dir>
 					<dir className={styles.language}>
 						<p>ENG</p>
 					</dir>
@@ -151,8 +165,8 @@ function Footer() {
 						<BsVolumeUp />
 					</div>
 					<div className={styles.dateIcons}>
-						<p>16.32</p>
-						<p>22.12.2021</p>
+						<p>{hourStr}</p>
+						<p>{dateStr}</p>
 					</div>
 				</section>
 			</div>

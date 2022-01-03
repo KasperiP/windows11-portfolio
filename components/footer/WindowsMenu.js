@@ -3,7 +3,7 @@ import { useEffect, useRef } from 'react';
 import { AiOutlinePoweroff } from 'react-icons/ai';
 import { IoIosArrowForward } from 'react-icons/io';
 import { VscSearch } from 'react-icons/vsc';
-import styles from './Footer.module.scss';
+import styles from './WindowsMenu.module.scss';
 
 function WindowsMenu({ isClosed, winMenu, handleWinMenu }) {
 	const node = useRef();
@@ -59,7 +59,7 @@ function WindowsMenu({ isClosed, winMenu, handleWinMenu }) {
 						</div>
 					</div>
 					<div className={styles.winMenuPinned}>
-						<div>
+						<div className={styles.winMenuPinnedContainer}>
 							<div className={styles.winMenuPinnedTop}>
 								<h2>Pinned</h2>
 								<div>
@@ -72,8 +72,8 @@ function WindowsMenu({ isClosed, winMenu, handleWinMenu }) {
 									<Image
 										src="/icons/fileExplorer.ico"
 										alt="img"
-										width={40}
-										height={40}
+										width={30}
+										height={30}
 									></Image>
 									<p>File Explorer</p>
 								</div>
@@ -81,8 +81,8 @@ function WindowsMenu({ isClosed, winMenu, handleWinMenu }) {
 									<Image
 										src="/icons/pictures.ico"
 										alt="img"
-										width={40}
-										height={40}
+										width={30}
+										height={30}
 									></Image>
 									<p>Photos</p>
 								</div>
@@ -90,14 +90,14 @@ function WindowsMenu({ isClosed, winMenu, handleWinMenu }) {
 									<Image
 										src="/icons/firefox.ico"
 										alt="img"
-										width={40}
-										height={40}
+										width={30}
+										height={30}
 									></Image>
 									<p>Firefox</p>
 								</div>
 							</div>
 						</div>
-						<div>
+						<div className={styles.winMenuPinnedContainer}>
 							{' '}
 							<div className={styles.winMenuPinnedTop}>
 								<h2>Recommended</h2>
@@ -112,8 +112,8 @@ function WindowsMenu({ isClosed, winMenu, handleWinMenu }) {
 										<Image
 											src="/icons/fileExplorer.ico"
 											alt="img"
-											width={40}
-											height={40}
+											width={30}
+											height={30}
 										></Image>
 										<p>File Explorer</p>
 									</div>
@@ -121,8 +121,8 @@ function WindowsMenu({ isClosed, winMenu, handleWinMenu }) {
 										<Image
 											src="/icons/pictures.ico"
 											alt="img"
-											width={40}
-											height={40}
+											width={30}
+											height={30}
 										></Image>
 										<p>Photos</p>
 									</div>
@@ -132,8 +132,8 @@ function WindowsMenu({ isClosed, winMenu, handleWinMenu }) {
 										<Image
 											src="/icons/firefox.ico"
 											alt="img"
-											width={40}
-											height={40}
+											width={30}
+											height={30}
 										></Image>
 										<p>Firefox</p>
 									</div>
@@ -141,8 +141,8 @@ function WindowsMenu({ isClosed, winMenu, handleWinMenu }) {
 										<Image
 											src="/icons/firefox.ico"
 											alt="img"
-											width={40}
-											height={40}
+											width={30}
+											height={30}
 										></Image>
 										<p>Firefox</p>
 									</div>
