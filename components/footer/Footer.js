@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import styles from './Footer.module.scss';
 import { AiOutlineWifi } from 'react-icons/ai';
-import { BsVolumeUp } from 'react-icons/bs';
+import { FiVolume2 } from 'react-icons/fi';
 import { IoIosArrowUp } from 'react-icons/io';
 import WindowsMenu from './WindowsMenu';
 import Error from '../error/Error';
@@ -36,21 +36,29 @@ function Footer() {
 		}
 	};
 
-	const [hourStr, setHourStr] = useState('');
-	const [dateStr, setDateStr] = useState('');
+	const [hourStr, setHourStr] = useState('00:00 PM');
+	const [dateStr, setDateStr] = useState('1/1/1970');
 
 	useEffect(() => {
+		let isMounted = true;
 		setInterval(() => {
 			if (typeof navigator !== 'undefined') {
-				setHourStr(
-					new Date().toLocaleTimeString(navigator.language, {
-						hour: '2-digit',
-						minute: '2-digit',
-					})
-				);
-				setDateStr(new Date().toLocaleDateString(navigator.language));
+				if (isMounted)
+					setHourStr(
+						new Date().toLocaleTimeString(navigator.language, {
+							hour: '2-digit',
+							minute: '2-digit',
+						})
+					);
+				if (isMounted)
+					setDateStr(
+						new Date().toLocaleDateString(navigator.language)
+					);
 			}
 		}, 1000);
+		return () => {
+			isMounted = false;
+		};
 	}, []);
 
 	return (
@@ -154,15 +162,15 @@ function Footer() {
 					</div>
 				</section>
 				<section className={styles.toolbarContainer}>
-					<dir className={styles.icon}>
+					{/* 					<dir className={styles.icon}>
 						<IoIosArrowUp />
-					</dir>
+					</dir> */}
 					<dir className={styles.language}>
 						<p>ENG</p>
 					</dir>
 					<div className={styles.icon}>
 						<AiOutlineWifi />
-						<BsVolumeUp />
+						<FiVolume2 />
 					</div>
 					<div className={styles.dateIcons}>
 						<p>{hourStr}</p>

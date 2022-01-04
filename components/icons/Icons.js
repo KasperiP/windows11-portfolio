@@ -100,15 +100,17 @@ function Icons() {
 							<p>Tools</p>
 						</div>
 					</Link>
-					<div className={`${styles.item} selectoItem`}>
-						<Image
-							src="/icons/links.ico"
-							alt="icon"
-							width={40}
-							height={40}
-						></Image>
-						<p>Links</p>
-					</div>
+					<Link href={'/links'} passHref>
+						<div className={`${styles.item} selectoItem`}>
+							<Image
+								src="/icons/links.ico"
+								alt="icon"
+								width={40}
+								height={40}
+							></Image>
+							<p>Links</p>
+						</div>
+					</Link>
 					<div className={`${styles.item} selectoItem`}>
 						<Image
 							src="/icons/pictures.ico"

@@ -162,8 +162,23 @@
 	}
 	.right {
 		display: flex;
-		gap: 5px;
-		padding-right: 5px;
+		height: 100%;
+		&:first-child {
+			color: gray;
+			&:hover {
+				background-color: transparent;
+				cursor: default;
+			}
+		}
+		div {
+			display: flex;
+			align-items: center;
+			padding: 10px;
+			&:hover {
+				background-color: #2e2e2e;
+				cursor: pointer;
+			}
+		}
 	}
 }
 .navigateSearch {
@@ -187,7 +202,7 @@
 .arrows {
 	display: flex;
 	align-items: center;
-	color: #fff;
+	color: gray;
 	width: 7rem;
 	justify-content: space-between;
 	padding: 0 10px 0 10px;
@@ -229,10 +244,13 @@
 	display: flex;
 	align-items: center;
 	gap: 5px;
-	background-color: #333333;
 	margin: 0 2px 0 2px;
 	border-radius: 2px;
 	cursor: pointer;
+
+	&:hover {
+		background-color: #2e2e2e;
+	}
 
 	svg {
 		color: gray;

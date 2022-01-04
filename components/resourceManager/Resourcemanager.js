@@ -252,7 +252,6 @@ function Resourcemanager(props) {
 					</div>
 					<div className={styles.navigatePath}>
 						<div className={styles.left}>
-							{' '}
 							<Image
 								src="/icons/folder.ico"
 								alt="ico"
@@ -263,8 +262,12 @@ function Resourcemanager(props) {
 							<p>{props.folder}</p>
 						</div>
 						<div className={styles.right}>
-							<RiArrowDropDownLine />
-							<IoMdRefresh />
+							<div>
+								<RiArrowDropDownLine />
+							</div>
+							<div>
+								<IoMdRefresh />
+							</div>
 						</div>
 					</div>
 					<div className={styles.navigateSearch}>
@@ -278,7 +281,13 @@ function Resourcemanager(props) {
 							className={styles.navigationDropdown}
 							onClick={() => setQuickaccess(!quickaccess)}
 						>
-							<RiArrowDropDownLine />
+							<RiArrowDropDownLine
+								style={
+									quickaccess
+										? {}
+										: { transform: 'rotate(-90deg)' }
+								}
+							/>
 							<Image
 								src="/icons/quickaccess.ico"
 								alt="ico"
@@ -331,7 +340,13 @@ function Resourcemanager(props) {
 							className={styles.navigationDropdown}
 							onClick={() => setThisPC(!thisPC)}
 						>
-							<RiArrowDropDownLine />
+							<RiArrowDropDownLine
+								style={
+									thisPC
+										? {}
+										: { transform: 'rotate(-90deg)' }
+								}
+							/>
 							<Image
 								src="/icons/computer.ico"
 								alt="ico"
