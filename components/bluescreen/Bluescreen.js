@@ -10,6 +10,7 @@ function Bluescreen(props) {
 		let isMounted = true;
 		let interval = setInterval(() => {
 			if (progress <= 100) {
+				// eslint-disable-next-line react-hooks/exhaustive-deps
 				let newProgress = (progress += parseInt(Math.random() * 10));
 				if (newProgress > 100) newProgress = 100;
 				if (isMounted) setProgress(newProgress);

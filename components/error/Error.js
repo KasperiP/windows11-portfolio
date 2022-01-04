@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import Draggable from 'react-draggable';
 import { VscChromeClose } from 'react-icons/vsc';
 import styles from './Error.module.scss';
