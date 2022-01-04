@@ -24,6 +24,7 @@ function about() {
 		<>
 			<Head>
 				<title>kassq - about</title>
+				<link rel="canonical" href="https://www.kassq.dev/about" />
 			</Head>
 			<div style={{ height: '100%' }}>
 				<Notepad name="About me" text={() => aboutMe()} />

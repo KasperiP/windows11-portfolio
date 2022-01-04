@@ -107,6 +107,7 @@ function links() {
 		<>
 			<Head>
 				<title>kassq - links</title>
+				<link rel="canonical" href="https://www.kassq.dev/links" />
 			</Head>
 			<div style={{ height: '100%' }}>
 				<Resourcemanager

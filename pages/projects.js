@@ -66,6 +66,7 @@ function projects({ data }) {
 		<>
 			<Head>
 				<title>kassq - projects</title>
+				<link rel="canonical" href="https://www.kassq.dev/projects" />
 			</Head>
 			<div style={{ height: '100%' }}>
 				<Resourcemanager

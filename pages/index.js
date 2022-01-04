@@ -6,6 +6,7 @@ export default function Home() {
 		<>
 			<Head>
 				<title>kassq</title>
+				<link rel="canonical" href="https://www.kassq.dev" />
 			</Head>
 			<div style={{ height: '100%' }}>
 				<Icons />

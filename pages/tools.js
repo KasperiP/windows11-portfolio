@@ -106,6 +106,7 @@ function tools() {
 		<>
 			<Head>
 				<title>kassq - tools</title>
+				<link rel="canonical" href="https://www.kassq.dev/tools" />
 			</Head>
 			<div style={{ height: '100%' }}>
 				<Resourcemanager
