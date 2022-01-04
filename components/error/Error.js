@@ -1,12 +1,13 @@
 import Image from 'next/image';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import Draggable from 'react-draggable';
 import { VscChromeClose } from 'react-icons/vsc';
 import styles from './Error.module.scss';
 
 function Error(props) {
-	const handleClose = () => {
+	const handleClose = async () => {
 		// Take props.errors array and remove props.error from it
-		const newErrors = props.errors.filter(
+		const newErrors = await props.errors.filter(
 			(err) => err.index !== props.index
 		);
 		props.setError(newErrors);
@@ -18,20 +19,18 @@ function Error(props) {
 	}, []);
 
 	return (
-		<>
-			<div
-				className={styles.errorContainer}
-				style={
-					props.index && props.index > 0
-						? {
-								transform: `translate(calc(-50% +  ${
-									props.index * 25
-								}px), calc(-50% - ${props.index * 25 + 25}px))`,
-						  }
-						: {}
-				}
-			>
-				{' '}
+		//TODO: Figure out better solution for this instead of using fixed values.
+		<Draggable
+			positionOffset={
+				props.index && props.index > 0
+					? {
+							x: `calc(-50% +  ${props.index * 20}px)`,
+							y: `calc(-50% -  ${props.index * 20}px)`,
+					  }
+					: { x: '-50%', y: '-50%' }
+			}
+		>
+			<div className={styles.errorContainer}>
 				<div className={styles.errorTop}>
 					<div>
 						<Image
@@ -72,7 +71,7 @@ function Error(props) {
 					</div>
 				</div>
 			</div>
-		</>
+		</Draggable>
 	);
 }
 

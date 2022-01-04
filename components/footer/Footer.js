@@ -13,11 +13,7 @@ function Footer() {
 	const [errors, setError] = useState([]);
 
 	const handleError = (err) => {
-		document.body.style.cursor = 'wait';
-		setTimeout(() => {
-			document.body.style.cursor = 'default';
-			setError([...errors, { error: err, index: errors.length }]);
-		}, 1000);
+		setError([...errors, { error: err, index: errors.length }]);
 	};
 
 	const handleWinMenu = () => {
@@ -67,7 +63,7 @@ function Footer() {
 				errors.map((err, index) => {
 					return (
 						<Error
-							key={index}
+							key={err.index}
 							error={err.error}
 							errors={errors}
 							setError={setError}
