@@ -26,7 +26,7 @@ function Bluescreen(props) {
 	return (
 		<>
 			<Head>
-				<title>kassq - bluescreen</title>
+				<title>kassq - {props.errorCode || 'ERROR'}</title>
 			</Head>
 			<div className={styles.container}>
 				<div className={styles.wrapper}>

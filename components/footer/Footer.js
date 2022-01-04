@@ -10,13 +10,13 @@ import Error from '../error/Error';
 function Footer() {
 	const [winMenu, setWinMenu] = useState(false);
 	const [isClosed, setIsClosed] = useState(true);
-	const [error, setError] = useState('');
+	const [errors, setError] = useState([]);
 
-	const handleError = (error) => {
+	const handleError = (err) => {
 		document.body.style.cursor = 'wait';
 		setTimeout(() => {
 			document.body.style.cursor = 'default';
-			setError(error);
+			setError([...errors, { error: err, index: errors.length }]);
 		}, 1000);
 	};
 
@@ -63,9 +63,18 @@ function Footer() {
 
 	return (
 		<>
-			{error && error !== '' && (
-				<Error error={error} setError={setError} />
-			)}
+			{errors &&
+				errors.map((err, index) => {
+					return (
+						<Error
+							key={index}
+							error={err.error}
+							errors={errors}
+							setError={setError}
+							index={err.index}
+						/>
+					);
+				})}
 			<div className={styles.container}>
 				<section className={styles.iconContainer}>
 					<div

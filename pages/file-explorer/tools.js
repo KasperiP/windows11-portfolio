@@ -1,9 +1,9 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import React from 'react';
-import Icons from '../components/icons/Icons';
-import Resourcemanager from '../components/resourceManager/Resourcemanager';
-import styles from '../styles/utils/List.module.scss';
+import Icons from '../../components/icons/Icons';
+import FileExplorer from '../../components/fileExplorer/FileExplorer';
+import styles from '../../styles/utils/List.module.scss';
 
 function tools() {
 	const content = () => {
@@ -106,10 +106,13 @@ function tools() {
 		<>
 			<Head>
 				<title>kassq - tools</title>
-				<link rel="canonical" href="https://www.kassq.dev/tools" />
+				<link
+					rel="canonical"
+					href="https://www.kassq.dev/file-explorer/tools"
+				/>
 			</Head>
 			<div style={{ height: '100%' }}>
-				<Resourcemanager
+				<FileExplorer
 					folder="Tools"
 					topNav={true}
 					component={content()}

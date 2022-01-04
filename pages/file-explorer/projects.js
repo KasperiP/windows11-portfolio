@@ -1,9 +1,9 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import React from 'react';
-import Icons from '../components/icons/Icons';
-import Resourcemanager from '../components/resourceManager/Resourcemanager';
-import styles from '../styles//utils/List.module.scss';
+import Icons from '../../components/icons/Icons';
+import FileExplorer from '../../components/fileExplorer/FileExplorer';
+import styles from '../../styles/utils/List.module.scss';
 
 function projects({ data }) {
 	const content = () => {
@@ -66,10 +66,13 @@ function projects({ data }) {
 		<>
 			<Head>
 				<title>kassq - projects</title>
-				<link rel="canonical" href="https://www.kassq.dev/projects" />
+				<link
+					rel="canonical"
+					href="https://www.kassq.dev/file-explorer/projects"
+				/>
 			</Head>
 			<div style={{ height: '100%' }}>
-				<Resourcemanager
+				<FileExplorer
 					folder="Projects"
 					component={content()}
 					topNav={true}

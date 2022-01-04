@@ -66,7 +66,7 @@ function Icons() {
 			></Selecto>
 			<div className={`elements ${styles.container}`}>
 				<div className={`selecto-area ${styles.wrapper}`} id="selecto1">
-					<Link href={'/about'} passHref>
+					<Link href={'/notepad/about'} passHref>
 						<div className={`${styles.item} selectoItem`}>
 							<Image
 								src="/icons/notes.ico"
@@ -77,7 +77,7 @@ function Icons() {
 							<p>About me</p>
 						</div>
 					</Link>
-					<Link href={'/projects'} passHref>
+					<Link href={'/file-explorer/projects'} passHref>
 						<div className={`${styles.item} selectoItem`}>
 							<Image
 								src="/icons/folder.ico"
@@ -89,7 +89,7 @@ function Icons() {
 						</div>
 					</Link>
 
-					<Link href={'/tools'} passHref>
+					<Link href={'/file-explorer/tools'} passHref>
 						<div className={`${styles.item} selectoItem`}>
 							<Image
 								src="/icons/folder.ico"
@@ -100,7 +100,7 @@ function Icons() {
 							<p>Tools</p>
 						</div>
 					</Link>
-					<Link href={'/links'} passHref>
+					<Link href={'/file-explorer/links'} passHref>
 						<div className={`${styles.item} selectoItem`}>
 							<Image
 								src="/icons/links.ico"

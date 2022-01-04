@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import React from 'react';
-import Icons from '../components/icons/Icons';
-import Notepad from '../components/notepad/Notepad';
+import Icons from '../../components/icons/Icons';
+import Notepad from '../../components/notepad/Notepad';
 
 function about() {
 	const getAge = () => {
@@ -24,7 +24,10 @@ function about() {
 		<>
 			<Head>
 				<title>kassq - about</title>
-				<link rel="canonical" href="https://www.kassq.dev/about" />
+				<link
+					rel="canonical"
+					href="https://www.kassq.dev/notepad/about"
+				/>
 			</Head>
 			<div style={{ height: '100%' }}>
 				<Notepad name="About me" text={() => aboutMe()} />

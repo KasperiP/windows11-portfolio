@@ -2,9 +2,9 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
-import Icons from '../components/icons/Icons';
-import Resourcemanager from '../components/resourceManager/Resourcemanager';
-import styles from '../styles//utils/List.module.scss';
+import Icons from '../../components/icons/Icons';
+import FileExplorer from '../../components/fileExplorer/FileExplorer';
+import styles from '../../styles/utils/List.module.scss';
 
 function links() {
 	const content = () => {
@@ -107,10 +107,13 @@ function links() {
 		<>
 			<Head>
 				<title>kassq - links</title>
-				<link rel="canonical" href="https://www.kassq.dev/links" />
+				<link
+					rel="canonical"
+					href="https://www.kassq.dev/file-explorer/links"
+				/>
 			</Head>
 			<div style={{ height: '100%' }}>
-				<Resourcemanager
+				<FileExplorer
 					folder="Links"
 					topNav={true}
 					component={content()}

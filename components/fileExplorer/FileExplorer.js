@@ -1,6 +1,6 @@
 import Image from 'next/image';
-import React, { useState } from 'react';
-import styles from './Resourcemanager.module.scss';
+import { useState } from 'react';
+import styles from './FileExplorer.module.scss';
 import {
 	VscChromeMinimize,
 	VscChromeMaximize,
@@ -19,8 +19,9 @@ import { FaRegShareSquare } from 'react-icons/fa';
 import { HiArrowLeft, HiArrowRight, HiArrowUp } from 'react-icons/hi';
 import { IoMdRefresh } from 'react-icons/io';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 
-function Resourcemanager(props) {
+function FileExplorer(props) {
 	const router = useRouter();
 
 	const [maximised, setMaximised] = useState(false);
@@ -277,11 +278,9 @@ function Resourcemanager(props) {
 				</section>
 				<section className={styles.contentArea}>
 					<div className={styles.sidebar}>
-						<div
-							className={styles.navigationDropdown}
-							onClick={() => setQuickaccess(!quickaccess)}
-						>
+						<div className={styles.navigationDropdown}>
 							<RiArrowDropDownLine
+								onClick={() => setQuickaccess(!quickaccess)}
 								style={
 									quickaccess
 										? {}
@@ -298,49 +297,55 @@ function Resourcemanager(props) {
 						</div>
 						{quickaccess && (
 							<>
-								<div className={styles.navigationItem}>
-									<Image
-										src="/icons/desktop.ico"
-										alt="ico"
-										width={16}
-										height={16}
-									/>
-									<p>Desktop</p>
-								</div>
-								<div className={styles.navigationItem}>
-									<Image
-										src="/icons/downloads.ico"
-										alt="ico"
-										width={16}
-										height={16}
-									/>
-									<p>Downloads</p>
-								</div>
-								<div className={styles.navigationItem}>
-									<Image
-										src="/icons/documents.ico"
-										alt="ico"
-										width={16}
-										height={16}
-									/>
-									<p>Documents</p>
-								</div>
-								<div className={styles.navigationItem}>
-									<Image
-										src="/icons/pictures.ico"
-										alt="ico"
-										width={16}
-										height={16}
-									/>
-									<p>Pictures</p>
-								</div>
+								<Link href="/file-explorer/desktop" passHref>
+									<div className={styles.navigationItem}>
+										<Image
+											src="/icons/desktop.ico"
+											alt="ico"
+											width={16}
+											height={16}
+										/>
+										<p>Desktop</p>
+									</div>
+								</Link>
+								<Link href="/file-explorer/downloads" passHref>
+									<div className={styles.navigationItem}>
+										<Image
+											src="/icons/downloads.ico"
+											alt="ico"
+											width={16}
+											height={16}
+										/>
+										<p>Downloads</p>
+									</div>
+								</Link>
+								<Link href="/file-explorer/documents" passHref>
+									<div className={styles.navigationItem}>
+										<Image
+											src="/icons/documents.ico"
+											alt="ico"
+											width={16}
+											height={16}
+										/>
+										<p>Documents</p>
+									</div>
+								</Link>
+								<Link href="/file-explorer/pictures" passHref>
+									<div className={styles.navigationItem}>
+										<Image
+											src="/icons/pictures.ico"
+											alt="ico"
+											width={16}
+											height={16}
+										/>
+										<p>Pictures</p>
+									</div>
+								</Link>
 							</>
 						)}
-						<div
-							className={styles.navigationDropdown}
-							onClick={() => setThisPC(!thisPC)}
-						>
+						<div className={styles.navigationDropdown}>
 							<RiArrowDropDownLine
+								onClick={() => setThisPC(!thisPC)}
 								style={
 									thisPC
 										? {}
@@ -457,4 +462,4 @@ function Resourcemanager(props) {
 	);
 }
 
-export default Resourcemanager;
+export default FileExplorer;

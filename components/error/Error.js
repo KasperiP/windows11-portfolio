@@ -5,7 +5,11 @@ import styles from './Error.module.scss';
 
 function Error(props) {
 	const handleClose = () => {
-		props.setError('');
+		// Take props.errors array and remove props.error from it
+		const newErrors = props.errors.filter(
+			(err) => err.index !== props.index
+		);
+		props.setError(newErrors);
 	};
 
 	useEffect(() => {
@@ -15,7 +19,18 @@ function Error(props) {
 
 	return (
 		<>
-			<div className={styles.errorContainer}>
+			<div
+				className={styles.errorContainer}
+				style={
+					props.index && props.index > 0
+						? {
+								transform: `translate(calc(-50% +  ${
+									props.index * 25
+								}px), calc(-50% - ${props.index * 25 + 25}px))`,
+						  }
+						: {}
+				}
+			>
 				{' '}
 				<div className={styles.errorTop}>
 					<div>
