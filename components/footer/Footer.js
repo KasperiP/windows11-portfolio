@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import styles from './Footer.module.scss';
 import { AiOutlineWifi } from 'react-icons/ai';
 import { FiVolume2 } from 'react-icons/fi';
-import { IoIosArrowUp } from 'react-icons/io';
+import Link from 'next/link';
 import WindowsMenu from './WindowsMenu';
 import Error from '../error/Error';
 
@@ -85,15 +85,16 @@ function Footer() {
 							className="windowsIcon"
 						/>
 					</div>
-					<div className={styles.icon}>
-						{' '}
-						<Image
-							src={'/icons/explorer.ico'}
-							width={25}
-							height={25}
-							alt="logo"
-						/>
-					</div>
+					<Link href="/file-explorer/quick-access" passHref>
+						<div className={styles.icon}>
+							<Image
+								src={'/icons/explorer.ico'}
+								width={25}
+								height={25}
+								alt="logo"
+							/>
+						</div>
+					</Link>
 					<div
 						className={styles.icon}
 						onClick={() => handleError('Firefox')}

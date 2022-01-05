@@ -61,7 +61,7 @@ function FileExplorer(props) {
 					<section className={styles.top}>
 						<div className={styles.topContainer}>
 							<Image
-								src="/icons/folder.ico"
+								src={`/icons/${props.icon}.ico`}
 								alt="ico"
 								width={20}
 								height={20}
@@ -254,7 +254,7 @@ function FileExplorer(props) {
 					<div className={styles.navigatePath}>
 						<div className={styles.left}>
 							<Image
-								src="/icons/folder.ico"
+								src={`/icons/${props.icon}.ico`}
 								alt="ico"
 								width={20}
 								height={20}
@@ -278,7 +278,14 @@ function FileExplorer(props) {
 				</section>
 				<section className={styles.contentArea}>
 					<div className={styles.sidebar}>
-						<div className={styles.navigationDropdown}>
+						<div
+							className={styles.navigationDropdown}
+							style={
+								router.pathname == '/file-explorer/quick-access'
+									? { backgroundColor: '#2e2e2e' }
+									: {}
+							}
+						>
 							<RiArrowDropDownLine
 								onClick={() => setQuickaccess(!quickaccess)}
 								style={
@@ -297,8 +304,19 @@ function FileExplorer(props) {
 						</div>
 						{quickaccess && (
 							<>
-								<Link href="/file-explorer/desktop" passHref>
-									<div className={styles.navigationItem}>
+								<Link
+									href="/file-explorer/desktop?top=true"
+									passHref
+								>
+									<div
+										className={styles.navigationItem}
+										style={
+											router.asPath ==
+											'/file-explorer/desktop?top=true'
+												? { backgroundColor: '#2e2e2e' }
+												: {}
+										}
+									>
 										<Image
 											src="/icons/desktop.ico"
 											alt="ico"
@@ -308,8 +326,19 @@ function FileExplorer(props) {
 										<p>Desktop</p>
 									</div>
 								</Link>
-								<Link href="/file-explorer/downloads" passHref>
-									<div className={styles.navigationItem}>
+								<Link
+									href="/file-explorer/downloads?top=true"
+									passHref
+								>
+									<div
+										className={styles.navigationItem}
+										style={
+											router.asPath ==
+											'/file-explorer/downloads?top=true'
+												? { backgroundColor: '#2e2e2e' }
+												: {}
+										}
+									>
 										<Image
 											src="/icons/downloads.ico"
 											alt="ico"
@@ -319,8 +348,19 @@ function FileExplorer(props) {
 										<p>Downloads</p>
 									</div>
 								</Link>
-								<Link href="/file-explorer/documents" passHref>
-									<div className={styles.navigationItem}>
+								<Link
+									href="/file-explorer/documents?top=true"
+									passHref
+								>
+									<div
+										className={styles.navigationItem}
+										style={
+											router.asPath ==
+											'/file-explorer/documents?top=true'
+												? { backgroundColor: '#2e2e2e' }
+												: {}
+										}
+									>
 										<Image
 											src="/icons/documents.ico"
 											alt="ico"
@@ -330,8 +370,19 @@ function FileExplorer(props) {
 										<p>Documents</p>
 									</div>
 								</Link>
-								<Link href="/file-explorer/pictures" passHref>
-									<div className={styles.navigationItem}>
+								<Link
+									href="/file-explorer/pictures?top=true"
+									passHref
+								>
+									<div
+										className={styles.navigationItem}
+										style={
+											router.asPath ==
+											'/file-explorer/pictures?top=true'
+												? { backgroundColor: '#2e2e2e' }
+												: {}
+										}
+									>
 										<Image
 											src="/icons/pictures.ico"
 											alt="ico"
@@ -343,7 +394,14 @@ function FileExplorer(props) {
 								</Link>
 							</>
 						)}
-						<div className={styles.navigationDropdown}>
+						<div
+							className={styles.navigationDropdown}
+							style={
+								router.pathname == '/file-explorer/this-pc'
+									? { backgroundColor: '#2e2e2e' }
+									: {}
+							}
+						>
 							<RiArrowDropDownLine
 								onClick={() => setThisPC(!thisPC)}
 								style={
@@ -363,7 +421,15 @@ function FileExplorer(props) {
 						{thisPC && (
 							<>
 								{' '}
-								<div className={styles.navigationItem}>
+								<div
+									className={styles.navigationItem}
+									style={
+										router.asPath ==
+										'/file-explorer/desktop'
+											? { backgroundColor: '#2e2e2e' }
+											: {}
+									}
+								>
 									<Image
 										src="/icons/desktop.ico"
 										alt="ico"
@@ -372,7 +438,15 @@ function FileExplorer(props) {
 									/>
 									<p>Desktop</p>
 								</div>
-								<div className={styles.navigationItem}>
+								<div
+									className={styles.navigationItem}
+									style={
+										router.asPath ==
+										'/file-explorer/downloads'
+											? { backgroundColor: '#2e2e2e' }
+											: {}
+									}
+								>
 									<Image
 										src="/icons/downloads.ico"
 										alt="ico"
@@ -381,7 +455,15 @@ function FileExplorer(props) {
 									/>
 									<p>Downloads</p>
 								</div>
-								<div className={styles.navigationItem}>
+								<div
+									className={styles.navigationItem}
+									style={
+										router.asPath ==
+										'/file-explorer/documents'
+											? { backgroundColor: '#2e2e2e' }
+											: {}
+									}
+								>
 									<Image
 										src="/icons/documents.ico"
 										alt="ico"
@@ -390,7 +472,15 @@ function FileExplorer(props) {
 									/>
 									<p>Documents</p>
 								</div>
-								<div className={styles.navigationItem}>
+								<div
+									className={styles.navigationItem}
+									style={
+										router.asPath ==
+										'/file-explorer/pictures'
+											? { backgroundColor: '#2e2e2e' }
+											: {}
+									}
+								>
 									<Image
 										src="/icons/pictures.ico"
 										alt="ico"
@@ -399,7 +489,14 @@ function FileExplorer(props) {
 									/>
 									<p>Pictures</p>
 								</div>
-								<div className={styles.navigationItem}>
+								<div
+									className={styles.navigationItem}
+									style={
+										router.asPath == '/file-explorer/videos'
+											? { backgroundColor: '#2e2e2e' }
+											: {}
+									}
+								>
 									<Image
 										src="/icons/videos.ico"
 										alt="ico"
@@ -408,7 +505,14 @@ function FileExplorer(props) {
 									/>
 									<p>Videos</p>
 								</div>
-								<div className={styles.navigationItem}>
+								<div
+									className={styles.navigationItem}
+									style={
+										router.asPath == '/file-explorer/music'
+											? { backgroundColor: '#2e2e2e' }
+											: {}
+									}
+								>
 									<Image
 										src="/icons/music.ico"
 										alt="ico"
@@ -417,7 +521,14 @@ function FileExplorer(props) {
 									/>
 									<p>Music</p>
 								</div>
-								<div className={styles.navigationItem}>
+								<div
+									className={styles.navigationItem}
+									style={
+										router.asPath == '/file-explorer/ssd1'
+											? { backgroundColor: '#2e2e2e' }
+											: {}
+									}
+								>
 									<Image
 										src="/icons/cdrive.ico"
 										alt="ico"
@@ -426,7 +537,14 @@ function FileExplorer(props) {
 									/>
 									<p>250GB SSD</p>
 								</div>
-								<div className={styles.navigationItem}>
+								<div
+									className={styles.navigationItem}
+									style={
+										router.asPath == '/file-explorer/ssd2'
+											? { backgroundColor: '#2e2e2e' }
+											: {}
+									}
+								>
 									<Image
 										src="/icons/drive.ico"
 										alt="ico"
@@ -454,7 +572,15 @@ function FileExplorer(props) {
 								<p>Size</p>
 							</div>
 						</div>
-						<div className={styles.child}>{props.component}</div>
+						<div className={styles.child}>
+							{props.component || (
+								<>
+									<p className={styles.emptyFolder}>
+										This folder is empty.
+									</p>
+								</>
+							)}
+						</div>
 					</div>
 				</section>
 			</section>

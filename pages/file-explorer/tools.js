@@ -26,8 +26,6 @@ function tools() {
 						<p className={styles.listItemType}>Shortcut</p>
 						<p className={styles.listItemSize}>2kt</p>
 					</div>
-				</div>
-				<div className={styles.listItemContainer}>
 					<div className={styles.listItem}>
 						<div className={styles.listItemName}>
 							<Image
@@ -44,8 +42,6 @@ function tools() {
 						<p className={styles.listItemType}>Shortcut</p>
 						<p className={styles.listItemSize}>2kt</p>
 					</div>
-				</div>
-				<div className={styles.listItemContainer}>
 					<div className={styles.listItem}>
 						<div className={styles.listItemName}>
 							<Image
@@ -62,8 +58,6 @@ function tools() {
 						<p className={styles.listItemType}>Shortcut</p>
 						<p className={styles.listItemSize}>2kt</p>
 					</div>
-				</div>
-				<div className={styles.listItemContainer}>
 					<div className={styles.listItem}>
 						<div className={styles.listItemName}>
 							<Image
@@ -80,8 +74,6 @@ function tools() {
 						<p className={styles.listItemType}>Shortcut</p>
 						<p className={styles.listItemSize}>2kt</p>
 					</div>
-				</div>
-				<div className={styles.listItemContainer}>
 					<div className={styles.listItem}>
 						<div className={styles.listItemName}>
 							<Image
@@ -113,6 +105,7 @@ function tools() {
 			</Head>
 			<div style={{ height: '100%' }}>
 				<FileExplorer
+					icon="folder"
 					folder="Tools"
 					topNav={true}
 					component={content()}

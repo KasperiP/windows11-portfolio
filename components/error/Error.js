@@ -21,6 +21,7 @@ function Error(props) {
 	return (
 		//TODO: Figure out better solution for this instead of using fixed values.
 		<Draggable
+			cancel="button"
 			positionOffset={
 				props.index && props.index > 0
 					? {

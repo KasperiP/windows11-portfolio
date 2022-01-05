@@ -114,6 +114,7 @@ function links() {
 			</Head>
 			<div style={{ height: '100%' }}>
 				<FileExplorer
+					icon="folder"
 					folder="Links"
 					topNav={true}
 					component={content()}

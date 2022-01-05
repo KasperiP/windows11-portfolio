@@ -3,22 +3,26 @@ import React from 'react';
 import Icons from '../../components/icons/Icons';
 import FileExplorer from '../../components/fileExplorer/FileExplorer';
 
-function downloads() {
+function quickAccess() {
 	return (
 		<>
 			<Head>
-				<title>kassq - downloads</title>
+				<title>kassq - Quick access</title>
 				<link
 					rel="canonical"
 					href="https://www.kassq.dev/file-explorer/downloads"
 				/>
 			</Head>
 			<div style={{ height: '100%' }}>
-				<FileExplorer folder="Downloads" topNav={true} icon="folder" />
+				<FileExplorer
+					folder="Quick access"
+					topNav={true}
+					icon="quickaccess"
+				/>
 				<Icons />
 			</div>
 		</>
 	);
 }
 
-export default downloads;
+export default quickAccess;

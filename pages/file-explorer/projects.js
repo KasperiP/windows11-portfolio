@@ -73,6 +73,7 @@ function projects({ data }) {
 			</Head>
 			<div style={{ height: '100%' }}>
 				<FileExplorer
+					icon="folder"
 					folder="Projects"
 					component={content()}
 					topNav={true}
