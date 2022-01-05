@@ -111,24 +111,28 @@ function Icons() {
 							<p>Links</p>
 						</div>
 					</Link>
-					<div className={`${styles.item} selectoItem`}>
-						<Image
-							src="/icons/pictures.ico"
-							alt="icon"
-							width={40}
-							height={40}
-						></Image>
-						<p>Images</p>
-					</div>
-					<div className={`${styles.item} selectoItem`}>
-						<Image
-							src="/icons/videos.ico"
-							alt="icon"
-							width={40}
-							height={40}
-						></Image>
-						<p>Videos</p>
-					</div>
+					<Link href={'/explorer/pictures'} passHref>
+						<div className={`${styles.item} selectoItem`}>
+							<Image
+								src="/icons/pictures.ico"
+								alt="icon"
+								width={40}
+								height={40}
+							></Image>
+							<p>Pictures</p>
+						</div>
+					</Link>
+					<Link href={'/explorer/videos'} passHref>
+						<div className={`${styles.item} selectoItem`}>
+							<Image
+								src="/icons/videos.ico"
+								alt="icon"
+								width={40}
+								height={40}
+							></Image>
+							<p>Videos</p>
+						</div>
+					</Link>
 
 					<div className={`${styles.item} selectoItem recycleBin`}>
 						{deleted ? (

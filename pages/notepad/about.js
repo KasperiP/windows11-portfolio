@@ -15,7 +15,7 @@ function about() {
 		}
 		return age;
 	};
-	const aboutMe = () => {
+	const textContent = () => {
 		return `Hello, my name is Kasperi! 👋\n\nI am a ${getAge()}-year-old student / developer from Finland 🇫🇮. I am interested on all kinds of tech related topics such as web development! I am currently studying data scienses in University of Tampere. 📊🧑‍🔬 Open the Links folder to follow me on social media! 🤠
 		`;
 	};
@@ -23,14 +23,14 @@ function about() {
 	return (
 		<>
 			<Head>
-				<title>kassq - about</title>
+				<title>kassq - About me</title>
 				<link
 					rel="canonical"
 					href="https://www.kassq.dev/notepad/about"
 				/>
 			</Head>
 			<div style={{ height: '100%' }}>
-				<Notepad name="About me" text={() => aboutMe()} />
+				<Notepad name="About me" text={() => textContent()} />
 				<Icons />
 			</div>
 		</>
