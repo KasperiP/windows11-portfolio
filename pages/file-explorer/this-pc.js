@@ -1,14 +1,13 @@
 import Head from 'next/head';
-import React from 'react';
-import Icons from '../../components/icons/Icons';
-import FileExplorer from '../../components/fileExplorer/FileExplorer';
-import { RiArrowDropDownLine } from 'react-icons/ri';
-import { BsFillPinAngleFill } from 'react-icons/bs';
 import Image from 'next/image';
+import React from 'react';
+import { BsFillPinAngleFill } from 'react-icons/bs';
+import { RiArrowDropDownLine } from 'react-icons/ri';
+import FileExplorer from '../../components/fileExplorer/fileExplorer';
+import Icons from '../../components/icons/Icons';
 import styles from '../../styles/utils/GridList.module.scss';
-import listItemStyles from '../../styles/utils/List.module.scss';
 
-function quickAccess() {
+function thisPC() {
 	const content = () => {
 		return (
 			<>
@@ -115,20 +114,36 @@ function quickAccess() {
 					<div />
 				</div>
 
-				<div className={listItemStyles.listItemContainer}>
-					<div className={listItemStyles.listItem}>
-						<div className={listItemStyles.listItemName}>
+				<div className={styles.wrapper}>
+					<div className={`${styles.item} ${styles.disk}`}>
+						<div>
 							<Image
-								src="/icons/notes.ico"
+								src="/icons/cdrive.ico"
 								alt="icon"
-								width={16}
-								height={16}
-							></Image>
-							<p>About me</p>
+								width={50}
+								height={50}
+							/>
 						</div>
-						<p className={listItemStyles.listItemType}>
-							This PC/Desktop/About me.txt
-						</p>
+						<div>
+							<p>250GB SSD (C:)</p>
+							<span className={styles.progressBar} />
+							<p>85.8 GB free of 222 GB</p>
+						</div>
+					</div>
+					<div className={`${styles.item} ${styles.disk}`}>
+						<div>
+							<Image
+								src="/icons/drive.ico"
+								alt="icon"
+								width={50}
+								height={50}
+							/>
+						</div>
+						<div>
+							<p>1TB SSD (D:)</p>
+							<span className={styles.progressBar} />
+							<p>393 GB free of 465 GB</p>
+						</div>
 					</div>
 				</div>
 			</>
@@ -138,7 +153,7 @@ function quickAccess() {
 	return (
 		<>
 			<Head>
-				<title>kassq - Quick access</title>
+				<title>kassq - This PC</title>
 				<link
 					rel="canonical"
 					href="https://www.kassq.dev/file-explorer/downloads"
@@ -157,4 +172,4 @@ function quickAccess() {
 	);
 }
 
-export default quickAccess;
+export default thisPC;

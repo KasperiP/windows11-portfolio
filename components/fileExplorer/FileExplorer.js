@@ -27,12 +27,20 @@ function FileExplorer(props) {
 	const [maximised, setMaximised] = useState(false);
 	const [closed, setClosed] = useState(false);
 
+	const [path, setPath] = useState(props.folder);
+
 	const [quickaccess, setQuickaccess] = useState(true);
 	const [thisPC, setThisPC] = useState(true);
 
 	const handleMaximize = () => {
 		setMaximised(!maximised);
 	};
+
+	const handleChange = (e) => {
+		setPath(e.target.value);
+	};
+	const handleFocus = (event) => event.target.select();
+	const handleBlur = () => setPath(props.folder);
 
 	const handleClose = () => {
 		setClosed(!closed);
@@ -260,7 +268,12 @@ function FileExplorer(props) {
 								height={20}
 							/>
 							<AiFillCaretRight />
-							<p>{props.folder}</p>
+							<input
+								value={`${path}`}
+								onChange={handleChange}
+								onFocus={handleFocus}
+								onBlur={handleBlur}
+							></input>
 						</div>
 						<div className={styles.right}>
 							<div>
@@ -273,7 +286,7 @@ function FileExplorer(props) {
 					</div>
 					<div className={styles.navigateSearch}>
 						<VscSearch />
-						<p>Search: {props.folder}</p>
+						<input placeholder={`Search: ${props.folder}`} />
 					</div>
 				</section>
 				<section className={styles.contentArea}>
@@ -294,13 +307,17 @@ function FileExplorer(props) {
 										: { transform: 'rotate(-90deg)' }
 								}
 							/>
-							<Image
-								src="/icons/quickaccess.ico"
-								alt="ico"
-								width={16}
-								height={16}
-							/>
-							<p>Quick access</p>
+							<Link href="/file-explorer/quick-access" passHref>
+								<div>
+									<Image
+										src="/icons/quickaccess.ico"
+										alt="ico"
+										width={16}
+										height={16}
+									/>
+									<p>Quick access</p>
+								</div>
+							</Link>
 						</div>
 						{quickaccess && (
 							<>
@@ -410,168 +427,202 @@ function FileExplorer(props) {
 										: { transform: 'rotate(-90deg)' }
 								}
 							/>
-							<Image
-								src="/icons/computer.ico"
-								alt="ico"
-								width={16}
-								height={16}
-							/>
-							<p>This PC</p>
+							<Link href="/file-explorer/this-pc" passHref>
+								<div>
+									<Image
+										src="/icons/computer.ico"
+										alt="ico"
+										width={16}
+										height={16}
+									/>
+									<p>This PC</p>
+								</div>
+							</Link>
 						</div>
 						{thisPC && (
 							<>
-								{' '}
-								<div
-									className={styles.navigationItem}
-									style={
-										router.asPath ==
-										'/file-explorer/desktop'
-											? { backgroundColor: '#2e2e2e' }
-											: {}
-									}
-								>
-									<Image
-										src="/icons/desktop.ico"
-										alt="ico"
-										width={16}
-										height={16}
-									/>
-									<p>Desktop</p>
-								</div>
-								<div
-									className={styles.navigationItem}
-									style={
-										router.asPath ==
-										'/file-explorer/downloads'
-											? { backgroundColor: '#2e2e2e' }
-											: {}
-									}
-								>
-									<Image
-										src="/icons/downloads.ico"
-										alt="ico"
-										width={16}
-										height={16}
-									/>
-									<p>Downloads</p>
-								</div>
-								<div
-									className={styles.navigationItem}
-									style={
-										router.asPath ==
-										'/file-explorer/documents'
-											? { backgroundColor: '#2e2e2e' }
-											: {}
-									}
-								>
-									<Image
-										src="/icons/documents.ico"
-										alt="ico"
-										width={16}
-										height={16}
-									/>
-									<p>Documents</p>
-								</div>
-								<div
-									className={styles.navigationItem}
-									style={
-										router.asPath ==
-										'/file-explorer/pictures'
-											? { backgroundColor: '#2e2e2e' }
-											: {}
-									}
-								>
-									<Image
-										src="/icons/pictures.ico"
-										alt="ico"
-										width={16}
-										height={16}
-									/>
-									<p>Pictures</p>
-								</div>
-								<div
-									className={styles.navigationItem}
-									style={
-										router.asPath == '/file-explorer/videos'
-											? { backgroundColor: '#2e2e2e' }
-											: {}
-									}
-								>
-									<Image
-										src="/icons/videos.ico"
-										alt="ico"
-										width={16}
-										height={16}
-									/>
-									<p>Videos</p>
-								</div>
-								<div
-									className={styles.navigationItem}
-									style={
-										router.asPath == '/file-explorer/music'
-											? { backgroundColor: '#2e2e2e' }
-											: {}
-									}
-								>
-									<Image
-										src="/icons/music.ico"
-										alt="ico"
-										width={16}
-										height={16}
-									/>
-									<p>Music</p>
-								</div>
-								<div
-									className={styles.navigationItem}
-									style={
-										router.asPath == '/file-explorer/ssd1'
-											? { backgroundColor: '#2e2e2e' }
-											: {}
-									}
-								>
-									<Image
-										src="/icons/cdrive.ico"
-										alt="ico"
-										width={16}
-										height={16}
-									/>
-									<p>250GB SSD</p>
-								</div>
-								<div
-									className={styles.navigationItem}
-									style={
-										router.asPath == '/file-explorer/ssd2'
-											? { backgroundColor: '#2e2e2e' }
-											: {}
-									}
-								>
-									<Image
-										src="/icons/drive.ico"
-										alt="ico"
-										width={16}
-										height={16}
-									/>
-									<p>1TB SSD</p>
-								</div>
+								<Link href="/file-explorer/desktop" passHref>
+									<div
+										className={styles.navigationItem}
+										style={
+											router.asPath ==
+											'/file-explorer/desktop'
+												? { backgroundColor: '#2e2e2e' }
+												: {}
+										}
+									>
+										<Image
+											src="/icons/desktop.ico"
+											alt="ico"
+											width={16}
+											height={16}
+										/>
+										<p>Desktop</p>
+									</div>
+								</Link>
+								<Link href="/file-explorer/downloads" passHref>
+									<div
+										className={styles.navigationItem}
+										style={
+											router.asPath ==
+											'/file-explorer/downloads'
+												? { backgroundColor: '#2e2e2e' }
+												: {}
+										}
+									>
+										<Image
+											src="/icons/downloads.ico"
+											alt="ico"
+											width={16}
+											height={16}
+										/>
+										<p>Downloads</p>
+									</div>
+								</Link>
+								<Link href="/file-explorer/documents" passHref>
+									<div
+										className={styles.navigationItem}
+										style={
+											router.asPath ==
+											'/file-explorer/documents'
+												? { backgroundColor: '#2e2e2e' }
+												: {}
+										}
+									>
+										<Image
+											src="/icons/documents.ico"
+											alt="ico"
+											width={16}
+											height={16}
+										/>
+										<p>Documents</p>
+									</div>
+								</Link>
+
+								<Link href="/file-explorer/pictures" passHref>
+									<div
+										className={styles.navigationItem}
+										style={
+											router.asPath ==
+											'/file-explorer/pictures'
+												? { backgroundColor: '#2e2e2e' }
+												: {}
+										}
+									>
+										<Image
+											src="/icons/pictures.ico"
+											alt="ico"
+											width={16}
+											height={16}
+										/>
+										<p>Pictures</p>
+									</div>
+								</Link>
+
+								<Link href="/file-explorer/videos" passHref>
+									<div
+										className={styles.navigationItem}
+										style={
+											router.asPath ==
+											'/file-explorer/videos'
+												? { backgroundColor: '#2e2e2e' }
+												: {}
+										}
+									>
+										<Image
+											src="/icons/videos.ico"
+											alt="ico"
+											width={16}
+											height={16}
+										/>
+										<p>Videos</p>
+									</div>
+								</Link>
+
+								<Link href="/file-explorer/music" passHref>
+									<div
+										className={styles.navigationItem}
+										style={
+											router.asPath ==
+											'/file-explorer/music'
+												? { backgroundColor: '#2e2e2e' }
+												: {}
+										}
+									>
+										<Image
+											src="/icons/music.ico"
+											alt="ico"
+											width={16}
+											height={16}
+										/>
+										<p>Music</p>
+									</div>
+								</Link>
+
+								<Link href="/file-explorer/drives/C" passHref>
+									<div
+										className={styles.navigationItem}
+										style={
+											router.asPath ==
+											'/file-explorer/drives/C'
+												? { backgroundColor: '#2e2e2e' }
+												: {}
+										}
+									>
+										<Image
+											src="/icons/cdrive.ico"
+											alt="ico"
+											width={16}
+											height={16}
+										/>
+										<p>250GB SSD</p>
+									</div>
+								</Link>
+
+								<Link href="/file-explorer/drives/D" passHref>
+									<div
+										className={styles.navigationItem}
+										style={
+											router.asPath ==
+											'/file-explorer/ssd2'
+												? { backgroundColor: '#2e2e2e' }
+												: {}
+										}
+									>
+										<Image
+											src="/icons/drive.ico"
+											alt="ico"
+											width={16}
+											height={16}
+										/>
+										<p>1TB SSD</p>
+									</div>
+								</Link>
 							</>
 						)}
 					</div>
-					<div className={styles.content}>
-						<div className={styles.topNav}>
-							<div className={styles.name}>
-								<p>Name</p>
-							</div>
 
-							<div className={styles.dateModified}>
-								<p>Date modified</p>
-							</div>
-							<div className={styles.type}>
-								<p>Type</p>
-							</div>
-							<div className={styles.size}>
-								<p>Size</p>
-							</div>
-						</div>
+					<div className={styles.content}>
+						{props.topNav && (
+							<>
+								<div className={styles.topNav}>
+									<div className={styles.name}>
+										<p>Name</p>
+									</div>
+
+									<div className={styles.dateModified}>
+										<p>Date modified</p>
+									</div>
+									<div className={styles.type}>
+										<p>Type</p>
+									</div>
+									<div className={styles.size}>
+										<p>Size</p>
+									</div>
+								</div>
+							</>
+						)}
+
 						<div className={styles.child}>
 							{props.component || (
 								<>

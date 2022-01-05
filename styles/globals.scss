@@ -18,6 +18,13 @@ p {
 	color: #fff;
 	font-size: 0.7rem;
 }
+input {
+	border: none;
+	outline: none;
+}
+a {
+	text-decoration: none;
+}
 
 textarea::-webkit-scrollbar {
 	width: 1em;
@@ -30,8 +37,4 @@ textarea::-webkit-scrollbar-track {
 textarea::-webkit-scrollbar-thumb {
 	background-color: darkgrey;
 	outline: 1px solid slategrey;
-}
-
-a {
-	text-decoration: none;
 }
