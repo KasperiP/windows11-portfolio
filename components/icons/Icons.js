@@ -77,7 +77,7 @@ function Icons() {
 							<p>About me</p>
 						</div>
 					</Link>
-					<Link href={'/file-explorer/projects'} passHref>
+					<Link href={'/explorer/projects'} passHref>
 						<div className={`${styles.item} selectoItem`}>
 							<Image
 								src="/icons/folder.ico"
@@ -89,7 +89,7 @@ function Icons() {
 						</div>
 					</Link>
 
-					<Link href={'/file-explorer/tools'} passHref>
+					<Link href={'/explorer/tools'} passHref>
 						<div className={`${styles.item} selectoItem`}>
 							<Image
 								src="/icons/folder.ico"
@@ -100,7 +100,7 @@ function Icons() {
 							<p>Tools</p>
 						</div>
 					</Link>
-					<Link href={'/file-explorer/links'} passHref>
+					<Link href={'/explorer/links'} passHref>
 						<div className={`${styles.item} selectoItem`}>
 							<Image
 								src="/icons/links.ico"

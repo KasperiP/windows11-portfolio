@@ -97,10 +97,10 @@ function tools() {
 	return (
 		<>
 			<Head>
-				<title>kassq - tools</title>
+				<title>kassq - Tools</title>
 				<link
 					rel="canonical"
-					href="https://www.kassq.dev/file-explorer/tools"
+					href="https://www.kassq.dev/explorer/tools"
 				/>
 			</Head>
 			<div style={{ height: '100%' }}>

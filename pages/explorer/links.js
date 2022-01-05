@@ -106,10 +106,10 @@ function links() {
 	return (
 		<>
 			<Head>
-				<title>kassq - links</title>
+				<title>kassq - Links</title>
 				<link
 					rel="canonical"
-					href="https://www.kassq.dev/file-explorer/links"
+					href="https://www.kassq.dev/explorer/links"
 				/>
 			</Head>
 			<div style={{ height: '100%' }}>

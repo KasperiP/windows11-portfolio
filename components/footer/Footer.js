@@ -85,7 +85,7 @@ function Footer() {
 							className="windowsIcon"
 						/>
 					</div>
-					<Link href="/file-explorer/quick-access" passHref>
+					<Link href="/explorer/quick-access" passHref>
 						<div className={styles.icon}>
 							<Image
 								src={'/icons/explorer.ico'}

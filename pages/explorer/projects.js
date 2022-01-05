@@ -65,10 +65,10 @@ function projects({ data }) {
 	return (
 		<>
 			<Head>
-				<title>kassq - projects</title>
+				<title>kassq - Projects</title>
 				<link
 					rel="canonical"
-					href="https://www.kassq.dev/file-explorer/projects"
+					href="https://www.kassq.dev/explorer/projects"
 				/>
 			</Head>
 			<div style={{ height: '100%' }}>

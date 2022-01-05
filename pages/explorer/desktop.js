@@ -29,7 +29,7 @@ function desktop() {
 							<p className={styles.listItemSize}>2kt</p>
 						</div>
 					</Link>
-					<Link href="/file-explorer/projects" passHref>
+					<Link href="/explorer/projects" passHref>
 						<div className={styles.listItem}>
 							<div className={styles.listItemName}>
 								<Image
@@ -47,7 +47,7 @@ function desktop() {
 							<p className={styles.listItemSize}>2kt</p>
 						</div>
 					</Link>
-					<Link href="/file-explorer/tools" passHref>
+					<Link href="/explorer/tools" passHref>
 						<div className={styles.listItem}>
 							<div className={styles.listItemName}>
 								<Image
@@ -65,7 +65,7 @@ function desktop() {
 							<p className={styles.listItemSize}>2kt</p>
 						</div>
 					</Link>
-					<Link href="/file-explorer/links" passHref>
+					<Link href="/explorer/links" passHref>
 						<div className={styles.listItem}>
 							<div className={styles.listItemName}>
 								<Image
@@ -84,7 +84,7 @@ function desktop() {
 						</div>
 					</Link>
 
-					<Link href="/file-explorer/images" passHref>
+					<Link href="/explorer/images" passHref>
 						<div className={styles.listItem}>
 							<div className={styles.listItemName}>
 								<Image
@@ -103,7 +103,7 @@ function desktop() {
 						</div>
 					</Link>
 
-					<Link href="/file-explorer/videos" passHref>
+					<Link href="/explorer/videos" passHref>
 						<div className={styles.listItem}>
 							<div className={styles.listItemName}>
 								<Image
@@ -129,10 +129,10 @@ function desktop() {
 	return (
 		<>
 			<Head>
-				<title>kassq - desktop</title>
+				<title>kassq - Desktop</title>
 				<link
 					rel="canonical"
-					href="https://www.kassq.dev/file-explorer/desktop"
+					href="https://www.kassq.dev/explorer/desktop"
 				/>
 			</Head>
 			<div style={{ height: '100%' }}>

@@ -294,7 +294,7 @@ function FileExplorer(props) {
 						<div
 							className={styles.navigationDropdown}
 							style={
-								router.pathname == '/file-explorer/quick-access'
+								router.pathname == '/explorer/quick-access'
 									? { backgroundColor: '#2e2e2e' }
 									: {}
 							}
@@ -307,7 +307,7 @@ function FileExplorer(props) {
 										: { transform: 'rotate(-90deg)' }
 								}
 							/>
-							<Link href="/file-explorer/quick-access" passHref>
+							<Link href="/explorer/quick-access" passHref>
 								<div>
 									<Image
 										src="/icons/quickaccess.ico"
@@ -322,14 +322,14 @@ function FileExplorer(props) {
 						{quickaccess && (
 							<>
 								<Link
-									href="/file-explorer/desktop?top=true"
+									href="/explorer/desktop?top=true"
 									passHref
 								>
 									<div
 										className={styles.navigationItem}
 										style={
 											router.asPath ==
-											'/file-explorer/desktop?top=true'
+											'/explorer/desktop?top=true'
 												? { backgroundColor: '#2e2e2e' }
 												: {}
 										}
@@ -344,14 +344,14 @@ function FileExplorer(props) {
 									</div>
 								</Link>
 								<Link
-									href="/file-explorer/downloads?top=true"
+									href="/explorer/downloads?top=true"
 									passHref
 								>
 									<div
 										className={styles.navigationItem}
 										style={
 											router.asPath ==
-											'/file-explorer/downloads?top=true'
+											'/explorer/downloads?top=true'
 												? { backgroundColor: '#2e2e2e' }
 												: {}
 										}
@@ -366,14 +366,14 @@ function FileExplorer(props) {
 									</div>
 								</Link>
 								<Link
-									href="/file-explorer/documents?top=true"
+									href="/explorer/documents?top=true"
 									passHref
 								>
 									<div
 										className={styles.navigationItem}
 										style={
 											router.asPath ==
-											'/file-explorer/documents?top=true'
+											'/explorer/documents?top=true'
 												? { backgroundColor: '#2e2e2e' }
 												: {}
 										}
@@ -388,14 +388,14 @@ function FileExplorer(props) {
 									</div>
 								</Link>
 								<Link
-									href="/file-explorer/pictures?top=true"
+									href="/explorer/pictures?top=true"
 									passHref
 								>
 									<div
 										className={styles.navigationItem}
 										style={
 											router.asPath ==
-											'/file-explorer/pictures?top=true'
+											'/explorer/pictures?top=true'
 												? { backgroundColor: '#2e2e2e' }
 												: {}
 										}
@@ -414,7 +414,7 @@ function FileExplorer(props) {
 						<div
 							className={styles.navigationDropdown}
 							style={
-								router.pathname == '/file-explorer/this-pc'
+								router.pathname == '/explorer/this-pc'
 									? { backgroundColor: '#2e2e2e' }
 									: {}
 							}
@@ -427,7 +427,7 @@ function FileExplorer(props) {
 										: { transform: 'rotate(-90deg)' }
 								}
 							/>
-							<Link href="/file-explorer/this-pc" passHref>
+							<Link href="/explorer/this-pc" passHref>
 								<div>
 									<Image
 										src="/icons/computer.ico"
@@ -441,12 +441,11 @@ function FileExplorer(props) {
 						</div>
 						{thisPC && (
 							<>
-								<Link href="/file-explorer/desktop" passHref>
+								<Link href="/explorer/desktop" passHref>
 									<div
 										className={styles.navigationItem}
 										style={
-											router.asPath ==
-											'/file-explorer/desktop'
+											router.asPath == '/explorer/desktop'
 												? { backgroundColor: '#2e2e2e' }
 												: {}
 										}
@@ -460,12 +459,12 @@ function FileExplorer(props) {
 										<p>Desktop</p>
 									</div>
 								</Link>
-								<Link href="/file-explorer/downloads" passHref>
+								<Link href="/explorer/downloads" passHref>
 									<div
 										className={styles.navigationItem}
 										style={
 											router.asPath ==
-											'/file-explorer/downloads'
+											'/explorer/downloads'
 												? { backgroundColor: '#2e2e2e' }
 												: {}
 										}
@@ -479,12 +478,12 @@ function FileExplorer(props) {
 										<p>Downloads</p>
 									</div>
 								</Link>
-								<Link href="/file-explorer/documents" passHref>
+								<Link href="/explorer/documents" passHref>
 									<div
 										className={styles.navigationItem}
 										style={
 											router.asPath ==
-											'/file-explorer/documents'
+											'/explorer/documents'
 												? { backgroundColor: '#2e2e2e' }
 												: {}
 										}
@@ -499,12 +498,12 @@ function FileExplorer(props) {
 									</div>
 								</Link>
 
-								<Link href="/file-explorer/pictures" passHref>
+								<Link href="/explorer/pictures" passHref>
 									<div
 										className={styles.navigationItem}
 										style={
 											router.asPath ==
-											'/file-explorer/pictures'
+											'/explorer/pictures'
 												? { backgroundColor: '#2e2e2e' }
 												: {}
 										}
@@ -519,12 +518,11 @@ function FileExplorer(props) {
 									</div>
 								</Link>
 
-								<Link href="/file-explorer/videos" passHref>
+								<Link href="/explorer/videos" passHref>
 									<div
 										className={styles.navigationItem}
 										style={
-											router.asPath ==
-											'/file-explorer/videos'
+											router.asPath == '/explorer/videos'
 												? { backgroundColor: '#2e2e2e' }
 												: {}
 										}
@@ -539,12 +537,11 @@ function FileExplorer(props) {
 									</div>
 								</Link>
 
-								<Link href="/file-explorer/music" passHref>
+								<Link href="/explorer/music" passHref>
 									<div
 										className={styles.navigationItem}
 										style={
-											router.asPath ==
-											'/file-explorer/music'
+											router.asPath == '/explorer/music'
 												? { backgroundColor: '#2e2e2e' }
 												: {}
 										}
@@ -559,12 +556,12 @@ function FileExplorer(props) {
 									</div>
 								</Link>
 
-								<Link href="/file-explorer/drives/C" passHref>
+								<Link href="/explorer/drives/C" passHref>
 									<div
 										className={styles.navigationItem}
 										style={
 											router.asPath ==
-											'/file-explorer/drives/C'
+											'/explorer/drives/C'
 												? { backgroundColor: '#2e2e2e' }
 												: {}
 										}
@@ -579,12 +576,11 @@ function FileExplorer(props) {
 									</div>
 								</Link>
 
-								<Link href="/file-explorer/drives/D" passHref>
+								<Link href="/explorer/drives/D" passHref>
 									<div
 										className={styles.navigationItem}
 										style={
-											router.asPath ==
-											'/file-explorer/ssd2'
+											router.asPath == '/explorer/ssd2'
 												? { backgroundColor: '#2e2e2e' }
 												: {}
 										}
