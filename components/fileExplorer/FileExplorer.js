@@ -74,7 +74,7 @@ function FileExplorer(props) {
 		if (
 			!globalThis?.sessionStorage
 				?.getItem('currentPath')
-				.includes('/explorer/')
+				?.includes('/explorer/')
 		) {
 			styles = {
 				...styles,
