@@ -2,6 +2,7 @@ import Layout from '../components/layout/Layout';
 import '../styles/globals.scss';
 import { useState, useCallback, useEffect } from 'react';
 import Bluescreen from '../components/bluescreen/Bluescreen';
+import { useRouter } from 'next/router';
 
 const useMediaQuery = (width) => {
 	const [targetReached, setTargetReached] = useState(false);
@@ -36,6 +37,20 @@ const useMediaQuery = (width) => {
 
 function MyApp({ Component, pageProps }) {
 	const isBreakpoint = useMediaQuery(768);
+
+	const router = useRouter();
+
+	useEffect(() => storePathValues, [router.asPath]);
+
+	function storePathValues() {
+		const storage = globalThis?.sessionStorage;
+		if (!storage) return;
+		// Set the previous path as the value of the current path.
+		const prevPath = storage.getItem('currentPath');
+		storage.setItem('prevPath', prevPath);
+		// Set the current path value by looking at the browser's location object.
+		storage.setItem('currentPath', globalThis.location.pathname);
+	}
 
 	return (
 		<>

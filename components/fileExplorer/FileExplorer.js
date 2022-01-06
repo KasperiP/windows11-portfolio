@@ -49,21 +49,51 @@ function FileExplorer(props) {
 		}, 250);
 	};
 
+	const getStyles = () => {
+		let styles = {};
+
+		if (maximised && !closed) {
+			styles = {
+				...styles,
+				...{
+					height: 'calc(100% - 50px)',
+					width: '100%',
+					borderRadius: '0',
+				},
+			};
+		}
+		if (closed) {
+			styles = {
+				...styles,
+				...{
+					opacity: '0',
+				},
+			};
+		}
+
+		console.log('prev', globalThis?.sessionStorage?.getItem('prevPath'));
+		console.log(
+			'current',
+			globalThis?.sessionStorage?.getItem('currentPath')
+		);
+		if (
+			!globalThis?.sessionStorage
+				?.getItem('currentPath')
+				.includes('/explorer/')
+		) {
+			styles = {
+				...styles,
+				...{
+					animation: 'fadeIn 1s',
+				},
+			};
+		}
+
+		return styles;
+	};
+
 	return (
-		<div
-			className={styles.container}
-			style={
-				maximised && !closed
-					? {
-							height: 'calc(100% - 50px)',
-							width: '100%',
-							borderRadius: '0',
-					  }
-					: closed
-					? { opacity: '0' }
-					: {}
-			}
-		>
+		<div className={styles.container} style={getStyles()}>
 			<section className={styles.main}>
 				<nav>
 					<section className={styles.top}>
