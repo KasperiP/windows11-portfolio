@@ -71,11 +71,6 @@ function FileExplorer(props) {
 			};
 		}
 
-		console.log('prev', globalThis?.sessionStorage?.getItem('prevPath'));
-		console.log(
-			'current',
-			globalThis?.sessionStorage?.getItem('currentPath')
-		);
 		if (
 			!globalThis?.sessionStorage
 				?.getItem('currentPath')
