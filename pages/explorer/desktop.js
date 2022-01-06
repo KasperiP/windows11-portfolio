@@ -84,7 +84,7 @@ function desktop() {
 						</div>
 					</Link>
 
-					<Link href="/explorer/images" passHref>
+					<Link href="/explorer/pictures" passHref>
 						<div className={styles.listItem}>
 							<div className={styles.listItemName}>
 								<Image
@@ -93,7 +93,7 @@ function desktop() {
 									width={16}
 									height={16}
 								></Image>
-								<p>Images</p>
+								<p>Pictures</p>
 							</div>
 							<p className={styles.listItemDateModified}>
 								30.12.2021 04:02
