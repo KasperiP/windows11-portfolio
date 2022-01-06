@@ -3,6 +3,7 @@ import '../styles/globals.scss';
 import { useState, useCallback, useEffect } from 'react';
 import Bluescreen from '../components/bluescreen/Bluescreen';
 import { useRouter } from 'next/router';
+import ContextProvider from '../components/contextProvider/contextProvider';
 
 const useMediaQuery = (width) => {
 	const [targetReached, setTargetReached] = useState(false);
@@ -45,12 +46,11 @@ function MyApp({ Component, pageProps }) {
 	function storePathValues() {
 		const storage = globalThis?.sessionStorage;
 		if (!storage) return;
-		// Set the current path value by looking at the browser's location object.
 		storage.setItem('prevPath', globalThis.location.pathname);
 	}
 
 	return (
-		<>
+		<ContextProvider>
 			{isBreakpoint ? (
 				<>
 					<Bluescreen errorCode="SCREEN_WIDTH_NOT_SUPPORTED" />
@@ -62,7 +62,7 @@ function MyApp({ Component, pageProps }) {
 					</Layout>
 				</>
 			)}
-		</>
+		</ContextProvider>
 	);
 }
 

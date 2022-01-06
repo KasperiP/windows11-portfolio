@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import styles from './FileExplorer.module.scss';
 import {
 	VscChromeMinimize,
@@ -20,11 +20,12 @@ import { HiArrowLeft, HiArrowRight, HiArrowUp } from 'react-icons/hi';
 import { IoMdRefresh } from 'react-icons/io';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import { Context } from '../contextProvider/contextProvider';
 
 function FileExplorer(props) {
 	const router = useRouter();
 
-	const [maximised, setMaximised] = useState(false);
+	const [maximised, setMaximised] = useContext(Context);
 	const [closed, setClosed] = useState(false);
 
 	const [path, setPath] = useState(props.folder);
@@ -137,12 +138,21 @@ function FileExplorer(props) {
 									</div>
 									<div>
 										<Image
+											src="/icons/shortcut.ico"
+											height={20}
+											width={20}
+											alt="ico"
+										/>
+										<p>Shortcut</p>
+									</div>
+									<div>
+										<Image
 											src="/icons/notes.ico"
 											height={20}
 											width={20}
 											alt="ico"
 										/>
-										<p>File</p>
+										<p>Text Document</p>
 									</div>
 								</div>
 							</div>
