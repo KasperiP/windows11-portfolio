@@ -73,13 +73,13 @@ function FileExplorer(props) {
 
 		if (
 			!globalThis?.sessionStorage
-				?.getItem('currentPath')
+				?.getItem('prevPath')
 				?.includes('/explorer/')
 		) {
 			styles = {
 				...styles,
 				...{
-					animation: 'fadeIn 1s',
+					animation: 'fadeIn 0.15s',
 				},
 			};
 		}
