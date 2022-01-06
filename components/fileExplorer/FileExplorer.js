@@ -6,18 +6,36 @@ import {
 	VscChromeMaximize,
 	VscChromeClose,
 	VscSearch,
+	VscSymbolProperty,
 } from 'react-icons/vsc';
-import { AiFillCaretRight, AiOutlinePlusCircle } from 'react-icons/ai';
-import { RiArrowDropDownLine } from 'react-icons/ri';
-import { BsScissors, BsTrash } from 'react-icons/bs';
-import { MdContentCopy } from 'react-icons/md';
+import {
+	AiFillCaretRight,
+	AiOutlinePlusCircle,
+	AiOutlineUndo,
+} from 'react-icons/ai';
+import { RiArrowDropDownLine, RiComputerLine } from 'react-icons/ri';
+import { BsPinAngle, BsScissors, BsTrash } from 'react-icons/bs';
+import {
+	MdContentCopy,
+	MdOutlineListAlt,
+	MdOutlineSelectAll,
+	MdOutlineViewCompact,
+	MdTabUnselected,
+} from 'react-icons/md';
 import { MdContentPaste } from 'react-icons/md';
 import { FiMoreHorizontal } from 'react-icons/fi';
 import { GiHamburgerMenu } from 'react-icons/gi';
-import { BiRename, BiSortAlt2 } from 'react-icons/bi';
-import { FaRegShareSquare } from 'react-icons/fa';
-import { HiArrowLeft, HiArrowRight, HiArrowUp } from 'react-icons/hi';
-import { IoMdRefresh } from 'react-icons/io';
+import { BiRename, BiSelection, BiShowAlt, BiSortAlt2 } from 'react-icons/bi';
+import { FaList, FaRegShareSquare } from 'react-icons/fa';
+import { SiMaterialdesignicons } from 'react-icons/si';
+import {
+	HiArrowLeft,
+	HiArrowRight,
+	HiArrowUp,
+	HiOutlineDesktopComputer,
+	HiOutlineViewList,
+} from 'react-icons/hi';
+import { IoMdOptions, IoMdRefresh } from 'react-icons/io';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { Context } from '../contextProvider/contextProvider';
@@ -185,31 +203,25 @@ function FileExplorer(props) {
 								<RiArrowDropDownLine />
 								<div className={styles.manageDropdown}>
 									<div>
-										<Image
-											src="/icons/folder.ico"
-											height={20}
-											width={20}
-											alt="ico"
-										/>
-										<p>Folder</p>
+										<p>Name</p>
 									</div>
 									<div>
-										<Image
-											src="/icons/folder.ico"
-											height={20}
-											width={20}
-											alt="ico"
-										/>
-										<p>Folder</p>
+										<p>Status</p>
 									</div>
 									<div>
-										<Image
-											src="/icons/link.ico"
-											height={20}
-											width={20}
-											alt="ico"
-										/>
-										<p>Shortcut</p>
+										<p>Date modified</p>
+									</div>
+									<div>
+										<p>More</p>
+									</div>
+									<div>
+										<p>Ascending</p>
+									</div>
+									<div>
+										<p>Descending</p>
+									</div>
+									<div>
+										<p>Group by</p>
 									</div>
 								</div>
 							</div>
@@ -222,31 +234,44 @@ function FileExplorer(props) {
 								<RiArrowDropDownLine />
 								<div className={styles.manageDropdown}>
 									<div>
-										<Image
-											src="/icons/folder.ico"
-											height={20}
-											width={20}
-											alt="ico"
-										/>
-										<p>Homo</p>
+										<RiComputerLine />
+										<p>Extra large icons</p>
 									</div>
 									<div>
-										<Image
-											src="/icons/folder.ico"
-											height={20}
-											width={20}
-											alt="ico"
-										/>
-										<p>Folder</p>
+										<HiOutlineDesktopComputer />
+										<p>Large icons</p>
 									</div>
 									<div>
-										<Image
-											src="/icons/link.ico"
-											height={20}
-											width={20}
-											alt="ico"
-										/>
-										<p>Shortcut</p>
+										<HiOutlineDesktopComputer />
+										<p>Medium icons</p>
+									</div>
+									<div>
+										<SiMaterialdesignicons />
+										<p>Small icons</p>
+									</div>
+									<div>
+										<FaList />
+										<p>List</p>
+									</div>
+									<div>
+										<HiOutlineViewList />
+										<p>Details</p>
+									</div>
+									<div>
+										<MdOutlineListAlt />
+										<p>Tiles</p>
+									</div>
+									<div>
+										<MdOutlineListAlt />
+										<p>Content</p>
+									</div>
+									<div>
+										<MdOutlineViewCompact />
+										<p>Compact view</p>
+									</div>
+									<div>
+										<BiShowAlt />
+										<p>Show</p>
 									</div>
 								</div>
 							</div>
@@ -256,31 +281,32 @@ function FileExplorer(props) {
 								<FiMoreHorizontal />
 								<div className={styles.manageDropdown}>
 									<div>
-										<Image
-											src="/icons/folder.ico"
-											height={20}
-											width={20}
-											alt="ico"
-										/>
-										<p>Folder</p>
+										<AiOutlineUndo />
+										<p>Undo</p>
 									</div>
 									<div>
-										<Image
-											src="/icons/folder.ico"
-											height={20}
-											width={20}
-											alt="ico"
-										/>
-										<p>Folder</p>
+										<BsPinAngle />
+										<p>Pin to Quick access</p>
 									</div>
 									<div>
-										<Image
-											src="/icons/link.ico"
-											height={20}
-											width={20}
-											alt="ico"
-										/>
-										<p>Shortcut</p>
+										<MdOutlineSelectAll />
+										<p>Select all</p>
+									</div>
+									<div>
+										<MdTabUnselected />
+										<p>Select none</p>
+									</div>
+									<div>
+										<BiSelection />
+										<p>Invert selection</p>
+									</div>
+									<div>
+										<VscSymbolProperty />
+										<p>Properties</p>
+									</div>
+									<div>
+										<IoMdOptions />
+										<p>Options</p>
 									</div>
 								</div>
 							</div>

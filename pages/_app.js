@@ -37,7 +37,7 @@ const useMediaQuery = (width) => {
 };
 
 function MyApp({ Component, pageProps }) {
-	const isBreakpoint = useMediaQuery(768);
+	const isBreakpoint = useMediaQuery(880);
 
 	const router = useRouter();
 
