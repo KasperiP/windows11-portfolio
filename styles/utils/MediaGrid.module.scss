@@ -1,0 +1,30 @@
+.wrapper {
+	// Responsive grid list that has rows depending on the screen size
+	display: grid;
+
+	grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+
+	grid-gap: 10px;
+	grid-auto-rows: minmax(100px, auto);
+	grid-auto-flow: dense;
+	margin: 0 20px 0 20px;
+}
+.imageWrapper {
+	width: 100px;
+	height: 100px;
+}
+.mediaItem {
+	position: relative;
+	padding: 5px;
+	width: 110px;
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+	text-align: center;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.mediaItem:hover {
+	background-color: #2e2e2e;
+}

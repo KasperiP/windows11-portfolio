@@ -68,6 +68,12 @@ function FileExplorer(props) {
 		}, 250);
 	};
 
+	// TODO: Tee loppuun
+	const handleBack = () => {
+		const prevPath = globalThis?.sessionStorage?.getItem('prevPath');
+		if (prevPath && prevPath !== null) router.back();
+	};
+
 	const getStyles = () => {
 		let styles = {};
 
@@ -315,7 +321,7 @@ function FileExplorer(props) {
 				</nav>
 				<section className={styles.navigate}>
 					<div className={styles.arrows}>
-						<HiArrowLeft />
+						<HiArrowLeft onClick={handleBack} />
 						<HiArrowRight />
 						<RiArrowDropDownLine />
 						<HiArrowUp />
