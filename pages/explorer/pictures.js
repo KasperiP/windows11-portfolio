@@ -26,10 +26,7 @@ function pictures({ data }) {
                             >
                                 <div className={styles.imageWrapper}>
                                     <Image
-                                        src={image.secure_url.replace(
-                                            "/upload/",
-                                            "/upload/q_auto:low/"
-                                        )}
+                                        src={image.url}
                                         alt="icon"
                                         width="100%"
                                         height="100%"
@@ -85,7 +82,14 @@ export async function getStaticProps() {
         .max_results(30)
         .execute();
 
-    const data = res.resources;
+    const data = res.resources.map((image) => {
+        return {
+            url: image.secure_url.replace("/upload/", "/upload/q_auto:low/"),
+            secure_url: image.secure_url,
+            filename: image.filename,
+            format: image.format,
+        };
+    });
 
     return {
         props: { data },

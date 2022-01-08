@@ -12,13 +12,13 @@ function videos({ data }) {
             <>
                 <div className={styles.wrapper}>
                     {data &&
-                        data.map((image) => (
+                        data.map((video) => (
                             <div
                                 className={styles.mediaItem}
-                                key={image.filename}
+                                key={video.filename}
                                 onClick={() =>
                                     window.open(
-                                        image.secure_url,
+                                        video.secure_url,
                                         "_blank",
                                         "noopener,noreferrer"
                                     )
@@ -26,15 +26,7 @@ function videos({ data }) {
                             >
                                 <div className={styles.imageWrapper}>
                                     <Image
-                                        src={(
-                                            image.secure_url
-                                                .split(".")
-                                                .slice(0, -1)
-                                                .join(".") + ".webp"
-                                        ).replace(
-                                            "/upload/",
-                                            "/upload/q_auto:low/"
-                                        )}
+                                        src={video.thumbnail}
                                         alt="icon"
                                         width="100%"
                                         height="100%"
@@ -43,7 +35,7 @@ function videos({ data }) {
                                     ></Image>
                                 </div>
                                 <p>
-                                    {image.filename.slice(0, -7)}.{image.format}
+                                    {video.filename.slice(0, -7)}.{video.format}
                                 </p>
                             </div>
                         ))}
@@ -90,7 +82,16 @@ export async function getStaticProps() {
         .max_results(30)
         .execute();
 
-    const data = res.resources;
+    const data = res.resources.map((video) => {
+        return {
+            thumbnail: (
+                video.secure_url.split(".").slice(0, -1).join(".") + ".webp"
+            ).replace("/upload/", "/upload/q_auto:low/"),
+            filename: video.filename,
+            url: video.secure_url,
+            format: video.format,
+        };
+    });
 
     return {
         props: { data },
