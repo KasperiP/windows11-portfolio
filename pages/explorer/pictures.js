@@ -87,6 +87,8 @@ export async function getStaticProps() {
 
     const data = res.resources;
 
+    console.log(data);
+
     return {
         props: { data },
     };
