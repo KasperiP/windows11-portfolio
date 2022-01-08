@@ -6,7 +6,7 @@ import styles from "../../styles/utils/MediaGrid.module.scss";
 import Image from "next/image";
 import cloudinary from "cloudinary";
 
-function Pictures({ data }) {
+function pictures({ data }) {
     const content = () => {
         return (
             <>
@@ -28,7 +28,7 @@ function Pictures({ data }) {
                                     <Image
                                         src={image.secure_url.replace(
                                             "/upload/",
-                                            "/upload/f_auto/"
+                                            "/upload/q_auto:low/"
                                         )}
                                         alt="icon"
                                         width="100%"
@@ -87,11 +87,9 @@ export async function getStaticProps() {
 
     const data = res.resources;
 
-    console.log(data);
-
     return {
         props: { data },
     };
 }
 
-export default Pictures;
+export default pictures;
