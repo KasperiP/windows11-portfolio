@@ -32,7 +32,7 @@ function videos({ data }) {
                                         height="100%"
                                         layout="responsive"
                                         objectFit="contain"
-                                    ></Image>
+                                    />
                                 </div>
                                 <p>
                                     {video.filename.slice(0, -7)}.{video.format}
@@ -93,8 +93,16 @@ export async function getStaticProps() {
         };
     });
 
+    if (!data) {
+        return {
+            notFound: true,
+        };
+    }
+
     return {
-        props: { data },
+        props: {
+            data,
+        },
     };
 }
 
