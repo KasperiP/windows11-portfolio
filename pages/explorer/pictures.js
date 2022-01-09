@@ -5,18 +5,18 @@ import FileExplorer from '../../components/fileExplorer/FileExplorer';
 import styles from '../../styles/utils/MediaGrid.module.scss';
 import Image from 'next/image';
 
-function Videos({ data }) {
+function Pictures({ data }) {
 	const Content = () => {
 		return (
 			<>
 				<div className={styles.wrapper}>
-					{data.map((video) => (
+					{data.map((image) => (
 						<div
 							className={styles.mediaItem}
-							key={video.filename}
+							key={image.filename}
 							onClick={() =>
 								window.open(
-									video.url,
+									image.secure_url,
 									'_blank',
 									'noopener,noreferrer'
 								)
@@ -24,7 +24,7 @@ function Videos({ data }) {
 						>
 							<div className={styles.imageWrapper}>
 								<Image
-									src={video.thumbnail}
+									src={image.url}
 									alt="icon"
 									width="100%"
 									height="100%"
@@ -33,7 +33,7 @@ function Videos({ data }) {
 								/>
 							</div>
 							<p>
-								{video.filename.slice(0, -7)}.{video.format}
+								{image.filename.slice(0, -7)}.{image.format}
 							</p>
 						</div>
 					))}
@@ -45,17 +45,17 @@ function Videos({ data }) {
 	return (
 		<>
 			<Head>
-				<title>kassq - Videos</title>
+				<title>kassq - Pictures</title>
 				<link
 					rel="canonical"
-					href="https://www.kassq.dev/explorer/videos"
+					href="https://www.kassq.dev/explorer/pictures"
 				/>
 			</Head>
 			<div style={{ height: '100%' }}>
 				<FileExplorer
-					folder="Videos"
+					folder="Pictures"
 					topNav={false}
-					icon="videos"
+					icon="pictures"
 					component={<Content />}
 				/>
 				<Icons />
@@ -65,12 +65,8 @@ function Videos({ data }) {
 }
 
 export async function getStaticProps() {
-	console.log(process.env.CLOUDINARY_API_KEY);
-	console.log(process.env.CLOUDINARY_API_SECRET);
-	console.log(process.env.CLOUDINARY_CLOUD_NAME);
-
 	const res = await fetch(
-		`https://api.cloudinary.com/v1_1/${process.env.CLOUDINARY_CLOUD_NAME}/resources/video`,
+		`https://api.cloudinary.com/v1_1/${process.env.CLOUDINARY_CLOUD_NAME}/resources/image`,
 		{
 			headers: {
 				Authorization: `Basic ${Buffer.from(
@@ -84,14 +80,15 @@ export async function getStaticProps() {
 
 	const data =
 		res &&
-		res.resources.map((video) => {
+		res.resources.map((image) => {
 			return {
-				thumbnail: (
-					video.secure_url.split('.').slice(0, -1).join('.') + '.webp'
-				).replace('/upload/', '/upload/q_auto:low/'),
-				filename: video.public_id.replace('videos/', ''),
-				url: video.secure_url,
-				format: video.format,
+				url: image.secure_url.replace(
+					'/upload/',
+					'/upload/q_auto:low/'
+				),
+				secure_url: image.secure_url,
+				filename: image.public_id.replace('images/', ''),
+				format: image.format,
 			};
 		});
 
@@ -108,4 +105,4 @@ export async function getStaticProps() {
 	};
 }
 
-export default Videos;
+export default Pictures;
