@@ -1,11 +1,43 @@
 import Head from 'next/head';
-import React from 'react';
+import { useState } from 'react';
 import Icons from '../../components/icons/Icons';
 import FileExplorer from '../../components/fileExplorer/FileExplorer';
 import styles from '../../styles/utils/MediaGrid.module.scss';
 import Image from 'next/image';
+import VideoPlayer from '../../components/videos/Videos';
 
-function videos({ data }) {
+function Videos({ data }) {
+	const [openVideo, setOpenVideo] = useState(null);
+	const VideoContent = () => {
+		return (
+			<div className={styles.wrapper}>
+				{data.map((video) => (
+					<div
+						className={styles.mediaItem}
+						key={video.filename}
+						onClick={() => {
+							setOpenVideo(video);
+						}}
+					>
+						<div className={styles.imageWrapper}>
+							<Image
+								src={video.thumbnail}
+								alt="icon"
+								width="100%"
+								height="100%"
+								layout="responsive"
+								objectFit="contain"
+							/>
+						</div>
+						<p>
+							{video.filename.slice(0, -7)}.{video.format}
+						</p>
+					</div>
+				))}
+			</div>
+		);
+	};
+
 	return (
 		<>
 			<Head>
@@ -16,42 +48,17 @@ function videos({ data }) {
 				/>
 			</Head>
 			<div style={{ height: '100%' }}>
+				{openVideo && (
+					<VideoPlayer
+						video={openVideo}
+						setOpenVideo={setOpenVideo}
+					/>
+				)}
 				<FileExplorer
 					folder="Videos"
 					topNav={false}
 					icon="videos"
-					component={
-						<div className={styles.wrapper}>
-							{data.map((video) => (
-								<div
-									className={styles.mediaItem}
-									key={video.filename}
-									onClick={() =>
-										window.open(
-											video.url,
-											'_blank',
-											'noopener,noreferrer'
-										)
-									}
-								>
-									<div className={styles.imageWrapper}>
-										<Image
-											src={video.thumbnail}
-											alt="icon"
-											width="100%"
-											height="100%"
-											layout="responsive"
-											objectFit="contain"
-										/>
-									</div>
-									<p>
-										{video.filename.slice(0, -7)}.
-										{video.format}
-									</p>
-								</div>
-							))}
-						</div>
-					}
+					component={<VideoContent />}
 				/>
 				<Icons />
 			</div>
@@ -97,4 +104,4 @@ export async function getStaticProps() {
 	};
 }
 
-export default videos;
+export default Videos;
