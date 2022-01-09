@@ -2,7 +2,6 @@ import Head from 'next/head';
 import React from 'react';
 import Icons from '../../components/icons/Icons';
 import FileExplorer from '../../components/fileExplorer/FileExplorer';
-import cloudinary from 'cloudinary';
 import styles from '../../styles/utils/MediaGrid.module.scss';
 import Image from 'next/image';
 
@@ -66,27 +65,25 @@ function Videos({ data }) {
 }
 
 export async function getStaticProps() {
-	cloudinary.config({
-		cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-		api_key: process.env.CLOUDINARY_API_KEY,
-		api_secret: process.env.CLOUDINARY_API_SECRET,
-		secure: true,
-	});
-
-	const res = await cloudinary.v2.search
-		.expression(
-			'folder:videos/*' // add your folder
-		)
-		.sort_by('public_id', 'desc')
-		.max_results(30)
-		.execute();
+	const res = await fetch(
+		`https://api.cloudinary.com/v1_1/${process.env.CLOUDINARY_CLOUD_NAME}/resources/video`,
+		{
+			headers: {
+				Authorization: `Basic ${Buffer.from(
+					process.env.CLOUDINARY_API_KEY +
+						':' +
+						process.env.CLOUDINARY_API_SECRET
+				).toString('base64')}}`,
+			},
+		}
+	).then((res) => res.json());
 
 	const data = res.resources.map((video) => {
 		return {
 			thumbnail: (
 				video.secure_url.split('.').slice(0, -1).join('.') + '.webp'
 			).replace('/upload/', '/upload/q_auto:low/'),
-			filename: video.filename,
+			filename: video.public_id.replace('videos/', ''),
 			url: video.secure_url,
 			format: video.format,
 		};

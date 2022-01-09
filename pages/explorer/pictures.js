@@ -4,7 +4,6 @@ import Icons from '../../components/icons/Icons';
 import FileExplorer from '../../components/fileExplorer/FileExplorer';
 import styles from '../../styles/utils/MediaGrid.module.scss';
 import Image from 'next/image';
-import cloudinary from 'cloudinary';
 
 function Pictures({ data }) {
 	const Content = () => {
@@ -66,26 +65,24 @@ function Pictures({ data }) {
 }
 
 export async function getStaticProps() {
-	cloudinary.config({
-		cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-		api_key: process.env.CLOUDINARY_API_KEY,
-		api_secret: process.env.CLOUDINARY_API_SECRET,
-		secure: true,
-	});
-
-	const res = await cloudinary.v2.search
-		.expression(
-			'folder:images/*' // add your folder
-		)
-		.sort_by('public_id', 'desc')
-		.max_results(30)
-		.execute();
+	const res = await fetch(
+		`https://api.cloudinary.com/v1_1/${process.env.CLOUDINARY_CLOUD_NAME}/resources/image`,
+		{
+			headers: {
+				Authorization: `Basic ${Buffer.from(
+					process.env.CLOUDINARY_API_KEY +
+						':' +
+						process.env.CLOUDINARY_API_SECRET
+				).toString('base64')}}`,
+			},
+		}
+	).then((res) => res.json());
 
 	const data = res.resources.map((image) => {
 		return {
 			url: image.secure_url.replace('/upload/', '/upload/q_auto:low/'),
 			secure_url: image.secure_url,
-			filename: image.filename,
+			filename: image.public_id.replace('images/', ''),
 			format: image.format,
 		};
 	});
