@@ -25,14 +25,14 @@ function pictures({ data }) {
                                 }
                             >
                                 <div className={styles.imageWrapper}>
-                                    <Image
+                                    {/*     <Image
                                         src={image.url}
                                         alt="icon"
                                         width="100%"
                                         height="100%"
                                         layout="responsive"
                                         objectFit="contain"
-                                    />
+                                    /> */}
                                 </div>
                                 <p>
                                     {image.filename.slice(0, -7)}.{image.format}
