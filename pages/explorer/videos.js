@@ -11,34 +11,33 @@ function videos({ data }) {
         return (
             <>
                 <div className={styles.wrapper}>
-                    {data &&
-                        data.map((video) => (
-                            <div
-                                className={styles.mediaItem}
-                                key={video.filename}
-                                onClick={() =>
-                                    window.open(
-                                        video.secure_url,
-                                        "_blank",
-                                        "noopener,noreferrer"
-                                    )
-                                }
-                            >
-                                <div className={styles.imageWrapper}>
-                                    {/*          <Image
-                                        src={video.thumbnail}
-                                        alt="icon"
-                                        width="100%"
-                                        height="100%"
-                                        layout="responsive"
-                                        objectFit="contain"
-                                    /> */}
-                                </div>
-                                <p>
-                                    {video.filename.slice(0, -7)}.{video.format}
-                                </p>
+                    {data.map((video) => (
+                        <div
+                            className={styles.mediaItem}
+                            key={video.filename}
+                            onClick={() =>
+                                window.open(
+                                    video.secure_url,
+                                    "_blank",
+                                    "noopener,noreferrer"
+                                )
+                            }
+                        >
+                            <div className={styles.imageWrapper}>
+                                <Image
+                                    src={video.thumbnail}
+                                    alt="icon"
+                                    width="100%"
+                                    height="100%"
+                                    layout="responsive"
+                                    objectFit="contain"
+                                />
                             </div>
-                        ))}
+                            <p>
+                                {video.filename.slice(0, -7)}.{video.format}
+                            </p>
+                        </div>
+                    ))}
                 </div>
             </>
         );
