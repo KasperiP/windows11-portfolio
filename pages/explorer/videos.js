@@ -6,43 +6,6 @@ import styles from '../../styles/utils/MediaGrid.module.scss';
 import Image from 'next/image';
 
 function videos({ data }) {
-	const Content = () => {
-		return (
-			<>
-				<div className={styles.wrapper}>
-					{data &&
-						data.map((video) => (
-							<div
-								className={styles.mediaItem}
-								key={video.filename}
-								onClick={() =>
-									window.open(
-										video.url,
-										'_blank',
-										'noopener,noreferrer'
-									)
-								}
-							>
-								<div className={styles.imageWrapper}>
-									<Image
-										src={video.thumbnail}
-										alt="icon"
-										width="100%"
-										height="100%"
-										layout="responsive"
-										objectFit="contain"
-									/>
-								</div>
-								<p>
-									{video.filename.slice(0, -7)}.{video.format}
-								</p>
-							</div>
-						))}
-				</div>
-			</>
-		);
-	};
-
 	return (
 		<>
 			<Head>
@@ -57,7 +20,38 @@ function videos({ data }) {
 					folder="Videos"
 					topNav={false}
 					icon="videos"
-					component={<Content />}
+					component={
+						<div className={styles.wrapper}>
+							{data.map((video) => (
+								<div
+									className={styles.mediaItem}
+									key={video.filename}
+									onClick={() =>
+										window.open(
+											video.url,
+											'_blank',
+											'noopener,noreferrer'
+										)
+									}
+								>
+									<div className={styles.imageWrapper}>
+										<Image
+											src={video.thumbnail}
+											alt="icon"
+											width="100%"
+											height="100%"
+											layout="responsive"
+											objectFit="contain"
+										/>
+									</div>
+									<p>
+										{video.filename.slice(0, -7)}.
+										{video.format}
+									</p>
+								</div>
+							))}
+						</div>
+					}
 				/>
 				<Icons />
 			</div>
@@ -66,10 +60,6 @@ function videos({ data }) {
 }
 
 export async function getStaticProps() {
-	console.log(process.env.CLOUDINARY_API_KEY);
-	console.log(process.env.CLOUDINARY_API_SECRET);
-	console.log(process.env.CLOUDINARY_CLOUD_NAME);
-
 	const res = await fetch(
 		`https://api.cloudinary.com/v1_1/${process.env.CLOUDINARY_CLOUD_NAME}/resources/video`,
 		{
@@ -83,18 +73,16 @@ export async function getStaticProps() {
 		}
 	).then((res) => res.json());
 
-	const data =
-		res &&
-		res.resources.map((video) => {
-			return {
-				thumbnail: (
-					video.secure_url.split('.').slice(0, -1).join('.') + '.webp'
-				).replace('/upload/', '/upload/q_auto:low/'),
-				filename: video.public_id.replace('videos/', ''),
-				url: video.secure_url,
-				format: video.format,
-			};
-		});
+	const data = res.resources.map((video) => {
+		return {
+			thumbnail: (
+				video.secure_url.split('.').slice(0, -1).join('.') + '.webp'
+			).replace('/upload/', '/upload/q_auto:low/'),
+			filename: video.public_id.replace('videos/', ''),
+			url: video.secure_url,
+			format: video.format,
+		};
+	});
 
 	if (!data) {
 		return {

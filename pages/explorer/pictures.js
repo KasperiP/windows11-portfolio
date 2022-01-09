@@ -6,43 +6,6 @@ import styles from '../../styles/utils/MediaGrid.module.scss';
 import Image from 'next/image';
 
 function pictures({ data }) {
-	const Content = () => {
-		return (
-			<>
-				<div className={styles.wrapper}>
-					{data &&
-						data.map((image) => (
-							<div
-								className={styles.mediaItem}
-								key={image.filename}
-								onClick={() =>
-									window.open(
-										image.secure_url,
-										'_blank',
-										'noopener,noreferrer'
-									)
-								}
-							>
-								<div className={styles.imageWrapper}>
-									<Image
-										src={image.url}
-										alt="icon"
-										width="100%"
-										height="100%"
-										layout="responsive"
-										objectFit="contain"
-									/>
-								</div>
-								<p>
-									{image.filename.slice(0, -7)}.{image.format}
-								</p>
-							</div>
-						))}
-				</div>
-			</>
-		);
-	};
-
 	return (
 		<>
 			<Head>
@@ -57,7 +20,38 @@ function pictures({ data }) {
 					folder="Pictures"
 					topNav={false}
 					icon="pictures"
-					component={<Content />}
+					component={
+						<div className={styles.wrapper}>
+							{data.map((image) => (
+								<div
+									className={styles.mediaItem}
+									key={image.filename}
+									onClick={() =>
+										window.open(
+											image.secure_url,
+											'_blank',
+											'noopener,noreferrer'
+										)
+									}
+								>
+									<div className={styles.imageWrapper}>
+										<Image
+											src={image.url}
+											alt="icon"
+											width="100%"
+											height="100%"
+											layout="responsive"
+											objectFit="contain"
+										/>
+									</div>
+									<p>
+										{image.filename.slice(0, -7)}.
+										{image.format}
+									</p>
+								</div>
+							))}
+						</div>
+					}
 				/>
 				<Icons />
 			</div>
@@ -79,19 +73,14 @@ export async function getStaticProps() {
 		}
 	).then((res) => res.json());
 
-	const data =
-		res &&
-		res.resources.map((image) => {
-			return {
-				url: image.secure_url.replace(
-					'/upload/',
-					'/upload/q_auto:low/'
-				),
-				secure_url: image.secure_url,
-				filename: image.public_id.replace('images/', ''),
-				format: image.format,
-			};
-		});
+	const data = res.resources.map((image) => {
+		return {
+			url: image.secure_url.replace('/upload/', '/upload/q_auto:low/'),
+			secure_url: image.secure_url,
+			filename: image.public_id.replace('images/', ''),
+			format: image.format,
+		};
+	});
 
 	if (!data) {
 		return {
