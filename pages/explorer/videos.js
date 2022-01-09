@@ -5,38 +5,39 @@ import FileExplorer from '../../components/fileExplorer/FileExplorer';
 import styles from '../../styles/utils/MediaGrid.module.scss';
 import Image from 'next/image';
 
-function Videos({ data }) {
+function videos({ data }) {
 	const Content = () => {
 		return (
 			<>
 				<div className={styles.wrapper}>
-					{data.map((video) => (
-						<div
-							className={styles.mediaItem}
-							key={video.filename}
-							onClick={() =>
-								window.open(
-									video.url,
-									'_blank',
-									'noopener,noreferrer'
-								)
-							}
-						>
-							<div className={styles.imageWrapper}>
-								<Image
-									src={video.thumbnail}
-									alt="icon"
-									width="100%"
-									height="100%"
-									layout="responsive"
-									objectFit="contain"
-								/>
+					{data &&
+						data.map((video) => (
+							<div
+								className={styles.mediaItem}
+								key={video.filename}
+								onClick={() =>
+									window.open(
+										video.url,
+										'_blank',
+										'noopener,noreferrer'
+									)
+								}
+							>
+								<div className={styles.imageWrapper}>
+									<Image
+										src={video.thumbnail}
+										alt="icon"
+										width="100%"
+										height="100%"
+										layout="responsive"
+										objectFit="contain"
+									/>
+								</div>
+								<p>
+									{video.filename.slice(0, -7)}.{video.format}
+								</p>
 							</div>
-							<p>
-								{video.filename.slice(0, -7)}.{video.format}
-							</p>
-						</div>
-					))}
+						))}
 				</div>
 			</>
 		);
@@ -108,4 +109,4 @@ export async function getStaticProps() {
 	};
 }
 
-export default Videos;
+export default videos;

@@ -5,38 +5,39 @@ import FileExplorer from '../../components/fileExplorer/FileExplorer';
 import styles from '../../styles/utils/MediaGrid.module.scss';
 import Image from 'next/image';
 
-function Pictures({ data }) {
+function pictures({ data }) {
 	const Content = () => {
 		return (
 			<>
 				<div className={styles.wrapper}>
-					{data.map((image) => (
-						<div
-							className={styles.mediaItem}
-							key={image.filename}
-							onClick={() =>
-								window.open(
-									image.secure_url,
-									'_blank',
-									'noopener,noreferrer'
-								)
-							}
-						>
-							<div className={styles.imageWrapper}>
-								<Image
-									src={image.url}
-									alt="icon"
-									width="100%"
-									height="100%"
-									layout="responsive"
-									objectFit="contain"
-								/>
+					{data &&
+						data.map((image) => (
+							<div
+								className={styles.mediaItem}
+								key={image.filename}
+								onClick={() =>
+									window.open(
+										image.secure_url,
+										'_blank',
+										'noopener,noreferrer'
+									)
+								}
+							>
+								<div className={styles.imageWrapper}>
+									<Image
+										src={image.url}
+										alt="icon"
+										width="100%"
+										height="100%"
+										layout="responsive"
+										objectFit="contain"
+									/>
+								</div>
+								<p>
+									{image.filename.slice(0, -7)}.{image.format}
+								</p>
 							</div>
-							<p>
-								{image.filename.slice(0, -7)}.{image.format}
-							</p>
-						</div>
-					))}
+						))}
 				</div>
 			</>
 		);
@@ -105,4 +106,4 @@ export async function getStaticProps() {
 	};
 }
 
-export default Pictures;
+export default pictures;
