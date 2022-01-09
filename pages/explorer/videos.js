@@ -64,7 +64,11 @@ function Videos({ data }) {
 	);
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
+	console.log(process.env.CLOUDINARY_API_KEY);
+	console.log(process.env.CLOUDINARY_API_SECRET);
+	console.log(process.env.CLOUDINARY_CLOUD_NAME);
+
 	const res = await fetch(
 		`https://api.cloudinary.com/v1_1/${process.env.CLOUDINARY_CLOUD_NAME}/resources/video`,
 		{
