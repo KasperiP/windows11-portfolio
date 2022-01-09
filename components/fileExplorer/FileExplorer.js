@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import styles from './FileExplorer.module.scss';
 import {
 	VscChromeMinimize,
@@ -45,6 +45,7 @@ function FileExplorer(props) {
 
 	const [maximised, setMaximised] = useContext(Context);
 	const [closed, setClosed] = useState(false);
+	const [style, setStyle] = useState({});
 
 	const [path, setPath] = useState(props.folder);
 
@@ -74,8 +75,8 @@ function FileExplorer(props) {
 		if (prevPath && prevPath !== null) router.back();
 	};
 
-	const getStyles = () => {
-		let styles = {};
+	useEffect(() => {
+		const styles = {};
 
 		if (maximised && !closed) {
 			styles = {
@@ -109,11 +110,12 @@ function FileExplorer(props) {
 			};
 		}
 
-		return styles;
-	};
+		setStyle(styles);
+		return () => {};
+	}, [maximised, closed]);
 
 	return (
-		<div className={styles.container} style={getStyles()}>
+		<div className={styles.container} style={style}>
 			<section className={styles.main}>
 				<nav>
 					<section className={styles.top}>
