@@ -76,7 +76,7 @@ function FileExplorer(props) {
 	};
 
 	useEffect(() => {
-		const styles = {};
+		let styles = {};
 
 		if (maximised && !closed) {
 			styles = {
