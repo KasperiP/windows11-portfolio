@@ -17,7 +17,7 @@ function Videos({ data }) {
 							key={video.filename}
 							onClick={() =>
 								window.open(
-									video.secure_url,
+									video.url,
 									'_blank',
 									'noopener,noreferrer'
 								)
@@ -55,7 +55,7 @@ function Videos({ data }) {
 			<div style={{ height: '100%' }}>
 				<FileExplorer
 					folder="Videos"
-					topNav={true}
+					topNav={false}
 					icon="videos"
 					component={<Content />}
 				/>
