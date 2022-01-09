@@ -31,7 +31,7 @@ const useMediaQuery = (width) => {
 			isMounted = false;
 			media.removeEventListener('change', updateTarget);
 		};
-	}, []);
+	}, [updateTarget, width]);
 
 	return targetReached;
 };

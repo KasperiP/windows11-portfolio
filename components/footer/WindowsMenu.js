@@ -8,19 +8,19 @@ import styles from './WindowsMenu.module.scss';
 function WindowsMenu({ isClosed, winMenu, handleWinMenu }) {
 	const node = useRef();
 
-	const handleClickOutside = (e) => {
-		if (
-			node.current.contains(e.target) ||
-			e.srcElement.className.includes('windowsIcon')
-		)
-			return;
-		// outside click
-		if (winMenu) {
-			handleWinMenu();
-		}
-	};
-
 	useEffect(() => {
+		const handleClickOutside = (e) => {
+			if (
+				node.current.contains(e.target) ||
+				e.srcElement.className.includes('windowsIcon')
+			)
+				return;
+			// outside click
+			if (winMenu) {
+				handleWinMenu();
+			}
+		};
+
 		if (winMenu) {
 			document.addEventListener('mousedown', handleClickOutside);
 		} else {
@@ -30,7 +30,7 @@ function WindowsMenu({ isClosed, winMenu, handleWinMenu }) {
 		return () => {
 			document.removeEventListener('mousedown', handleClickOutside);
 		};
-	}, [winMenu]);
+	}, [handleWinMenu, winMenu]);
 
 	return (
 		<div
