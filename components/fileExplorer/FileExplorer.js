@@ -141,7 +141,9 @@ function FileExplorer(props) {
 					}}
 					position={maximized && { x: 0, y: 0 }}
 					disabled={maximized}
-					onStop={() => savePosition && setIsDragging(false)}
+					onStop={(e, data) =>
+						savePosition(e, data) && setIsDragging(false)
+					}
 					defaultPosition={position}
 					onStart={() => setIsDragging(true)}
 				>
@@ -155,7 +157,11 @@ function FileExplorer(props) {
 								? {}
 								: { transition: 'all 0.15s ease-in-out' }
 						}
-						initial={{ opacity: 0 }}
+						initial={
+							history.length >= 1
+								? { opacity: 1 }
+								: { opacity: 0 }
+						}
 						exit={{ opacity: 0 }}
 						transition={{ duration: 0.15 }}
 					>
