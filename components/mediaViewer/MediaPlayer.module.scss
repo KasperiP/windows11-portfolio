@@ -84,10 +84,10 @@
 
 @keyframes fadeIn {
 	0% {
-		opacity: 0;
+		transform: translate(-50%, calc(-50% - 25px)) scale(0);
 	}
 	100% {
-		opacity: 1;
+		transform: translate(-50%, calc(-50% - 25px)) scale(1);
 	}
 }
 @keyframes growDown {
@@ -102,7 +102,7 @@
 	}
 }
 
-.imageArea {
+.mediaArea {
 	height: calc(100% - 2.5rem - 1rem);
 	padding: 10px;
 	position: relative;

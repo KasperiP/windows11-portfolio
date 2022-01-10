@@ -3,8 +3,8 @@ import Icons from '../../components/icons/Icons';
 import FileExplorer from '../../components/fileExplorer/FileExplorer';
 import styles from '../../styles/utils/MediaGrid.module.scss';
 import Image from 'next/image';
-import Photos from '../../components/photos/Photos';
 import { useState } from 'react';
+import MediaPlayer from '../../components/mediaViewer/MediaPlayer';
 
 function Pictures({ data }) {
 	const [openImage, setOpenImage] = useState(null);
@@ -50,7 +50,20 @@ function Pictures({ data }) {
 			</Head>
 			<div style={{ height: '100%' }}>
 				{openImage && (
-					<Photos image={openImage} setOpenImage={setOpenImage} />
+					<MediaPlayer
+						media={openImage}
+						close={setOpenImage}
+						component={
+							<Image
+								src={openImage.url}
+								alt="icon"
+								width="100%"
+								height="100%"
+								layout="fill"
+								objectFit="contain"
+							/>
+						}
+					/>
 				)}
 				<FileExplorer
 					folder="Pictures"

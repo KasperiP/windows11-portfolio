@@ -2,17 +2,15 @@
 	position: absolute;
 	left: 50%;
 	top: 50%;
-	transform: translate(-50%, calc(-50% - 25px));
+
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	z-index: 1000;
 	width: 55rem;
 	height: 35rem;
-	background-color: #191919;
 	border-radius: 10px;
-
-	transition: all 0.15s ease-in-out;
+	background-color: #191919;
 }
 .container input {
 	border: none;
@@ -247,15 +245,6 @@
 	max-width: 100%;
 	overflow-y: scroll;
 	overflow-x: hidden;
-}
-
-@keyframes fadeIn {
-	0% {
-		opacity: 0;
-	}
-	100% {
-		opacity: 1;
-	}
 }
 
 .navigationDropdown {

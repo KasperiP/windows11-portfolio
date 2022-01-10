@@ -42,7 +42,10 @@ function Notepad(props) {
 							borderRadius: '0',
 					  }
 					: closed
-					? { opacity: '0' }
+					? {
+							transform:
+								'translate(-50%, calc(-50% - 25px)) scale(0)',
+					  }
 					: {}
 			}
 		>

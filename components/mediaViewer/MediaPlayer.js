@@ -1,11 +1,12 @@
+import Image from 'next/image';
 import { useState } from 'react';
 import {
 	VscChromeClose,
 	VscChromeMaximize,
 	VscChromeMinimize,
 } from 'react-icons/vsc';
-import styles from './Videos.module.scss';
-function Photos(props) {
+import styles from './MediaPlayer.module.scss';
+function MediaPlayer(props) {
 	const [maximised, setMaximised] = useState(false);
 	const [closed, setClosed] = useState(false);
 
@@ -17,7 +18,7 @@ function Photos(props) {
 		// Setclosed(!closed) then wait for animation to finish then redirect
 		setClosed(!closed);
 		setTimeout(() => {
-			props.setOpenVideo(null);
+			props.close(null);
 		}, 250);
 	};
 
@@ -41,8 +42,8 @@ function Photos(props) {
 					<section className={styles.top}>
 						<div className={styles.topContainer}>
 							<p>
-								{props.video.filename.slice(0, -7)}.
-								{props.video.format}
+								{props.media.filename.slice(0, -7)}.
+								{props.media.format}
 							</p>
 						</div>
 						<div className={styles.iconContainer}>
@@ -64,12 +65,8 @@ function Photos(props) {
 						</div>
 					</section>
 				</nav>
-				<section className={styles.videoArea}>
-					<video
-						controls
-						src={props.video.url}
-						style={{ width: '100%', height: '100%' }}
-					/>
+				<section className={styles.mediaArea}>
+					{props.component}
 				</section>
 				<footer
 					className={styles.footer}
@@ -80,4 +77,4 @@ function Photos(props) {
 	);
 }
 
-export default Photos;
+export default MediaPlayer;

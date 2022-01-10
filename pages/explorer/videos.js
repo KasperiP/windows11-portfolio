@@ -4,7 +4,7 @@ import Icons from '../../components/icons/Icons';
 import FileExplorer from '../../components/fileExplorer/FileExplorer';
 import styles from '../../styles/utils/MediaGrid.module.scss';
 import Image from 'next/image';
-import VideoPlayer from '../../components/videos/Videos';
+import MediaPlayer from '../../components/mediaViewer/MediaPlayer';
 
 function Videos({ data }) {
 	const [openVideo, setOpenVideo] = useState(null);
@@ -49,9 +49,16 @@ function Videos({ data }) {
 			</Head>
 			<div style={{ height: '100%' }}>
 				{openVideo && (
-					<VideoPlayer
-						video={openVideo}
-						setOpenVideo={setOpenVideo}
+					<MediaPlayer
+						close={setOpenVideo}
+						media={openVideo}
+						component={
+							<video
+								controls
+								src={openVideo.secure_url}
+								style={{ width: '100%', height: '100%' }}
+							/>
+						}
 					/>
 				)}
 				<FileExplorer
@@ -85,8 +92,11 @@ export async function getStaticProps() {
 			thumbnail: (
 				video.secure_url.split('.').slice(0, -1).join('.') + '.webp'
 			).replace('/upload/', '/upload/q_auto:low/'),
-			filename: video.public_id.replace('videos/', ''),
-			url: video.secure_url,
+			filename:
+				video.public_id.replace('videos/', '').length > 25
+					? video.public_id.replace('videos/', '').slice(0, 25)
+					: video.public_id.replace('videos/', ''),
+			secure_url: video.secure_url,
 			format: video.format,
 		};
 	});
