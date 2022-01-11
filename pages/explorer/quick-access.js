@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import React from 'react';
-import Icons from '../../components/modules/icons/Icons';
-import FileExplorer from '../../components/windows/fileExplorer/FileExplorer';
+import Icons from '../../components/modules/Icons/Icons';
+import FileExplorer from '../../components/windows/FileExplorer/FileExplorer';
 import { RiArrowDropDownLine } from 'react-icons/ri';
 import { BsFillPinAngleFill } from 'react-icons/bs';
 import Image from 'next/image';

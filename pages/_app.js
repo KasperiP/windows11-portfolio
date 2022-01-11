@@ -1,7 +1,7 @@
-import Layout from '../components/layout/Layout';
+import Layout from '../components/Layout/Layout';
 import '../styles/globals.css';
 import { useState, useCallback, useEffect } from 'react';
-import Bluescreen from '../components/modules/bluescreen/Bluescreen';
+import Bluescreen from '../components/modules/Bluescreen/Bluescreen';
 import { useRouter } from 'next/router';
 import ContextProvider from '../context/ContextProvider';
 

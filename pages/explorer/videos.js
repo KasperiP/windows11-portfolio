@@ -1,10 +1,10 @@
 import Head from 'next/head';
 import { useState } from 'react';
-import Icons from '../../components/modules/icons/Icons';
-import FileExplorer from '../../components/windows/fileExplorer/FileExplorer';
+import Icons from '../../components/modules/Icons/Icons';
+import FileExplorer from '../../components/windows/FileExplorer/FileExplorer';
 import styles from '../../styles/utils/MediaGrid.module.css';
 import Image from 'next/image';
-import MediaPlayer from '../../components/windows/mediaPlayer/MediaPlayer';
+import MediaPlayer from '../../components/windows/MediaPlayer/MediaPlayer';
 
 function Videos({ data }) {
 	const [openVideo, setOpenVideo] = useState(null);

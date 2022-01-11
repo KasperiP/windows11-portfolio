@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import React from 'react';
-import Bluescreen from '../components/modules/bluescreen/Bluescreen';
+import Bluescreen from '../components/modules/Bluescreen/Bluescreen';
 
 function Custom404() {
 	return (

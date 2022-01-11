@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import React from 'react';
-import Icons from '../../components/modules/icons/Icons';
-import Notepad from '../../components/windows/notepad/Notepad';
+import Icons from '../../components/modules/Icons/Icons';
+import Notepad from '../../components/windows/Notepad/Notepad';
 function about() {
 	const getAge = () => {
 		const dateString = '2002-01-30';
