@@ -1,17 +1,22 @@
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import {
 	VscChromeClose,
 	VscChromeMaximize,
 	VscChromeMinimize,
 } from 'react-icons/vsc';
+import { Context } from '../../../context/ContextProvider';
+import DraggableWindow from '../../utils/draggableWindow/DraggableWindow';
 import styles from './Notepad.module.css';
 function Notepad(props) {
 	const router = useRouter();
 
-	const [maximised, setMaximised] = useState(false);
-	const [closed, setClosed] = useState(false);
+	const { maximizedState } = useContext(Context);
+	const [maximized, setMaximized] = maximizedState;
+
+	const [isClosing, setIsClosing] = useState(false);
+
 	const [text, setText] = useState(props.text);
 
 	// onChange text handler
@@ -20,38 +25,26 @@ function Notepad(props) {
 	};
 
 	const handleMaximize = () => {
-		setMaximised(!maximised);
+		setMaximized({ ...maximized, notepad: !maximized.notepad });
 	};
 
 	const handleClose = () => {
 		// Setclosed(!closed) then wait for animation to finish then redirect
-		setClosed(!closed);
+		setIsClosing(!isClosing);
 		setTimeout(() => {
 			router.push('/');
-		}, 250);
+		}, 500);
 	};
 
 	return (
-		<div
-			className={styles.container}
-			style={
-				maximised && !closed
-					? {
-							height: 'calc(100% - 50px)',
-							width: '100%',
-							borderRadius: '0',
-					  }
-					: closed
-					? {
-							transform:
-								'translate(-50%, calc(-50% - 25px)) scale(0)',
-					  }
-					: {}
-			}
+		<DraggableWindow
+			isClosing={isClosing}
+			keepPosition={false}
+			windowName={'notepad'}
 		>
 			<section className={styles.main}>
 				<nav>
-					<section className={styles.top}>
+					<section className={`${styles.top} draggable`}>
 						<div className={styles.topContainer}>
 							<Image
 								src="/icons/notepad.ico"
@@ -61,7 +54,9 @@ function Notepad(props) {
 							/>
 							<p>{props.name}</p>
 						</div>
-						<div className={styles.iconContainer}>
+						<div
+							className={`${styles.iconContainer} not_draggable`}
+						>
 							<div className={styles.icon}>
 								<VscChromeMinimize />
 							</div>
@@ -198,10 +193,7 @@ function Notepad(props) {
 						onChange={handleChange}
 					/>
 				</section>
-				<footer
-					className={styles.footer}
-					style={maximised ? { borderRadius: '0' } : {}}
-				>
+				<footer className={styles.footer}>
 					<div>
 						<p>Ln 1, Col 1</p>
 					</div>
@@ -212,7 +204,7 @@ function Notepad(props) {
 					</div>
 				</footer>
 			</section>
-		</div>
+		</DraggableWindow>
 	);
 }
 

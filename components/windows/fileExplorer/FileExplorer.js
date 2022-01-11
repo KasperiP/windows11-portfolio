@@ -67,7 +67,8 @@ function FileExplorer(props) {
 	const [thisPC, setThisPC] = useState(true);
 
 	const handleMaximize = () => {
-		setMaximized(!maximized);
+		// Set fileExplorer to maximized
+		setMaximized({ ...maximized, fileExplorer: !maximized.fileExplorer });
 	};
 
 	const handleChange = (e) => {

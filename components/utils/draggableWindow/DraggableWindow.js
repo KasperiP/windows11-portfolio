@@ -11,8 +11,6 @@ function DraggableWindow({ children, isClosing, keepPosition, windowName }) {
 	const {
 		maximizedState,
 		explorerHistoryState,
-		indexState,
-		wasManualState,
 		positionState,
 		windowPriorityState,
 	} = useContext(Context);
@@ -55,6 +53,11 @@ function DraggableWindow({ children, isClosing, keepPosition, windowName }) {
 	const handleClick = (e, window) => {
 		handlePriority(window);
 	};
+	const handleDrag = (e, data) => {
+		if (maximized[windowName]) {
+			setMaximized({ ...maximized, [windowName]: false });
+		}
+	};
 
 	const variants = {
 		maximized: {
@@ -77,8 +80,10 @@ function DraggableWindow({ children, isClosing, keepPosition, windowName }) {
 						x: 'calc(-50%)',
 						y: 'calc(-50% - 25px)',
 					}}
-					position={maximized && { x: 0, y: 0 }}
-					disabled={maximized}
+					position={
+						maximized[windowName] === true ? { x: 0, y: 0 } : null
+					}
+					onDrag={handleDrag}
 					onStop={(e, data) => {
 						savePosition(e, data);
 						setIsDragging(false);
@@ -92,12 +97,13 @@ function DraggableWindow({ children, isClosing, keepPosition, windowName }) {
 						className={styles.container}
 						ref={nodeRef}
 						variants={variants}
-						animate={maximized ? 'maximized' : 'minimized'}
+						animate={
+							maximized[windowName] ? 'maximized' : 'minimized'
+						}
 						style={
 							isDragging
 								? { zIndex: 997 }
 								: {
-										transition: 'all 0.15s ease-in-out',
 										zIndex: windowPriority[windowName],
 								  }
 						}
@@ -107,7 +113,7 @@ function DraggableWindow({ children, isClosing, keepPosition, windowName }) {
 								: { opacity: 0 }
 						}
 						exit={{ opacity: 0 }}
-						transition={{ duration: 0.15 }}
+						transition={{ duration: 0.2 }}
 					>
 						{children}
 					</motion.div>

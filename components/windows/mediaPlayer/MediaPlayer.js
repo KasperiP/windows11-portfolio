@@ -1,18 +1,21 @@
-import Image from 'next/image';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import {
 	VscChromeClose,
 	VscChromeMaximize,
 	VscChromeMinimize,
 } from 'react-icons/vsc';
+import { Context } from '../../../context/ContextProvider';
 import DraggableWindow from '../../utils/draggableWindow/DraggableWindow';
 import styles from './MediaPlayer.module.css';
+
 function MediaPlayer(props) {
-	const [maximised, setMaximised] = useState(false);
+	const { maximizedState } = useContext(Context);
+	const [maximized, setMaximized] = maximizedState;
+
 	const [isClosing, setIsClosing] = useState(false);
 
 	const handleMaximize = () => {
-		setMaximised(!maximised);
+		setMaximized({ ...maximized, mediaPlayer: !maximized.mediaPlayer });
 	};
 
 	const handleClose = () => {
@@ -20,7 +23,7 @@ function MediaPlayer(props) {
 		setIsClosing(!isClosing);
 		setTimeout(() => {
 			props.close(null);
-		}, 250);
+		}, 500);
 	};
 
 	return (
@@ -62,10 +65,7 @@ function MediaPlayer(props) {
 				<section className={styles.mediaArea}>
 					{props.component}
 				</section>
-				<footer
-					className={styles.footer}
-					style={maximised ? { borderRadius: '0' } : {}}
-				></footer>
+				<footer className={styles.footer}></footer>
 			</section>
 		</DraggableWindow>
 	);

@@ -3,12 +3,18 @@ import { createContext, useEffect, useState } from 'react';
 export const Context = createContext();
 
 const initialPriority = {
-	fileExplorer: 10,
-	mediaPlayer: 11,
+	fileExplorer: 100,
+	mediaPlayer: 101,
+};
+
+const initialMaximized = {
+	fileExplorer: false,
+	mediaPlayer: false,
+	notepad: false,
 };
 
 const ContextProvider = ({ children }) => {
-	const [maximized, setMaximized] = useState(false);
+	const [maximized, setMaximized] = useState(initialMaximized);
 
 	const [explorerHistory, setExplorerHistory] = useState([]);
 	const [index, setIndex] = useState(0);

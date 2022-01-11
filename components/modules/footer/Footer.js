@@ -21,7 +21,7 @@ function Footer() {
 			setWinMenu(false);
 			setTimeout(() => {
 				setIsClosed(true);
-			}, 250);
+			}, 500);
 		} else {
 			setIsClosed(false);
 

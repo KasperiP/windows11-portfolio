@@ -5,10 +5,14 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	z-index: 10;
+	z-index: 100;
 	width: 55rem;
 	height: 35rem;
 	border-radius: 10px;
 	background-color: #191919;
 	border: 1px solid #323232;
+	resize: both;
+	overflow: auto;
+	min-width: 55rem;
+	min-height: 35rem;
 }
