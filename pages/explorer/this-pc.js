@@ -71,7 +71,7 @@ function thisPC() {
 						</div>
 					</Link>
 
-					<Link href="/explorer/documents" passHref>
+					<Link href="/explorer/pictures" passHref>
 						<div className={styles.item}>
 							<div>
 								<Image

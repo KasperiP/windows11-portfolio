@@ -2,11 +2,9 @@
 	position: absolute;
 	left: 50%;
 	top: 50%;
-	transform: translate(-50%, calc(-50% - 25px));
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	z-index: 9999;
 	width: 55rem;
 	height: 35rem;
 	background-color: #272727;

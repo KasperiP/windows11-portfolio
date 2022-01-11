@@ -5,10 +5,11 @@ import {
 	VscChromeMaximize,
 	VscChromeMinimize,
 } from 'react-icons/vsc';
+import DraggableWindow from '../draggableWindow/DraggableWindow';
 import styles from './MediaPlayer.module.scss';
 function MediaPlayer(props) {
 	const [maximised, setMaximised] = useState(false);
-	const [closed, setClosed] = useState(false);
+	const [isClosing, setIsClosing] = useState(false);
 
 	const handleMaximize = () => {
 		setMaximised(!maximised);
@@ -16,37 +17,30 @@ function MediaPlayer(props) {
 
 	const handleClose = () => {
 		// Setclosed(!closed) then wait for animation to finish then redirect
-		setClosed(!closed);
+		setIsClosing(!isClosing);
 		setTimeout(() => {
 			props.close(null);
 		}, 250);
 	};
 
 	return (
-		<div
-			className={styles.container}
-			style={
-				maximised && !closed
-					? {
-							height: 'calc(100% - 50px)',
-							width: '100%',
-							borderRadius: '0',
-					  }
-					: closed
-					? { opacity: '0' }
-					: {}
-			}
+		<DraggableWindow
+			isClosing={isClosing}
+			keepPosition={false}
+			windowName={'mediaPlayer'}
 		>
 			<section className={styles.main}>
 				<nav>
-					<section className={styles.top}>
+					<section className={`${styles.top} draggable`}>
 						<div className={styles.topContainer}>
 							<p>
 								{props.media.filename.slice(0, -7)}.
 								{props.media.format}
 							</p>
 						</div>
-						<div className={styles.iconContainer}>
+						<div
+							className={`${styles.iconContainer} not_draggable`}
+						>
 							<div className={styles.icon}>
 								<VscChromeMinimize />
 							</div>
@@ -73,7 +67,7 @@ function MediaPlayer(props) {
 					style={maximised ? { borderRadius: '0' } : {}}
 				></footer>
 			</section>
-		</div>
+		</DraggableWindow>
 	);
 }
 

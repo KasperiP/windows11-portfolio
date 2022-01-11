@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import styles from './FileExplorer.module.scss';
 import {
 	VscChromeMinimize,
@@ -39,8 +39,7 @@ import { IoMdOptions, IoMdRefresh } from 'react-icons/io';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { Context } from '../contextProvider/contextProvider';
-import { AnimatePresence, motion } from 'framer-motion';
-import Draggable from 'react-draggable';
+import DraggableWindow from '../draggableWindow/DraggableWindow';
 
 function FileExplorer(props) {
 	const router = useRouter();
@@ -58,10 +57,8 @@ function FileExplorer(props) {
 	const [index, setIndex] = indexState;
 	const [wasManual, setWasManual] = wasManualState;
 	const [position, setPosition] = positionState;
-	const nodeRef = useRef(null);
-	const [isDragging, setIsDragging] = useState(false);
 
-	const [closed, setClosed] = useState(false);
+	const [isClosing, setIsClosing] = useState(false);
 
 	const [path, setPath] = useState(props.folder);
 
@@ -75,12 +72,12 @@ function FileExplorer(props) {
 	const handleChange = (e) => {
 		setPath(e.target.value);
 	};
-	const handleFocus = (event) => event.target.select();
+	const handleFocus = (e) => e.target.select();
 	const handleBlur = () => setPath(props.folder);
 
 	const handleClose = () => {
 		setPosition({ x: 0, y: 0 });
-		setClosed(!closed);
+		setIsClosing(!isClosing);
 		setHistory([]);
 		setTimeout(() => {
 			router.push('/');
@@ -114,342 +111,315 @@ function FileExplorer(props) {
 		}
 	};
 
-	const savePosition = (e, data) => {
-		setPosition({ x: data.x, y: data.y });
-	};
-
-	const variants = {
-		maximized: {
-			height: 'calc(100% - 49px)',
-			width: '100%',
-			borderRadius: '0px',
-			opacity: 1,
-		},
-		minimized: { opacity: 1 },
-	};
-
 	return (
-		<AnimatePresence>
-			{!closed && (
-				<Draggable
-					nodeRef={nodeRef}
-					handle=".draggable"
-					cancel=".not_draggable"
-					positionOffset={{
-						x: 'calc(-50%)',
-						y: 'calc(-50% - 25px)',
-					}}
-					position={maximized && { x: 0, y: 0 }}
-					disabled={maximized}
-					onStop={(e, data) =>
-						savePosition(e, data) && setIsDragging(false)
-					}
-					defaultPosition={position}
-					onStart={() => setIsDragging(true)}
-				>
-					<motion.div
-						className={styles.container}
-						ref={nodeRef}
-						variants={variants}
-						animate={maximized ? 'maximized' : 'minimized'}
-						style={
-							isDragging
-								? {}
-								: { transition: 'all 0.15s ease-in-out' }
-						}
-						initial={
-							history.length >= 1
-								? { opacity: 1 }
-								: { opacity: 0 }
-						}
-						exit={{ opacity: 0 }}
-						transition={{ duration: 0.15 }}
-					>
-						<section className={styles.main}>
-							<nav>
-								<section className={`${styles.top} draggable`}>
-									<div className={styles.topContainer}>
+		<DraggableWindow
+			isClosing={isClosing}
+			keepPosition={true}
+			windowName={'fileExplorer'}
+		>
+			<section className={styles.main}>
+				<nav>
+					<section className={`${styles.top} draggable`}>
+						<div className={styles.topContainer}>
+							<Image
+								src={`/icons/${props.icon}.ico`}
+								alt="ico"
+								width={20}
+								height={20}
+							/>
+							<p>{props.folder}</p>
+						</div>
+						<div
+							className={`${styles.iconContainer} not_draggable`}
+						>
+							<div className={styles.icon}>
+								<VscChromeMinimize />
+							</div>
+							<div
+								className={styles.icon}
+								onClick={handleMaximize}
+							>
+								<VscChromeMaximize />
+							</div>
+							<div
+								className={styles.iconClose}
+								onClick={handleClose}
+							>
+								<VscChromeClose />
+							</div>
+						</div>
+					</section>
+					<section className={styles.manage}>
+						<div className={styles.manageNew}>
+							<div className={styles.icon}>
+								<AiOutlinePlusCircle />
+								<p>New</p>
+								<RiArrowDropDownLine />
+								<div className={styles.manageDropdown}>
+									<div>
 										<Image
-											src={`/icons/${props.icon}.ico`}
-											alt="ico"
-											width={20}
+											src="/icons/folder.ico"
 											height={20}
+											width={20}
+											alt="ico"
 										/>
-										<p>{props.folder}</p>
+										<p>Folder</p>
 									</div>
-									<div
-										className={`${styles.iconContainer} not_draggable`}
-									>
-										<div className={styles.icon}>
-											<VscChromeMinimize />
-										</div>
-										<div
-											className={styles.icon}
-											onClick={handleMaximize}
-										>
-											<VscChromeMaximize />
-										</div>
-										<div
-											className={styles.iconClose}
-											onClick={handleClose}
-										>
-											<VscChromeClose />
-										</div>
-									</div>
-								</section>
-								<section className={styles.manage}>
-									<div className={styles.manageNew}>
-										<div className={styles.icon}>
-											<AiOutlinePlusCircle />
-											<p>New</p>
-											<RiArrowDropDownLine />
-											<div
-												className={
-													styles.manageDropdown
-												}
-											>
-												<div>
-													<Image
-														src="/icons/folder.ico"
-														height={20}
-														width={20}
-														alt="ico"
-													/>
-													<p>Folder</p>
-												</div>
-												<div>
-													<Image
-														src="/icons/shortcut.ico"
-														height={20}
-														width={20}
-														alt="ico"
-													/>
-													<p>Shortcut</p>
-												</div>
-												<div>
-													<Image
-														src="/icons/notes.ico"
-														height={20}
-														width={20}
-														alt="ico"
-													/>
-													<p>Text Document</p>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div className={styles.manageActions}>
-										<div className={styles.icon}>
-											<BsScissors />
-										</div>
-										<div className={styles.icon}>
-											<MdContentCopy />
-										</div>
-										<div className={styles.icon}>
-											<MdContentPaste />
-										</div>
-										<div className={styles.icon}>
-											<BiRename />
-										</div>
-										<div className={styles.icon}>
-											<FaRegShareSquare />
-										</div>
-										<div className={styles.icon}>
-											<BsTrash />
-										</div>
-									</div>
-									<div className={styles.manageSort}>
-										<div className={styles.icon}>
-											{' '}
-											<BiSortAlt2 />
-											<p>Sort</p>
-											<RiArrowDropDownLine />
-											<div
-												className={
-													styles.manageDropdown
-												}
-											>
-												<div>
-													<p>Name</p>
-												</div>
-												<div>
-													<p>Status</p>
-												</div>
-												<div>
-													<p>Date modified</p>
-												</div>
-												<div>
-													<p>More</p>
-												</div>
-												<div>
-													<p>Ascending</p>
-												</div>
-												<div>
-													<p>Descending</p>
-												</div>
-												<div>
-													<p>Group by</p>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div className={styles.manageView}>
-										<div className={styles.icon}>
-											{' '}
-											<GiHamburgerMenu />
-											<p>View</p>
-											<RiArrowDropDownLine />
-											<div
-												className={
-													styles.manageDropdown
-												}
-											>
-												<div>
-													<RiComputerLine />
-													<p>Extra large icons</p>
-												</div>
-												<div>
-													<HiOutlineDesktopComputer />
-													<p>Large icons</p>
-												</div>
-												<div>
-													<HiOutlineDesktopComputer />
-													<p>Medium icons</p>
-												</div>
-												<div>
-													<SiMaterialdesignicons />
-													<p>Small icons</p>
-												</div>
-												<div>
-													<FaList />
-													<p>List</p>
-												</div>
-												<div>
-													<HiOutlineViewList />
-													<p>Details</p>
-												</div>
-												<div>
-													<MdOutlineListAlt />
-													<p>Tiles</p>
-												</div>
-												<div>
-													<MdOutlineListAlt />
-													<p>Content</p>
-												</div>
-												<div>
-													<MdOutlineViewCompact />
-													<p>Compact view</p>
-												</div>
-												<div>
-													<BiShowAlt />
-													<p>Show</p>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div className={styles.manageMore}>
-										<div className={styles.icon}>
-											<FiMoreHorizontal />
-											<div
-												className={
-													styles.manageDropdown
-												}
-											>
-												<div>
-													<AiOutlineUndo />
-													<p>Undo</p>
-												</div>
-												<div>
-													<BsPinAngle />
-													<p>Pin to Quick access</p>
-												</div>
-												<div>
-													<MdOutlineSelectAll />
-													<p>Select all</p>
-												</div>
-												<div>
-													<MdTabUnselected />
-													<p>Select none</p>
-												</div>
-												<div>
-													<BiSelection />
-													<p>Invert selection</p>
-												</div>
-												<div>
-													<VscSymbolProperty />
-													<p>Properties</p>
-												</div>
-												<div>
-													<IoMdOptions />
-													<p>Options</p>
-												</div>
-											</div>
-										</div>
-									</div>
-								</section>
-							</nav>
-							<section className={styles.navigate}>
-								<div className={styles.arrows}>
-									<HiArrowLeft
-										onClick={handleBack}
-										style={
-											typeof history[index - 1] ===
-											'undefined'
-												? {}
-												: { color: 'white' }
-										}
-									/>
-									<HiArrowRight
-										onClick={handleNext}
-										style={
-											typeof history[index + 1] ===
-											'undefined'
-												? {}
-												: { color: 'white' }
-										}
-									/>
-									<RiArrowDropDownLine />
-									<HiArrowUp />
-								</div>
-								<div className={styles.navigatePath}>
-									<div className={styles.left}>
+									<div>
 										<Image
-											src={`/icons/${props.icon}.ico`}
-											alt="ico"
-											width={20}
+											src="/icons/shortcut.ico"
 											height={20}
+											width={20}
+											alt="ico"
 										/>
-										<AiFillCaretRight />
-										<input
-											value={`${path}`}
-											onChange={handleChange}
-											onFocus={handleFocus}
-											onBlur={handleBlur}
-										></input>
+										<p>Shortcut</p>
 									</div>
-									<div className={styles.right}>
-										<div>
-											<RiArrowDropDownLine />
-										</div>
-										<div>
-											<IoMdRefresh />
-										</div>
+									<div>
+										<Image
+											src="/icons/notes.ico"
+											height={20}
+											width={20}
+											alt="ico"
+										/>
+										<p>Text Document</p>
 									</div>
 								</div>
-								<div className={styles.navigateSearch}>
-									<VscSearch />
-									<input
-										placeholder={`Search: ${props.folder}`}
+							</div>
+						</div>
+						<div className={styles.manageActions}>
+							<div className={styles.icon}>
+								<BsScissors />
+							</div>
+							<div className={styles.icon}>
+								<MdContentCopy />
+							</div>
+							<div className={styles.icon}>
+								<MdContentPaste />
+							</div>
+							<div className={styles.icon}>
+								<BiRename />
+							</div>
+							<div className={styles.icon}>
+								<FaRegShareSquare />
+							</div>
+							<div className={styles.icon}>
+								<BsTrash />
+							</div>
+						</div>
+						<div className={styles.manageSort}>
+							<div className={styles.icon}>
+								{' '}
+								<BiSortAlt2 />
+								<p>Sort</p>
+								<RiArrowDropDownLine />
+								<div className={styles.manageDropdown}>
+									<div>
+										<p>Name</p>
+									</div>
+									<div>
+										<p>Status</p>
+									</div>
+									<div>
+										<p>Date modified</p>
+									</div>
+									<div>
+										<p>More</p>
+									</div>
+									<div>
+										<p>Ascending</p>
+									</div>
+									<div>
+										<p>Descending</p>
+									</div>
+									<div>
+										<p>Group by</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div className={styles.manageView}>
+							<div className={styles.icon}>
+								{' '}
+								<GiHamburgerMenu />
+								<p>View</p>
+								<RiArrowDropDownLine />
+								<div className={styles.manageDropdown}>
+									<div>
+										<RiComputerLine />
+										<p>Extra large icons</p>
+									</div>
+									<div>
+										<HiOutlineDesktopComputer />
+										<p>Large icons</p>
+									</div>
+									<div>
+										<HiOutlineDesktopComputer />
+										<p>Medium icons</p>
+									</div>
+									<div>
+										<SiMaterialdesignicons />
+										<p>Small icons</p>
+									</div>
+									<div>
+										<FaList />
+										<p>List</p>
+									</div>
+									<div>
+										<HiOutlineViewList />
+										<p>Details</p>
+									</div>
+									<div>
+										<MdOutlineListAlt />
+										<p>Tiles</p>
+									</div>
+									<div>
+										<MdOutlineListAlt />
+										<p>Content</p>
+									</div>
+									<div>
+										<MdOutlineViewCompact />
+										<p>Compact view</p>
+									</div>
+									<div>
+										<BiShowAlt />
+										<p>Show</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div className={styles.manageMore}>
+							<div className={styles.icon}>
+								<FiMoreHorizontal />
+								<div className={styles.manageDropdown}>
+									<div>
+										<AiOutlineUndo />
+										<p>Undo</p>
+									</div>
+									<div>
+										<BsPinAngle />
+										<p>Pin to Quick access</p>
+									</div>
+									<div>
+										<MdOutlineSelectAll />
+										<p>Select all</p>
+									</div>
+									<div>
+										<MdTabUnselected />
+										<p>Select none</p>
+									</div>
+									<div>
+										<BiSelection />
+										<p>Invert selection</p>
+									</div>
+									<div>
+										<VscSymbolProperty />
+										<p>Properties</p>
+									</div>
+									<div>
+										<IoMdOptions />
+										<p>Options</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</section>
+				</nav>
+				<section className={styles.navigate}>
+					<div className={styles.arrows}>
+						<HiArrowLeft
+							onClick={handleBack}
+							style={
+								typeof history[index - 1] === 'undefined'
+									? {}
+									: { color: 'white' }
+							}
+						/>
+						<HiArrowRight
+							onClick={handleNext}
+							style={
+								typeof history[index + 1] === 'undefined'
+									? {}
+									: { color: 'white' }
+							}
+						/>
+						<RiArrowDropDownLine />
+						<HiArrowUp />
+					</div>
+					<div className={styles.navigatePath}>
+						<div className={styles.left}>
+							<Image
+								src={`/icons/${props.icon}.ico`}
+								alt="ico"
+								width={20}
+								height={20}
+							/>
+							<AiFillCaretRight />
+							<input
+								value={`${path}`}
+								onChange={handleChange}
+								onFocus={handleFocus}
+								onBlur={handleBlur}
+							></input>
+						</div>
+						<div className={styles.right}>
+							<div>
+								<RiArrowDropDownLine />
+							</div>
+							<div>
+								<IoMdRefresh />
+							</div>
+						</div>
+					</div>
+					<div className={styles.navigateSearch}>
+						<VscSearch />
+						<input placeholder={`Search: ${props.folder}`} />
+					</div>
+				</section>
+				<section className={styles.contentArea}>
+					<div className={styles.sidebar}>
+						<div
+							className={styles.navigationDropdown}
+							style={
+								router.pathname == '/explorer/quick-access'
+									? {
+											backgroundColor: '#2e2e2e',
+									  }
+									: {}
+							}
+						>
+							<RiArrowDropDownLine
+								onClick={() => setQuickaccess(!quickaccess)}
+								style={
+									quickaccess
+										? {}
+										: {
+												transform: 'rotate(-90deg)',
+										  }
+								}
+							/>
+							<Link href="/explorer/quick-access" passHref>
+								<div>
+									<Image
+										src="/icons/quickaccess.ico"
+										alt="ico"
+										width={16}
+										height={16}
 									/>
+									<p>Quick access</p>
 								</div>
-							</section>
-							<section className={styles.contentArea}>
-								<div className={styles.sidebar}>
+							</Link>
+						</div>
+						{quickaccess && (
+							<>
+								<Link
+									href="/explorer/desktop?top=true"
+									passHref
+								>
 									<div
-										className={styles.navigationDropdown}
+										className={styles.navigationItem}
 										style={
-											router.pathname ==
-											'/explorer/quick-access'
+											router.asPath ==
+											'/explorer/desktop?top=true'
 												? {
 														backgroundColor:
 															'#2e2e2e',
@@ -457,151 +427,24 @@ function FileExplorer(props) {
 												: {}
 										}
 									>
-										<RiArrowDropDownLine
-											onClick={() =>
-												setQuickaccess(!quickaccess)
-											}
-											style={
-												quickaccess
-													? {}
-													: {
-															transform:
-																'rotate(-90deg)',
-													  }
-											}
+										<Image
+											src="/icons/desktop.ico"
+											alt="ico"
+											width={16}
+											height={16}
 										/>
-										<Link
-											href="/explorer/quick-access"
-											passHref
-										>
-											<div>
-												<Image
-													src="/icons/quickaccess.ico"
-													alt="ico"
-													width={16}
-													height={16}
-												/>
-												<p>Quick access</p>
-											</div>
-										</Link>
+										<p>Desktop</p>
 									</div>
-									{quickaccess && (
-										<>
-											<Link
-												href="/explorer/desktop?top=true"
-												passHref
-											>
-												<div
-													className={
-														styles.navigationItem
-													}
-													style={
-														router.asPath ==
-														'/explorer/desktop?top=true'
-															? {
-																	backgroundColor:
-																		'#2e2e2e',
-															  }
-															: {}
-													}
-												>
-													<Image
-														src="/icons/desktop.ico"
-														alt="ico"
-														width={16}
-														height={16}
-													/>
-													<p>Desktop</p>
-												</div>
-											</Link>
-											<Link
-												href="/explorer/downloads?top=true"
-												passHref
-											>
-												<div
-													className={
-														styles.navigationItem
-													}
-													style={
-														router.asPath ==
-														'/explorer/downloads?top=true'
-															? {
-																	backgroundColor:
-																		'#2e2e2e',
-															  }
-															: {}
-													}
-												>
-													<Image
-														src="/icons/downloads.ico"
-														alt="ico"
-														width={16}
-														height={16}
-													/>
-													<p>Downloads</p>
-												</div>
-											</Link>
-											<Link
-												href="/explorer/documents?top=true"
-												passHref
-											>
-												<div
-													className={
-														styles.navigationItem
-													}
-													style={
-														router.asPath ==
-														'/explorer/documents?top=true'
-															? {
-																	backgroundColor:
-																		'#2e2e2e',
-															  }
-															: {}
-													}
-												>
-													<Image
-														src="/icons/documents.ico"
-														alt="ico"
-														width={16}
-														height={16}
-													/>
-													<p>Documents</p>
-												</div>
-											</Link>
-											<Link
-												href="/explorer/pictures?top=true"
-												passHref
-											>
-												<div
-													className={
-														styles.navigationItem
-													}
-													style={
-														router.asPath ==
-														'/explorer/pictures?top=true'
-															? {
-																	backgroundColor:
-																		'#2e2e2e',
-															  }
-															: {}
-													}
-												>
-													<Image
-														src="/icons/pictures.ico"
-														alt="ico"
-														width={16}
-														height={16}
-													/>
-													<p>Pictures</p>
-												</div>
-											</Link>
-										</>
-									)}
+								</Link>
+								<Link
+									href="/explorer/downloads?top=true"
+									passHref
+								>
 									<div
-										className={styles.navigationDropdown}
+										className={styles.navigationItem}
 										style={
-											router.pathname ==
-											'/explorer/this-pc'
+											router.asPath ==
+											'/explorer/downloads?top=true'
 												? {
 														backgroundColor:
 															'#2e2e2e',
@@ -609,301 +452,316 @@ function FileExplorer(props) {
 												: {}
 										}
 									>
-										<RiArrowDropDownLine
-											onClick={() => setThisPC(!thisPC)}
-											style={
-												thisPC
-													? {}
-													: {
-															transform:
-																'rotate(-90deg)',
-													  }
-											}
+										<Image
+											src="/icons/downloads.ico"
+											alt="ico"
+											width={16}
+											height={16}
 										/>
-										<Link href="/explorer/this-pc" passHref>
-											<div>
-												<Image
-													src="/icons/computer.ico"
-													alt="ico"
-													width={16}
-													height={16}
-												/>
-												<p>This PC</p>
-											</div>
-										</Link>
+										<p>Downloads</p>
 									</div>
-									{thisPC && (
-										<>
-											<Link
-												href="/explorer/desktop"
-												passHref
-											>
-												<div
-													className={
-														styles.navigationItem
-													}
-													style={
-														router.asPath ==
-														'/explorer/desktop'
-															? {
-																	backgroundColor:
-																		'#2e2e2e',
-															  }
-															: {}
-													}
-												>
-													<Image
-														src="/icons/desktop.ico"
-														alt="ico"
-														width={16}
-														height={16}
-													/>
-													<p>Desktop</p>
-												</div>
-											</Link>
-											<Link
-												href="/explorer/downloads"
-												passHref
-											>
-												<div
-													className={
-														styles.navigationItem
-													}
-													style={
-														router.asPath ==
-														'/explorer/downloads'
-															? {
-																	backgroundColor:
-																		'#2e2e2e',
-															  }
-															: {}
-													}
-												>
-													<Image
-														src="/icons/downloads.ico"
-														alt="ico"
-														width={16}
-														height={16}
-													/>
-													<p>Downloads</p>
-												</div>
-											</Link>
-											<Link
-												href="/explorer/documents"
-												passHref
-											>
-												<div
-													className={
-														styles.navigationItem
-													}
-													style={
-														router.asPath ==
-														'/explorer/documents'
-															? {
-																	backgroundColor:
-																		'#2e2e2e',
-															  }
-															: {}
-													}
-												>
-													<Image
-														src="/icons/documents.ico"
-														alt="ico"
-														width={16}
-														height={16}
-													/>
-													<p>Documents</p>
-												</div>
-											</Link>
-
-											<Link
-												href="/explorer/pictures"
-												passHref
-											>
-												<div
-													className={
-														styles.navigationItem
-													}
-													style={
-														router.asPath ==
-														'/explorer/pictures'
-															? {
-																	backgroundColor:
-																		'#2e2e2e',
-															  }
-															: {}
-													}
-												>
-													<Image
-														src="/icons/pictures.ico"
-														alt="ico"
-														width={16}
-														height={16}
-													/>
-													<p>Pictures</p>
-												</div>
-											</Link>
-
-											<Link
-												href="/explorer/videos"
-												passHref
-											>
-												<div
-													className={
-														styles.navigationItem
-													}
-													style={
-														router.asPath ==
-														'/explorer/videos'
-															? {
-																	backgroundColor:
-																		'#2e2e2e',
-															  }
-															: {}
-													}
-												>
-													<Image
-														src="/icons/videos.ico"
-														alt="ico"
-														width={16}
-														height={16}
-													/>
-													<p>Videos</p>
-												</div>
-											</Link>
-
-											<Link
-												href="/explorer/music"
-												passHref
-											>
-												<div
-													className={
-														styles.navigationItem
-													}
-													style={
-														router.asPath ==
-														'/explorer/music'
-															? {
-																	backgroundColor:
-																		'#2e2e2e',
-															  }
-															: {}
-													}
-												>
-													<Image
-														src="/icons/music.ico"
-														alt="ico"
-														width={16}
-														height={16}
-													/>
-													<p>Music</p>
-												</div>
-											</Link>
-
-											<Link
-												href="/explorer/drives/C"
-												passHref
-											>
-												<div
-													className={
-														styles.navigationItem
-													}
-													style={
-														router.asPath ==
-														'/explorer/drives/C'
-															? {
-																	backgroundColor:
-																		'#2e2e2e',
-															  }
-															: {}
-													}
-												>
-													<Image
-														src="/icons/cdrive.ico"
-														alt="ico"
-														width={16}
-														height={16}
-													/>
-													<p>250GB SSD</p>
-												</div>
-											</Link>
-
-											<Link
-												href="/explorer/drives/D"
-												passHref
-											>
-												<div
-													className={
-														styles.navigationItem
-													}
-													style={
-														router.asPath ==
-														'/explorer/ssd2'
-															? {
-																	backgroundColor:
-																		'#2e2e2e',
-															  }
-															: {}
-													}
-												>
-													<Image
-														src="/icons/drive.ico"
-														alt="ico"
-														width={16}
-														height={16}
-													/>
-													<p>1TB SSD</p>
-												</div>
-											</Link>
-										</>
-									)}
+								</Link>
+								<Link
+									href="/explorer/documents?top=true"
+									passHref
+								>
+									<div
+										className={styles.navigationItem}
+										style={
+											router.asPath ==
+											'/explorer/documents?top=true'
+												? {
+														backgroundColor:
+															'#2e2e2e',
+												  }
+												: {}
+										}
+									>
+										<Image
+											src="/icons/documents.ico"
+											alt="ico"
+											width={16}
+											height={16}
+										/>
+										<p>Documents</p>
+									</div>
+								</Link>
+								<Link
+									href="/explorer/pictures?top=true"
+									passHref
+								>
+									<div
+										className={styles.navigationItem}
+										style={
+											router.asPath ==
+											'/explorer/pictures?top=true'
+												? {
+														backgroundColor:
+															'#2e2e2e',
+												  }
+												: {}
+										}
+									>
+										<Image
+											src="/icons/pictures.ico"
+											alt="ico"
+											width={16}
+											height={16}
+										/>
+										<p>Pictures</p>
+									</div>
+								</Link>
+							</>
+						)}
+						<div
+							className={styles.navigationDropdown}
+							style={
+								router.pathname == '/explorer/this-pc'
+									? {
+											backgroundColor: '#2e2e2e',
+									  }
+									: {}
+							}
+						>
+							<RiArrowDropDownLine
+								onClick={() => setThisPC(!thisPC)}
+								style={
+									thisPC
+										? {}
+										: {
+												transform: 'rotate(-90deg)',
+										  }
+								}
+							/>
+							<Link href="/explorer/this-pc" passHref>
+								<div>
+									<Image
+										src="/icons/computer.ico"
+										alt="ico"
+										width={16}
+										height={16}
+									/>
+									<p>This PC</p>
 								</div>
+							</Link>
+						</div>
+						{thisPC && (
+							<>
+								<Link href="/explorer/desktop" passHref>
+									<div
+										className={styles.navigationItem}
+										style={
+											router.asPath == '/explorer/desktop'
+												? {
+														backgroundColor:
+															'#2e2e2e',
+												  }
+												: {}
+										}
+									>
+										<Image
+											src="/icons/desktop.ico"
+											alt="ico"
+											width={16}
+											height={16}
+										/>
+										<p>Desktop</p>
+									</div>
+								</Link>
+								<Link href="/explorer/downloads" passHref>
+									<div
+										className={styles.navigationItem}
+										style={
+											router.asPath ==
+											'/explorer/downloads'
+												? {
+														backgroundColor:
+															'#2e2e2e',
+												  }
+												: {}
+										}
+									>
+										<Image
+											src="/icons/downloads.ico"
+											alt="ico"
+											width={16}
+											height={16}
+										/>
+										<p>Downloads</p>
+									</div>
+								</Link>
+								<Link href="/explorer/documents" passHref>
+									<div
+										className={styles.navigationItem}
+										style={
+											router.asPath ==
+											'/explorer/documents'
+												? {
+														backgroundColor:
+															'#2e2e2e',
+												  }
+												: {}
+										}
+									>
+										<Image
+											src="/icons/documents.ico"
+											alt="ico"
+											width={16}
+											height={16}
+										/>
+										<p>Documents</p>
+									</div>
+								</Link>
 
-								<div className={styles.content}>
-									{props.topNav && (
-										<>
-											<div className={styles.topNav}>
-												<div className={styles.name}>
-													<p>Name</p>
-												</div>
+								<Link href="/explorer/pictures" passHref>
+									<div
+										className={styles.navigationItem}
+										style={
+											router.asPath ==
+											'/explorer/pictures'
+												? {
+														backgroundColor:
+															'#2e2e2e',
+												  }
+												: {}
+										}
+									>
+										<Image
+											src="/icons/pictures.ico"
+											alt="ico"
+											width={16}
+											height={16}
+										/>
+										<p>Pictures</p>
+									</div>
+								</Link>
 
-												<div
-													className={
-														styles.dateModified
-													}
-												>
-													<p>Date modified</p>
-												</div>
-												<div className={styles.type}>
-													<p>Type</p>
-												</div>
-												<div className={styles.size}>
-													<p>Size</p>
-												</div>
-											</div>
-										</>
-									)}
+								<Link href="/explorer/videos" passHref>
+									<div
+										className={styles.navigationItem}
+										style={
+											router.asPath == '/explorer/videos'
+												? {
+														backgroundColor:
+															'#2e2e2e',
+												  }
+												: {}
+										}
+									>
+										<Image
+											src="/icons/videos.ico"
+											alt="ico"
+											width={16}
+											height={16}
+										/>
+										<p>Videos</p>
+									</div>
+								</Link>
 
-									<div className={styles.child}>
-										{props.component || (
-											<>
-												<p
-													className={
-														styles.emptyFolder
-													}
-												>
-													This folder is empty.
-												</p>
-											</>
-										)}
+								<Link href="/explorer/music" passHref>
+									<div
+										className={styles.navigationItem}
+										style={
+											router.asPath == '/explorer/music'
+												? {
+														backgroundColor:
+															'#2e2e2e',
+												  }
+												: {}
+										}
+									>
+										<Image
+											src="/icons/music.ico"
+											alt="ico"
+											width={16}
+											height={16}
+										/>
+										<p>Music</p>
+									</div>
+								</Link>
+
+								<Link href="/explorer/drives/C" passHref>
+									<div
+										className={styles.navigationItem}
+										style={
+											router.asPath ==
+											'/explorer/drives/C'
+												? {
+														backgroundColor:
+															'#2e2e2e',
+												  }
+												: {}
+										}
+									>
+										<Image
+											src="/icons/cdrive.ico"
+											alt="ico"
+											width={16}
+											height={16}
+										/>
+										<p>250GB SSD</p>
+									</div>
+								</Link>
+
+								<Link href="/explorer/drives/D" passHref>
+									<div
+										className={styles.navigationItem}
+										style={
+											router.asPath == '/explorer/ssd2'
+												? {
+														backgroundColor:
+															'#2e2e2e',
+												  }
+												: {}
+										}
+									>
+										<Image
+											src="/icons/drive.ico"
+											alt="ico"
+											width={16}
+											height={16}
+										/>
+										<p>1TB SSD</p>
+									</div>
+								</Link>
+							</>
+						)}
+					</div>
+
+					<div className={styles.content}>
+						{props.topNav && (
+							<>
+								<div className={styles.topNav}>
+									<div className={styles.name}>
+										<p>Name</p>
+									</div>
+
+									<div className={styles.dateModified}>
+										<p>Date modified</p>
+									</div>
+									<div className={styles.type}>
+										<p>Type</p>
+									</div>
+									<div className={styles.size}>
+										<p>Size</p>
 									</div>
 								</div>
-							</section>
-						</section>
-					</motion.div>
-				</Draggable>
-			)}
-		</AnimatePresence>
+							</>
+						)}
+
+						<div className={styles.child}>
+							{props.component || (
+								<>
+									<p className={styles.emptyFolder}>
+										This folder is empty.
+									</p>
+								</>
+							)}
+						</div>
+					</div>
+				</section>
+			</section>
+		</DraggableWindow>
 	);
 }
 
