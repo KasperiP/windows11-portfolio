@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { useContext, useRef, useState } from 'react';
 import Draggable from 'react-draggable';
-import { Context } from '../contextProvider/contextProvider';
+import { Context } from '../../../context/ContextProvider';
 import styles from './DraggableWindow.module.scss';
 
 function DraggableWindow({ children, isClosing, keepPosition, windowName }) {
@@ -26,13 +26,28 @@ function DraggableWindow({ children, isClosing, keepPosition, windowName }) {
 	};
 
 	const handlePriority = (window) => {
-		const highestPriority = Object.values(windowPriority).reduce((a, b) =>
-			Math.max(a, b)
+		// Get all priority values for all windows and sort them
+		const priorityValues = Object.values(windowPriority).sort(
+			(a, b) => a - b
 		);
-		if (windowPriority[windowName] === highestPriority) return;
+		// Get the highest priority value
+		const highestPriority = priorityValues[priorityValues.length - 1];
 
-		const newPriority = { ...windowPriority };
-		newPriority[window] = highestPriority + 1;
+		// If the window has highest priority then return
+		if (windowPriority[window] === highestPriority) return;
+
+		// Reduce all priority values by 1. Keep the keys same
+		const newPriority = Object.fromEntries(
+			Object.entries(windowPriority).map(([key, value]) => [
+				key,
+				value - 1,
+			])
+		);
+
+		// Set highest priority value to the current window
+		newPriority[window] = highestPriority;
+
+		// Set the new priority values
 		setWindowPriority(newPriority);
 	};
 

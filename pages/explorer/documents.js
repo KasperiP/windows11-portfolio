@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import React from 'react';
-import Icons from '../../components/icons/Icons';
-import FileExplorer from '../../components/fileExplorer/FileExplorer';
+import Icons from '../../components/modules/icons/Icons';
+import FileExplorer from '../../components/windows/fileExplorer/FileExplorer';
 
 function documents() {
 	return (

@@ -38,8 +38,8 @@ import {
 import { IoMdOptions, IoMdRefresh } from 'react-icons/io';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import { Context } from '../contextProvider/contextProvider';
-import DraggableWindow from '../draggableWindow/DraggableWindow';
+import { Context } from '../../../context/ContextProvider';
+import DraggableWindow from '../../utils/draggableWindow/DraggableWindow';
 
 function FileExplorer(props) {
 	const router = useRouter();
@@ -51,6 +51,7 @@ function FileExplorer(props) {
 		indexState,
 		wasManualState,
 		positionState,
+		openWindowsState,
 	} = useContext(Context);
 	const [maximized, setMaximized] = maximizedState;
 	const [history, setHistory] = explorerHistoryState;

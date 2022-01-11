@@ -4,8 +4,8 @@ import Link from 'next/link';
 import React from 'react';
 import { BsFillPinAngleFill } from 'react-icons/bs';
 import { RiArrowDropDownLine } from 'react-icons/ri';
-import FileExplorer from '../../components/fileExplorer/FileExplorer';
-import Icons from '../../components/icons/Icons';
+import Icons from '../../components/modules/icons/Icons';
+import FileExplorer from '../../components/windows/fileExplorer/FileExplorer';
 import styles from '../../styles/utils/GridList.module.scss';
 
 function thisPC() {

@@ -5,7 +5,7 @@ import {
 	VscChromeMaximize,
 	VscChromeMinimize,
 } from 'react-icons/vsc';
-import DraggableWindow from '../draggableWindow/DraggableWindow';
+import DraggableWindow from '../../utils/draggableWindow/DraggableWindow';
 import styles from './MediaPlayer.module.scss';
 function MediaPlayer(props) {
 	const [maximised, setMaximised] = useState(false);
