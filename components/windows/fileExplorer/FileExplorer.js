@@ -39,7 +39,7 @@ import { IoMdOptions, IoMdRefresh } from 'react-icons/io';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { Context } from '../../../context/ContextProvider';
-import DraggableWindow from '../../utils/draggableWindow/DraggableWindow';
+import DraggableWindow from '../../utils/DraggableWindow/DraggableWindow';
 
 function FileExplorer(props) {
 	const router = useRouter();

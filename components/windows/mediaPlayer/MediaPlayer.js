@@ -5,7 +5,7 @@ import {
 	VscChromeMinimize,
 } from 'react-icons/vsc';
 import { Context } from '../../../context/ContextProvider';
-import DraggableWindow from '../../utils/draggableWindow/DraggableWindow';
+import DraggableWindow from '../../utils/DraggableWindow/DraggableWindow';
 import styles from './MediaPlayer.module.css';
 
 function MediaPlayer(props) {

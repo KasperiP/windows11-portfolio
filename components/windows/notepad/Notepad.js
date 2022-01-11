@@ -7,7 +7,7 @@ import {
 	VscChromeMinimize,
 } from 'react-icons/vsc';
 import { Context } from '../../../context/ContextProvider';
-import DraggableWindow from '../../utils/draggableWindow/DraggableWindow';
+import DraggableWindow from '../../utils/DraggableWindow/DraggableWindow';
 import styles from './Notepad.module.css';
 function Notepad(props) {
 	const router = useRouter();
@@ -184,6 +184,7 @@ function Notepad(props) {
 						</div>
 					</section>
 				</nav>
+
 				<section className={styles.textarea}>
 					<textarea
 						name="notepad"
@@ -193,6 +194,7 @@ function Notepad(props) {
 						onChange={handleChange}
 					/>
 				</section>
+
 				<footer className={styles.footer}>
 					<div>
 						<p>Ln 1, Col 1</p>

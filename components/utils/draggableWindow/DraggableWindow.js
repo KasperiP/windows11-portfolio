@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from 'framer-motion';
-import { useContext, useRef, useState } from 'react';
-import Draggable from 'react-draggable';
+import { useContext, useEffect, useRef, useState } from 'react';
+import { Rnd } from 'react-rnd';
 import { Context } from '../../../context/ContextProvider';
 import styles from './DraggableWindow.module.css';
 
@@ -18,11 +18,6 @@ function DraggableWindow({ children, isClosing, keepPosition, windowName }) {
 	const [history, setHistory] = explorerHistoryState;
 	const [position, setPosition] = positionState;
 	const [windowPriority, setWindowPriority] = windowPriorityState;
-
-	const savePosition = (e, data) => {
-		if (!keepPosition) return;
-		setPosition({ x: data.x, y: data.y });
-	};
 
 	const handlePriority = (window) => {
 		// Get all priority values for all windows and sort them
@@ -61,36 +56,59 @@ function DraggableWindow({ children, isClosing, keepPosition, windowName }) {
 
 	const variants = {
 		maximized: {
-			height: 'calc(100% - 49px)',
-			width: '100%',
 			borderRadius: '0px',
 			opacity: 1,
 		},
 		minimized: { opacity: 1 },
 	};
 
+	// Javascript function to calculate center for abolute div with height 550 and width 880
+	const getCenter = () => {
+		let width = window.innerWidth;
+		let height = window.innerHeight;
+
+		const x = width / 2 - 880 / 2;
+		const y = height / 2 - 550 / 2;
+
+		setPosition({ x: x, y: y });
+	};
+
+	useEffect(() => {
+		getCenter();
+	}, []);
+
 	return (
 		<AnimatePresence>
 			{!isClosing && (
-				<Draggable
-					nodeRef={nodeRef}
-					handle=".draggable"
-					cancel=".not_draggable"
-					positionOffset={{
-						x: 'calc(-50%)',
-						y: 'calc(-50% - 25px)',
-					}}
-					position={
-						maximized[windowName] === true ? { x: 0, y: 0 } : null
+				<Rnd
+					onDragStart={() =>
+						setMaximized({ ...maximized, [windowName]: false })
 					}
-					onDrag={handleDrag}
-					onStop={(e, data) => {
-						savePosition(e, data);
-						setIsDragging(false);
-						handlePriority(windowName);
+					onDragStop={(e, d) => {
+						setPosition({ x: d.x, y: d.y });
 					}}
-					defaultPosition={keepPosition ? position : { x: 0, y: 0 }}
-					onStart={() => setIsDragging(true)}
+					onResize={(e, direction, ref, delta, position) => {
+						setPosition({
+							width: ref.offsetWidth,
+							height: ref.offsetHeight,
+							...position,
+						});
+					}}
+					size={
+						maximized[windowName]
+							? { width: '100%', height: '100%' }
+							: { width: position.width, height: position.height }
+					}
+					position={
+						maximized[windowName]
+							? { x: 0, y: 0 }
+							: { x: position.x, y: position.y }
+					}
+					minWidth={880}
+					minHeight={550}
+					style={{
+						zIndex: windowPriority[windowName],
+					}}
 				>
 					<motion.div
 						onClick={(e) => handleClick(e, windowName)}
@@ -117,7 +135,7 @@ function DraggableWindow({ children, isClosing, keepPosition, windowName }) {
 					>
 						{children}
 					</motion.div>
-				</Draggable>
+				</Rnd>
 			)}
 		</AnimatePresence>
 	);
