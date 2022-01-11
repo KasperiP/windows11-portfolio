@@ -57,35 +57,41 @@ function DraggableWindow({ children, isClosing, keepPosition, windowName }) {
 	const variants = {
 		maximized: {
 			borderRadius: '0px',
-			opacity: 1,
+			transform: 'scale(1)',
 		},
-		minimized: { opacity: 1 },
-	};
-
-	// Javascript function to calculate center for abolute div with height 550 and width 880
-	const getCenter = () => {
-		let width = window.innerWidth;
-		let height = window.innerHeight;
-
-		const x = width / 2 - 880 / 2;
-		const y = height / 2 - 550 / 2;
-
-		setPosition({ x: x, y: y });
+		minimized: { opacity: 1, transform: 'scale(1)' },
 	};
 
 	useEffect(() => {
-		getCenter();
+		const getCenter = () => {
+			let width = window.innerWidth;
+			let height = window.innerHeight;
+
+			const x = width / 2 - 880 / 2;
+			const y = height / 2 - 550 / 2;
+
+			setPosition({ x: x, y: y, width: 880, height: 550 });
+		};
+		if (position.x === 0 && position.y === 0) {
+			getCenter();
+		}
 	}, []);
 
 	return (
 		<AnimatePresence>
 			{!isClosing && (
 				<Rnd
+					dragHandleClassName={'draggable'}
+					default={{ width: 880, height: 550 }}
 					onDragStart={() =>
 						setMaximized({ ...maximized, [windowName]: false })
 					}
 					onDragStop={(e, d) => {
-						setPosition({ x: d.x, y: d.y });
+						setPosition({
+							...position,
+							x: d.x,
+							y: d.y,
+						});
 					}}
 					onResize={(e, direction, ref, delta, position) => {
 						setPosition({
@@ -97,7 +103,10 @@ function DraggableWindow({ children, isClosing, keepPosition, windowName }) {
 					size={
 						maximized[windowName]
 							? { width: '100%', height: '100%' }
-							: { width: position.width, height: position.height }
+							: {
+									width: position.width || 880,
+									height: position.height || 550,
+							  }
 					}
 					position={
 						maximized[windowName]
@@ -127,11 +136,11 @@ function DraggableWindow({ children, isClosing, keepPosition, windowName }) {
 						}
 						initial={
 							history.length >= 1
-								? { opacity: 1 }
-								: { opacity: 0 }
+								? { transform: 'scale(1)' }
+								: { transform: 'scale(0)' }
 						}
-						exit={{ opacity: 0 }}
-						transition={{ duration: 0.2 }}
+						exit={{ transform: 'scale(0)' }}
+						transition={{ duration: 0.15 }}
 					>
 						{children}
 					</motion.div>

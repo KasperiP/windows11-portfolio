@@ -19,7 +19,12 @@ const ContextProvider = ({ children }) => {
 	const [explorerHistory, setExplorerHistory] = useState([]);
 	const [index, setIndex] = useState(0);
 
-	const [position, setPosition] = useState({ x: 0, y: 0 });
+	const [position, setPosition] = useState({
+		x: 0,
+		y: 0,
+		width: 880,
+		height: 550,
+	});
 
 	const [wasManual, setWasManual] = useState(false);
 
