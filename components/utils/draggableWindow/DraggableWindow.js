@@ -22,6 +22,7 @@ function DraggableWindow({ children, isClosing, keepPosition, windowName }) {
 	const [windowPriority, setWindowPriority] = windowPriorityState;
 
 	const savePosition = (e, data) => {
+		if (!keepPosition) return;
 		setPosition({ x: data.x, y: data.y });
 	};
 
@@ -49,6 +50,10 @@ function DraggableWindow({ children, isClosing, keepPosition, windowName }) {
 
 		// Set the new priority values
 		setWindowPriority(newPriority);
+	};
+
+	const handleClick = (e, window) => {
+		handlePriority(window);
 	};
 
 	const variants = {
@@ -83,7 +88,7 @@ function DraggableWindow({ children, isClosing, keepPosition, windowName }) {
 					onStart={() => setIsDragging(true)}
 				>
 					<motion.div
-						onClick={() => handlePriority(windowName)}
+						onClick={(e) => handleClick(e, windowName)}
 						className={styles.container}
 						ref={nodeRef}
 						variants={variants}

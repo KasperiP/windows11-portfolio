@@ -750,7 +750,7 @@ function FileExplorer(props) {
 							</>
 						)}
 
-						<div className={styles.child}>
+						<div className={`${styles.child} not_clickable`}>
 							{props.component || (
 								<>
 									<p className={styles.emptyFolder}>
