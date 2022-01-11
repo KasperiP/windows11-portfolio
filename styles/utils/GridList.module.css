@@ -3,18 +3,20 @@
 	margin-top: 15px;
 	align-items: center;
 }
+
 .dropdownNav h2 {
 	font-size: 1rem;
 	color: #fff;
 	font-weight: 300;
-
 	margin-right: 10px;
 	white-space: nowrap;
 }
+
 .dropdownNav svg {
 	font-size: 2rem;
 	color: #2e2e2e;
 }
+
 .dropdownNav div {
 	height: 1px;
 	width: 100%;
@@ -22,13 +24,12 @@
 }
 
 .wrapper {
-	// Responsive grid list that has rows depending on the screen size
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 	grid-gap: 10px;
 	grid-auto-rows: minmax(auto, auto);
 	grid-auto-flow: dense;
-	margin: 0 20px 0 20px;
+	margin: 0 20px;
 }
 
 .item {
@@ -39,10 +40,12 @@
 	border-radius: 5px;
 	cursor: pointer;
 }
+
 .item svg {
 	color: gray;
 	font-size: 0.8rem;
 }
+
 .item:hover {
 	background-color: #2e2e2e;
 }
@@ -52,6 +55,5 @@
 	width: 10rem;
 	display: flex;
 	background-color: #fff;
-
-	box-shadow: inset 100px 0px 0px -1px #26a0da;
+	box-shadow: inset 100px 0 0 -1px #26a0da;
 }

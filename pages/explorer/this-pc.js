@@ -6,7 +6,7 @@ import { BsFillPinAngleFill } from 'react-icons/bs';
 import { RiArrowDropDownLine } from 'react-icons/ri';
 import Icons from '../../components/modules/icons/Icons';
 import FileExplorer from '../../components/windows/fileExplorer/FileExplorer';
-import styles from '../../styles/utils/GridList.module.scss';
+import styles from '../../styles/utils/GridList.module.css';
 
 function thisPC() {
 	const content = () => {

@@ -5,8 +5,8 @@ import FileExplorer from '../../components/windows/fileExplorer/FileExplorer';
 import { RiArrowDropDownLine } from 'react-icons/ri';
 import { BsFillPinAngleFill } from 'react-icons/bs';
 import Image from 'next/image';
-import styles from '../../styles/utils/GridList.module.scss';
-import listItemStyles from '../../styles/utils/List.module.scss';
+import styles from '../../styles/utils/GridList.module.css';
+import listItemStyles from '../../styles/utils/List.module.css';
 import Link from 'next/link';
 
 function quickAccess() {
@@ -72,7 +72,7 @@ function quickAccess() {
 						</div>
 					</Link>
 
-					<Link href="/explorer/documents" passHref>
+					<Link href="/explorer/pictures" passHref>
 						<div className={styles.item}>
 							<div>
 								<Image

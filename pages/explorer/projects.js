@@ -3,7 +3,7 @@ import Image from 'next/image';
 import React from 'react';
 import Icons from '../../components/modules/icons/Icons';
 import FileExplorer from '../../components/windows/fileExplorer/FileExplorer';
-import styles from '../../styles/utils/List.module.scss';
+import styles from '../../styles/utils/List.module.css';
 
 function projects({ data }) {
 	const content = () => {

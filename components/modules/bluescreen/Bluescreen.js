@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import styles from './Bluescreen.module.scss';
+import styles from './Bluescreen.module.css';
 
 function Bluescreen(props) {
 	const [progress, setProgress] = useState(0);

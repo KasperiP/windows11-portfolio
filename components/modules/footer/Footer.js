@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import styles from './Footer.module.scss';
+import styles from './Footer.module.css';
 import { AiOutlineWifi } from 'react-icons/ai';
 import { FiVolume2 } from 'react-icons/fi';
 import Link from 'next/link';

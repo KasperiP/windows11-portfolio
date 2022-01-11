@@ -2,7 +2,7 @@ import Head from 'next/head';
 import { useState } from 'react';
 import Icons from '../../components/modules/icons/Icons';
 import FileExplorer from '../../components/windows/fileExplorer/FileExplorer';
-import styles from '../../styles/utils/MediaGrid.module.scss';
+import styles from '../../styles/utils/MediaGrid.module.css';
 import Image from 'next/image';
 import MediaPlayer from '../../components/windows/mediaPlayer/MediaPlayer';
 

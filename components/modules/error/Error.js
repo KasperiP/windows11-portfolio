@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { useEffect } from 'react';
 import Draggable from 'react-draggable';
 import { VscChromeClose } from 'react-icons/vsc';
-import styles from './Error.module.scss';
+import styles from './Error.module.css';
 
 function Error(props) {
 	const handleClose = async () => {

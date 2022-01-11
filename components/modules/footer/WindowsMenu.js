@@ -3,7 +3,7 @@ import { useEffect, useRef } from 'react';
 import { AiOutlinePoweroff } from 'react-icons/ai';
 import { IoIosArrowForward } from 'react-icons/io';
 import { VscSearch } from 'react-icons/vsc';
-import styles from './WindowsMenu.module.scss';
+import styles from './WindowsMenu.module.css';
 
 function WindowsMenu({ isClosed, winMenu, handleWinMenu }) {
 	const node = useRef();

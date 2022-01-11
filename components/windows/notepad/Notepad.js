@@ -6,7 +6,7 @@ import {
 	VscChromeMaximize,
 	VscChromeMinimize,
 } from 'react-icons/vsc';
-import styles from './Notepad.module.scss';
+import styles from './Notepad.module.css';
 function Notepad(props) {
 	const router = useRouter();
 

@@ -1,4 +1,4 @@
-import styles from './Icons.module.scss';
+import styles from './Icons.module.css';
 import Image from 'next/image';
 import Selecto from 'react-selecto';
 import { useEffect, useRef, useState } from 'react';

@@ -2,7 +2,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useContext, useRef, useState } from 'react';
 import Draggable from 'react-draggable';
 import { Context } from '../../../context/ContextProvider';
-import styles from './DraggableWindow.module.scss';
+import styles from './DraggableWindow.module.css';
 
 function DraggableWindow({ children, isClosing, keepPosition, windowName }) {
 	const nodeRef = useRef(null);
@@ -95,7 +95,7 @@ function DraggableWindow({ children, isClosing, keepPosition, windowName }) {
 						animate={maximized ? 'maximized' : 'minimized'}
 						style={
 							isDragging
-								? { zIndex: 9999 }
+								? { zIndex: 997 }
 								: {
 										transition: 'all 0.15s ease-in-out',
 										zIndex: windowPriority[windowName],

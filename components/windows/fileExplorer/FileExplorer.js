@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { useContext, useEffect, useState } from 'react';
-import styles from './FileExplorer.module.scss';
+import styles from './FileExplorer.module.css';
 import {
 	VscChromeMinimize,
 	VscChromeMaximize,

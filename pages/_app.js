@@ -1,5 +1,5 @@
 import Layout from '../components/layout/Layout';
-import '../styles/globals.scss';
+import '../styles/globals.css';
 import { useState, useCallback, useEffect } from 'react';
 import Bluescreen from '../components/modules/bluescreen/Bluescreen';
 import { useRouter } from 'next/router';

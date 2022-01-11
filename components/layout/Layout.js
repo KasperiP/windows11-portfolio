@@ -1,4 +1,4 @@
-import styles from './Layout.module.scss';
+import styles from './Layout.module.css';
 import Footer from '../modules/footer/Footer';
 
 function Layout({ children }) {

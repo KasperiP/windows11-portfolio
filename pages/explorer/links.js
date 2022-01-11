@@ -4,7 +4,7 @@ import Link from 'next/link';
 import React from 'react';
 import Icons from '../../components/modules/icons/Icons';
 import FileExplorer from '../../components/windows/fileExplorer/FileExplorer';
-import styles from '../../styles/utils/List.module.scss';
+import styles from '../../styles/utils/List.module.css';
 
 function links() {
 	const content = () => {

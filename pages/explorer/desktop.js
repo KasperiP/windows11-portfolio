@@ -3,7 +3,7 @@ import React from 'react';
 import Icons from '../../components/modules/icons/Icons';
 import FileExplorer from '../../components/windows/fileExplorer/FileExplorer';
 import Image from 'next/image';
-import styles from '../../styles/utils/List.module.scss';
+import styles from '../../styles/utils/List.module.css';
 import Link from 'next/link';
 
 function desktop() {
