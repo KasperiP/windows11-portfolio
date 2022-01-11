@@ -87,7 +87,7 @@ function DraggableWindow({ children, isClosing, keepPosition, windowName }) {
 								: { opacity: 0 }
 						}
 						exit={{ opacity: 0 }}
-						transition={{ duration: 0.55 }}
+						transition={{ duration: 0.15 }}
 					>
 						{children}
 					</motion.div>
