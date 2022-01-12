@@ -209,7 +209,7 @@ function DraggableWindow({ children, isClosing, keepPosition, windowName }) {
 							? { zIndex: 997 }
 							: {
 									zIndex: windowPriority[windowName] || 10,
-									/* 	transition: 'all 0.2s ease-in-out', */
+									transition: 'all 0.2s ease-in-out',
 							  }
 					}
 					resizeHandleStyles={handleStyles}
