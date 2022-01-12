@@ -91,6 +91,7 @@ function DraggableWindow({ children, isClosing, keepPosition, windowName }) {
 
 	useEffect(() => {
 		console.log('boo', position[windowName]);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [position]);
 
 	useEffect(() => {
@@ -131,6 +132,7 @@ function DraggableWindow({ children, isClosing, keepPosition, windowName }) {
 		setTimeout(() => {
 			setLoading(false);
 		}, 500);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	const [lastPos, setLastPos] = useState({ x: 0, y: 0, width: 0, height: 0 });

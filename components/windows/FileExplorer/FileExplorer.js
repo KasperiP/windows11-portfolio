@@ -94,6 +94,7 @@ function FileExplorer(props) {
 			setIndex(newHistory.length - 1);
 		}
 		setWasManual(false);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [asPath]);
 
 	const handleBack = () => {
