@@ -90,12 +90,27 @@ function DraggableWindow({ children, isClosing, keepPosition, windowName }) {
 	};
 
 	useEffect(() => {
+		console.log('boo', position[windowName]);
+	}, [position]);
+
+	useEffect(() => {
 		const getCenter = () => {
 			let width = window.innerWidth;
 			let height = window.innerHeight;
 
-			const x = width / 2 - position[windowName].width / 2;
-			const y = height / 2 - position[windowName].height / 2;
+			let x;
+			let y;
+			if (width !== position[windowName].width) {
+				x = width / 2 - position[windowName].width / 2;
+			} else {
+				x = width / 2 - 880 / 2;
+			}
+
+			if (height !== position[windowName].height) {
+				y = height / 2 - position[windowName].height / 2;
+			} else {
+				y = height / 2 - 550 / 2;
+			}
 
 			setPosition({
 				...position,
