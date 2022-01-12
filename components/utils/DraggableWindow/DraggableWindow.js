@@ -222,13 +222,6 @@ function DraggableWindow({ children, isClosing, keepPosition, windowName }) {
 						animate={
 							maximized[windowName] ? 'maximized' : 'minimized'
 						}
-						style={
-							isDragging
-								? { zIndex: 997 }
-								: {
-										zIndex: windowPriority[windowName],
-								  }
-						}
 						initial={
 							history.length >= 1
 								? { transform: 'scale(1)' }
