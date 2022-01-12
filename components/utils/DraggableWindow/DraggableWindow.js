@@ -138,6 +138,7 @@ function DraggableWindow({ children, isClosing, keepPosition, windowName }) {
 	const [lastPos, setLastPos] = useState({ x: 0, y: 0, width: 0, height: 0 });
 
 	useEffect(() => {
+		if (loading) return;
 		if (maximized[windowName] === true) {
 			setLastPos({
 				x: position[windowName].x,
