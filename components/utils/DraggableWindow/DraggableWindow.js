@@ -112,15 +112,10 @@ function DraggableWindow({ children, isClosing, keepPosition, windowName }) {
 		}
 	}, []);
 
-	useEffect(() => {
-		console.log(position[windowName]);
-	}, [position]);
-
 	const [lastPos, setLastPos] = useState({ x: 0, y: 0, width: 0, height: 0 });
 
 	useEffect(() => {
 		if (maximized[windowName] === true) {
-			console.log('maximized');
 			setLastPos({
 				x: position[windowName].x,
 				y: position[windowName].y,
@@ -138,7 +133,6 @@ function DraggableWindow({ children, isClosing, keepPosition, windowName }) {
 				},
 			});
 		} else if (maximized[windowName] === false) {
-			console.log('minimized');
 			setPosition({
 				...position,
 				[windowName]: {
