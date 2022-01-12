@@ -46,6 +46,7 @@ function DraggableWindow({ children, isClosing, keepPosition, windowName }) {
 	const nodeRef = useRef(null);
 	const [isDragging, setIsDragging] = useState(false);
 	const [isResizing, setIsResizing] = useState(false);
+	const [loading, setLoading] = useState(true);
 
 	const {
 		maximizedState,
@@ -110,6 +111,11 @@ function DraggableWindow({ children, isClosing, keepPosition, windowName }) {
 		if (position[windowName]?.x === 0 && position[windowName]?.y === 0) {
 			getCenter();
 		}
+
+		// wait .5 sec before setting loading to false
+		setTimeout(() => {
+			setLoading(false);
+		}, 500);
 	}, []);
 
 	const [lastPos, setLastPos] = useState({ x: 0, y: 0, width: 0, height: 0 });
@@ -199,7 +205,7 @@ function DraggableWindow({ children, isClosing, keepPosition, windowName }) {
 					minWidth={880}
 					minHeight={550}
 					style={
-						isDragging || isResizing
+						isDragging || isResizing || loading
 							? { zIndex: 997 }
 							: {
 									zIndex: windowPriority[windowName] || 10,
