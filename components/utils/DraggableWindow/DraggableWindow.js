@@ -4,9 +4,48 @@ import { Rnd } from 'react-rnd';
 import { Context } from '../../../context/ContextProvider';
 import styles from './DraggableWindow.module.css';
 
+const handleStyles = {
+	bottom: {
+		cursor: 'ns-resize',
+	},
+	bottomLeft: {
+		cursor: 'nesw-resize',
+	},
+	bottomRight: {
+		cursor: 'nwse-resize',
+	},
+	left: {
+		cursor: 'ew-resize',
+	},
+	right: {
+		cursor: 'ew-resize',
+	},
+	top: {
+		cursor: 'ns-resize',
+	},
+	topLeft: {
+		cursor: 'nwse-resize',
+	},
+	topRight: {
+		cursor: 'nesw-resize',
+	},
+};
+
+const variants = {
+	maximized: {
+		borderRadius: '0px',
+		transform: 'scale(1)',
+	},
+	minimized: {
+		opacity: 1,
+		transform: 'scale(1)',
+	},
+};
+
 function DraggableWindow({ children, isClosing, keepPosition, windowName }) {
 	const nodeRef = useRef(null);
 	const [isDragging, setIsDragging] = useState(false);
+	const [isResizing, setIsResizing] = useState(false);
 
 	const {
 		maximizedState,
@@ -49,21 +88,13 @@ function DraggableWindow({ children, isClosing, keepPosition, windowName }) {
 		handlePriority(window);
 	};
 
-	const variants = {
-		maximized: {
-			borderRadius: '0px',
-			transform: 'scale(1)',
-		},
-		minimized: { opacity: 1, transform: 'scale(1)' },
-	};
-
 	useEffect(() => {
 		const getCenter = () => {
 			let width = window.innerWidth;
 			let height = window.innerHeight;
 
-			const x = width / 2 - 880 / 2;
-			const y = height / 2 - 550 / 2;
+			const x = width / 2 - position[windowName].width / 2;
+			const y = height / 2 - position[windowName].height / 2;
 
 			setPosition({
 				...position,
@@ -75,24 +106,66 @@ function DraggableWindow({ children, isClosing, keepPosition, windowName }) {
 				},
 			});
 		};
-		console.log(position);
+
 		if (position[windowName]?.x === 0 && position[windowName]?.y === 0) {
 			getCenter();
 		}
 	}, []);
+
+	useEffect(() => {
+		console.log(position[windowName]);
+	}, [position]);
+
+	const [lastPos, setLastPos] = useState({ x: 0, y: 0, width: 0, height: 0 });
+
+	useEffect(() => {
+		if (maximized[windowName] === true) {
+			console.log('maximized');
+			setLastPos({
+				x: position[windowName].x,
+				y: position[windowName].y,
+				width: position[windowName].width,
+				height: position[windowName].height,
+			});
+
+			setPosition({
+				...position,
+				[windowName]: {
+					x: 0,
+					y: 0,
+					width: window.innerWidth,
+					height: window.innerHeight,
+				},
+			});
+		} else if (maximized[windowName] === false) {
+			console.log('minimized');
+			setPosition({
+				...position,
+				[windowName]: {
+					x: lastPos.x,
+					y: lastPos.y,
+					width: lastPos.width,
+					height: lastPos.height,
+				},
+			});
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [maximized]);
 
 	return (
 		<AnimatePresence>
 			{!isClosing && (
 				<Rnd
 					dragHandleClassName={'draggable'}
+					cancel={'.not_draggable'}
 					default={{ width: 880, height: 550 }}
 					onDragStart={() => {
-						setMaximized({ ...maximized, [windowName]: false });
+						if (maximized[windowName]) {
+							setMaximized({ ...maximized, [windowName]: false });
+						}
 						setIsDragging(true);
 					}}
 					onDragStop={(e, d) => {
-						// Set the new position without replacing width and height
 						setPosition({
 							...position,
 							[windowName]: {
@@ -104,6 +177,10 @@ function DraggableWindow({ children, isClosing, keepPosition, windowName }) {
 						setIsDragging(false);
 					}}
 					onResize={(e, direction, ref, delta, pos) => {
+						if (maximized[windowName]) {
+							setMaximized({ ...maximized, [windowName]: false });
+						}
+						setIsResizing(true);
 						setPosition({
 							...position,
 							[windowName]: {
@@ -114,31 +191,28 @@ function DraggableWindow({ children, isClosing, keepPosition, windowName }) {
 							},
 						});
 					}}
-					size={
-						maximized[windowName]
-							? { width: '100%', height: '100%' }
-							: {
-									width: position[windowName]?.width || 880,
-									height: position[windowName]?.height || 550,
-							  }
-					}
-					position={
-						maximized[windowName]
-							? { x: 0, y: 0 }
-							: {
-									x: position[windowName]?.x,
-									y: position[windowName]?.y,
-							  }
-					}
+					onResizeStop={(e, direction, ref, delta, pos) => {
+						setIsResizing(false);
+					}}
+					size={{
+						width: position[windowName].width || 880,
+						height: position[windowName].height || 550,
+					}}
+					position={{
+						x: position[windowName].x,
+						y: position[windowName].y,
+					}}
 					minWidth={880}
 					minHeight={550}
 					style={
-						isDragging
+						isDragging || isResizing
 							? { zIndex: 997 }
 							: {
 									zIndex: windowPriority[windowName] || 10,
+									/* 	transition: 'all 0.2s ease-in-out', */
 							  }
 					}
+					resizeHandleStyles={handleStyles}
 				>
 					<motion.div
 						onClick={(e) => handleClick(e, windowName)}

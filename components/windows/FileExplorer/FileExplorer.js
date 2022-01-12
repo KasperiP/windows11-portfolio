@@ -82,6 +82,7 @@ function FileExplorer(props) {
 			...position,
 			fileExplorer: { x: 0, y: 0, width: 880, height: 550 },
 		});
+		setMaximized({ ...maximized, fileExplorer: null });
 		setIsClosing(!isClosing);
 		setHistory([]);
 		setTimeout(() => {

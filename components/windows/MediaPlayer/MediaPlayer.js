@@ -21,6 +21,7 @@ function MediaPlayer(props) {
 	const handleClose = () => {
 		// Setclosed(!closed) then wait for animation to finish then redirect
 		setIsClosing(!isClosing);
+		setMaximized({ ...maximized, mediaPlayer: null });
 		setTimeout(() => {
 			props.close(null);
 		}, 500);

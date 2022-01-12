@@ -31,6 +31,7 @@ function Notepad(props) {
 	const handleClose = () => {
 		// Setclosed(!closed) then wait for animation to finish then redirect
 		setIsClosing(!isClosing);
+		setMaximized({ ...maximized, notepad: null });
 		setTimeout(() => {
 			router.push('/');
 		}, 500);

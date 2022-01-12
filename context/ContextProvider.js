@@ -8,9 +8,9 @@ const initialPriority = {
 };
 
 const initialMaximized = {
-	fileExplorer: false,
-	mediaPlayer: false,
-	notepad: false,
+	fileExplorer: null,
+	mediaPlayer: null,
+	notepad: null,
 };
 
 const initialPosition = {
@@ -19,18 +19,30 @@ const initialPosition = {
 		y: 0,
 		width: 880,
 		height: 550,
+		lastX: 0,
+		lastY: 0,
+		lastWidth: 880,
+		lastHeight: 550,
 	},
 	mediaPlayer: {
 		x: 0,
 		y: 0,
 		width: 880,
 		height: 550,
+		lastX: 0,
+		lastY: 0,
+		lastWidth: 880,
+		lastHeight: 550,
 	},
 	notepad: {
 		x: 0,
 		y: 0,
 		width: 880,
 		height: 550,
+		lastX: 0,
+		lastY: 0,
+		lastWidth: 880,
+		lastHeight: 550,
 	},
 };
 
