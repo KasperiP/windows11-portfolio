@@ -48,11 +48,6 @@ function DraggableWindow({ children, isClosing, keepPosition, windowName }) {
 	const handleClick = (e, window) => {
 		handlePriority(window);
 	};
-	const handleDrag = (e, data) => {
-		if (maximized[windowName]) {
-			setMaximized({ ...maximized, [windowName]: false });
-		}
-	};
 
 	const variants = {
 		maximized: {
@@ -70,9 +65,18 @@ function DraggableWindow({ children, isClosing, keepPosition, windowName }) {
 			const x = width / 2 - 880 / 2;
 			const y = height / 2 - 550 / 2;
 
-			setPosition({ x: x, y: y, width: 880, height: 550 });
+			setPosition({
+				...position,
+				[windowName]: {
+					x: x,
+					y: y,
+					width: 880,
+					height: 550,
+				},
+			});
 		};
-		if (position.x === 0 && position.y === 0) {
+		console.log(position);
+		if (position[windowName]?.x === 0 && position[windowName]?.y === 0) {
 			getCenter();
 		}
 	}, []);
@@ -83,41 +87,58 @@ function DraggableWindow({ children, isClosing, keepPosition, windowName }) {
 				<Rnd
 					dragHandleClassName={'draggable'}
 					default={{ width: 880, height: 550 }}
-					onDragStart={() =>
-						setMaximized({ ...maximized, [windowName]: false })
-					}
-					onDragStop={(e, d) => {
-						setPosition({
-							...position,
-							x: d.x,
-							y: d.y,
-						});
+					onDragStart={() => {
+						setMaximized({ ...maximized, [windowName]: false });
+						setIsDragging(true);
 					}}
-					onResize={(e, direction, ref, delta, position) => {
+					onDragStop={(e, d) => {
+						// Set the new position without replacing width and height
 						setPosition({
-							width: ref.offsetWidth,
-							height: ref.offsetHeight,
 							...position,
+							[windowName]: {
+								...position[windowName],
+								x: d.x,
+								y: d.y,
+							},
+						});
+						setIsDragging(false);
+					}}
+					onResize={(e, direction, ref, delta, pos) => {
+						setPosition({
+							...position,
+							[windowName]: {
+								x: pos.x,
+								y: pos.y,
+								width: ref.offsetWidth,
+								height: ref.offsetHeight,
+							},
 						});
 					}}
 					size={
 						maximized[windowName]
 							? { width: '100%', height: '100%' }
 							: {
-									width: position.width || 880,
-									height: position.height || 550,
+									width: position[windowName]?.width || 880,
+									height: position[windowName]?.height || 550,
 							  }
 					}
 					position={
 						maximized[windowName]
 							? { x: 0, y: 0 }
-							: { x: position.x, y: position.y }
+							: {
+									x: position[windowName]?.x,
+									y: position[windowName]?.y,
+							  }
 					}
 					minWidth={880}
 					minHeight={550}
-					style={{
-						zIndex: windowPriority[windowName],
-					}}
+					style={
+						isDragging
+							? { zIndex: 997 }
+							: {
+									zIndex: windowPriority[windowName] || 10,
+							  }
+					}
 				>
 					<motion.div
 						onClick={(e) => handleClick(e, windowName)}

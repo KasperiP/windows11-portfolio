@@ -78,7 +78,10 @@ function FileExplorer(props) {
 	const handleBlur = () => setPath(props.folder);
 
 	const handleClose = () => {
-		setPosition({ x: 0, y: 0 });
+		setPosition({
+			...position,
+			fileExplorer: { x: 0, y: 0, width: 880, height: 550 },
+		});
 		setIsClosing(!isClosing);
 		setHistory([]);
 		setTimeout(() => {

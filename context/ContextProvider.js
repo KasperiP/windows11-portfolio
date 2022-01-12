@@ -13,18 +13,34 @@ const initialMaximized = {
 	notepad: false,
 };
 
+const initialPosition = {
+	fileExplorer: {
+		x: 0,
+		y: 0,
+		width: 880,
+		height: 550,
+	},
+	mediaPlayer: {
+		x: 0,
+		y: 0,
+		width: 880,
+		height: 550,
+	},
+	notepad: {
+		x: 0,
+		y: 0,
+		width: 880,
+		height: 550,
+	},
+};
+
 const ContextProvider = ({ children }) => {
 	const [maximized, setMaximized] = useState(initialMaximized);
 
 	const [explorerHistory, setExplorerHistory] = useState([]);
 	const [index, setIndex] = useState(0);
 
-	const [position, setPosition] = useState({
-		x: 0,
-		y: 0,
-		width: 880,
-		height: 550,
-	});
+	const [position, setPosition] = useState(initialPosition);
 
 	const [wasManual, setWasManual] = useState(false);
 

@@ -1,4 +1,4 @@
-import Layout from '../components/Layout/Layout';
+import Layout from '../components/layouts/Layout/Layout';
 import '../styles/globals.css';
 import { useState, useCallback, useEffect } from 'react';
 import Bluescreen from '../components/modules/Bluescreen/Bluescreen';
