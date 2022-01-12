@@ -22,7 +22,7 @@ export default function Document() {
 				<meta name="author" content="kassq" />
 				<meta
 					name="description"
-					content="Kassq's personal website. A place to share my projects and learn about me."
+					content="Kassq's personal website. A place to share my projects and learn about me. I do some coding sometimes."
 				/>
 				<meta
 					name="keywords"
@@ -37,11 +37,11 @@ export default function Document() {
 				<meta property="og:url" content="https://www.kassq.dev" />
 				<meta
 					property="og:image"
-					content="https://www.kassq.dev/images/logo.webp"
+					content="https://www.kassq.dev/logo.webp"
 				/>
 				<meta
 					property="og:description"
-					content="Kassq's personal website. A place to share my projects and learn about me."
+					content="Kassq's personal website. A place to share my projects and learn about me. I do some coding sometimes."
 				/>
 			</Head>
 			<body>
