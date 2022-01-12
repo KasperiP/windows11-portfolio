@@ -5,7 +5,7 @@ import { AiOutlineWifi } from 'react-icons/ai';
 import { FiVolume2 } from 'react-icons/fi';
 import Link from 'next/link';
 import WindowsMenu from './WindowsMenu';
-import Error from '../error/Error';
+import Error from '../Error/Error';
 
 function Footer() {
 	const [winMenu, setWinMenu] = useState(false);
