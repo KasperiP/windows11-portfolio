@@ -109,7 +109,7 @@ function DraggableWindow({ children, isClosing, keepPosition, windowName }) {
 				x = width / 2 - 880 / 2;
 			}
 
-			if (height !== position[windowName].height) {
+			if (height !== position[windowName].height - 50) {
 				y = height / 2 - position[windowName].height / 2;
 			} else {
 				y = height / 2 - 550 / 2;
@@ -157,7 +157,7 @@ function DraggableWindow({ children, isClosing, keepPosition, windowName }) {
 					x: 0,
 					y: 0,
 					width: window.innerWidth,
-					height: window.innerHeight,
+					height: window.innerHeight - 50,
 				},
 			});
 		} else if (maximized[windowName] === false) {
