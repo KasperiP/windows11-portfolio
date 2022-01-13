@@ -166,7 +166,7 @@ function quickAccess() {
 				<title>kassq - Quick access</title>
 				<link
 					rel="canonical"
-					href="https://www.kassq.dev/explorer/downloads"
+					href="https://www.kassq.dev/explorer/quick-access"
 				/>
 			</Head>
 			<div style={{ height: '100%' }}>

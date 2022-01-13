@@ -173,7 +173,7 @@ function thisPC() {
 				<title>kassq - This PC</title>
 				<link
 					rel="canonical"
-					href="https://www.kassq.dev/explorer/downloads"
+					href="https://www.kassq.dev/explorer/this-pc"
 				/>
 			</Head>
 			<div style={{ height: '100%' }}>

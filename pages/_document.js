@@ -43,6 +43,24 @@ export default function Document() {
 					property="og:description"
 					content="Kassq's personal website. A place to share my projects and learn about me. I do some coding sometimes."
 				/>
+
+				{/* Global Site Tag (gtag.js) - Google Analytics */}
+				<script
+					async
+					src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
+				/>
+				<script
+					dangerouslySetInnerHTML={{
+						__html: `
+							window.dataLayer = window.dataLayer || [];
+							function gtag(){dataLayer.push(arguments);}
+							gtag('js', new Date());
+							gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}', {
+							page_path: window.location.pathname,
+							});
+						`,
+					}}
+				/>
 			</Head>
 			<body>
 				<Main />
