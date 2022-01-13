@@ -29,7 +29,7 @@ export default function Document() {
 					content="kassq, kasperi, coding, development"
 				/>
 				<link rel="canonical" href="https://www.kassq.dev" />
-				<meta name="”robots”" content="index, follow" />
+				<meta name="robots" content="index, follow" />
 
 				{/* OpenGraph */}
 				<meta property="og:title" content="Kassq" />
