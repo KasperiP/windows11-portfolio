@@ -71,7 +71,7 @@ function Icons() {
 							<Image
 								src="/icons/notes.ico"
 								alt="icon"
-								quality={90}
+								quality={100}
 								width={40}
 								height={40}
 							></Image>
@@ -83,7 +83,7 @@ function Icons() {
 							<Image
 								src="/icons/folder.ico"
 								alt="icon"
-								quality={90}
+								quality={100}
 								width={40}
 								height={40}
 							></Image>
@@ -96,7 +96,7 @@ function Icons() {
 							<Image
 								src="/icons/folder.ico"
 								alt="icon"
-								quality={90}
+								quality={100}
 								width={40}
 								height={40}
 							></Image>
@@ -108,7 +108,7 @@ function Icons() {
 							<Image
 								src="/icons/links.ico"
 								alt="icon"
-								quality={90}
+								quality={100}
 								width={40}
 								height={40}
 							></Image>
@@ -120,7 +120,7 @@ function Icons() {
 							<Image
 								src="/icons/pictures.ico"
 								alt="icon"
-								quality={90}
+								quality={100}
 								width={40}
 								height={40}
 							></Image>
@@ -132,7 +132,7 @@ function Icons() {
 							<Image
 								src="/icons/videos.ico"
 								alt="icon"
-								quality={90}
+								quality={100}
 								width={40}
 								height={40}
 							></Image>
@@ -145,7 +145,7 @@ function Icons() {
 							<Image
 								src="/icons/trashcanFull.ico"
 								alt="icon"
-								quality={90}
+								quality={100}
 								width={40}
 								height={40}
 							></Image>
@@ -153,7 +153,7 @@ function Icons() {
 							<Image
 								src="/icons/trashcan.ico"
 								alt="icon"
-								quality={90}
+								quality={100}
 								width={40}
 								height={40}
 							></Image>
