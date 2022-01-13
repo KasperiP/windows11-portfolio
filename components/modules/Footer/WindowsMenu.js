@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import { useEffect, useRef } from 'react';
 import { AiOutlinePoweroff } from 'react-icons/ai';
 import { IoIosArrowForward } from 'react-icons/io';
@@ -68,33 +69,39 @@ function WindowsMenu({ isClosed, winMenu, handleWinMenu }) {
 								</div>
 							</div>
 							<div className={styles.winMenuPinnedBottom}>
-								<div>
-									<Image
-										src="/icons/fileExplorer.ico"
-										alt="img"
-										width={30}
-										height={30}
-									></Image>
-									<p>File Explorer</p>
-								</div>
-								<div>
-									<Image
-										src="/icons/pictures.ico"
-										alt="img"
-										width={30}
-										height={30}
-									></Image>
-									<p>Photos</p>
-								</div>
-								<div>
-									<Image
-										src="/icons/firefox.ico"
-										alt="img"
-										width={30}
-										height={30}
-									></Image>
-									<p>Firefox</p>
-								</div>
+								<Link href="/explorer/quick-access" passHref>
+									<div onClick={() => handleWinMenu()}>
+										<Image
+											src="/icons/fileExplorer.ico"
+											alt="img"
+											width={30}
+											height={30}
+										></Image>
+										<p>File Explorer</p>
+									</div>
+								</Link>
+								<Link href="/explorer/pictures" passHref>
+									<div onClick={() => handleWinMenu()}>
+										<Image
+											src="/icons/pictures.ico"
+											alt="img"
+											width={30}
+											height={30}
+										></Image>
+										<p>Photos</p>
+									</div>
+								</Link>
+								<Link href="/explorer/videos" passHref>
+									<div onClick={() => handleWinMenu()}>
+										<Image
+											src="/icons/videos.ico"
+											alt="img"
+											width={30}
+											height={30}
+										></Image>
+										<p>Videos</p>
+									</div>
+								</Link>
 							</div>
 						</div>
 						<div className={styles.winMenuPinnedContainer}>
@@ -108,35 +115,44 @@ function WindowsMenu({ isClosed, winMenu, handleWinMenu }) {
 							</div>
 							<div className={styles.winMenuRecommendedBottom}>
 								<div className={styles.winMenuRecommendedItem}>
-									<div>
-										<Image
-											src="/icons/fileExplorer.ico"
-											alt="img"
-											width={30}
-											height={30}
-										></Image>
-										<p>File Explorer</p>
-									</div>
-									<div>
-										<Image
-											src="/icons/pictures.ico"
-											alt="img"
-											width={30}
-											height={30}
-										></Image>
-										<p>Photos</p>
-									</div>
+									<Link
+										href="/explorer/quick-access"
+										passHref
+									>
+										<div onClick={() => handleWinMenu()}>
+											<Image
+												src="/icons/fileExplorer.ico"
+												alt="img"
+												width={30}
+												height={30}
+											></Image>
+											<p>File Explorer</p>
+										</div>
+									</Link>
+									<Link href="/explorer/pictures" passHref>
+										<div onClick={() => handleWinMenu()}>
+											<Image
+												src="/icons/pictures.ico"
+												alt="img"
+												width={30}
+												height={30}
+											></Image>
+											<p>Photos</p>
+										</div>
+									</Link>
 								</div>
 								<div className={styles.winMenuRecommendedItem}>
-									<div>
-										<Image
-											src="/icons/firefox.ico"
-											alt="img"
-											width={30}
-											height={30}
-										></Image>
-										<p>Firefox</p>
-									</div>
+									<Link href="/explorer/videos" passHref>
+										<div onClick={() => handleWinMenu()}>
+											<Image
+												src="/icons/videos.ico"
+												alt="img"
+												width={30}
+												height={30}
+											></Image>
+											<p>Videos</p>
+										</div>
+									</Link>
 									<div>
 										<Image
 											src="/icons/firefox.ico"

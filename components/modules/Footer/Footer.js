@@ -99,7 +99,6 @@ function Footer() {
 						className={styles.icon}
 						onClick={() => handleError('Firefox')}
 					>
-						{' '}
 						<Image
 							src={'/icons/firefox.ico'}
 							width={25}
@@ -111,7 +110,6 @@ function Footer() {
 						className={styles.icon}
 						onClick={() => handleError('Spotify')}
 					>
-						{' '}
 						<Image
 							src={'/icons/spotify.ico'}
 							width={25}
@@ -123,7 +121,6 @@ function Footer() {
 						className={styles.icon}
 						onClick={() => handleError('Steam')}
 					>
-						{' '}
 						<Image
 							src={'/icons/steam.ico'}
 							width={25}
@@ -135,7 +132,6 @@ function Footer() {
 						className={styles.icon}
 						onClick={() => handleError('Discord')}
 					>
-						{' '}
 						<Image
 							src={'/icons/discord.ico'}
 							width={25}
@@ -149,7 +145,6 @@ function Footer() {
 							handleError('Visual Studio Code - Insiders')
 						}
 					>
-						{' '}
 						<Image
 							src={'/icons/vscode.ico'}
 							width={25}
@@ -157,8 +152,10 @@ function Footer() {
 							alt="logo"
 						/>
 					</div>
-					<div className={styles.icon}>
-						{' '}
+					<div
+						className={styles.icon}
+						onClick={() => handleError('Git Bash')}
+					>
 						<Image
 							src={'/icons/terminal.ico'}
 							width={25}
