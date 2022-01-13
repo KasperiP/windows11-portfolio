@@ -19,7 +19,13 @@ export default function Document() {
 
 				{/* SEO */}
 				<meta name="theme-color" content="#55FFFF" />
+				<meta charset="utf-8" />
+				<meta name="language" content="english" />
+
 				<meta name="author" content="kassq" />
+				<meta name="designer" content="kassq" />
+				<meta name="publisher" content="kassq" />
+
 				<meta
 					name="description"
 					content="Kassq's personal website. A place to share my projects and learn about me. I do some coding sometimes."
@@ -29,7 +35,9 @@ export default function Document() {
 					content="kassq, kasperi, coding, development"
 				/>
 				<link rel="canonical" href="https://www.kassq.dev" />
+
 				<meta name="robots" content="index, follow" />
+				<meta name="subject" content="Personal" />
 
 				{/* OpenGraph */}
 				<meta property="og:title" content="Kassq" />
