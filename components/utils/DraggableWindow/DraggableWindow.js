@@ -92,11 +92,6 @@ function DraggableWindow({ children, isClosing, keepPosition, windowName }) {
 	};
 
 	useEffect(() => {
-		console.log('boo', position[windowName]);
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [position]);
-
-	useEffect(() => {
 		const getCenter = () => {
 			let width = window.innerWidth;
 			let height = window.innerHeight;
