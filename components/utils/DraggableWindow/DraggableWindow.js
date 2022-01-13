@@ -53,11 +53,13 @@ function DraggableWindow({ children, isClosing, keepPosition, windowName }) {
 		explorerHistoryState,
 		positionState,
 		windowPriorityState,
+		lastPosState,
 	} = useContext(Context);
 	const [maximized, setMaximized] = maximizedState;
 	const [history, setHistory] = explorerHistoryState;
 	const [position, setPosition] = positionState;
 	const [windowPriority, setWindowPriority] = windowPriorityState;
+	const [lastPos, setLastPos] = lastPosState;
 
 	const handlePriority = (window) => {
 		// Get all priority values for all windows and sort them
@@ -139,9 +141,8 @@ function DraggableWindow({ children, isClosing, keepPosition, windowName }) {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
-	const [lastPos, setLastPos] = useState({ x: 0, y: 0, width: 0, height: 0 });
-
 	useEffect(() => {
+		if (loading) return;
 		if (maximized[windowName] === true) {
 			setLastPos({
 				x: position[windowName].x,

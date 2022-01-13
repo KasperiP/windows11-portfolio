@@ -34,10 +34,18 @@ const initialPosition = {
 	},
 };
 
+const initialLastPos = {
+	x: 0,
+	y: 0,
+	width: 0,
+	height: 0,
+};
+
 const ContextProvider = ({ children }) => {
 	const [maximized, setMaximized] = useState(initialMaximized);
 
 	const [explorerHistory, setExplorerHistory] = useState([]);
+
 	const [index, setIndex] = useState(0);
 
 	const [position, setPosition] = useState(initialPosition);
@@ -45,6 +53,8 @@ const ContextProvider = ({ children }) => {
 	const [wasManual, setWasManual] = useState(false);
 
 	const [windowPriority, setWindowPriority] = useState(initialPriority);
+
+	const [lastPos, setLastPos] = useState({ x: 0, y: 0, width: 0, height: 0 });
 
 	return (
 		<Context.Provider
@@ -55,6 +65,7 @@ const ContextProvider = ({ children }) => {
 				wasManualState: [wasManual, setWasManual],
 				positionState: [position, setPosition],
 				windowPriorityState: [windowPriority, setWindowPriority],
+				lastPosState: [lastPos, setLastPos],
 			}}
 		>
 			{children}
