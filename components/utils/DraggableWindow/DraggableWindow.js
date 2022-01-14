@@ -280,6 +280,11 @@ function DraggableWindow({ children, windowName, topTitle, topIcon, close }) {
 						}
 						exit={{ transform: 'scale(0)' }}
 						transition={{ duration: 0.15 }}
+						style={
+							windowName === 'terminal'
+								? { backgroundColor: 'transparent' }
+								: {}
+						}
 					>
 						<div className={styles.main}>
 							<nav>

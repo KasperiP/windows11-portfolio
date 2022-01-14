@@ -139,7 +139,7 @@
 }
 
 .textarea {
-	height: calc(100% - 4.8rem - 2rem);
+	height: calc(100% - 32px - 32px - 40px);
 	padding: 10px;
 }
 
@@ -161,7 +161,7 @@
 	background-color: #202020;
 	border-top: 1px solid #1d1d1d;
 	height: 2rem;
-	border-radius: 0 0 15px 15px;
+	border-radius: 0 0 10px 10px;
 	display: flex;
 	justify-content: space-between;
 }

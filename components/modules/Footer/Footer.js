@@ -152,17 +152,16 @@ function Footer() {
 							alt="logo"
 						/>
 					</div>
-					<div
-						className={styles.icon}
-						onClick={() => handleError('Git Bash')}
-					>
-						<Image
-							src={'/icons/terminal.ico'}
-							width={25}
-							height={25}
-							alt="logo"
-						/>
-					</div>
+					<Link href="/terminal" passHref>
+						<div className={styles.icon}>
+							<Image
+								src={'/icons/terminal.ico'}
+								width={25}
+								height={25}
+								alt="logo"
+							/>
+						</div>
+					</Link>
 				</section>
 				<section className={styles.toolbarContainer}>
 					{/* 					<dir className={styles.icon}>
