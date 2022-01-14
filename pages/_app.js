@@ -1,9 +1,9 @@
-import Layout from '../components/layouts/Layout/Layout';
-import '../styles/globals.css';
-import { useState, useCallback, useEffect } from 'react';
-import Bluescreen from '../components/modules/Bluescreen/Bluescreen';
 import { useRouter } from 'next/router';
+import { useCallback, useEffect, useState } from 'react';
+import Layout from '../components/layouts/Layout/Layout';
+import Bluescreen from '../components/modules/Bluescreen/Bluescreen';
 import ContextProvider from '../context/ContextProvider';
+import '../styles/globals.css';
 
 const useMediaQuery = (width) => {
 	const [targetReached, setTargetReached] = useState(false);

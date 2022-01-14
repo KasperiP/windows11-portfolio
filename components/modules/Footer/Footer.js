@@ -1,11 +1,11 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import styles from './Footer.module.css';
 import { AiOutlineWifi } from 'react-icons/ai';
 import { FiVolume2 } from 'react-icons/fi';
-import Link from 'next/link';
-import WindowsMenu from './WindowsMenu';
 import Error from '../Error/Error';
+import styles from './Footer.module.css';
+import WindowsMenu from './WindowsMenu';
 
 function Footer() {
 	const [winMenu, setWinMenu] = useState(false);

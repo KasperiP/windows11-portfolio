@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import React from 'react';
 import Icons from '../../components/modules/Icons/Icons';
 import Notepad from '../../components/windows/Notepad/Notepad';
 function about() {
@@ -15,7 +14,7 @@ function about() {
 		return age;
 	};
 	const textContent = () => {
-		return `Hello, my name is Kasperi! 👋\n\nI am a ${getAge()}-year-old student / developer from Finland 🇫🇮. I am interested on all kinds of tech related topics such as web development! Starting computer science studies fall 2022 in University of Tampere. 📊🧑‍🔬 Open the Links folder to follow me on social media! 🤠
+		return `Hello, my name is Kasperi! 👋\n\nI am a ${getAge()}-year-old student / developer from Finland. I am interested on all kinds of tech related topics such as web development! I will be starting computer science studies fall 2022 in University of Tampere. Open the Links folder to follow me on social media! 🤠
 		`;
 	};
 

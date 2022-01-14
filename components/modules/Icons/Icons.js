@@ -1,8 +1,8 @@
-import styles from './Icons.module.css';
 import Image from 'next/image';
-import Selecto from 'react-selecto';
-import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
+import { useEffect, useRef, useState } from 'react';
+import Selecto from 'react-selecto';
+import styles from './Icons.module.css';
 
 const ESCAPE_KEYS = ['46', 'Delete'];
 

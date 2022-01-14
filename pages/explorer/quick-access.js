@@ -1,13 +1,12 @@
 import Head from 'next/head';
-import React from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { BsFillPinAngleFill } from 'react-icons/bs';
+import { RiArrowDropDownLine } from 'react-icons/ri';
 import Icons from '../../components/modules/Icons/Icons';
 import FileExplorer from '../../components/windows/FileExplorer/FileExplorer';
-import { RiArrowDropDownLine } from 'react-icons/ri';
-import { BsFillPinAngleFill } from 'react-icons/bs';
-import Image from 'next/image';
 import styles from '../../styles/utils/GridList.module.css';
 import listItemStyles from '../../styles/utils/List.module.css';
-import Link from 'next/link';
 
 function quickAccess() {
 	const content = () => {

@@ -1,10 +1,10 @@
 import Head from 'next/head';
+import Image from 'next/image';
 import { useState } from 'react';
 import Icons from '../../components/modules/Icons/Icons';
 import FileExplorer from '../../components/windows/FileExplorer/FileExplorer';
-import styles from '../../styles/utils/MediaGrid.module.css';
-import Image from 'next/image';
 import MediaPlayer from '../../components/windows/MediaPlayer/MediaPlayer';
+import styles from '../../styles/utils/MediaGrid.module.css';
 
 function Videos({ data }) {
 	const [openVideo, setOpenVideo] = useState(null);
@@ -21,6 +21,7 @@ function Videos({ data }) {
 					>
 						<div className={styles.imageWrapper}>
 							<Image
+								className="no_click"
 								src={video.thumbnail}
 								alt="icon"
 								width="100%"
@@ -29,7 +30,7 @@ function Videos({ data }) {
 								objectFit="contain"
 							/>
 						</div>
-						<p>
+						<p className="no_click">
 							{video.filename.slice(0, -7)}.{video.format}
 						</p>
 					</div>
@@ -55,6 +56,7 @@ function Videos({ data }) {
 						component={
 							<video
 								controls
+								autoPlay
 								src={openVideo.secure_url}
 								style={{ width: '100%', height: '100%' }}
 							/>

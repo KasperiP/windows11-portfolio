@@ -1,10 +1,10 @@
 import Head from 'next/head';
-import Icons from '../../components/modules/Icons/Icons';
-import FileExplorer from '../../components/windows/FileExplorer/FileExplorer';
-import styles from '../../styles/utils/MediaGrid.module.css';
 import Image from 'next/image';
 import { useState } from 'react';
+import Icons from '../../components/modules/Icons/Icons';
+import FileExplorer from '../../components/windows/FileExplorer/FileExplorer';
 import MediaPlayer from '../../components/windows/MediaPlayer/MediaPlayer';
+import styles from '../../styles/utils/MediaGrid.module.css';
 
 function Pictures({ data }) {
 	const [openImage, setOpenImage] = useState(null);
@@ -22,6 +22,7 @@ function Pictures({ data }) {
 					>
 						<div className={styles.imageWrapper}>
 							<Image
+								className="no_click"
 								src={image.url}
 								alt="icon"
 								width="100%"
@@ -30,7 +31,7 @@ function Pictures({ data }) {
 								objectFit="contain"
 							/>
 						</div>
-						<p>
+						<p className="no_click">
 							{image.filename.slice(0, -7)}.{image.format}
 						</p>
 					</div>
