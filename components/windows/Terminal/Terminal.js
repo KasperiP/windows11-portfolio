@@ -1,9 +1,65 @@
+import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import DraggableWindow from '../../utils/DraggableWindow/DraggableWindow';
 import styles from './Terminal.module.css';
 
 function Terminal() {
 	const [history, setHistory] = useState([]);
+
+	const executeCommand = (input) => {
+		const command = input.split(' ')[0];
+
+		switch (command) {
+			case 'clear':
+				setHistory([]);
+				break;
+			case 'whoami':
+				setHistory([
+					...history,
+					{
+						input: input,
+						response: `kassq`,
+					},
+				]);
+				break;
+			case 'ls':
+				setHistory([
+					...history,
+					{
+						input: input,
+						response: `hello.txt`,
+					},
+				]);
+				break;
+			case 'echo':
+				setHistory([
+					...history,
+					{
+						input: input,
+						response: `${input.replace('echo ', '')}`,
+					},
+				]);
+				break;
+			case '':
+				setHistory([
+					...history,
+					{
+						input: input,
+						response: null,
+					},
+				]);
+				break;
+			default:
+				setHistory([
+					...history,
+					{
+						input: input,
+						response: `bash: ${input}: command not found`,
+					},
+				]);
+				break;
+		}
+	};
 
 	useEffect(() => {
 		const handleFocus = (e) => {
@@ -12,34 +68,12 @@ function Terminal() {
 			terminal?.scrollIntoView();
 		};
 
-		const handleKeyUp = (e) => {
+		const handleKeyUp = async (e) => {
 			if (e.keyCode == 13) {
 				let input = e.target.value; // get current input val
 
-				if (input === 'clear') {
-					setHistory([]);
-					e.target.value = '';
-					return;
-				} else if (input !== '') {
-					setHistory([
-						...history,
-						{
-							input: input,
-							response: `bash: ${input}: command not found`,
-						},
-					]); // log input to terminal
-					e.target.value = ''; // clear input
-					console.log('joo');
-					return;
-				}
+				await executeCommand(input);
 
-				setHistory([
-					...history,
-					{
-						input: input,
-						response: null,
-					},
-				]); // log input to terminal
 				e.target.value = ''; // clear input
 				console.log(history);
 			}
@@ -60,6 +94,14 @@ function Terminal() {
 		<DraggableWindow
 			windowName={'terminal'}
 			topTitle={'MINGW64:/c/Users/kassq'}
+			topIcon={
+				<Image
+					src={`/icons/terminal.ico`}
+					alt="ico"
+					width={20}
+					height={20}
+				/>
+			}
 		>
 			<div className={`${styles.main} terminal`}>
 				{history.map((item, index) => (
