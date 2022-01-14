@@ -27,7 +27,7 @@ export default function Document() {
 
 				{/* SEO */}
 				<meta name="theme-color" content="#55FFFF" />
-				<meta charset="utf-8" />
+				<meta charSet="utf-8" />
 				<meta name="language" content="english" />
 
 				<meta name="author" content="kassq" />
