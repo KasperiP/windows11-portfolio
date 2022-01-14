@@ -42,7 +42,6 @@ export default function Document() {
 					name="keywords"
 					content="kassq, kasperi, coding, development"
 				/>
-				<link rel="canonical" href="https://www.kassq.dev" />
 
 				<meta name="robots" content="index, follow" />
 				<meta name="subject" content="Personal" />
