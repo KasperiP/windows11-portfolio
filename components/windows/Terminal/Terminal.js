@@ -1,65 +1,68 @@
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import DraggableWindow from '../../utils/DraggableWindow/DraggableWindow';
 import styles from './Terminal.module.css';
 
 function Terminal() {
 	const [history, setHistory] = useState([]);
 
-	const executeCommand = (input) => {
-		const command = input.split(' ')[0];
+	const executeCommand = useCallback(
+		(input) => {
+			const command = input.split(' ')[0];
 
-		switch (command) {
-			case 'clear':
-				setHistory([]);
-				break;
-			case 'whoami':
-				setHistory([
-					...history,
-					{
-						input: input,
-						response: `kassq`,
-					},
-				]);
-				break;
-			case 'ls':
-				setHistory([
-					...history,
-					{
-						input: input,
-						response: `hello.txt`,
-					},
-				]);
-				break;
-			case 'echo':
-				setHistory([
-					...history,
-					{
-						input: input,
-						response: `${input.replace('echo ', '')}`,
-					},
-				]);
-				break;
-			case '':
-				setHistory([
-					...history,
-					{
-						input: input,
-						response: null,
-					},
-				]);
-				break;
-			default:
-				setHistory([
-					...history,
-					{
-						input: input,
-						response: `bash: ${input}: command not found`,
-					},
-				]);
-				break;
-		}
-	};
+			switch (command) {
+				case 'clear':
+					setHistory([]);
+					break;
+				case 'whoami':
+					setHistory([
+						...history,
+						{
+							input: input,
+							response: `kassq`,
+						},
+					]);
+					break;
+				case 'ls':
+					setHistory([
+						...history,
+						{
+							input: input,
+							response: `hello.txt`,
+						},
+					]);
+					break;
+				case 'echo':
+					setHistory([
+						...history,
+						{
+							input: input,
+							response: `${input.replace('echo ', '')}`,
+						},
+					]);
+					break;
+				case '':
+					setHistory([
+						...history,
+						{
+							input: input,
+							response: null,
+						},
+					]);
+					break;
+				default:
+					setHistory([
+						...history,
+						{
+							input: input,
+							response: `bash: ${input}: command not found`,
+						},
+					]);
+					break;
+			}
+		},
+		[history]
+	);
 
 	useEffect(() => {
 		const handleFocus = (e) => {
@@ -88,7 +91,7 @@ function Terminal() {
 			document.removeEventListener('keyup', handleKeyUp);
 			document.removeEventListener('click', handleFocus);
 		};
-	}, [history]);
+	}, [executeCommand, history]);
 
 	return (
 		<DraggableWindow
