@@ -1,13 +1,13 @@
 .container {
+	z-index: 100;
 	display: flex;
-	height: 100%;
-	width: 100%;
 	align-items: center;
 	justify-content: center;
-	z-index: 100;
+	width: 100%;
+	height: 100%;
+	border: 1px solid #323232;
 	border-radius: 10px;
 	background-color: #191919;
-	border: 1px solid #323232;
 }
 
 .main {
@@ -16,23 +16,23 @@
 }
 
 .main nav {
-	background-color: #202020;
 	border-radius: 10px 10px 0 0;
+	background-color: #202020;
 }
 
 .top {
 	display: flex;
 	justify-content: space-between;
-	padding-left: 5px;
 	height: 2rem;
+	padding-left: 5px;
 }
 
 .top .icon {
-	padding: 0 10px;
-	height: 100%;
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	height: 100%;
+	padding: 0 10px;
 	cursor: pointer;
 }
 
@@ -41,12 +41,12 @@
 }
 
 .top .iconClose {
-	height: 100%;
 	display: flex;
 	align-items: center;
-	border-radius: 0 10px 0 0;
+	height: 100%;
 	padding-right: 15px;
 	padding-left: 14px;
+	border-radius: 0 10px 0 0;
 	cursor: pointer;
 }
 
@@ -56,47 +56,47 @@
 
 .topContainer {
 	display: flex;
-	align-items: center;
 	gap: 5px;
+	align-items: center;
 }
 
 .iconContainer {
 	display: flex;
-	align-items: center;
 	gap: 5px;
+	align-items: center;
 	color: #fff;
 }
 
 .terminalContainer {
 	display: flex;
-	margin-top: 3px;
+	gap: 10px;
 	align-items: center;
 	justify-content: space-between;
-	gap: 10px;
+	margin-top: 3px;
 	color: #fff;
 }
 
 .terminalContainer svg:hover {
-	background-color: #2e2e2e;
 	border-radius: 5px;
+	background-color: #2e2e2e;
 }
 
 .terminalContainer div:first-child {
-	height: 100%;
 	display: flex;
-	background-color: rgb(19 19 19);
-	border-radius: 5px 5px 0 0;
+	gap: 5px;
+	align-items: center;
+	height: 100%;
 	padding-right: 10px;
 	padding-left: 10px;
-	align-items: center;
-	gap: 5px;
+	border-radius: 5px 5px 0 0;
+	background-color: rgb(19 19 19);
 }
 
 .manageButtons {
 	display: flex;
-	align-items: center;
-	font-size: 1.2rem;
-	height: 100%;
 	gap: 5px;
+	align-items: center;
+	height: 100%;
 	border-radius: 0 0 0 10px;
+	font-size: 1.2rem;
 }

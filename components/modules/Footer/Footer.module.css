@@ -1,14 +1,14 @@
 .container {
-	height: 50px;
-	background-color: #212121;
+	position: absolute;
+	z-index: 998;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	position: absolute;
-	z-index: 998;
 	width: 100%;
-	background-image: url('/images/darknoice.png');
+	height: 50px;
 	border-top: 1px solid #3f3f3f;
+	background-color: #212121;
+	background-image: url('/images/darknoice.png');
 }
 
 .iconContainer {
@@ -20,25 +20,25 @@
 .dateIcons,
 .language,
 .microphone {
-	cursor: pointer;
-	border-radius: 5px;
 	display: flex;
-	justify-content: center;
-	align-items: center;
-	padding: 8px;
-	transition: background-color 0.15s ease-in-out;
 	gap: 5px;
+	align-items: center;
+	justify-content: center;
+	padding: 8px;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: background-color 0.15s ease-in-out;
 }
 
 .dateIcons {
 	flex-direction: column;
-	font-size: 0.65rem;
 	align-items: flex-end;
+	font-size: 0.65rem;
 }
 
 .microphone {
-	font-size: 1rem;
 	color: #99ebff;
+	font-size: 1rem;
 }
 
 .dateIcons p {
@@ -47,10 +47,10 @@
 }
 
 .language p {
-	font-size: 0.6em;
-	font-weight: 400;
-	padding-left: 3px;
 	padding-right: 3px;
+	padding-left: 3px;
+	font-weight: 400;
+	font-size: 0.6em;
 }
 
 .icon:not(:active) span {
@@ -71,10 +71,10 @@
 .toolbarContainer {
 	position: absolute;
 	right: 0;
+	display: flex;
+	gap: 3px;
 	height: 41px;
+	margin-right: 8px;
 	color: #f9f9f9;
 	font-size: 1.2rem;
-	display: flex;
-	margin-right: 8px;
-	gap: 3px;
 }

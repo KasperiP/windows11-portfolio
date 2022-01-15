@@ -6,9 +6,9 @@
 
 .listItem {
 	display: flex;
-	cursor: pointer;
 	padding: 5px 0;
 	border-radius: 2px;
+	cursor: pointer;
 }
 
 .listItem:hover {
@@ -42,8 +42,8 @@
 }
 
 .listItemSize {
-	width: 10%;
 	display: flex;
 	justify-content: flex-end;
+	width: 10%;
 	padding-right: 5px;
 }
