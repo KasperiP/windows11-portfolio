@@ -14,7 +14,7 @@ function desktop() {
 						<div className={styles.listItem}>
 							<div className={styles.listItemName}>
 								<Image
-									src="/icons/notes.ico"
+									src="/icons/notes/notes.png"
 									alt="icon"
 									width={16}
 									height={16}

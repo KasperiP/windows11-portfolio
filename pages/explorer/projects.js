@@ -41,7 +41,7 @@ function projects({ data }) {
 						>
 							<div className={styles.listItemName}>
 								<Image
-									src="/icons/github.ico"
+									src="/svg/github.svg"
 									alt="icon"
 									width={16}
 									height={16}

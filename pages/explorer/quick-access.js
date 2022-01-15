@@ -139,7 +139,7 @@ function quickAccess() {
 						<div className={listItemStyles.listItem}>
 							<div className={listItemStyles.listItemName}>
 								<Image
-									src="/icons/notes.ico"
+									src="/icons/notes/notes.png"
 									alt="icon"
 									width={16}
 									height={16}

@@ -155,7 +155,7 @@ function WindowsMenu({ isClosed, winMenu, handleWinMenu }) {
 									</Link>
 									<div>
 										<Image
-											src="/icons/firefox.ico"
+											src="/icons/firefox/firefox.png"
 											alt="img"
 											width={30}
 											height={30}

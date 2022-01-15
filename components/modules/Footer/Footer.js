@@ -78,7 +78,7 @@ function Footer() {
 						onClick={() => handleWinMenu()}
 					>
 						<Image
-							src={'/icons/windows.ico'}
+							src={'/icons/windows/windows.png'}
 							width={25}
 							height={25}
 							alt="logo"
@@ -100,7 +100,7 @@ function Footer() {
 						onClick={() => handleError('Firefox')}
 					>
 						<Image
-							src={'/icons/firefox.ico'}
+							src={'/icons/firefox/firefox.png'}
 							width={25}
 							height={25}
 							alt="logo"
@@ -111,7 +111,7 @@ function Footer() {
 						onClick={() => handleError('Spotify')}
 					>
 						<Image
-							src={'/icons/spotify.ico'}
+							src={'/icons/spotify/spotify.png'}
 							width={25}
 							height={25}
 							alt="logo"
@@ -122,7 +122,7 @@ function Footer() {
 						onClick={() => handleError('Steam')}
 					>
 						<Image
-							src={'/icons/steam.ico'}
+							src={'/icons/steam/steam.png'}
 							width={25}
 							height={25}
 							alt="logo"
@@ -133,7 +133,7 @@ function Footer() {
 						onClick={() => handleError('Discord')}
 					>
 						<Image
-							src={'/icons/discord.ico'}
+							src={'/icons/discord/discord.png'}
 							width={25}
 							height={25}
 							alt="logo"
@@ -146,7 +146,7 @@ function Footer() {
 						}
 					>
 						<Image
-							src={'/icons/vscode.ico'}
+							src={'/icons/vscode/vscode.png'}
 							width={25}
 							height={25}
 							alt="logo"
@@ -155,7 +155,7 @@ function Footer() {
 					<Link href="/terminal" passHref>
 						<div className={styles.icon}>
 							<Image
-								src={'/icons/terminal.ico'}
+								src={'/icons/terminal/terminal.png'}
 								width={25}
 								height={25}
 								alt="logo"

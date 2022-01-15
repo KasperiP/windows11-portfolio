@@ -126,7 +126,7 @@ function FileExplorer(props) {
 								</div>
 								<div>
 									<Image
-										src="/icons/notes.ico"
+										src="/icons/notes/notes.png"
 										height={20}
 										width={20}
 										alt="ico"

@@ -35,7 +35,7 @@ function Error(props) {
 				<div className={styles.errorTop}>
 					<div>
 						<Image
-							src={'/icons/error.ico'}
+							src={'/icons/error/error.png'}
 							width={20}
 							height={20}
 							alt="icon"
@@ -49,7 +49,7 @@ function Error(props) {
 				<div className={styles.errorContent}>
 					<div>
 						<Image
-							src={'/icons/error.ico'}
+							src={'/icons/error/error.png'}
 							width={40}
 							height={40}
 							alt="icon"

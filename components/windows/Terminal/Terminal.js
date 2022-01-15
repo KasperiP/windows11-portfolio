@@ -98,7 +98,7 @@ function Terminal() {
 			topTitle={'MINGW64:/c/Users/kassq'}
 			topIcon={
 				<Image
-					src={`/icons/terminal.ico`}
+					src={`/icons/terminal/terminal.png`}
 					alt="ico"
 					width={20}
 					height={20}
