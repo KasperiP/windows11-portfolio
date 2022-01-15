@@ -1,6 +1,8 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { useRouter } from 'next/router';
 import { useContext, useEffect, useRef, useState } from 'react';
+import { AiOutlinePlus } from 'react-icons/ai';
+import { RiArrowDropDownLine } from 'react-icons/ri';
 import {
 	VscChromeClose,
 	VscChromeMaximize,
@@ -289,10 +291,40 @@ function DraggableWindow({ children, windowName, topTitle, topIcon, close }) {
 						<div className={styles.main}>
 							<nav>
 								<section className={`${styles.top} draggable`}>
-									<div className={styles.topContainer}>
-										{topIcon}
-										<p>{topTitle}</p>
-									</div>
+									{windowName === 'terminal' ? (
+										<>
+											<div
+												className={
+													styles.terminalContainer
+												}
+											>
+												<div>
+													<div>
+														{topIcon}
+														<p>{topTitle}</p>
+													</div>
+													<VscChromeClose />
+												</div>
+												<div
+													className={
+														styles.manageButtons
+													}
+												>
+													<AiOutlinePlus />
+													<RiArrowDropDownLine />
+												</div>
+											</div>
+										</>
+									) : (
+										<>
+											<div
+												className={styles.topContainer}
+											>
+												{topIcon}
+												<p>{topTitle}</p>
+											</div>
+										</>
+									)}
 									<div
 										className={`${styles.iconContainer} not_draggable`}
 									>

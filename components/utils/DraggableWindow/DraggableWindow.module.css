@@ -66,3 +66,37 @@
 	gap: 5px;
 	color: #fff;
 }
+
+.terminalContainer {
+	display: flex;
+	margin-top: 3px;
+	align-items: center;
+	justify-content: space-between;
+	gap: 10px;
+	color: #fff;
+}
+
+.terminalContainer svg:hover {
+	background-color: #2e2e2e;
+	border-radius: 5px;
+}
+
+.terminalContainer div:first-child {
+	height: 100%;
+	display: flex;
+	background-color: rgb(19 19 19);
+	border-radius: 5px 5px 0 0;
+	padding-right: 10px;
+	padding-left: 10px;
+	align-items: center;
+	gap: 5px;
+}
+
+.manageButtons {
+	display: flex;
+	align-items: center;
+	font-size: 1.2rem;
+	height: 100%;
+	gap: 5px;
+	border-radius: 0 0 0 10px;
+}
