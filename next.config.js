@@ -3,7 +3,6 @@ module.exports = {
 	images: {
 		domains: ['res.cloudinary.com'],
 		formats: ['image/avif', 'image/webp'],
-		deviceSizes: [1920],
-		imageSizes: [256],
+		imageSizes: [128, 256, 512, 1024, 2048],
 	},
 };

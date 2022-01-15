@@ -72,7 +72,7 @@ function WindowsMenu({ isClosed, winMenu, handleWinMenu }) {
 								<Link href="/explorer/quick-access" passHref>
 									<div onClick={() => handleWinMenu()}>
 										<Image
-											src="/icons/fileExplorer.ico"
+											src="/icons/fileexplorer/explorer.png"
 											alt="img"
 											width={30}
 											height={30}
@@ -83,7 +83,7 @@ function WindowsMenu({ isClosed, winMenu, handleWinMenu }) {
 								<Link href="/explorer/pictures" passHref>
 									<div onClick={() => handleWinMenu()}>
 										<Image
-											src="/icons/pictures.ico"
+											src="/icons/pictures/pictures.png"
 											alt="img"
 											width={30}
 											height={30}
@@ -94,7 +94,7 @@ function WindowsMenu({ isClosed, winMenu, handleWinMenu }) {
 								<Link href="/explorer/videos" passHref>
 									<div onClick={() => handleWinMenu()}>
 										<Image
-											src="/icons/videos.ico"
+											src="/icons/videos/videos.png"
 											alt="img"
 											width={30}
 											height={30}
@@ -121,7 +121,7 @@ function WindowsMenu({ isClosed, winMenu, handleWinMenu }) {
 									>
 										<div onClick={() => handleWinMenu()}>
 											<Image
-												src="/icons/fileExplorer.ico"
+												src="/icons/fileexplorer/explorer.png"
 												alt="img"
 												width={30}
 												height={30}
@@ -132,7 +132,7 @@ function WindowsMenu({ isClosed, winMenu, handleWinMenu }) {
 									<Link href="/explorer/pictures" passHref>
 										<div onClick={() => handleWinMenu()}>
 											<Image
-												src="/icons/pictures.ico"
+												src="/icons/pictures/pictures.png"
 												alt="img"
 												width={30}
 												height={30}
@@ -145,7 +145,7 @@ function WindowsMenu({ isClosed, winMenu, handleWinMenu }) {
 									<Link href="/explorer/videos" passHref>
 										<div onClick={() => handleWinMenu()}>
 											<Image
-												src="/icons/videos.ico"
+												src="/icons/videos/videos.png"
 												alt="img"
 												width={30}
 												height={30}

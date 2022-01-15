@@ -374,7 +374,7 @@ function FileExplorer(props) {
 									}
 								>
 									<Image
-										src="/icons/desktop.ico"
+										src="/icons/desktop/desktop_small.png"
 										alt="ico"
 										width={16}
 										height={16}
@@ -395,10 +395,11 @@ function FileExplorer(props) {
 									}
 								>
 									<Image
-										src="/icons/downloads.ico"
+										src="/icons/downloads/downloads_small.png"
 										alt="ico"
 										width={16}
 										height={16}
+										unoptimized
 									/>
 									<p>Downloads</p>
 								</div>
@@ -416,7 +417,7 @@ function FileExplorer(props) {
 									}
 								>
 									<Image
-										src="/icons/documents.ico"
+										src="/icons/documents/documents_small.png"
 										alt="ico"
 										width={16}
 										height={16}
@@ -437,7 +438,7 @@ function FileExplorer(props) {
 									}
 								>
 									<Image
-										src="/icons/pictures.ico"
+										src="/icons/pictures/pictures_small.png"
 										alt="ico"
 										width={16}
 										height={16}
@@ -493,7 +494,7 @@ function FileExplorer(props) {
 									}
 								>
 									<Image
-										src="/icons/desktop.ico"
+										src="/icons/desktop/desktop_small.png"
 										alt="ico"
 										width={16}
 										height={16}
@@ -513,10 +514,11 @@ function FileExplorer(props) {
 									}
 								>
 									<Image
-										src="/icons/downloads.ico"
+										src="/icons/downloads/downloads_small.png"
 										alt="ico"
 										width={16}
 										height={16}
+										unoptimized
 									/>
 									<p>Downloads</p>
 								</div>
@@ -533,7 +535,7 @@ function FileExplorer(props) {
 									}
 								>
 									<Image
-										src="/icons/documents.ico"
+										src="/icons/documents/documents_small.png"
 										alt="ico"
 										width={16}
 										height={16}
@@ -554,7 +556,7 @@ function FileExplorer(props) {
 									}
 								>
 									<Image
-										src="/icons/pictures.ico"
+										src="/icons/pictures/pictures_small.png"
 										alt="ico"
 										width={16}
 										height={16}
@@ -575,7 +577,7 @@ function FileExplorer(props) {
 									}
 								>
 									<Image
-										src="/icons/videos.ico"
+										src="/icons/videos/videos_small.png"
 										alt="ico"
 										width={16}
 										height={16}
@@ -596,7 +598,7 @@ function FileExplorer(props) {
 									}
 								>
 									<Image
-										src="/icons/music.ico"
+										src="/icons/music/music_small.png"
 										alt="ico"
 										width={16}
 										height={16}

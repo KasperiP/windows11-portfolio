@@ -21,7 +21,7 @@ function thisPC() {
 						<div className={styles.item}>
 							<div>
 								<Image
-									src="/icons/desktop.ico"
+									src="/icons/desktop/desktop.png"
 									alt="icon"
 									width={50}
 									height={50}
@@ -38,7 +38,7 @@ function thisPC() {
 						<div className={styles.item}>
 							<div>
 								<Image
-									src="/icons/downloads.ico"
+									src="/icons/downloads/downloads.png"
 									alt="icon"
 									width={50}
 									height={50}
@@ -56,7 +56,7 @@ function thisPC() {
 						<div className={styles.item}>
 							<div>
 								<Image
-									src="/icons/documents.ico"
+									src="/icons/documents/documents.png"
 									alt="icon"
 									width={50}
 									height={50}
@@ -74,7 +74,7 @@ function thisPC() {
 						<div className={styles.item}>
 							<div>
 								<Image
-									src="/icons/pictures.ico"
+									src="/icons/pictures/pictures.png"
 									alt="icon"
 									width={50}
 									height={50}
@@ -92,7 +92,7 @@ function thisPC() {
 						<div className={styles.item}>
 							<div>
 								<Image
-									src="/icons/videos.ico"
+									src="/icons/videos/videos.png"
 									alt="icon"
 									width={50}
 									height={50}
@@ -110,7 +110,7 @@ function thisPC() {
 						<div className={styles.item}>
 							<div>
 								<Image
-									src="/icons/music.ico"
+									src="/icons/music/music.png"
 									alt="icon"
 									width={50}
 									height={50}

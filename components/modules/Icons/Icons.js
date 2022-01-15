@@ -114,7 +114,7 @@ function Icons() {
 					<Link href={'/explorer/pictures'} passHref>
 						<div className={`${styles.item} selectoItem`}>
 							<Image
-								src="/icons/pictures.ico"
+								src="/icons/pictures/pictures.png"
 								alt="icon"
 								width={40}
 								height={40}
@@ -125,10 +125,11 @@ function Icons() {
 					<Link href={'/explorer/videos'} passHref>
 						<div className={`${styles.item} selectoItem`}>
 							<Image
-								src="/icons/videos.ico"
+								src="/icons/videos/videos.png"
 								alt="icon"
 								width={40}
 								height={40}
+								quality={100}
 							></Image>
 							<p>Videos</p>
 						</div>

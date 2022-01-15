@@ -88,7 +88,7 @@ function Footer() {
 					<Link href="/explorer/quick-access" passHref>
 						<div className={styles.icon}>
 							<Image
-								src={'/icons/explorer.ico'}
+								src={'/icons/explorer/explorer.png'}
 								width={25}
 								height={25}
 								alt="logo"

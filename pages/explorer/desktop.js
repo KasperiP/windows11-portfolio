@@ -87,7 +87,7 @@ function desktop() {
 						<div className={styles.listItem}>
 							<div className={styles.listItemName}>
 								<Image
-									src="/icons/pictures.ico"
+									src="/icons/pictures/pictures.png"
 									alt="icon"
 									width={16}
 									height={16}
@@ -106,7 +106,7 @@ function desktop() {
 						<div className={styles.listItem}>
 							<div className={styles.listItemName}>
 								<Image
-									src="/icons/videos.ico"
+									src="/icons/videos/videos.png"
 									alt="icon"
 									width={16}
 									height={16}

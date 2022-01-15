@@ -28,7 +28,7 @@ function tools() {
 					<div className={styles.listItem}>
 						<div className={styles.listItemName}>
 							<Image
-								src="/icons/githubdesktop.ico"
+								src="/icons/githubdesktop/desktop.png"
 								alt="icon"
 								width={16}
 								height={16}
