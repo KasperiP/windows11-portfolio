@@ -129,7 +129,7 @@ function Icons() {
 								alt="icon"
 								width={40}
 								height={40}
-								layout="fixed"
+								unoptimized={true}
 							></Image>
 							<p>Videos</p>
 						</div>
