@@ -72,7 +72,7 @@ function WindowsMenu({ isClosed, winMenu, handleWinMenu }) {
 								<Link href="/explorer/quick-access" passHref>
 									<div onClick={() => handleWinMenu()}>
 										<Image
-											src="/icons/fileexplorer/explorer.png"
+											src="/icons/explorer/explorer.png"
 											alt="img"
 											width={30}
 											height={30}
@@ -121,7 +121,7 @@ function WindowsMenu({ isClosed, winMenu, handleWinMenu }) {
 									>
 										<div onClick={() => handleWinMenu()}>
 											<Image
-												src="/icons/fileexplorer/explorer.png"
+												src="/icons/explorer/explorer.png"
 												alt="img"
 												width={30}
 												height={30}
