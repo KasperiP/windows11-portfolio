@@ -18,7 +18,8 @@
 		"react-dom": "17.0.2",
 		"react-icons": "^4.3.1",
 		"react-rnd": "^10.3.5",
-		"react-selecto": "^1.13.2"
+		"react-selecto": "^1.13.2",
+		"sharp": "^0.29.3"
 	},
 	"devDependencies": {
 		"eslint": "8.5.0",

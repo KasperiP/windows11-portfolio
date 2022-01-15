@@ -129,7 +129,6 @@ function Icons() {
 								alt="icon"
 								width={40}
 								height={40}
-								sizes="(min-width: 1200px) 128px"
 							></Image>
 							<p>Videos</p>
 						</div>
