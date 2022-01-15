@@ -179,7 +179,7 @@ function thisPC() {
 				<FileExplorer
 					folder="This PC"
 					topNav={false}
-					icon="computer"
+					icon="this-pc"
 					component={content()}
 				/>
 				<Icons />

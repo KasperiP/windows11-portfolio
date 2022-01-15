@@ -78,7 +78,6 @@ function Terminal() {
 				await executeCommand(input);
 
 				e.target.value = ''; // clear input
-				console.log(history);
 			}
 		};
 

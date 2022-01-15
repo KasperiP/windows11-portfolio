@@ -13,7 +13,11 @@ function downloads() {
 				/>
 			</Head>
 			<div style={{ height: '100%' }}>
-				<FileExplorer folder="Downloads" topNav={true} icon="folder" />
+				<FileExplorer
+					folder="Downloads"
+					topNav={true}
+					icon="downloads"
+				/>
 				<Icons />
 			</div>
 		</>

@@ -32,7 +32,7 @@ function desktop() {
 						<div className={styles.listItem}>
 							<div className={styles.listItemName}>
 								<Image
-									src="/icons/folder.ico"
+									src="/icons/folder/folder.png"
 									alt="icon"
 									width={16}
 									height={16}
@@ -50,7 +50,7 @@ function desktop() {
 						<div className={styles.listItem}>
 							<div className={styles.listItemName}>
 								<Image
-									src="/icons/folder.ico"
+									src="/icons/folder/folder.png"
 									alt="icon"
 									width={16}
 									height={16}
@@ -68,7 +68,7 @@ function desktop() {
 						<div className={styles.listItem}>
 							<div className={styles.listItemName}>
 								<Image
-									src="/icons/folder.ico"
+									src="/icons/folder/folder.png"
 									alt="icon"
 									width={16}
 									height={16}
@@ -136,7 +136,7 @@ function desktop() {
 			</Head>
 			<div style={{ height: '100%' }}>
 				<FileExplorer
-					icon="folder"
+					icon="desktop"
 					folder="Desktop"
 					topNav={true}
 					component={content()}

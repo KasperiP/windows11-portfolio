@@ -80,7 +80,7 @@ function Icons() {
 					<Link href={'/explorer/projects'} passHref>
 						<div className={`${styles.item} selectoItem`}>
 							<Image
-								src="/icons/folder.ico"
+								src="/icons/folder/folder.png"
 								alt="icon"
 								width={40}
 								height={40}
@@ -92,7 +92,7 @@ function Icons() {
 					<Link href={'/explorer/tools'} passHref>
 						<div className={`${styles.item} selectoItem`}>
 							<Image
-								src="/icons/folder.ico"
+								src="/icons/folder/folder.png"
 								alt="icon"
 								width={40}
 								height={40}
@@ -103,7 +103,7 @@ function Icons() {
 					<Link href={'/explorer/links'} passHref>
 						<div className={`${styles.item} selectoItem`}>
 							<Image
-								src="/icons/links.ico"
+								src="/icons/links/links.png"
 								alt="icon"
 								width={40}
 								height={40}

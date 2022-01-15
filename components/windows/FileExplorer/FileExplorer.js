@@ -91,7 +91,7 @@ function FileExplorer(props) {
 			topTitle={props.folder}
 			topIcon={
 				<Image
-					src={`/icons/${props.icon}.ico`}
+					src={`/icons/${props.icon}/${props.icon}.png`}
 					alt="ico"
 					width={20}
 					height={20}
@@ -108,7 +108,7 @@ function FileExplorer(props) {
 							<div className={styles.manageDropdown}>
 								<div>
 									<Image
-										src="/icons/folder.ico"
+										src="/icons/folder/folder.png"
 										height={20}
 										width={20}
 										alt="ico"
@@ -298,7 +298,7 @@ function FileExplorer(props) {
 				<div className={styles.navigatePath}>
 					<div className={styles.left}>
 						<Image
-							src={`/icons/${props.icon}.ico`}
+							src={`/icons/${props.icon}/${props.icon}.png`}
 							alt="ico"
 							width={20}
 							height={20}
@@ -350,7 +350,7 @@ function FileExplorer(props) {
 						<Link href="/explorer/quick-access" passHref>
 							<div>
 								<Image
-									src="/icons/quickaccess.ico"
+									src="/icons/quickaccess/quickaccess.png"
 									alt="ico"
 									width={16}
 									height={16}
@@ -471,7 +471,7 @@ function FileExplorer(props) {
 						<Link href="/explorer/this-pc" passHref>
 							<div>
 								<Image
-									src="/icons/computer.ico"
+									src="/icons/this-pc/this-pc.png"
 									alt="ico"
 									width={16}
 									height={16}
