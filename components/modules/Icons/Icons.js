@@ -2,11 +2,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import Selecto from 'react-selecto';
-import folderImg from '../../../public/icons/folder/folder.png';
-import linksImg from '../../../public/icons/links/links.png';
-import notesImg from '../../../public/icons/notes/notes.png';
-import picturesImg from '../../../public/icons/pictures/pictures.png';
-import videosImg from '../../../public/icons/videos/videos.png';
 import styles from './Icons.module.css';
 
 const ESCAPE_KEYS = ['46', 'Delete'];
@@ -74,8 +69,7 @@ function Icons() {
 					<Link href={'/notepad/about'} passHref>
 						<div className={`${styles.item} selectoItem`}>
 							<Image
-								src={notesImg}
-								placeholder="blur"
+								src="/icons/notes/notes.png"
 								alt="icon"
 								width={40}
 								height={40}
@@ -86,8 +80,7 @@ function Icons() {
 					<Link href={'/explorer/projects'} passHref>
 						<div className={`${styles.item} selectoItem`}>
 							<Image
-								src={folderImg}
-								placeholder="blue"
+								src="/icons/folder/folder.png"
 								alt="icon"
 								width={40}
 								height={40}
@@ -99,8 +92,7 @@ function Icons() {
 					<Link href={'/explorer/tools'} passHref>
 						<div className={`${styles.item} selectoItem`}>
 							<Image
-								src={folderImg}
-								placeholder="blue"
+								src="/icons/folder/folder.png"
 								alt="icon"
 								width={40}
 								height={40}
@@ -111,8 +103,7 @@ function Icons() {
 					<Link href={'/explorer/links'} passHref>
 						<div className={`${styles.item} selectoItem`}>
 							<Image
-								src={linksImg}
-								placeholder="blur"
+								src="/icons/links/links.png"
 								alt="icon"
 								width={40}
 								height={40}
@@ -123,8 +114,7 @@ function Icons() {
 					<Link href={'/explorer/pictures'} passHref>
 						<div className={`${styles.item} selectoItem`}>
 							<Image
-								src={picturesImg}
-								placeholder="blur"
+								src="/icons/pictures/pictures.png"
 								alt="icon"
 								width={40}
 								height={40}
@@ -135,8 +125,7 @@ function Icons() {
 					<Link href={'/explorer/videos'} passHref>
 						<div className={`${styles.item} selectoItem`}>
 							<Image
-								src={videosImg}
-								placeholder="blur"
+								src="/icons/videos/videos.png"
 								alt="icon"
 								width={40}
 								height={40}
