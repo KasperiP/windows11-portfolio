@@ -77,7 +77,7 @@ function Videos({ data }) {
 
 export async function getStaticProps() {
 	const res = await fetch(
-		`https://api.cloudinary.com/v1_1/${process.env.CLOUDINARY_CLOUD_NAME}/resources/video`,
+		`https://api.cloudinary.com/v1_1/${process.env.CLOUDINARY_CLOUD_NAME}/resources/video?max_results=100`,
 		{
 			headers: {
 				Authorization: `Basic ${Buffer.from(
