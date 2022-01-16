@@ -13,7 +13,7 @@ function Videos({ data }) {
 			<div className={styles.wrapper}>
 				{data.map((video) => (
 					<div
-						className={styles.mediaItem}
+						className={`${styles.mediaItem} no_click`}
 						key={video.filename}
 						onClick={() => {
 							setOpenVideo(video);

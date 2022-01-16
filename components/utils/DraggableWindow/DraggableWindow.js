@@ -73,7 +73,9 @@ function DraggableWindow({ children, windowName, topTitle, topIcon, close }) {
 	const [lastPos, setLastPos] = lastPosState;
 
 	const handlePriority = (e, window) => {
+		console.log(e.target);
 		// Check if e.target has className "no_click"
+		console.log(e.target.className);
 		if (e.target.className === 'no_click') return;
 
 		// Get all priority values for all windows and sort them

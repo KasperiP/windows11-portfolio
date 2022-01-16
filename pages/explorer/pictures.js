@@ -14,7 +14,7 @@ function Pictures({ data }) {
 			<div className={styles.wrapper}>
 				{data.map((image) => (
 					<div
-						className={styles.mediaItem}
+						className={`${styles.mediaItem} no_click`}
 						key={image.filename}
 						onClick={() => {
 							setOpenImage(image);
