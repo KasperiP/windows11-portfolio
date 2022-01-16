@@ -138,14 +138,14 @@ function Icons() {
 					<div className={`${styles.item} selectoItem recycleBin`}>
 						{deleted ? (
 							<Image
-								src="/icons/trashcanFull.ico"
+								src="/icons/trash/trash_full.png"
 								alt="icon"
 								width={40}
 								height={40}
 							></Image>
 						) : (
 							<Image
-								src="/icons/trashcan.ico"
+								src="/icons/trash/trash_empty.png"
 								alt="icon"
 								width={40}
 								height={40}

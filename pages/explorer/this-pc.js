@@ -134,7 +134,7 @@ function thisPC() {
 					<div className={`${styles.item} ${styles.disk}`}>
 						<div>
 							<Image
-								src="/icons/cdrive.ico"
+								src="/icons/drives/c.png"
 								alt="icon"
 								width={50}
 								height={50}
@@ -149,7 +149,7 @@ function thisPC() {
 					<div className={`${styles.item} ${styles.disk}`}>
 						<div>
 							<Image
-								src="/icons/drive.ico"
+								src="/icons/drives/d.png"
 								alt="icon"
 								width={50}
 								height={50}

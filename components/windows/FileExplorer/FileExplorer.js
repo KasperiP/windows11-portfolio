@@ -117,7 +117,7 @@ function FileExplorer(props) {
 								</div>
 								<div>
 									<Image
-										src="/icons/shortcut.ico"
+										src="/icons/shortcut/shortcut.png"
 										height={20}
 										width={20}
 										alt="ico"
@@ -374,7 +374,7 @@ function FileExplorer(props) {
 									}
 								>
 									<Image
-										src="/icons/desktop/desktop_small.png"
+										src="/icons/desktop/desktop.png"
 										alt="ico"
 										width={16}
 										height={16}
@@ -494,7 +494,7 @@ function FileExplorer(props) {
 									}
 								>
 									<Image
-										src="/icons/desktop/desktop_small.png"
+										src="/icons/desktop/desktop.png"
 										alt="ico"
 										width={16}
 										height={16}
@@ -619,7 +619,7 @@ function FileExplorer(props) {
 									}
 								>
 									<Image
-										src="/icons/cdrive.ico"
+										src="/icons/drives/c.png"
 										alt="ico"
 										width={16}
 										height={16}
@@ -640,7 +640,7 @@ function FileExplorer(props) {
 									}
 								>
 									<Image
-										src="/icons/drive.ico"
+										src="/icons/drives/d.png"
 										alt="ico"
 										width={16}
 										height={16}
