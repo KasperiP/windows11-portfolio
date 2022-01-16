@@ -124,7 +124,7 @@ function Terminal() {
 							kassq@Kasperi <span>MINGW64</span> <span>~</span>
 						</p>
 						<p>$ {item.input}</p>
-						{item.response.split('<br/>').map((text, index) => (
+						{item.response?.split('<br/>')?.map((text, index) => (
 							<p key={index}>{text}</p>
 						))}
 					</div>
