@@ -11,6 +11,15 @@ function Terminal() {
 			const command = input.split(' ')[0];
 
 			switch (command) {
+				case 'help':
+					setHistory([
+						...history,
+						{
+							input: input,
+							response: `help: Display this help message<br/>clear: Clear the terminal screen<br/>ls: List the files in the current directory<br/>echo: Displays text/string that are passed as an argument<br/>whoami: Display the name of the current user`,
+						},
+					]);
+					break;
 				case 'clear':
 					setHistory([]);
 					break;
@@ -115,7 +124,9 @@ function Terminal() {
 							kassq@Kasperi <span>MINGW64</span> <span>~</span>
 						</p>
 						<p>$ {item.input}</p>
-						{item.response && <p>{item.response}</p>}
+						{item.response.split('<br/>').map((text, index) => (
+							<p key={index}>{text}</p>
+						))}
 					</div>
 				))}
 				<div className={styles.historyItem}>
