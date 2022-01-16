@@ -135,7 +135,7 @@ function Terminal() {
 					</p>
 					<div className={`${styles.promt}`}>
 						<p>$</p>
-						<input type="text" className="prompt" autoFocus />
+						<input type="text" className="prompt" />
 					</div>
 				</div>
 			</div>
