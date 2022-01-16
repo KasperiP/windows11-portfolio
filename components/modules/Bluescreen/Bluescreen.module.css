@@ -1,0 +1,52 @@
+.container {
+	position: absolute;
+	z-index: 999;
+	width: 100%;
+	height: 100%;
+	background: #3973aa;
+}
+
+.container p,
+.container h1,
+.container h2 {
+	color: #fefeff;
+}
+
+.wrapper {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	justify-content: center;
+	width: 60rem;
+	max-width: 90%;
+	height: 100%;
+	margin: auto;
+}
+
+.wrapper h1 {
+	margin-bottom: 30px;
+	font-weight: 400;
+	font-size: 7.5em;
+	line-height: 80%;
+}
+
+.wrapper h2 {
+	font-weight: 400;
+	font-size: 1em;
+}
+
+.aboutIssue {
+	display: flex;
+	gap: 20px;
+}
+
+@media screen and (max-width: 1200px) {
+	.aboutIssue {
+		flex-direction: column;
+	}
+}
+
+.aboutIssue div:first-child {
+	display: flex;
+	align-items: center;
+}

@@ -1,9 +1,8 @@
 import Head from 'next/head';
 import Image from 'next/image';
-import React from 'react';
-import Icons from '../../components/icons/Icons';
-import FileExplorer from '../../components/fileExplorer/FileExplorer';
-import styles from '../../styles/utils/List.module.scss';
+import Icons from '../../components/modules/Icons/Icons';
+import FileExplorer from '../../components/windows/FileExplorer/FileExplorer';
+import styles from '../../styles/utils/List.module.css';
 
 function projects({ data }) {
 	const content = () => {
@@ -42,7 +41,7 @@ function projects({ data }) {
 						>
 							<div className={styles.listItemName}>
 								<Image
-									src="/icons/github.ico"
+									src="/svg/github.svg"
 									alt="icon"
 									width={16}
 									height={16}

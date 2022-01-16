@@ -1,12 +1,11 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
 import { BsFillPinAngleFill } from 'react-icons/bs';
 import { RiArrowDropDownLine } from 'react-icons/ri';
-import FileExplorer from '../../components/fileExplorer/FileExplorer';
-import Icons from '../../components/icons/Icons';
-import styles from '../../styles/utils/GridList.module.scss';
+import Icons from '../../components/modules/Icons/Icons';
+import FileExplorer from '../../components/windows/FileExplorer/FileExplorer';
+import styles from '../../styles/utils/GridList.module.css';
 
 function thisPC() {
 	const content = () => {
@@ -22,7 +21,7 @@ function thisPC() {
 						<div className={styles.item}>
 							<div>
 								<Image
-									src="/icons/desktop.ico"
+									src="/icons/desktop/desktop.png"
 									alt="icon"
 									width={50}
 									height={50}
@@ -39,7 +38,7 @@ function thisPC() {
 						<div className={styles.item}>
 							<div>
 								<Image
-									src="/icons/downloads.ico"
+									src="/icons/downloads/downloads.png"
 									alt="icon"
 									width={50}
 									height={50}
@@ -57,7 +56,7 @@ function thisPC() {
 						<div className={styles.item}>
 							<div>
 								<Image
-									src="/icons/documents.ico"
+									src="/icons/documents/documents.png"
 									alt="icon"
 									width={50}
 									height={50}
@@ -71,11 +70,11 @@ function thisPC() {
 						</div>
 					</Link>
 
-					<Link href="/explorer/documents" passHref>
+					<Link href="/explorer/pictures" passHref>
 						<div className={styles.item}>
 							<div>
 								<Image
-									src="/icons/pictures.ico"
+									src="/icons/pictures/pictures.png"
 									alt="icon"
 									width={50}
 									height={50}
@@ -93,7 +92,7 @@ function thisPC() {
 						<div className={styles.item}>
 							<div>
 								<Image
-									src="/icons/videos.ico"
+									src="/icons/videos/videos.png"
 									alt="icon"
 									width={50}
 									height={50}
@@ -111,7 +110,7 @@ function thisPC() {
 						<div className={styles.item}>
 							<div>
 								<Image
-									src="/icons/music.ico"
+									src="/icons/music/music.png"
 									alt="icon"
 									width={50}
 									height={50}
@@ -135,7 +134,7 @@ function thisPC() {
 					<div className={`${styles.item} ${styles.disk}`}>
 						<div>
 							<Image
-								src="/icons/cdrive.ico"
+								src="/icons/drives/c.png"
 								alt="icon"
 								width={50}
 								height={50}
@@ -150,7 +149,7 @@ function thisPC() {
 					<div className={`${styles.item} ${styles.disk}`}>
 						<div>
 							<Image
-								src="/icons/drive.ico"
+								src="/icons/drives/d.png"
 								alt="icon"
 								width={50}
 								height={50}
@@ -173,14 +172,14 @@ function thisPC() {
 				<title>kassq - This PC</title>
 				<link
 					rel="canonical"
-					href="https://www.kassq.dev/explorer/downloads"
+					href="https://www.kassq.dev/explorer/this-pc"
 				/>
 			</Head>
 			<div style={{ height: '100%' }}>
 				<FileExplorer
 					folder="This PC"
 					topNav={false}
-					icon="computer"
+					icon="this-pc"
 					component={content()}
 				/>
 				<Icons />

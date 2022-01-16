@@ -1,10 +1,9 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
-import Icons from '../../components/icons/Icons';
-import FileExplorer from '../../components/fileExplorer/FileExplorer';
-import styles from '../../styles/utils/List.module.scss';
+import Icons from '../../components/modules/Icons/Icons';
+import FileExplorer from '../../components/windows/FileExplorer/FileExplorer';
+import styles from '../../styles/utils/List.module.css';
 
 function links() {
 	const content = () => {
@@ -16,15 +15,15 @@ function links() {
 							<div className={styles.listItem}>
 								<div className={styles.listItemName}>
 									<Image
-										src="/icons/twitter.ico"
+										src="/svg/twitter.svg"
 										alt="icon"
-										width={16}
-										height={16}
+										width={18}
+										height={18}
 									></Image>
 									<p>Twitter</p>
 								</div>
 								<p className={styles.listItemDateModified}>
-									30.12.2021 04:02
+									30.12.2021 02:02
 								</p>
 								<p className={styles.listItemType}>Shortcut</p>
 								<p className={styles.listItemSize}>2kt</p>
@@ -39,15 +38,15 @@ function links() {
 							<div className={styles.listItem}>
 								<div className={styles.listItemName}>
 									<Image
-										src="/icons/discord.ico"
+										src="/svg/discord.svg"
 										alt="icon"
-										width={16}
-										height={16}
+										width={18}
+										height={18}
 									></Image>
 									<p>Discord</p>
 								</div>
 								<p className={styles.listItemDateModified}>
-									30.12.2021 04:02
+									30.01.2022 12:44
 								</p>
 								<p className={styles.listItemType}>Shortcut</p>
 								<p className={styles.listItemSize}>2kt</p>
@@ -64,15 +63,15 @@ function links() {
 							<div className={styles.listItem}>
 								<div className={styles.listItemName}>
 									<Image
-										src="/icons/linkedin.ico"
+										src="/svg/linkedin.svg"
 										alt="icon"
-										width={16}
-										height={16}
+										width={18}
+										height={18}
 									></Image>
 									<p>Linkedin</p>
 								</div>
 								<p className={styles.listItemDateModified}>
-									30.12.2021 04:02
+									12.12.2021 01:02
 								</p>
 								<p className={styles.listItemType}>Shortcut</p>
 								<p className={styles.listItemSize}>2kt</p>
@@ -84,15 +83,40 @@ function links() {
 							<div className={styles.listItem}>
 								<div className={styles.listItemName}>
 									<Image
-										src="/icons/github.ico"
+										src="/svg/github.svg"
 										alt="icon"
-										width={16}
-										height={16}
+										width={18}
+										height={18}
 									></Image>
 									<p>Github</p>
 								</div>
 								<p className={styles.listItemDateModified}>
-									30.12.2021 04:02
+									1.8.2022 08:00
+								</p>
+								<p className={styles.listItemType}>Shortcut</p>
+								<p className={styles.listItemSize}>2kt</p>
+							</div>
+						</a>
+					</Link>
+					<Link
+						href={
+							'https://open.spotify.com/user/ayg671h7p08iisz8d2hp8vjw4'
+						}
+						passHref
+					>
+						<a target="_blank">
+							<div className={styles.listItem}>
+								<div className={styles.listItemName}>
+									<Image
+										src="/svg/spotify.svg"
+										alt="icon"
+										width={18}
+										height={18}
+									></Image>
+									<p>Spotify</p>
+								</div>
+								<p className={styles.listItemDateModified}>
+									1.1.2024 04:20
 								</p>
 								<p className={styles.listItemType}>Shortcut</p>
 								<p className={styles.listItemSize}>2kt</p>

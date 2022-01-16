@@ -1,0 +1,65 @@
+@font-face {
+	font-weight: 600;
+	font-style: normal;
+	font-family: 'Lucida Console';
+	src: url('/fonts/Lucida-console.ttf');
+	font-display: swap;
+}
+
+.main {
+	position: absolute;
+	z-index: 1;
+	overflow-y: auto;
+	width: 100%;
+	height: calc(100% - 32px);
+	padding: 10px;
+	font-weight: 600;
+	font-family: 'Lucida Console', sans-serif;
+}
+
+.main p {
+	font-size: 0.9rem;
+}
+
+.terminalTitle {
+	color: rgb(64 200 64);
+}
+
+.terminalTitle > span {
+	color: rgb(190 190 0);
+}
+
+.terminalTitle > span:first-child {
+	color: rgb(200 64 255);
+}
+
+.promt {
+	display: flex;
+	gap: 5px;
+	align-items: flex-start;
+	height: 100%;
+	color: #fff;
+}
+
+.promt input {
+	width: 100%;
+	border: none;
+	background-color: transparent;
+	color: #fff;
+	outline: none;
+	font-weight: 600;
+	font-size: 0.9rem;
+	word-wrap: break-word;
+}
+
+.historyItem {
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.background {
+	height: calc(100% - 32px);
+	border-radius: 0 0 10px 10px;
+	background-image: url('/images/darknoice.png');
+	opacity: 0.9;
+}

@@ -1,10 +1,9 @@
 import Head from 'next/head';
-import React from 'react';
-import Icons from '../../components/icons/Icons';
-import FileExplorer from '../../components/fileExplorer/FileExplorer';
 import Image from 'next/image';
-import styles from '../../styles/utils/List.module.scss';
 import Link from 'next/link';
+import Icons from '../../components/modules/Icons/Icons';
+import FileExplorer from '../../components/windows/FileExplorer/FileExplorer';
+import styles from '../../styles/utils/List.module.css';
 
 function desktop() {
 	const content = () => {
@@ -15,7 +14,7 @@ function desktop() {
 						<div className={styles.listItem}>
 							<div className={styles.listItemName}>
 								<Image
-									src="/icons/notes.ico"
+									src="/icons/notes/notes.png"
 									alt="icon"
 									width={16}
 									height={16}
@@ -33,7 +32,7 @@ function desktop() {
 						<div className={styles.listItem}>
 							<div className={styles.listItemName}>
 								<Image
-									src="/icons/folder.ico"
+									src="/icons/folder/folder.png"
 									alt="icon"
 									width={16}
 									height={16}
@@ -51,7 +50,7 @@ function desktop() {
 						<div className={styles.listItem}>
 							<div className={styles.listItemName}>
 								<Image
-									src="/icons/folder.ico"
+									src="/icons/folder/folder.png"
 									alt="icon"
 									width={16}
 									height={16}
@@ -69,7 +68,7 @@ function desktop() {
 						<div className={styles.listItem}>
 							<div className={styles.listItemName}>
 								<Image
-									src="/icons/folder.ico"
+									src="/icons/folder/folder.png"
 									alt="icon"
 									width={16}
 									height={16}
@@ -88,7 +87,7 @@ function desktop() {
 						<div className={styles.listItem}>
 							<div className={styles.listItemName}>
 								<Image
-									src="/icons/pictures.ico"
+									src="/icons/pictures/pictures.png"
 									alt="icon"
 									width={16}
 									height={16}
@@ -107,7 +106,7 @@ function desktop() {
 						<div className={styles.listItem}>
 							<div className={styles.listItemName}>
 								<Image
-									src="/icons/videos.ico"
+									src="/icons/videos/videos.png"
 									alt="icon"
 									width={16}
 									height={16}
@@ -137,7 +136,7 @@ function desktop() {
 			</Head>
 			<div style={{ height: '100%' }}>
 				<FileExplorer
-					icon="folder"
+					icon="desktop"
 					folder="Desktop"
 					topNav={true}
 					component={content()}

@@ -1,0 +1,58 @@
+.errorContainer {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	z-index: 200;
+	width: 25rem;
+	padding: 10px;
+	border: 1px solid rgb(128 128 128 / 53.5%);
+	border-radius: 10px;
+	background-color: #f0f0f0;
+	transform: translate(-50%, -50%);
+}
+
+.errorContainer p {
+	color: #000;
+}
+
+.errorTop {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 5px;
+}
+
+.errorTop div:first-child {
+	display: flex;
+	gap: 5px;
+	align-items: center;
+}
+
+.errorTop div:nth-child(2) {
+	display: flex;
+	align-items: center;
+	padding: 3px 8px;
+}
+
+.errorTop div:nth-child(2):hover {
+	background-color: red;
+}
+
+.errorContent {
+	display: flex;
+	gap: 10px;
+	margin-bottom: 5px;
+	padding: 10px;
+	border: 1px solid rgb(128 128 128 / 57%);
+	background-color: #fff;
+}
+
+.errorBottom {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.errorBottom button {
+	padding-right: 30px;
+	padding-left: 30px;
+	border: 2px solid #207ec8;
+}

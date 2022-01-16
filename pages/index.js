@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import Icons from '../components/icons/Icons';
+import Icons from '../components/modules/Icons/Icons';
 
 export default function Home() {
 	return (

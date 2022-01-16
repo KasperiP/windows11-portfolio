@@ -1,7 +1,6 @@
 import Head from 'next/head';
-import React from 'react';
-import Icons from '../../components/icons/Icons';
-import FileExplorer from '../../components/fileExplorer/FileExplorer';
+import Icons from '../../components/modules/Icons/Icons';
+import FileExplorer from '../../components/windows/FileExplorer/FileExplorer';
 
 function downloads() {
 	return (
@@ -14,7 +13,11 @@ function downloads() {
 				/>
 			</Head>
 			<div style={{ height: '100%' }}>
-				<FileExplorer folder="Downloads" topNav={true} icon="folder" />
+				<FileExplorer
+					folder="Downloads"
+					topNav={true}
+					icon="downloads"
+				/>
 				<Icons />
 			</div>
 		</>

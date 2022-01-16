@@ -1,9 +1,9 @@
-import Layout from '../components/layout/Layout';
-import '../styles/globals.scss';
-import { useState, useCallback, useEffect } from 'react';
-import Bluescreen from '../components/bluescreen/Bluescreen';
 import { useRouter } from 'next/router';
-import ContextProvider from '../components/contextProvider/contextProvider';
+import { useCallback, useEffect, useState } from 'react';
+import Layout from '../components/layouts/Layout/Layout';
+import Bluescreen from '../components/modules/Bluescreen/Bluescreen';
+import ContextProvider from '../context/ContextProvider';
+import '../styles/globals.css';
 
 const useMediaQuery = (width) => {
 	const [targetReached, setTargetReached] = useState(false);
@@ -31,7 +31,7 @@ const useMediaQuery = (width) => {
 			isMounted = false;
 			media.removeEventListener('change', updateTarget);
 		};
-	}, []);
+	}, [updateTarget, width]);
 
 	return targetReached;
 };
@@ -48,6 +48,19 @@ function MyApp({ Component, pageProps }) {
 		if (!storage) return;
 		storage.setItem('prevPath', globalThis.location.pathname);
 	}
+
+	// Google analytics
+	useEffect(() => {
+		const handleRouteChange = (url) => {
+			window.gtag('config', process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS, {
+				page_path: url,
+			});
+		};
+		router.events.on('routeChangeComplete', handleRouteChange);
+		return () => {
+			router.events.off('routeChangeComplete', handleRouteChange);
+		};
+	}, [router.events]);
 
 	return (
 		<ContextProvider>

@@ -1,9 +1,8 @@
 import Head from 'next/head';
 import Image from 'next/image';
-import React from 'react';
-import Icons from '../../components/icons/Icons';
-import FileExplorer from '../../components/fileExplorer/FileExplorer';
-import styles from '../../styles/utils/List.module.scss';
+import Icons from '../../components/modules/Icons/Icons';
+import FileExplorer from '../../components/windows/FileExplorer/FileExplorer';
+import styles from '../../styles/utils/List.module.css';
 
 function tools() {
 	const content = () => {
@@ -13,7 +12,7 @@ function tools() {
 					<div className={styles.listItem}>
 						<div className={styles.listItemName}>
 							<Image
-								src="/icons/vscode.ico"
+								src="/icons/vscode/vscode.png"
 								alt="icon"
 								width={16}
 								height={16}
@@ -29,7 +28,7 @@ function tools() {
 					<div className={styles.listItem}>
 						<div className={styles.listItemName}>
 							<Image
-								src="/icons/githubdesktop.ico"
+								src="/icons/githubdesktop/githubdesktop.png"
 								alt="icon"
 								width={16}
 								height={16}
@@ -45,7 +44,7 @@ function tools() {
 					<div className={styles.listItem}>
 						<div className={styles.listItemName}>
 							<Image
-								src="/icons/mongodbcompass.ico"
+								src="/icons/mongodbcompass/mongodbcompass.png"
 								alt="icon"
 								width={16}
 								height={16}
@@ -61,7 +60,7 @@ function tools() {
 					<div className={styles.listItem}>
 						<div className={styles.listItemName}>
 							<Image
-								src="/icons/postman.ico"
+								src="/icons/postman/postman.png"
 								alt="icon"
 								width={16}
 								height={16}
@@ -77,7 +76,7 @@ function tools() {
 					<div className={styles.listItem}>
 						<div className={styles.listItemName}>
 							<Image
-								src="/icons/photoshop.ico"
+								src="/icons/photoshop/photoshop.png"
 								alt="icon"
 								width={16}
 								height={16}

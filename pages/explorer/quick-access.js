@@ -1,13 +1,12 @@
 import Head from 'next/head';
-import React from 'react';
-import Icons from '../../components/icons/Icons';
-import FileExplorer from '../../components/fileExplorer/FileExplorer';
-import { RiArrowDropDownLine } from 'react-icons/ri';
-import { BsFillPinAngleFill } from 'react-icons/bs';
 import Image from 'next/image';
-import styles from '../../styles/utils/GridList.module.scss';
-import listItemStyles from '../../styles/utils/List.module.scss';
 import Link from 'next/link';
+import { BsFillPinAngleFill } from 'react-icons/bs';
+import { RiArrowDropDownLine } from 'react-icons/ri';
+import Icons from '../../components/modules/Icons/Icons';
+import FileExplorer from '../../components/windows/FileExplorer/FileExplorer';
+import styles from '../../styles/utils/GridList.module.css';
+import listItemStyles from '../../styles/utils/List.module.css';
 
 function quickAccess() {
 	const content = () => {
@@ -23,7 +22,7 @@ function quickAccess() {
 						<div className={styles.item}>
 							<div>
 								<Image
-									src="/icons/desktop.ico"
+									src="/icons/desktop/desktop.png"
 									alt="icon"
 									width={50}
 									height={50}
@@ -40,7 +39,7 @@ function quickAccess() {
 						<div className={styles.item}>
 							<div>
 								<Image
-									src="/icons/downloads.ico"
+									src="/icons/downloads/downloads.png"
 									alt="icon"
 									width={50}
 									height={50}
@@ -58,7 +57,7 @@ function quickAccess() {
 						<div className={styles.item}>
 							<div>
 								<Image
-									src="/icons/documents.ico"
+									src="/icons/documents/documents.png"
 									alt="icon"
 									width={50}
 									height={50}
@@ -72,11 +71,11 @@ function quickAccess() {
 						</div>
 					</Link>
 
-					<Link href="/explorer/documents" passHref>
+					<Link href="/explorer/pictures" passHref>
 						<div className={styles.item}>
 							<div>
 								<Image
-									src="/icons/pictures.ico"
+									src="/icons/pictures/pictures.png"
 									alt="icon"
 									width={50}
 									height={50}
@@ -94,7 +93,7 @@ function quickAccess() {
 						<div className={styles.item}>
 							<div>
 								<Image
-									src="/icons/videos.ico"
+									src="/icons/videos/videos.png"
 									alt="icon"
 									width={50}
 									height={50}
@@ -112,7 +111,7 @@ function quickAccess() {
 						<div className={styles.item}>
 							<div>
 								<Image
-									src="/icons/music.ico"
+									src="/icons/music/music.png"
 									alt="icon"
 									width={50}
 									height={50}
@@ -140,7 +139,7 @@ function quickAccess() {
 						<div className={listItemStyles.listItem}>
 							<div className={listItemStyles.listItemName}>
 								<Image
-									src="/icons/notes.ico"
+									src="/icons/notes/notes.png"
 									alt="icon"
 									width={16}
 									height={16}
@@ -166,7 +165,7 @@ function quickAccess() {
 				<title>kassq - Quick access</title>
 				<link
 					rel="canonical"
-					href="https://www.kassq.dev/explorer/downloads"
+					href="https://www.kassq.dev/explorer/quick-access"
 				/>
 			</Head>
 			<div style={{ height: '100%' }}>

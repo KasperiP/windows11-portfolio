@@ -1,0 +1,49 @@
+.listItemContainer {
+	display: flex;
+	flex-direction: column;
+	margin-top: 3px;
+}
+
+.listItem {
+	display: flex;
+	padding: 5px 0;
+	border-radius: 2px;
+	cursor: pointer;
+}
+
+.listItem:hover {
+	background-color: #2e2e2e;
+}
+
+.listItem div,
+.listItem p {
+	display: flex;
+	align-items: center;
+	padding-top: 1px;
+	padding-bottom: 1px;
+}
+
+.listItemName {
+	display: flex;
+	gap: 5px;
+	align-items: center;
+	width: 40%;
+	padding-left: 5px;
+}
+
+.listItemDateModified {
+	width: 25%;
+	padding-left: 10px;
+}
+
+.listItemType {
+	width: 25%;
+	padding-left: 10px;
+}
+
+.listItemSize {
+	display: flex;
+	justify-content: flex-end;
+	width: 10%;
+	padding-right: 5px;
+}
