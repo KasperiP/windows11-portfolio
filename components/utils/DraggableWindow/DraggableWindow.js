@@ -65,15 +65,17 @@ function DraggableWindow({ children, windowName, topTitle, topIcon, close }) {
 		positionState,
 		windowPriorityState,
 		lastPosState,
+		openWindowsState,
 	} = useContext(Context);
 	const [maximized, setMaximized] = maximizedState;
 	const [history, setHistory] = explorerHistoryState;
 	const [position, setPosition] = positionState;
 	const [windowPriority, setWindowPriority] = windowPriorityState;
 	const [lastPos, setLastPos] = lastPosState;
+	const [openWindows, setOpenWindows] = openWindowsState;
 
 	const handlePriority = (e, window) => {
-		if (e.target.className === 'no_click') return;
+		if (e.target.className === 'no_click' || openWindows < 2) return;
 
 		// Get all priority values for all windows and sort them
 		const priorityValues = Object.values(windowPriority).sort(
@@ -126,6 +128,7 @@ function DraggableWindow({ children, windowName, topTitle, topIcon, close }) {
 	};
 
 	useEffect(() => {
+		setOpenWindows((prev) => prev + 1);
 		const getCenter = () => {
 			let width = window.innerWidth;
 			let height = window.innerHeight;
@@ -169,6 +172,10 @@ function DraggableWindow({ children, windowName, topTitle, topIcon, close }) {
 			setLoading(false);
 		}, 500);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
+
+		return () => {
+			setOpenWindows((prev) => prev - 1);
+		};
 	}, []);
 
 	useEffect(() => {
@@ -275,7 +282,7 @@ function DraggableWindow({ children, windowName, topTitle, topIcon, close }) {
 							maximized[windowName] ? 'maximized' : 'minimized'
 						}
 						initial={
-							history.length >= 1
+							history.length >= 1 && windowName !== 'fileExplorer'
 								? { transform: 'scale(1)' }
 								: { transform: 'scale(0)' }
 						}

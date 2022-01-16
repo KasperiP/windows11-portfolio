@@ -4,7 +4,7 @@ export const Context = createContext();
 
 const initialPriority = {
 	fileExplorer: 100,
-	mediaPlayer: 101,
+	mediaPlayer: 102,
 };
 
 const initialMaximized = {
@@ -56,6 +56,7 @@ const ContextProvider = ({ children }) => {
 	const [wasManual, setWasManual] = useState(false);
 	const [windowPriority, setWindowPriority] = useState(initialPriority);
 	const [lastPos, setLastPos] = useState(initialLastPos);
+	const [openWindows, setOpenWindows] = useState(0);
 
 	return (
 		<Context.Provider
@@ -67,6 +68,7 @@ const ContextProvider = ({ children }) => {
 				positionState: [position, setPosition],
 				windowPriorityState: [windowPriority, setWindowPriority],
 				lastPosState: [lastPos, setLastPos],
+				openWindowsState: [openWindows, setOpenWindows],
 			}}
 		>
 			{children}
