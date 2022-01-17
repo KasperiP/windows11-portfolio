@@ -50,7 +50,21 @@ const variants = {
 	},
 };
 
-function DraggableWindow({ children, windowName, topTitle, topIcon, close }) {
+interface DraggableWindowProps {
+	children: React.ReactNode;
+	windowName: string;
+	topTitle: string;
+	topIcon?: React.ReactNode;
+	close?: () => void;
+}
+
+function DraggableWindow({
+	children,
+	windowName,
+	topTitle,
+	topIcon,
+	close,
+}: DraggableWindowProps) {
 	const router = useRouter();
 	const nodeRef = useRef(null);
 
@@ -77,7 +91,7 @@ function DraggableWindow({ children, windowName, topTitle, topIcon, close }) {
 
 		// Get all priority values for all windows and sort them
 		const priorityValues = Object.values(windowPriority).sort(
-			(a, b) => a - b
+			(a: number, b: number) => a - b
 		);
 		// Get the highest priority value
 		const highestPriority = priorityValues[priorityValues.length - 1];
@@ -210,7 +224,6 @@ function DraggableWindow({ children, windowName, topTitle, topIcon, close }) {
 				<Rnd
 					dragHandleClassName={'draggable'}
 					cancel={'.not_draggable'}
-					default={{ width: 880, height: 550 }}
 					onDragStart={() => {
 						if (maximized[windowName]) {
 							setMaximized({ ...maximized, [windowName]: false });

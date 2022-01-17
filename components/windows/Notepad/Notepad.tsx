@@ -11,9 +11,8 @@ function Notepad(props) {
 
 	return (
 		<DraggableWindow
-			keepPosition={false}
-			windowName={'notepad'}
-			topTitle={'Notepad'}
+			windowName="notepad"
+			topTitle="Notepad"
 			topIcon={
 				<Image
 					src={`/icons/notepad/notepad.png`}
