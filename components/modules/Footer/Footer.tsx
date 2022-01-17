@@ -167,9 +167,9 @@ function Footer() {
 					{/* 					<dir className={styles.icon}>
 						<IoIosArrowUp />
 					</dir> */}
-					<dir className={styles.language}>
+					<div className={styles.language}>
 						<p>ENG</p>
-					</dir>
+					</div>
 					<div className={styles.icon}>
 						<AiOutlineWifi />
 						<FiVolume2 />

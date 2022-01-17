@@ -7,7 +7,7 @@ import { VscSearch } from 'react-icons/vsc';
 import styles from './WindowsMenu.module.css';
 
 function WindowsMenu({ isClosed, winMenu, handleWinMenu }) {
-	const node = useRef();
+	const node = useRef(null);
 
 	useEffect(() => {
 		const handleClickOutside = (e) => {
