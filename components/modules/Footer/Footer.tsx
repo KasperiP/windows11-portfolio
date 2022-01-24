@@ -7,12 +7,17 @@ import Error from '../Error/Error';
 import styles from './Footer.module.css';
 import WindowsMenu from './WindowsMenu';
 
+type ErrorObject = {
+	error: string;
+	index: number;
+};
+
 function Footer() {
 	const [winMenu, setWinMenu] = useState(false);
 	const [isClosed, setIsClosed] = useState(true);
-	const [errors, setError] = useState([]);
+	const [errors, setError] = useState([] as ErrorObject[]);
 
-	const handleError = (err) => {
+	const handleError = (err: string) => {
 		setError([...errors, { error: err, index: errors.length }]);
 	};
 

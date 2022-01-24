@@ -1,19 +1,25 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useRef } from 'react';
+import { MouseEventHandler, useEffect, useRef } from 'react';
 import { AiOutlinePoweroff } from 'react-icons/ai';
 import { IoIosArrowForward } from 'react-icons/io';
 import { VscSearch } from 'react-icons/vsc';
 import styles from './WindowsMenu.module.css';
 
-function WindowsMenu({ isClosed, winMenu, handleWinMenu }) {
-	const node = useRef(null);
+interface WindowsMenuProps {
+	isClosed: boolean;
+	winMenu: boolean;
+	handleWinMenu: () => void;
+}
+
+function WindowsMenu({ isClosed, winMenu, handleWinMenu }: WindowsMenuProps) {
+	const node = useRef(null as unknown as HTMLDivElement);
 
 	useEffect(() => {
-		const handleClickOutside = (e) => {
+		const handleClickOutside = (event: MouseEvent) => {
 			if (
-				node.current.contains(e.target) ||
-				e.srcElement.className.includes('windowsIcon')
+				node.current.contains(event.target) ||
+				event.srcElement.className.includes('windowsIcon')
 			)
 				return;
 			// outside click
