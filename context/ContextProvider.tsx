@@ -24,7 +24,7 @@ type Maximized = {
 	[key: string]: boolean | null;
 };
 
-interface ContextInterface {
+type ContextType = {
 	maximizedState: [Maximized, (newMaximized: Maximized) => void];
 	explorerHistoryState: [string[], (newExplorerHistory: string[]) => void];
 	indexState: [number, (newIndex: number) => void];
@@ -35,7 +35,7 @@ interface ContextInterface {
 		(newPriority: WindowPriority) => void
 	];
 	lastPosState: [LastPos, (newLastPos: LastPos) => void];
-}
+};
 
 // React-selecto uses z-index 100 so these values must be higher than
 const initialPriority = {
@@ -84,7 +84,7 @@ const initialLastPos = {
 	height: 0,
 };
 
-const initialState: ContextInterface = {
+const initialState: ContextType = {
 	maximizedState: [initialMaximized, () => {}],
 	explorerHistoryState: [[], () => {}],
 	indexState: [0, () => {}],
@@ -94,7 +94,7 @@ const initialState: ContextInterface = {
 	lastPosState: [initialLastPos, () => {}],
 };
 
-export const Context = createContext<ContextInterface>(initialState);
+export const Context = createContext<ContextType>(initialState);
 
 const ContextProvider = ({ children }: { children: React.ReactNode }) => {
 	const [maximized, setMaximized] = useState<Maximized>(initialMaximized);
@@ -106,7 +106,7 @@ const ContextProvider = ({ children }: { children: React.ReactNode }) => {
 		useState<WindowPriority>(initialPriority);
 	const [lastPos, setLastPos] = useState<LastPos>(initialLastPos);
 
-	const appContext: ContextInterface = {
+	const appContext: ContextType = {
 		maximizedState: [maximized, setMaximized],
 		explorerHistoryState: [explorerHistory, setExplorerHistory],
 		indexState: [index, setIndex],

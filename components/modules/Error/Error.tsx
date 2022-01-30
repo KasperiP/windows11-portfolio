@@ -8,12 +8,12 @@ type ErrorObject = {
 	error: string;
 	index: number;
 };
-interface ErrorProps {
+type ErrorProps = {
 	errors: ErrorObject[];
 	index: number;
 	setError: React.Dispatch<React.SetStateAction<ErrorObject[]>>;
 	error: string;
-}
+};
 
 function Error({ errors, index, setError, error }: ErrorProps) {
 	const handleClose = async () => {

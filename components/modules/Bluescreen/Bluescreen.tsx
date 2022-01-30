@@ -3,9 +3,9 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import styles from './Bluescreen.module.css';
 
-interface BluescreenProps {
+type BluescreenProps = {
 	errorCode: string;
-}
+};
 
 function Bluescreen({ errorCode }: BluescreenProps) {
 	const [progress, setProgress] = useState(0);

@@ -50,13 +50,13 @@ const variants = {
 	},
 };
 
-interface DraggableWindowProps {
+type DraggableWindowProps = {
 	children: React.ReactNode;
 	windowName: string;
 	topTitle: string;
 	topIcon?: React.ReactNode;
 	close?: () => void;
-}
+};
 
 function DraggableWindow({
 	children,
