@@ -1,10 +1,46 @@
-import { createContext, useState } from 'react';
+import React, { createContext, useState } from 'react';
 
-export const Context = createContext();
+type LastPos = {
+	x: number;
+	y: number;
+	width: number;
+	height: number;
+};
 
+type PositionState = {
+	[key: string]: {
+		x: number;
+		y: number;
+		width: number;
+		height: number;
+	};
+};
+
+type WindowPriority = {
+	[key: string]: number;
+};
+
+type Maximized = {
+	[key: string]: boolean | null;
+};
+
+interface ContextInterface {
+	maximizedState: [Maximized, (newMaximized: Maximized) => void];
+	explorerHistoryState: [string[], (newExplorerHistory: string[]) => void];
+	indexState: [number, (newIndex: number) => void];
+	wasManualState: [boolean, (newWasManual: boolean) => void];
+	positionState: [PositionState, (newPosition: PositionState) => void];
+	windowPriorityState: [
+		WindowPriority,
+		(newPriority: WindowPriority) => void
+	];
+	lastPosState: [LastPos, (newLastPos: LastPos) => void];
+}
+
+// React-selecto uses z-index 100 so these values must be higher than
 const initialPriority = {
-	fileExplorer: 100,
-	mediaPlayer: 101,
+	fileExplorer: 101,
+	mediaPlayer: 102,
 };
 
 const initialMaximized = {
@@ -48,30 +84,39 @@ const initialLastPos = {
 	height: 0,
 };
 
-const ContextProvider = ({ children }) => {
-	const [maximized, setMaximized] = useState(initialMaximized);
-	const [explorerHistory, setExplorerHistory] = useState([]);
-	const [index, setIndex] = useState(0);
-	const [position, setPosition] = useState(initialPosition);
-	const [wasManual, setWasManual] = useState(false);
-	const [windowPriority, setWindowPriority] = useState(initialPriority);
-	const [lastPos, setLastPos] = useState(initialLastPos);
+const initialState: ContextInterface = {
+	maximizedState: [initialMaximized, () => {}],
+	explorerHistoryState: [[], () => {}],
+	indexState: [0, () => {}],
+	wasManualState: [false, () => {}],
+	positionState: [initialPosition, () => {}],
+	windowPriorityState: [initialPriority, () => {}],
+	lastPosState: [initialLastPos, () => {}],
+};
 
-	return (
-		<Context.Provider
-			value={{
-				maximizedState: [maximized, setMaximized],
-				explorerHistoryState: [explorerHistory, setExplorerHistory],
-				indexState: [index, setIndex],
-				wasManualState: [wasManual, setWasManual],
-				positionState: [position, setPosition],
-				windowPriorityState: [windowPriority, setWindowPriority],
-				lastPosState: [lastPos, setLastPos],
-			}}
-		>
-			{children}
-		</Context.Provider>
-	);
+export const Context = createContext<ContextInterface>(initialState);
+
+const ContextProvider = ({ children }: { children: React.ReactNode }) => {
+	const [maximized, setMaximized] = useState<Maximized>(initialMaximized);
+	const [explorerHistory, setExplorerHistory] = useState<string[]>([]);
+	const [index, setIndex] = useState<number>(0);
+	const [position, setPosition] = useState<PositionState>(initialPosition);
+	const [wasManual, setWasManual] = useState<boolean>(false);
+	const [windowPriority, setWindowPriority] =
+		useState<WindowPriority>(initialPriority);
+	const [lastPos, setLastPos] = useState<LastPos>(initialLastPos);
+
+	const appContext: ContextInterface = {
+		maximizedState: [maximized, setMaximized],
+		explorerHistoryState: [explorerHistory, setExplorerHistory],
+		indexState: [index, setIndex],
+		wasManualState: [wasManual, setWasManual],
+		positionState: [position, setPosition],
+		windowPriorityState: [windowPriority, setWindowPriority],
+		lastPosState: [lastPos, setLastPos],
+	};
+
+	return <Context.Provider value={appContext}>{children}</Context.Provider>;
 };
 
 export default ContextProvider;

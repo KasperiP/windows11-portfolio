@@ -28,7 +28,7 @@ function about() {
 				/>
 			</Head>
 			<div style={{ height: '100%' }}>
-				<Notepad name="About me" text={() => textContent()} />
+				<Notepad initialText={textContent()} />
 				<Icons />
 			</div>
 		</>

@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { MouseEventHandler, useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { AiOutlinePoweroff } from 'react-icons/ai';
 import { IoIosArrowForward } from 'react-icons/io';
 import { VscSearch } from 'react-icons/vsc';
@@ -13,16 +13,17 @@ interface WindowsMenuProps {
 }
 
 function WindowsMenu({ isClosed, winMenu, handleWinMenu }: WindowsMenuProps) {
-	const node = useRef(null as unknown as HTMLDivElement);
+	const node = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
 		const handleClickOutside = (event: MouseEvent) => {
+			const target = event.target as HTMLElement;
+			if (null === node.current) return;
 			if (
-				node.current.contains(event.target) ||
-				event.srcElement.className.includes('windowsIcon')
+				node.current.contains(target) ||
+				target.className.includes('windowsIcon')
 			)
 				return;
-			// outside click
 			if (winMenu) {
 				handleWinMenu();
 			}

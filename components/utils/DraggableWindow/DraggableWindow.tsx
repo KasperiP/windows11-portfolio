@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { useRouter } from 'next/router';
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState, MouseEvent } from 'react';
 import { AiOutlinePlus } from 'react-icons/ai';
 import { RiArrowDropDownLine } from 'react-icons/ri';
 import {
@@ -73,25 +73,22 @@ function DraggableWindow({
 	const [loading, setLoading] = useState(true);
 	const [isClosing, setIsClosing] = useState(false);
 
-	const {
-		maximizedState,
-		explorerHistoryState,
-		positionState,
-		windowPriorityState,
-		lastPosState,
-	} = useContext(Context);
-	const [maximized, setMaximized] = maximizedState;
-	const [history, setHistory] = explorerHistoryState;
-	const [position, setPosition] = positionState;
-	const [windowPriority, setWindowPriority] = windowPriorityState;
-	const [lastPos, setLastPos] = lastPosState;
+	const DraggableWindowContext = useContext(Context);
 
-	const handlePriority = (e, window) => {
-		if (e.target.className === 'no_click') return;
+	const [maximized, setMaximized] = DraggableWindowContext.maximizedState;
+	const [history, setHistory] = DraggableWindowContext.explorerHistoryState;
+	const [position, setPosition] = DraggableWindowContext.positionState;
+	const [windowPriority, setWindowPriority] =
+		DraggableWindowContext.windowPriorityState;
+	const [lastPos, setLastPos] = DraggableWindowContext.lastPosState;
+
+	const handlePriority = (e: MouseEvent, window: string) => {
+		const target = e.target as HTMLElement;
+		if (target.className === 'no_click') return;
 
 		// Get all priority values for all windows and sort them
 		const priorityValues = Object.values(windowPriority).sort(
-			(a: number, b: number) => a - b
+			(a, b) => a - b
 		);
 		// Get the highest priority value
 		const highestPriority = priorityValues[priorityValues.length - 1];
@@ -127,7 +124,7 @@ function DraggableWindow({
 			setHistory([]);
 		}
 		if (windowName === 'mediaPlayer') {
-			return close();
+			if (close) return close();
 		}
 
 		setTimeout(() => {
@@ -135,7 +132,7 @@ function DraggableWindow({
 		}, 500);
 	};
 
-	const handleClick = (e, window) => {
+	const handleClick = (e: MouseEvent<HTMLDivElement>, window: string) => {
 		handlePriority(e, window);
 	};
 

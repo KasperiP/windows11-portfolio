@@ -1,11 +1,11 @@
 import Image from 'next/image';
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import DraggableWindow from '../../utils/DraggableWindow/DraggableWindow';
 import styles from './Notepad.module.css';
-function Notepad(props) {
-	const [text, setText] = useState(props.text);
+function Notepad({ initialText }: { initialText: string }) {
+	const [text, setText] = useState(initialText);
 
-	const handleChange = (e) => {
+	const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
 		setText(e.target.value);
 	};
 
