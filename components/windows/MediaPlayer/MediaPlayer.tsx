@@ -1,22 +1,14 @@
+import { MediaType } from '../../../typings';
 import DraggableWindow from '../../utils/DraggableWindow/DraggableWindow';
 import styles from './MediaPlayer.module.css';
 
-type MediaType = {
-	filename: string;
-	thumbnail: string;
-	secure_url: string;
-	format: string;
-	public_id: string;
-	url: string;
-};
-
-type MediaPlayerProps = {
+type Props = {
 	media: MediaType;
 	component: JSX.Element;
 	closeMedia: (newMedia: MediaType | null) => void;
 };
 
-function MediaPlayer(props: MediaPlayerProps) {
+function MediaPlayer(props: Props) {
 	return (
 		<DraggableWindow
 			windowName={'mediaPlayer'}

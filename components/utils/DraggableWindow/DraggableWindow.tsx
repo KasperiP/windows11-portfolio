@@ -1,6 +1,13 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { useRouter } from 'next/router';
-import { useContext, useEffect, useRef, useState, MouseEvent } from 'react';
+import {
+	useContext,
+	useEffect,
+	useRef,
+	useState,
+	MouseEvent,
+	ReactNode,
+} from 'react';
 import { AiOutlinePlus } from 'react-icons/ai';
 import { RiArrowDropDownLine } from 'react-icons/ri';
 import {
@@ -50,11 +57,11 @@ const variants = {
 	},
 };
 
-type DraggableWindowProps = {
-	children: React.ReactNode;
+type Props = {
+	children: ReactNode;
 	windowName: string;
 	topTitle: string;
-	topIcon?: React.ReactNode;
+	topIcon?: ReactNode;
 	close?: (newMedia: null) => void;
 };
 
@@ -64,7 +71,7 @@ function DraggableWindow({
 	topTitle,
 	topIcon,
 	close,
-}: DraggableWindowProps) {
+}: Props) {
 	const router = useRouter();
 	const nodeRef = useRef(null);
 

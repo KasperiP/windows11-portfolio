@@ -41,14 +41,14 @@ import { Context } from '../../../context/ContextProvider';
 import DraggableWindow from '../../utils/DraggableWindow/DraggableWindow';
 import styles from './FileExplorer.module.css';
 
-type FileExplorerProps = {
+type Props = {
 	folder: string;
 	icon: string;
 	topNav: boolean;
 	component?: React.ReactNode;
 };
 
-function FileExplorer(props: FileExplorerProps) {
+function FileExplorer(props: Props) {
 	const router = useRouter();
 	const { asPath } = router;
 

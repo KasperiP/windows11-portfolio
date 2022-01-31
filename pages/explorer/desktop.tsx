@@ -5,7 +5,7 @@ import Icons from '../../components/modules/Icons/Icons';
 import FileExplorer from '../../components/windows/FileExplorer/FileExplorer';
 import styles from '../../styles/utils/List.module.css';
 
-function desktop() {
+function Desktop() {
 	const content = () => {
 		return (
 			<>
@@ -147,4 +147,4 @@ function desktop() {
 	);
 }
 
-export default desktop;
+export default Desktop;

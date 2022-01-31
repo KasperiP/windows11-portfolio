@@ -5,15 +5,7 @@ import Icons from '../../components/modules/Icons/Icons';
 import FileExplorer from '../../components/windows/FileExplorer/FileExplorer';
 import MediaPlayer from '../../components/windows/MediaPlayer/MediaPlayer';
 import styles from '../../styles/utils/MediaGrid.module.css';
-
-type MediaType = {
-	filename: string;
-	thumbnail: string;
-	secure_url: string;
-	format: string;
-	public_id: string;
-	url: string;
-};
+import { MediaType } from '../../typings';
 
 function Pictures({ data }: { data: MediaType[] }) {
 	const [openImage, setOpenImage] = useState<MediaType | null>(null);

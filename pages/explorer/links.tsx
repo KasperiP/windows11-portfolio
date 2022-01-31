@@ -5,7 +5,7 @@ import Icons from '../../components/modules/Icons/Icons';
 import FileExplorer from '../../components/windows/FileExplorer/FileExplorer';
 import styles from '../../styles/utils/List.module.css';
 
-function links() {
+function Links() {
 	const content = () => {
 		return (
 			<>
@@ -149,4 +149,4 @@ function links() {
 	);
 }
 
-export default links;
+export default Links;

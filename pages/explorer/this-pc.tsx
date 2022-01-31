@@ -7,7 +7,7 @@ import Icons from '../../components/modules/Icons/Icons';
 import FileExplorer from '../../components/windows/FileExplorer/FileExplorer';
 import styles from '../../styles/utils/GridList.module.css';
 
-function thisPC() {
+function ThisPC() {
 	const content = () => {
 		return (
 			<>
@@ -188,4 +188,4 @@ function thisPC() {
 	);
 }
 
-export default thisPC;
+export default ThisPC;

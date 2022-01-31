@@ -2,20 +2,17 @@ import Image from 'next/image';
 import { useEffect } from 'react';
 import Draggable from 'react-draggable';
 import { VscChromeClose } from 'react-icons/vsc';
+import { ErrorType } from '../../../typings';
 import styles from './Error.module.css';
 
-type ErrorObject = {
-	error: string;
+type Props = {
+	errors: ErrorType[];
 	index: number;
-};
-type ErrorProps = {
-	errors: ErrorObject[];
-	index: number;
-	setError: React.Dispatch<React.SetStateAction<ErrorObject[]>>;
+	setError: React.Dispatch<React.SetStateAction<ErrorType[]>>;
 	error: string;
 };
 
-function Error({ errors, index, setError, error }: ErrorProps) {
+function Error({ errors, index, setError, error }: Props) {
 	const handleClose = async () => {
 		// Take props.errors array and remove props.error from it
 		const newErrors = await errors.filter((err) => err.index !== index);

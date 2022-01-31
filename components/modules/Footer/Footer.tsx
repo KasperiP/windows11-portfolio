@@ -3,19 +3,15 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { AiOutlineWifi } from 'react-icons/ai';
 import { FiVolume2 } from 'react-icons/fi';
+import { ErrorType } from '../../../typings';
 import Error from '../Error/Error';
 import styles from './Footer.module.css';
 import WindowsMenu from './WindowsMenu';
 
-type ErrorObject = {
-	error: string;
-	index: number;
-};
-
 function Footer() {
 	const [winMenu, setWinMenu] = useState(false);
 	const [isClosed, setIsClosed] = useState(true);
-	const [errors, setError] = useState([] as ErrorObject[]);
+	const [errors, setError] = useState([] as ErrorType[]);
 
 	const handleError = (err: string) => {
 		setError([...errors, { error: err, index: errors.length }]);

@@ -4,7 +4,7 @@ import Icons from '../../components/modules/Icons/Icons';
 import FileExplorer from '../../components/windows/FileExplorer/FileExplorer';
 import styles from '../../styles/utils/List.module.css';
 
-function tools() {
+function Tools() {
 	const content = () => {
 		return (
 			<>
@@ -115,4 +115,4 @@ function tools() {
 	);
 }
 
-export default tools;
+export default Tools;

@@ -6,13 +6,13 @@ import { IoIosArrowForward } from 'react-icons/io';
 import { VscSearch } from 'react-icons/vsc';
 import styles from './WindowsMenu.module.css';
 
-type WindowsMenuProps = {
+type Props = {
 	isClosed: boolean;
 	winMenu: boolean;
 	handleWinMenu: () => void;
 };
 
-function WindowsMenu({ isClosed, winMenu, handleWinMenu }: WindowsMenuProps) {
+function WindowsMenu({ isClosed, winMenu, handleWinMenu }: Props) {
 	const node = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {

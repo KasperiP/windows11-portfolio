@@ -8,7 +8,7 @@ import FileExplorer from '../../components/windows/FileExplorer/FileExplorer';
 import styles from '../../styles/utils/GridList.module.css';
 import listItemStyles from '../../styles/utils/List.module.css';
 
-function quickAccess() {
+function QuickAccess() {
 	const content = () => {
 		return (
 			<>
@@ -181,4 +181,4 @@ function quickAccess() {
 	);
 }
 
-export default quickAccess;
+export default QuickAccess;
