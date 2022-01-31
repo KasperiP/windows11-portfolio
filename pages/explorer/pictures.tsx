@@ -6,8 +6,17 @@ import FileExplorer from '../../components/windows/FileExplorer/FileExplorer';
 import MediaPlayer from '../../components/windows/MediaPlayer/MediaPlayer';
 import styles from '../../styles/utils/MediaGrid.module.css';
 
-function Pictures({ data }) {
-	const [openImage, setOpenImage] = useState(null);
+type MediaType = {
+	filename: string;
+	thumbnail: string;
+	secure_url: string;
+	format: string;
+	public_id: string;
+	url: string;
+};
+
+function Pictures({ data }: { data: MediaType[] }) {
+	const [openImage, setOpenImage] = useState<MediaType | null>(null);
 
 	const ImageContent = () => {
 		return (
@@ -53,7 +62,7 @@ function Pictures({ data }) {
 				{openImage && (
 					<MediaPlayer
 						media={openImage}
-						close={setOpenImage}
+						closeMedia={setOpenImage}
 						component={
 							<Image
 								src={openImage.url}
@@ -90,7 +99,7 @@ export async function getStaticProps() {
 		}
 	).then((res) => res.json());
 
-	const data = res.resources.map((image) => {
+	const data = res.resources.map((image: MediaType) => {
 		return {
 			url: image.secure_url.replace('/upload/', '/upload/q_auto:low/'),
 			secure_url: image.secure_url,

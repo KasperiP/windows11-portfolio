@@ -6,12 +6,14 @@ type MediaType = {
 	thumbnail: string;
 	secure_url: string;
 	format: string;
+	public_id: string;
+	url: string;
 };
 
 type MediaPlayerProps = {
 	media: MediaType;
-	close: () => void;
 	component: JSX.Element;
+	closeMedia: (newMedia: MediaType | null) => void;
 };
 
 function MediaPlayer(props: MediaPlayerProps) {
@@ -20,7 +22,7 @@ function MediaPlayer(props: MediaPlayerProps) {
 			windowName={'mediaPlayer'}
 			topTitle={`${props.media.filename.slice(0, -7)}.
             ${props.media.format}`}
-			close={props.close}
+			close={props.closeMedia}
 		>
 			<section className={styles.mediaArea}>{props.component}</section>
 			<footer className={styles.footer} />

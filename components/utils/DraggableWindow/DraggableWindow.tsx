@@ -55,7 +55,7 @@ type DraggableWindowProps = {
 	windowName: string;
 	topTitle: string;
 	topIcon?: React.ReactNode;
-	close?: () => void;
+	close?: (newMedia: null) => void;
 };
 
 function DraggableWindow({
@@ -124,7 +124,7 @@ function DraggableWindow({
 			setHistory([]);
 		}
 		if (windowName === 'mediaPlayer') {
-			if (close) return close();
+			if (close) return close(null);
 		}
 
 		setTimeout(() => {

@@ -12,6 +12,7 @@ type MediaType = {
 	secure_url: string;
 	format: string;
 	public_id: string;
+	url: string;
 };
 
 function Videos({ data }: { data: MediaType[] }) {
@@ -59,7 +60,7 @@ function Videos({ data }: { data: MediaType[] }) {
 			<div style={{ height: '100%' }}>
 				{openVideo && (
 					<MediaPlayer
-						close={setOpenVideo}
+						closeMedia={setOpenVideo}
 						media={openVideo}
 						component={
 							<video

@@ -53,9 +53,13 @@ function MyApp({ Component, pageProps }: AppProps) {
 	// Google analytics
 	useEffect(() => {
 		const handleRouteChange = (url: string) => {
-			window.gtag('config', process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS, {
-				page_path: url,
-			});
+			(window as any).gtag(
+				'config',
+				process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS,
+				{
+					page_path: url,
+				}
+			);
 		};
 		router.events.on('routeChangeComplete', handleRouteChange);
 		return () => {
