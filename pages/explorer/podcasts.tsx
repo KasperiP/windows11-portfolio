@@ -174,6 +174,7 @@ export async function getStaticProps() {
 				koodiapinnanallaTime,
 			},
 		},
+		revalidate: 10, // In seconds
 	};
 }
 
