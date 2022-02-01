@@ -175,8 +175,8 @@ function DraggableWindow({
 			};
 
 			if (
-				position[windowName]?.x === 0 &&
-				position[windowName]?.y === 0 &&
+				position[windowName].x === 0 &&
+				position[windowName].y === 0 &&
 				!maximized[windowName]
 			) {
 				await getCenter();
@@ -222,7 +222,7 @@ function DraggableWindow({
 
 	return (
 		<AnimatePresence>
-			{!isClosing && (
+			{!isClosing && !loading && (
 				<Rnd
 					dragHandleClassName={'draggable'}
 					cancel={'.not_draggable'}
