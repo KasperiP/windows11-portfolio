@@ -104,12 +104,31 @@ function Podcasts({ data }: { data: Props }) {
 }
 
 export async function getStaticProps() {
-	// Fetch https://koodikrapula.fi/ and get the first link from the page
+	const basic = Buffer.from(
+		`${process.env.SPOTIFY_CLIENT_ID}:${process.env.SPOTIFY_CLIENT_SECRET}`
+	).toString('base64');
+	const TOKEN_ENDPOINT = `https://accounts.spotify.com/api/token`;
+
+	const getAccessToken = async () => {
+		const response = await fetch(TOKEN_ENDPOINT, {
+			method: 'POST',
+			headers: {
+				Authorization: `Basic ${basic}`,
+				'Content-Type': 'application/x-www-form-urlencoded',
+			},
+			body: `grant_type=refresh_token&refresh_token=${process.env.SPOTIFY_REFRESH_TOKEN}`,
+		});
+
+		return response.json();
+	};
+
+	const { access_token }: { access_token: string } = await getAccessToken();
+
 	const koodikrapulaRes = await fetch(
 		'https://api.spotify.com/v1/shows/1st4zWhHxzXn345vqdTfk8/episodes',
 		{
 			headers: new Headers({
-				Authorization: `Bearer ${process.env.SPOTIFY_API_KEY}`,
+				Authorization: `Bearer ${access_token}`,
 			}),
 		}
 	).then((res) => res.json());
@@ -120,12 +139,12 @@ export async function getStaticProps() {
 		'https://api.spotify.com/v1/shows/3wKj2ZpdPi4eO3a2nSNwxy/episodes',
 		{
 			headers: new Headers({
-				Authorization: `Bearer ${process.env.SPOTIFY_API_KEY}`,
+				Authorization: `Bearer ${access_token}`,
 			}),
 		}
 	).then((res) => res.json());
 
-	// Webbidevaus
+	// Webbidevaus (not on spotify so using this hacky way)
 	const webbidevausTimeElement = webbidevausRes.match(
 		/<span class="meta__section-title meta__section-title--light">(.*?)"/
 	);
@@ -138,11 +157,14 @@ export async function getStaticProps() {
 				.join('-')
 		: '01.01.1970 00:00';
 
-	const koodiapinnanallaTime =
-		koodiapinnanallaRes.items[koodiapinnanallaRes.items.length - 1]
-			.release_date;
+	// koodiapinnanallaRes has key release_date so we can use that to get the latest episode
+	const koodiapinnanallaTime = koodiapinnanallaRes.items
+		.map((x: { release_date: string }) => x.release_date)
+		.sort((a: string, b: string) => +new Date(b) - +new Date(a))[0];
 
-	const koodikrapulaTime = koodikrapulaRes.items[0].release_date;
+	const koodikrapulaTime = koodikrapulaRes.items
+		.map((x: { release_date: string }) => x.release_date)
+		.sort((a: string, b: string) => +new Date(b) - +new Date(a))[0];
 
 	return {
 		props: {
