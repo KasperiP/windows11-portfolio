@@ -64,6 +64,24 @@ function Desktop() {
 							<p className={styles.listItemSize}>2kt</p>
 						</div>
 					</Link>
+					<Link href="/explorer/podcasts" passHref>
+						<div className={styles.listItem}>
+							<div className={styles.listItemName}>
+								<Image
+									src="/icons/folder/folder.png"
+									alt="icon"
+									width={16}
+									height={16}
+								></Image>
+								<p>Podcasts I listen to</p>
+							</div>
+							<p className={styles.listItemDateModified}>
+								30.01.2021 04:02
+							</p>
+							<p className={styles.listItemType}>Folder</p>
+							<p className={styles.listItemSize}>2kt</p>
+						</div>
+					</Link>
 					<Link href="/explorer/links" passHref>
 						<div className={styles.listItem}>
 							<div className={styles.listItemName}>

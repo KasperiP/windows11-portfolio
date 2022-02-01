@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import Image from 'next/image';
+import Link from 'next/link';
 import Icons from '../../components/modules/Icons/Icons';
 import FileExplorer from '../../components/windows/FileExplorer/FileExplorer';
 import styles from '../../styles/utils/List.module.css';
@@ -26,57 +27,63 @@ function Podcasts({ data }: { data: Props }) {
 		return (
 			<>
 				<div className={styles.listItemContainer}>
-					<div className={styles.listItem}>
-						<div className={styles.listItemName}>
-							<Image
-								src="/icons/podcasts/webbidevaus.png"
-								alt="icon"
-								width={16}
-								quality={100}
-								height={16}
-							></Image>
-							<p>Webbidevaus.fi</p>
+					<Link href="https://webbidevaus.fi/" passHref>
+						<div className={styles.listItem}>
+							<div className={styles.listItemName}>
+								<Image
+									src="/icons/podcasts/webbidevaus.png"
+									alt="icon"
+									width={16}
+									quality={100}
+									height={16}
+								></Image>
+								<p>Webbidevaus.fi</p>
+							</div>
+							<p className={styles.listItemDateModified}>
+								{getDate(data.webbidevausTime)}
+							</p>
+							<p className={styles.listItemType}>Shortcut</p>
+							<p className={styles.listItemSize}>2kt</p>
 						</div>
-						<p className={styles.listItemDateModified}>
-							{getDate(data.webbidevausTime)}
-						</p>
-						<p className={styles.listItemType}>Shortcut</p>
-						<p className={styles.listItemSize}>2kt</p>
-					</div>
-					<div className={styles.listItem}>
-						<div className={styles.listItemName}>
-							<Image
-								src="/icons/podcasts/koodiapinnanalla.png"
-								alt="icon"
-								width={16}
-								quality={100}
-								height={16}
-							></Image>
-							<p>Koodia pinnan alla</p>
+					</Link>
+					<Link href="https://koodiapinnanalla.fi/" passHref>
+						<div className={styles.listItem}>
+							<div className={styles.listItemName}>
+								<Image
+									src="/icons/podcasts/koodiapinnanalla.png"
+									alt="icon"
+									width={16}
+									quality={100}
+									height={16}
+								></Image>
+								<p>Koodia pinnan alla</p>
+							</div>
+							<p className={styles.listItemDateModified}>
+								{getDate(data.koodiapinnanallaTime)}
+							</p>
+							<p className={styles.listItemType}>Shortcut</p>
+							<p className={styles.listItemSize}>2kt</p>
 						</div>
-						<p className={styles.listItemDateModified}>
-							{getDate(data.koodiapinnanallaTime)}
-						</p>
-						<p className={styles.listItemType}>Shortcut</p>
-						<p className={styles.listItemSize}>2kt</p>
-					</div>
-					<div className={styles.listItem}>
-						<div className={styles.listItemName}>
-							<Image
-								src="/icons/podcasts/koodikrapula.png"
-								alt="icon"
-								width={16}
-								quality={100}
-								height={16}
-							></Image>
-							<p>Koodikrapula</p>
+					</Link>
+					<Link href="https://koodikrapula.fi/" passHref>
+						<div className={styles.listItem}>
+							<div className={styles.listItemName}>
+								<Image
+									src="/icons/podcasts/koodikrapula.png"
+									alt="icon"
+									width={16}
+									quality={100}
+									height={16}
+								></Image>
+								<p>Koodikrapula</p>
+							</div>
+							<p className={styles.listItemDateModified}>
+								{getDate(data.koodikrapulaTime)}
+							</p>
+							<p className={styles.listItemType}>Shortcut</p>
+							<p className={styles.listItemSize}>2kt</p>
 						</div>
-						<p className={styles.listItemDateModified}>
-							{getDate(data.koodikrapulaTime)}
-						</p>
-						<p className={styles.listItemType}>Shortcut</p>
-						<p className={styles.listItemSize}>2kt</p>
-					</div>
+					</Link>
 				</div>
 			</>
 		);
@@ -84,7 +91,7 @@ function Podcasts({ data }: { data: Props }) {
 	return (
 		<>
 			<Head>
-				<title>kassq - Favorites</title>
+				<title>kassq - Podcasts</title>
 				<link
 					rel="canonical"
 					href="https://www.kassq.dev/explorer/favorites"
@@ -93,7 +100,7 @@ function Podcasts({ data }: { data: Props }) {
 			<div style={{ height: '100%' }}>
 				<FileExplorer
 					icon="folder"
-					folder="Podcasts I listen"
+					folder="Podcasts I listen to"
 					topNav={true}
 					component={content()}
 				/>
@@ -124,7 +131,7 @@ export async function getStaticProps() {
 
 	const { access_token }: { access_token: string } = await getAccessToken();
 
-	const koodikrapulaRes = await fetch(
+	const koodikrapulaRes: { items: [{ release_date: string }] } = await fetch(
 		'https://api.spotify.com/v1/shows/1st4zWhHxzXn345vqdTfk8/episodes',
 		{
 			headers: new Headers({
@@ -135,14 +142,16 @@ export async function getStaticProps() {
 	const webbidevausRes = await (
 		await fetch('https://webbidevaus.fi/')
 	).text();
-	const koodiapinnanallaRes = await fetch(
-		'https://api.spotify.com/v1/shows/3wKj2ZpdPi4eO3a2nSNwxy/episodes',
-		{
-			headers: new Headers({
-				Authorization: `Bearer ${access_token}`,
-			}),
-		}
-	).then((res) => res.json());
+
+	const koodiapinnanallaRes: { items: [{ release_date: string }] } =
+		await fetch(
+			'https://api.spotify.com/v1/shows/3wKj2ZpdPi4eO3a2nSNwxy/episodes',
+			{
+				headers: new Headers({
+					Authorization: `Bearer ${access_token}`,
+				}),
+			}
+		).then((res) => res.json());
 
 	// Webbidevaus (not on spotify so using this hacky way)
 	const webbidevausTimeElement = webbidevausRes.match(
