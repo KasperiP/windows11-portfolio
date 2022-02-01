@@ -144,50 +144,48 @@ function DraggableWindow({
 	};
 
 	useEffect(() => {
-		const getCenter = () => {
-			let width = window.innerWidth;
-			let height = window.innerHeight;
+		(async () => {
+			const getCenter = async () => {
+				let width = window.innerWidth;
+				let height = window.innerHeight;
 
-			let x;
-			let y;
-			if (width !== position[windowName].width) {
-				x = width / 2 - position[windowName].width / 2;
+				let x;
+				let y;
+				if (width !== position[windowName].width) {
+					x = width / 2 - position[windowName].width / 2;
+				} else {
+					x = width / 2 - 880 / 2;
+				}
+
+				if (height !== position[windowName].height - 50) {
+					y = height / 2 - position[windowName].height / 2;
+				} else {
+					y = height / 2 - 550 / 2;
+				}
+
+				setPosition({
+					...position,
+					[windowName]: {
+						x: x,
+						y: y,
+						width: 880,
+						height: 550,
+					},
+				});
+			};
+
+			if (
+				position[windowName]?.x === 0 &&
+				position[windowName]?.y === 0 &&
+				!maximized[windowName]
+			) {
+				await getCenter();
+				setLoading(false);
 			} else {
-				x = width / 2 - 880 / 2;
+				setLoading(false);
 			}
-
-			if (height !== position[windowName].height - 50) {
-				y = height / 2 - position[windowName].height / 2;
-			} else {
-				y = height / 2 - 550 / 2;
-			}
-
-			setPosition({
-				...position,
-				[windowName]: {
-					x: x,
-					y: y,
-					width: 880,
-					height: 550,
-				},
-			});
-		};
-
-		if (
-			position[windowName]?.x === 0 &&
-			position[windowName]?.y === 0 &&
-			!maximized[windowName]
-		) {
-			getCenter();
-		}
-
-		//TODO: Better solution for this
-		// wait .5 sec before setting loading to false
-		setTimeout(() => {
-			setLoading(false);
-		}, 500);
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+		})();
+	}, [maximized, position, setPosition, windowName]);
 
 	useEffect(() => {
 		if (loading) return;
@@ -260,7 +258,7 @@ function DraggableWindow({
 							},
 						});
 					}}
-					onResizeStop={(e, direction, ref, delta, pos) => {
+					onResizeStop={() => {
 						setIsResizing(false);
 					}}
 					size={{
@@ -273,12 +271,16 @@ function DraggableWindow({
 					}}
 					minWidth={880}
 					minHeight={550}
+					className={`${
+						isDragging || isResizing || loading
+							? ''
+							: styles.animatedWindow
+					}`}
 					style={
 						isDragging || isResizing || loading
 							? { zIndex: 997 }
 							: {
 									zIndex: windowPriority[windowName] || 10,
-									transition: 'all 0.2s ease-in-out',
 							  }
 					}
 					resizeHandleStyles={handleStyles}

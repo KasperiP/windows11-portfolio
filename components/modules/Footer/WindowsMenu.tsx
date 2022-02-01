@@ -41,20 +41,12 @@ function WindowsMenu({ isClosed, winMenu, handleWinMenu }: Props) {
 	}, [handleWinMenu, winMenu]);
 
 	return (
-		<div
-			className={styles.overflow}
-			style={isClosed ? { display: 'none' } : { display: 'block' }}
-		>
+		<div className={styles.overflow}>
 			<div
 				ref={node}
-				className={styles.winMenu}
-				style={
-					winMenu
-						? { transform: 'translateY(0)' }
-						: {
-								transform: 'translateY(200%)',
-						  }
-				}
+				className={`${styles.winMenu} ${
+					winMenu ? styles.open : styles.closed
+				}`}
 			>
 				<div className={styles.winMenuContainer}>
 					<div className={styles.winMenuSearch}>

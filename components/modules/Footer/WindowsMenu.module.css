@@ -180,3 +180,11 @@
 .winMenuFooter img {
 	border-radius: 50%;
 }
+
+.open {
+	transform: translateY(0);
+}
+
+.closed {
+	transform: translateY(200%);
+}

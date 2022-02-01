@@ -18,19 +18,15 @@ function Footer() {
 	};
 
 	const handleWinMenu = () => {
-		if (winMenu) {
-			setWinMenu(false);
-			setTimeout(() => {
+		(async () => {
+			if (winMenu) {
+				setWinMenu(false);
 				setIsClosed(true);
-			}, 500);
-		} else {
-			setIsClosed(false);
-
-			//TODO: Wtf is this? Must be a better solution for this
-			setTimeout(() => {
+			} else {
+				setIsClosed(false);
 				setWinMenu(true);
-			}, 1);
-		}
+			}
+		})();
 	};
 
 	const [hourStr, setHourStr] = useState('00:00 PM');
@@ -165,9 +161,6 @@ function Footer() {
 					</Link>
 				</section>
 				<section className={styles.toolbarContainer}>
-					{/* 					<dir className={styles.icon}>
-						<IoIosArrowUp />
-					</dir> */}
 					<div className={styles.language}>
 						<p>ENG</p>
 					</div>
