@@ -1,0 +1,158 @@
+import Head from 'next/head';
+import Image from 'next/image';
+import Icons from '../../components/modules/Icons/Icons';
+import FileExplorer from '../../components/windows/FileExplorer/FileExplorer';
+import styles from '../../styles/utils/List.module.css';
+
+type Props = {
+	webbidevausTime: string;
+	koodikrapulaTime: string;
+	koodiapinnanallaTime: string;
+};
+
+const getDate = (date: string) => {
+	const dateString = new Date(date).toLocaleDateString('en-GB', {
+		year: 'numeric',
+		month: '2-digit',
+		day: '2-digit',
+		hour: '2-digit',
+		minute: '2-digit',
+	});
+	return dateString.replace(',', '');
+};
+
+function Podcasts({ data }: { data: Props }) {
+	const content = () => {
+		return (
+			<>
+				<div className={styles.listItemContainer}>
+					<div className={styles.listItem}>
+						<div className={styles.listItemName}>
+							<Image
+								src="/icons/podcasts/webbidevaus.png"
+								alt="icon"
+								width={16}
+								quality={100}
+								height={16}
+							></Image>
+							<p>Webbidevaus.fi</p>
+						</div>
+						<p className={styles.listItemDateModified}>
+							{getDate(data.webbidevausTime)}
+						</p>
+						<p className={styles.listItemType}>Shortcut</p>
+						<p className={styles.listItemSize}>2kt</p>
+					</div>
+					<div className={styles.listItem}>
+						<div className={styles.listItemName}>
+							<Image
+								src="/icons/podcasts/koodiapinnanalla.png"
+								alt="icon"
+								width={16}
+								quality={100}
+								height={16}
+							></Image>
+							<p>Koodia pinnan alla</p>
+						</div>
+						<p className={styles.listItemDateModified}>
+							{getDate(data.koodiapinnanallaTime)}
+						</p>
+						<p className={styles.listItemType}>Shortcut</p>
+						<p className={styles.listItemSize}>2kt</p>
+					</div>
+					<div className={styles.listItem}>
+						<div className={styles.listItemName}>
+							<Image
+								src="/icons/podcasts/koodikrapula.png"
+								alt="icon"
+								width={16}
+								quality={100}
+								height={16}
+							></Image>
+							<p>Koodikrapula</p>
+						</div>
+						<p className={styles.listItemDateModified}>
+							{getDate(data.koodikrapulaTime)}
+						</p>
+						<p className={styles.listItemType}>Shortcut</p>
+						<p className={styles.listItemSize}>2kt</p>
+					</div>
+				</div>
+			</>
+		);
+	};
+	return (
+		<>
+			<Head>
+				<title>kassq - Favorites</title>
+				<link
+					rel="canonical"
+					href="https://www.kassq.dev/explorer/favorites"
+				/>
+			</Head>
+			<div style={{ height: '100%' }}>
+				<FileExplorer
+					icon="folder"
+					folder="Podcasts I listen"
+					topNav={true}
+					component={content()}
+				/>
+				<Icons />
+			</div>
+		</>
+	);
+}
+
+export async function getStaticProps() {
+	// Fetch https://koodikrapula.fi/ and get the first link from the page
+	const koodikrapulaRes = await fetch(
+		'https://api.spotify.com/v1/shows/1st4zWhHxzXn345vqdTfk8/episodes',
+		{
+			headers: new Headers({
+				Authorization: `Bearer ${process.env.SPOTIFY_API_KEY}`,
+			}),
+		}
+	).then((res) => res.json());
+	const webbidevausRes = await (
+		await fetch('https://webbidevaus.fi/')
+	).text();
+	const koodiapinnanallaRes = await fetch(
+		'https://api.spotify.com/v1/shows/3wKj2ZpdPi4eO3a2nSNwxy/episodes',
+		{
+			headers: new Headers({
+				Authorization: `Bearer ${process.env.SPOTIFY_API_KEY}`,
+			}),
+		}
+	).then((res) => res.json());
+
+	// Webbidevaus
+	const webbidevausTimeElement = webbidevausRes.match(
+		/<span class="meta__section-title meta__section-title--light">(.*?)"/
+	);
+	const webbidevausTime = webbidevausTimeElement
+		? webbidevausTimeElement[1]
+				.replace('</span></h2><h2 class=', '')
+				.split('.')
+				.reverse()
+				.map((x) => x.padStart(2, '0'))
+				.join('-')
+		: '01.01.1970 00:00';
+
+	const koodiapinnanallaTime =
+		koodiapinnanallaRes.items[koodiapinnanallaRes.items.length - 1]
+			.release_date;
+
+	const koodikrapulaTime = koodikrapulaRes.items[0].release_date;
+
+	return {
+		props: {
+			data: {
+				koodikrapulaTime,
+				webbidevausTime,
+				koodiapinnanallaTime,
+			},
+		},
+	};
+}
+
+export default Podcasts;

@@ -89,6 +89,22 @@ function Tools() {
 						<p className={styles.listItemType}>Shortcut</p>
 						<p className={styles.listItemSize}>2kt</p>
 					</div>
+					<div className={styles.listItem}>
+						<div className={styles.listItemName}>
+							<Image
+								src="/icons/illustrator/illustrator.png"
+								alt="icon"
+								width={16}
+								height={16}
+							></Image>
+							<p>Illustrator</p>
+						</div>
+						<p className={styles.listItemDateModified}>
+							30.12.2021 05:59
+						</p>
+						<p className={styles.listItemType}>Shortcut</p>
+						<p className={styles.listItemSize}>2kt</p>
+					</div>
 				</div>
 			</>
 		);
