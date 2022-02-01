@@ -1,27 +1,10 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Selecto from 'react-selecto';
 import styles from './Icons.module.css';
 
 const ESCAPE_KEYS = ['46', 'Delete'];
-
-const useEventListener = (eventName, handler, element) => {
-	if (typeof window !== 'undefined') element = window;
-	const savedHandler = useRef();
-
-	useEffect(() => {
-		savedHandler.current = handler;
-	}, [handler]);
-
-	useEffect(() => {
-		const eventListener = (event) => savedHandler.current(event);
-		element.addEventListener(eventName, eventListener);
-		return () => {
-			element.removeEventListener(eventName, eventListener);
-		};
-	}, [eventName, element]);
-};
 
 function Icons() {
 	const [deleted, setDeleted] = useState(false);
@@ -37,12 +20,17 @@ function Icons() {
 		});
 	};
 
-	const handler = ({ key }) => {
-		if (ESCAPE_KEYS.includes(String(key))) {
-			handleDelete();
-		}
-	};
-	useEventListener('keydown', handler);
+	useEffect(() => {
+		const eventListener = (e: KeyboardEvent) => {
+			if (ESCAPE_KEYS.includes(String(e.key))) {
+				handleDelete();
+			}
+		};
+		document.addEventListener('keydown', eventListener);
+		return () => {
+			document.removeEventListener('keydown', eventListener);
+		};
+	}, []);
 
 	return (
 		<>
@@ -88,7 +76,6 @@ function Icons() {
 							<p>Projects</p>
 						</div>
 					</Link>
-
 					<Link href={'/explorer/tools'} passHref>
 						<div className={`${styles.item} selectoItem`}>
 							<Image
@@ -98,6 +85,17 @@ function Icons() {
 								height={40}
 							></Image>
 							<p>Tools</p>
+						</div>
+					</Link>
+					<Link href={'/explorer/podcasts'} passHref>
+						<div className={`${styles.item} selectoItem`}>
+							<Image
+								src="/icons/folder/folder.png"
+								alt="icon"
+								width={40}
+								height={40}
+							></Image>
+							<p>Podcasts I listen to</p>
 						</div>
 					</Link>
 					<Link href={'/explorer/links'} passHref>

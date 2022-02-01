@@ -4,7 +4,7 @@ import Icons from '../../components/modules/Icons/Icons';
 import FileExplorer from '../../components/windows/FileExplorer/FileExplorer';
 import styles from '../../styles/utils/List.module.css';
 
-function tools() {
+function Tools() {
 	const content = () => {
 		return (
 			<>
@@ -89,6 +89,22 @@ function tools() {
 						<p className={styles.listItemType}>Shortcut</p>
 						<p className={styles.listItemSize}>2kt</p>
 					</div>
+					<div className={styles.listItem}>
+						<div className={styles.listItemName}>
+							<Image
+								src="/icons/illustrator/illustrator.png"
+								alt="icon"
+								width={16}
+								height={16}
+							></Image>
+							<p>Illustrator</p>
+						</div>
+						<p className={styles.listItemDateModified}>
+							30.12.2021 05:59
+						</p>
+						<p className={styles.listItemType}>Shortcut</p>
+						<p className={styles.listItemSize}>2kt</p>
+					</div>
 				</div>
 			</>
 		);
@@ -115,4 +131,4 @@ function tools() {
 	);
 }
 
-export default tools;
+export default Tools;

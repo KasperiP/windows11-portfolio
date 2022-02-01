@@ -5,9 +5,10 @@ import Icons from '../../components/modules/Icons/Icons';
 import FileExplorer from '../../components/windows/FileExplorer/FileExplorer';
 import MediaPlayer from '../../components/windows/MediaPlayer/MediaPlayer';
 import styles from '../../styles/utils/MediaGrid.module.css';
+import { MediaType } from '../../typings';
 
-function Videos({ data }) {
-	const [openVideo, setOpenVideo] = useState(null);
+function Videos({ data }: { data: MediaType[] }) {
+	const [openVideo, setOpenVideo] = useState<MediaType | null>(null);
 	const VideoContent = () => {
 		return (
 			<div className={styles.wrapper}>
@@ -51,7 +52,7 @@ function Videos({ data }) {
 			<div style={{ height: '100%' }}>
 				{openVideo && (
 					<MediaPlayer
-						close={setOpenVideo}
+						closeMedia={setOpenVideo}
 						media={openVideo}
 						component={
 							<video
@@ -89,7 +90,7 @@ export async function getStaticProps() {
 		}
 	).then((res) => res.json());
 
-	const data = res.resources.map((video) => {
+	const data = res.resources.map((video: MediaType) => {
 		return {
 			thumbnail: (
 				video.secure_url.split('.').slice(0, -1).join('.') + '.webp'

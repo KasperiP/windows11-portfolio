@@ -1,7 +1,13 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useContext, useEffect, useState } from 'react';
+import {
+	ChangeEvent,
+	useContext,
+	useEffect,
+	useState,
+	FocusEvent,
+} from 'react';
 import {
 	AiFillCaretRight,
 	AiOutlinePlusCircle,
@@ -35,7 +41,14 @@ import { Context } from '../../../context/ContextProvider';
 import DraggableWindow from '../../utils/DraggableWindow/DraggableWindow';
 import styles from './FileExplorer.module.css';
 
-function FileExplorer(props) {
+type Props = {
+	folder: string;
+	icon: string;
+	topNav: boolean;
+	component?: React.ReactNode;
+};
+
+function FileExplorer(props: Props) {
 	const router = useRouter();
 	const { asPath } = router;
 
@@ -49,11 +62,11 @@ function FileExplorer(props) {
 	const [quickaccess, setQuickaccess] = useState(true);
 	const [thisPC, setThisPC] = useState(true);
 
-	const handleChange = (e) => {
+	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
 		setPath(e.target.value);
 	};
 
-	const handleFocus = (e) => e.target.select();
+	const handleFocus = (e: FocusEvent<HTMLInputElement>) => e.target.select();
 
 	const handleBlur = () => setPath(props.folder);
 
@@ -71,17 +84,17 @@ function FileExplorer(props) {
 	const handleBack = () => {
 		if (index > 0 && history.length > 0) {
 			setWasManual(true);
-			index = index - 1;
-			setIndex(index);
-			router.push(history[index]);
+			let i = index - 1;
+			setIndex(i);
+			router.push(history[i]);
 		}
 	};
 	const handleNext = () => {
 		if (index < history.length - 1) {
 			setWasManual(true);
-			index = index + 1;
-			setIndex(index);
-			router.push(history[index]);
+			let i = index + 1;
+			setIndex(i);
+			router.push(history[i]);
 		}
 	};
 

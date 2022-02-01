@@ -3,31 +3,37 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import styles from './Bluescreen.module.css';
 
-function Bluescreen(props) {
+type Props = {
+	errorCode: string;
+};
+
+function Bluescreen({ errorCode }: Props) {
 	const [progress, setProgress] = useState(0);
 
 	useEffect(() => {
 		let isMounted = true;
-		let interval = setInterval(() => {
+		let interval = setTimeout(() => {
 			if (progress <= 100) {
-				// eslint-disable-next-line react-hooks/exhaustive-deps
-				let newProgress = (progress += parseInt(Math.random() * 10));
+				let currentProgress = progress;
+				let newProgress = (currentProgress += Math.floor(
+					Math.random() * 10
+				));
 				if (newProgress > 100) newProgress = 100;
 				if (isMounted) setProgress(newProgress);
 			} else {
 				if (isMounted) setProgress(100);
-				clearInterval(interval);
+				clearTimeout(interval);
 			}
 		}, 1000);
 		return () => {
 			isMounted = false;
 		};
-	}, []);
+	}, [progress]);
 
 	return (
 		<>
 			<Head>
-				<title>kassq - {props.errorCode || 'ERROR'}</title>
+				<title>kassq - {errorCode || 'ERROR'}</title>
 			</Head>
 			<div className={styles.container}>
 				<div className={styles.wrapper}>
@@ -56,7 +62,7 @@ function Bluescreen(props) {
 							</h2>
 							<h2>
 								If you call a support person, give them this
-								info: Stop Code: {props.errorCode || 'UNKNOWN'}
+								info: Stop Code: {errorCode || 'UNKNOWN'}
 							</h2>
 						</div>
 					</div>

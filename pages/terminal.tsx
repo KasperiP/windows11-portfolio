@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import { useEffect } from 'react';
 import Icons from '../components/modules/Icons/Icons';
 import Terminal from '../components/windows/Terminal/Terminal';
 

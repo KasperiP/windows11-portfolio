@@ -6,17 +6,24 @@ import { IoIosArrowForward } from 'react-icons/io';
 import { VscSearch } from 'react-icons/vsc';
 import styles from './WindowsMenu.module.css';
 
-function WindowsMenu({ isClosed, winMenu, handleWinMenu }) {
-	const node = useRef();
+type Props = {
+	isClosed: boolean;
+	winMenu: boolean;
+	handleWinMenu: () => void;
+};
+
+function WindowsMenu({ isClosed, winMenu, handleWinMenu }: Props) {
+	const node = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
-		const handleClickOutside = (e) => {
+		const handleClickOutside = (event: MouseEvent) => {
+			const target = event.target as HTMLElement;
+			if (null === node.current) return;
 			if (
-				node.current.contains(e.target) ||
-				e.srcElement.className.includes('windowsIcon')
+				node.current.contains(target) ||
+				target.className.includes('windowsIcon')
 			)
 				return;
-			// outside click
 			if (winMenu) {
 				handleWinMenu();
 			}

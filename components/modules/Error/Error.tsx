@@ -2,15 +2,21 @@ import Image from 'next/image';
 import { useEffect } from 'react';
 import Draggable from 'react-draggable';
 import { VscChromeClose } from 'react-icons/vsc';
+import { ErrorType } from '../../../typings';
 import styles from './Error.module.css';
 
-function Error(props) {
+type Props = {
+	errors: ErrorType[];
+	index: number;
+	setError: React.Dispatch<React.SetStateAction<ErrorType[]>>;
+	error: string;
+};
+
+function Error({ errors, index, setError, error }: Props) {
 	const handleClose = async () => {
 		// Take props.errors array and remove props.error from it
-		const newErrors = await props.errors.filter(
-			(err) => err.index !== props.index
-		);
-		props.setError(newErrors);
+		const newErrors = await errors.filter((err) => err.index !== index);
+		setError(newErrors);
 	};
 
 	useEffect(() => {
@@ -23,10 +29,10 @@ function Error(props) {
 		<Draggable
 			cancel="button"
 			positionOffset={
-				props.index && props.index > 0
+				index && index > 0
 					? {
-							x: `calc(-50% +  ${props.index * 20}px)`,
-							y: `calc(-50% -  ${props.index * 20}px)`,
+							x: `calc(-50% +  ${index * 20}px)`,
+							y: `calc(-50% -  ${index * 20}px)`,
 					  }
 					: { x: '-50%', y: '-50%' }
 			}
@@ -40,7 +46,7 @@ function Error(props) {
 							height={20}
 							alt="icon"
 						/>
-						<p>{props.error}.exe - Application error</p>
+						<p>{error}.exe - Application error</p>
 					</div>
 					<div onClick={handleClose}>
 						<VscChromeClose />

@@ -2,7 +2,7 @@ import Head from 'next/head';
 import Icons from '../../components/modules/Icons/Icons';
 import FileExplorer from '../../components/windows/FileExplorer/FileExplorer';
 
-function downloads() {
+function Downloads() {
 	return (
 		<>
 			<Head>
@@ -24,4 +24,4 @@ function downloads() {
 	);
 }
 
-export default downloads;
+export default Downloads;

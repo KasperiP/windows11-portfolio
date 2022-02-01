@@ -1,6 +1,13 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { useRouter } from 'next/router';
-import { useContext, useEffect, useRef, useState } from 'react';
+import {
+	useContext,
+	useEffect,
+	useRef,
+	useState,
+	MouseEvent,
+	ReactNode,
+} from 'react';
 import { AiOutlinePlus } from 'react-icons/ai';
 import { RiArrowDropDownLine } from 'react-icons/ri';
 import {
@@ -50,7 +57,21 @@ const variants = {
 	},
 };
 
-function DraggableWindow({ children, windowName, topTitle, topIcon, close }) {
+type Props = {
+	children: ReactNode;
+	windowName: string;
+	topTitle: string;
+	topIcon?: ReactNode;
+	close?: (newMedia: null) => void;
+};
+
+function DraggableWindow({
+	children,
+	windowName,
+	topTitle,
+	topIcon,
+	close,
+}: Props) {
 	const router = useRouter();
 	const nodeRef = useRef(null);
 
@@ -59,23 +80,18 @@ function DraggableWindow({ children, windowName, topTitle, topIcon, close }) {
 	const [loading, setLoading] = useState(true);
 	const [isClosing, setIsClosing] = useState(false);
 
-	const {
-		maximizedState,
-		explorerHistoryState,
-		positionState,
-		windowPriorityState,
-		lastPosState,
-		openWindowsState,
-	} = useContext(Context);
-	const [maximized, setMaximized] = maximizedState;
-	const [history, setHistory] = explorerHistoryState;
-	const [position, setPosition] = positionState;
-	const [windowPriority, setWindowPriority] = windowPriorityState;
-	const [lastPos, setLastPos] = lastPosState;
-	const [openWindows, setOpenWindows] = openWindowsState;
+	const DraggableWindowContext = useContext(Context);
 
-	const handlePriority = (e, window) => {
-		if (e.target.className === 'no_click' || openWindows < 2) return;
+	const [maximized, setMaximized] = DraggableWindowContext.maximizedState;
+	const [history, setHistory] = DraggableWindowContext.explorerHistoryState;
+	const [position, setPosition] = DraggableWindowContext.positionState;
+	const [windowPriority, setWindowPriority] =
+		DraggableWindowContext.windowPriorityState;
+	const [lastPos, setLastPos] = DraggableWindowContext.lastPosState;
+
+	const handlePriority = (e: MouseEvent, window: string) => {
+		const target = e.target as HTMLElement;
+		if (target.className === 'no_click') return;
 
 		// Get all priority values for all windows and sort them
 		const priorityValues = Object.values(windowPriority).sort(
@@ -115,7 +131,7 @@ function DraggableWindow({ children, windowName, topTitle, topIcon, close }) {
 			setHistory([]);
 		}
 		if (windowName === 'mediaPlayer') {
-			return close();
+			if (close) return close(null);
 		}
 
 		setTimeout(() => {
@@ -123,12 +139,11 @@ function DraggableWindow({ children, windowName, topTitle, topIcon, close }) {
 		}, 500);
 	};
 
-	const handleClick = (e, window) => {
+	const handleClick = (e: MouseEvent<HTMLDivElement>, window: string) => {
 		handlePriority(e, window);
 	};
 
 	useEffect(() => {
-		setOpenWindows((prev) => prev + 1);
 		const getCenter = () => {
 			let width = window.innerWidth;
 			let height = window.innerHeight;
@@ -172,10 +187,6 @@ function DraggableWindow({ children, windowName, topTitle, topIcon, close }) {
 			setLoading(false);
 		}, 500);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-
-		return () => {
-			setOpenWindows((prev) => prev - 1);
-		};
 	}, []);
 
 	useEffect(() => {
@@ -217,7 +228,6 @@ function DraggableWindow({ children, windowName, topTitle, topIcon, close }) {
 				<Rnd
 					dragHandleClassName={'draggable'}
 					cancel={'.not_draggable'}
-					default={{ width: 880, height: 550 }}
 					onDragStart={() => {
 						if (maximized[windowName]) {
 							setMaximized({ ...maximized, [windowName]: false });

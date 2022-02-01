@@ -2,7 +2,7 @@ import Head from 'next/head';
 import Icons from '../../components/modules/Icons/Icons';
 import FileExplorer from '../../components/windows/FileExplorer/FileExplorer';
 
-function music() {
+function Music() {
 	return (
 		<>
 			<Head>
@@ -20,4 +20,4 @@ function music() {
 	);
 }
 
-export default music;
+export default Music;

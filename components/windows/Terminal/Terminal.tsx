@@ -1,10 +1,11 @@
 import Image from 'next/image';
 import { useCallback, useEffect, useState } from 'react';
+import { HistoryType } from '../../../typings';
 import DraggableWindow from '../../utils/DraggableWindow/DraggableWindow';
 import styles from './Terminal.module.css';
 
 function Terminal() {
-	const [history, setHistory] = useState([]);
+	const [history, setHistory] = useState<HistoryType[] | []>([]);
 
 	const executeCommand = useCallback(
 		(input) => {
@@ -35,6 +36,7 @@ function Terminal() {
 				case 'ls':
 					setHistory([
 						...history,
+
 						{
 							input: input,
 							response: `hello.txt`,
@@ -74,19 +76,22 @@ function Terminal() {
 	);
 
 	useEffect(() => {
-		const handleFocus = (e) => {
-			const terminal = document.getElementsByClassName('prompt')[0];
+		const handleFocus = () => {
+			const terminal = document.getElementsByClassName(
+				'prompt'
+			)[0] as HTMLInputElement;
 			terminal?.focus();
 			terminal?.scrollIntoView();
 		};
 
-		const handleKeyUp = async (e) => {
-			if (e.keyCode == 13) {
-				let input = e.target.value; // get current input val
+		const handleKeyUp = async (e: KeyboardEvent) => {
+			if (e.key == 'Enter') {
+				const target = e.target as HTMLInputElement;
+				let input = target.value;
 
 				await executeCommand(input);
 
-				e.target.value = ''; // clear input
+				target.value = '';
 			}
 		};
 

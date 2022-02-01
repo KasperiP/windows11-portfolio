@@ -2,7 +2,7 @@ import Head from 'next/head';
 import Icons from '../../components/modules/Icons/Icons';
 import FileExplorer from '../../components/windows/FileExplorer/FileExplorer';
 
-function documents() {
+function Documents() {
 	return (
 		<>
 			<Head>
@@ -24,4 +24,4 @@ function documents() {
 	);
 }
 
-export default documents;
+export default Documents;

@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { AiOutlineWifi } from 'react-icons/ai';
 import { FiVolume2 } from 'react-icons/fi';
+import { ErrorType } from '../../../typings';
 import Error from '../Error/Error';
 import styles from './Footer.module.css';
 import WindowsMenu from './WindowsMenu';
@@ -10,9 +11,9 @@ import WindowsMenu from './WindowsMenu';
 function Footer() {
 	const [winMenu, setWinMenu] = useState(false);
 	const [isClosed, setIsClosed] = useState(true);
-	const [errors, setError] = useState([]);
+	const [errors, setError] = useState([] as ErrorType[]);
 
-	const handleError = (err) => {
+	const handleError = (err: string) => {
 		setError([...errors, { error: err, index: errors.length }]);
 	};
 
@@ -167,9 +168,9 @@ function Footer() {
 					{/* 					<dir className={styles.icon}>
 						<IoIosArrowUp />
 					</dir> */}
-					<dir className={styles.language}>
+					<div className={styles.language}>
 						<p>ENG</p>
-					</dir>
+					</div>
 					<div className={styles.icon}>
 						<AiOutlineWifi />
 						<FiVolume2 />

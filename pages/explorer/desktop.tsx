@@ -5,7 +5,7 @@ import Icons from '../../components/modules/Icons/Icons';
 import FileExplorer from '../../components/windows/FileExplorer/FileExplorer';
 import styles from '../../styles/utils/List.module.css';
 
-function desktop() {
+function Desktop() {
 	const content = () => {
 		return (
 			<>
@@ -59,6 +59,24 @@ function desktop() {
 							</div>
 							<p className={styles.listItemDateModified}>
 								30.12.2021 04:02
+							</p>
+							<p className={styles.listItemType}>Folder</p>
+							<p className={styles.listItemSize}>2kt</p>
+						</div>
+					</Link>
+					<Link href="/explorer/podcasts" passHref>
+						<div className={styles.listItem}>
+							<div className={styles.listItemName}>
+								<Image
+									src="/icons/folder/folder.png"
+									alt="icon"
+									width={16}
+									height={16}
+								></Image>
+								<p>Podcasts I listen to</p>
+							</div>
+							<p className={styles.listItemDateModified}>
+								30.01.2021 04:02
 							</p>
 							<p className={styles.listItemType}>Folder</p>
 							<p className={styles.listItemSize}>2kt</p>
@@ -147,4 +165,4 @@ function desktop() {
 	);
 }
 
-export default desktop;
+export default Desktop;

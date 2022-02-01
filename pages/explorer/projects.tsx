@@ -3,10 +3,11 @@ import Image from 'next/image';
 import Icons from '../../components/modules/Icons/Icons';
 import FileExplorer from '../../components/windows/FileExplorer/FileExplorer';
 import styles from '../../styles/utils/List.module.css';
+import { ProjectType } from '../../typings';
 
-function projects({ data }) {
+function Projects({ data }: { data: ProjectType[] }) {
 	const content = () => {
-		const getDate = (date) => {
+		const getDate = (date: string) => {
 			const dateString = new Date(date).toLocaleDateString('en-GB', {
 				year: 'numeric',
 				month: '2-digit',
@@ -17,7 +18,7 @@ function projects({ data }) {
 			return dateString.replace(',', '');
 		};
 
-		const formatSize = (size) => {
+		const formatSize = (size: number) => {
 			if (size > 1024) {
 				return `${(size / 1024).toFixed(2)} MB`;
 			}
@@ -86,7 +87,7 @@ function projects({ data }) {
 export async function getStaticProps() {
 	const res = await fetch(`https://api.github.com/users/KasperiP/repos`);
 	const data = (await res.json()).filter(
-		(project) =>
+		(project: ProjectType) =>
 			project.fork === false && project.full_name !== 'KasperiP/KasperiP'
 	);
 
@@ -101,4 +102,4 @@ export async function getStaticProps() {
 	};
 }
 
-export default projects;
+export default Projects;
