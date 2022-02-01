@@ -53,6 +53,8 @@ function Links() {
 							</div>
 						</a>
 					</Link>
+					{/* 	
+									
 					<Link
 						href={
 							'https://fi.linkedin.com/in/kasperi-pohtinen-41273a204'
@@ -77,7 +79,9 @@ function Links() {
 								<p className={styles.listItemSize}>2kt</p>
 							</div>
 						</a>
-					</Link>
+					</Link> 
+
+					*/}
 					<Link href={'https://github.com/KasperiP/'} passHref>
 						<a target="_blank">
 							<div className={styles.listItem}>

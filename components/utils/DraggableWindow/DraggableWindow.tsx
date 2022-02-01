@@ -292,7 +292,7 @@ function DraggableWindow({
 							maximized[windowName] ? 'maximized' : 'minimized'
 						}
 						initial={
-							history.length >= 1
+							history.length >= 1 && windowName === 'fileExplorer'
 								? { transform: 'scale(1)' }
 								: { transform: 'scale(0)' }
 						}

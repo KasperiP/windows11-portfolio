@@ -18,13 +18,6 @@ export default function Document() {
 					rel="stylesheet"
 				/>
 
-				<link
-					rel="preload"
-					href="/fonts/Lucida-console.ttf"
-					as="font"
-					crossOrigin=""
-				/>
-
 				{/* SEO */}
 				<meta name="theme-color" content="#55FFFF" />
 				<meta charSet="utf-8" />
