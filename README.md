@@ -1,4 +1,12 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Windows11-portfolio
+[![Open is Visual Studio Code](https://open.vscode.dev/badges/open-in-vscode.svg)](https://open.vscode.dev/KasperiP/windows11-portfolio)
+
+Windows 11 inspired personal portfolio website built using Next.js & deployed on Vercel. Feel free to clean up my messy code and teach me how to write better typescript. Im noob 😩.
+
+![windows11-banner](https://i.imgur.com/muQyeAG.png)
+
+## Demo
+View the website on Vercel: https://www.kassq.dev
 
 ## Getting Started
 
@@ -12,11 +20,6 @@ yarn dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
 ## Learn More
 
