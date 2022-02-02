@@ -105,7 +105,14 @@ function DraggableWindow({
 	};
 
 	const handleMaximize = () => {
-		setMaximized({ ...maximized, [windowName]: !maximized[windowName] });
+		if (maximized[windowName] === true) {
+			setMaximized({ ...maximized, [windowName]: null });
+		} else {
+			setMaximized({
+				...maximized,
+				[windowName]: true,
+			});
+		}
 	};
 
 	const handleClose = () => {
