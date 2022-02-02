@@ -1,12 +1,12 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { useRouter } from 'next/router';
 import {
+	MouseEvent,
+	ReactNode,
 	useContext,
 	useEffect,
 	useRef,
 	useState,
-	MouseEvent,
-	ReactNode,
 } from 'react';
 import { AiOutlinePlus } from 'react-icons/ai';
 import { RiArrowDropDownLine } from 'react-icons/ri';
@@ -49,11 +49,11 @@ const handleStyles = {
 const variants = {
 	maximized: {
 		borderRadius: '0px',
-		transform: 'scale(1)',
+		scale: 1,
 	},
 	minimized: {
 		opacity: 1,
-		transform: 'scale(1)',
+		scale: 1,
 	},
 };
 
@@ -294,11 +294,11 @@ function DraggableWindow({
 							maximized[windowName] ? 'maximized' : 'minimized'
 						}
 						initial={
-							history.length >= 1 && windowName === 'fileExplorer'
-								? { transform: 'scale(1)' }
-								: { transform: 'scale(0)' }
+							history.length > 1 && windowName === 'fileExplorer'
+								? { scale: 1 }
+								: { scale: 0 }
 						}
-						exit={{ transform: 'scale(0)' }}
+						exit={{ scale: 0 }}
 						transition={{ duration: 0.15 }}
 						style={
 							windowName === 'terminal'
