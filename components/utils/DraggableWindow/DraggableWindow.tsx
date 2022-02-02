@@ -9,6 +9,7 @@ import {
 	useState,
 } from 'react';
 import { AiOutlinePlus } from 'react-icons/ai';
+import { MdOutlineSelfImprovement } from 'react-icons/md';
 import { RiArrowDropDownLine } from 'react-icons/ri';
 import {
 	VscChromeClose,
@@ -17,6 +18,8 @@ import {
 } from 'react-icons/vsc';
 import { Rnd } from 'react-rnd';
 import { Context } from '../../../context/ContextProvider';
+import { MediaType } from '../../../typings';
+import { handleWindowPriority } from '../WindowPriority/WindowPriority';
 import styles from './DraggableWindow.module.css';
 
 const handleStyles = {
@@ -89,33 +92,16 @@ function DraggableWindow({
 		DraggableWindowContext.windowPriorityState;
 	const [lastPos, setLastPos] = DraggableWindowContext.lastPosState;
 
-	const handlePriority = (e: MouseEvent, window: string) => {
-		const target = e.target as HTMLElement;
-		if (target.className === 'no_click') return;
+	const handlePriority = async (e: MouseEvent, window: string) => {
+		const newPriority = await handleWindowPriority({
+			e,
+			windowName: window,
+			windowPriority,
+		});
 
-		// Get all priority values for all windows and sort them
-		const priorityValues = Object.values(windowPriority).sort(
-			(a, b) => a - b
-		);
-		// Get the highest priority value
-		const highestPriority = priorityValues[priorityValues.length - 1];
-
-		// If the window has highest priority then return
-		if (windowPriority[window] === highestPriority) return;
-
-		// Reduce all priority values by 1. Keep the keys same
-		const newPriority = Object.fromEntries(
-			Object.entries(windowPriority).map(([key, value]) => [
-				key,
-				value - 1,
-			])
-		);
-
-		// Set highest priority value to the current window
-		newPriority[window] = highestPriority;
-
-		// Set the new priority values
-		setWindowPriority(newPriority);
+		if (newPriority) {
+			setWindowPriority(newPriority);
+		}
 	};
 
 	const handleMaximize = () => {
@@ -127,11 +113,15 @@ function DraggableWindow({
 		setIsClosing(true);
 		setMaximized({ ...maximized, [windowName]: null });
 
-		if (windowName === 'fileExplorer') {
-			setHistory([]);
-		}
+		if (windowName === 'fileExplorer') setHistory([]);
 		if (windowName === 'mediaPlayer') {
-			if (close) return close(null);
+			if (close) close(null);
+			const newPriority = Object.fromEntries(
+				Object.entries(windowPriority).filter(
+					([key]) => key !== 'mediaPlayer'
+				)
+			);
+			return setWindowPriority(newPriority);
 		}
 
 		setTimeout(() => {

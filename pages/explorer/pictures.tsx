@@ -1,14 +1,19 @@
 import Head from 'next/head';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import Icons from '../../components/modules/Icons/Icons';
+import { handleWindowPriority } from '../../components/utils/WindowPriority/WindowPriority';
 import FileExplorer from '../../components/windows/FileExplorer/FileExplorer';
 import MediaPlayer from '../../components/windows/MediaPlayer/MediaPlayer';
+import { Context } from '../../context/ContextProvider';
 import styles from '../../styles/utils/MediaGrid.module.css';
 import { MediaType } from '../../typings';
 
 function Pictures({ data }: { data: MediaType[] }) {
 	const [openImage, setOpenImage] = useState<MediaType | null>(null);
+	const DraggableWindowContext = useContext(Context);
+	const [windowState, setWindowState] =
+		DraggableWindowContext.windowPriorityState;
 
 	const ImageContent = () => {
 		return (
@@ -17,8 +22,15 @@ function Pictures({ data }: { data: MediaType[] }) {
 					<div
 						className={`${styles.mediaItem} no_click`}
 						key={image.filename}
-						onClick={() => {
+						onClick={async () => {
 							setOpenImage(image);
+
+							const newWindowState = await handleWindowPriority({
+								windowName: 'mediaPlayer',
+								windowPriority: windowState,
+							});
+							if (!newWindowState) return;
+							setWindowState(newWindowState);
 						}}
 					>
 						<div className={styles.imageWrapper}>

@@ -40,6 +40,10 @@ export default function Document() {
 				<meta name="subject" content="Personal" />
 
 				{/* OpenGraph */}
+				<meta
+					property="og:site_name"
+					content="Windows > Linux on desktop environment"
+				/>
 				<meta property="og:title" content="Kassq" />
 				<meta property="og:type" content="website" />
 				<meta property="og:url" content="https://www.kassq.dev" />
