@@ -28,61 +28,67 @@ function Podcasts({ data }: { data: Props }) {
 			<>
 				<div className={styles.listItemContainer}>
 					<Link href="https://webbidevaus.fi/" passHref>
-						<div className={styles.listItem}>
-							<div className={styles.listItemName}>
-								<Image
-									src="/icons/podcasts/webbidevaus.png"
-									alt="icon"
-									width={16}
-									quality={100}
-									height={16}
-								></Image>
-								<p>Webbidevaus.fi</p>
+						<a target="_blank">
+							<div className={styles.listItem}>
+								<div className={styles.listItemName}>
+									<Image
+										src="/icons/podcasts/webbidevaus.png"
+										alt="icon"
+										width={16}
+										quality={100}
+										height={16}
+									></Image>
+									<p>Webbidevaus.fi</p>
+								</div>
+								<p className={styles.listItemDateModified}>
+									{getDate(data.webbidevausTime)}
+								</p>
+								<p className={styles.listItemType}>Shortcut</p>
+								<p className={styles.listItemSize}>2kt</p>
 							</div>
-							<p className={styles.listItemDateModified}>
-								{getDate(data.webbidevausTime)}
-							</p>
-							<p className={styles.listItemType}>Shortcut</p>
-							<p className={styles.listItemSize}>2kt</p>
-						</div>
+						</a>
 					</Link>
 					<Link href="https://koodiapinnanalla.fi/" passHref>
-						<div className={styles.listItem}>
-							<div className={styles.listItemName}>
-								<Image
-									src="/icons/podcasts/koodiapinnanalla.png"
-									alt="icon"
-									width={16}
-									quality={100}
-									height={16}
-								></Image>
-								<p>Koodia pinnan alla</p>
+						<a target="_blank">
+							<div className={styles.listItem}>
+								<div className={styles.listItemName}>
+									<Image
+										src="/icons/podcasts/koodiapinnanalla.png"
+										alt="icon"
+										width={16}
+										quality={100}
+										height={16}
+									></Image>
+									<p>Koodia pinnan alla</p>
+								</div>
+								<p className={styles.listItemDateModified}>
+									{getDate(data.koodiapinnanallaTime)}
+								</p>
+								<p className={styles.listItemType}>Shortcut</p>
+								<p className={styles.listItemSize}>2kt</p>
 							</div>
-							<p className={styles.listItemDateModified}>
-								{getDate(data.koodiapinnanallaTime)}
-							</p>
-							<p className={styles.listItemType}>Shortcut</p>
-							<p className={styles.listItemSize}>2kt</p>
-						</div>
+						</a>
 					</Link>
 					<Link href="https://koodikrapula.fi/" passHref>
-						<div className={styles.listItem}>
-							<div className={styles.listItemName}>
-								<Image
-									src="/icons/podcasts/koodikrapula.png"
-									alt="icon"
-									width={16}
-									quality={100}
-									height={16}
-								></Image>
-								<p>Koodikrapula</p>
+						<a target="_blank">
+							<div className={styles.listItem}>
+								<div className={styles.listItemName}>
+									<Image
+										src="/icons/podcasts/koodikrapula.png"
+										alt="icon"
+										width={16}
+										quality={100}
+										height={16}
+									></Image>
+									<p>Koodikrapula</p>
+								</div>
+								<p className={styles.listItemDateModified}>
+									{getDate(data.koodikrapulaTime)}
+								</p>
+								<p className={styles.listItemType}>Shortcut</p>
+								<p className={styles.listItemSize}>2kt</p>
 							</div>
-							<p className={styles.listItemDateModified}>
-								{getDate(data.koodikrapulaTime)}
-							</p>
-							<p className={styles.listItemType}>Shortcut</p>
-							<p className={styles.listItemSize}>2kt</p>
-						</div>
+						</a>
 					</Link>
 				</div>
 			</>

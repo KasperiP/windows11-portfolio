@@ -1,14 +1,15 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { useRouter } from 'next/router';
 import {
+	MouseEvent,
+	ReactNode,
 	useContext,
 	useEffect,
 	useRef,
 	useState,
-	MouseEvent,
-	ReactNode,
 } from 'react';
 import { AiOutlinePlus } from 'react-icons/ai';
+import { MdOutlineSelfImprovement } from 'react-icons/md';
 import { RiArrowDropDownLine } from 'react-icons/ri';
 import {
 	VscChromeClose,
@@ -17,6 +18,8 @@ import {
 } from 'react-icons/vsc';
 import { Rnd } from 'react-rnd';
 import { Context } from '../../../context/ContextProvider';
+import { MediaType } from '../../../typings';
+import { handleWindowPriority } from '../WindowPriority/WindowPriority';
 import styles from './DraggableWindow.module.css';
 
 const handleStyles = {
@@ -49,11 +52,11 @@ const handleStyles = {
 const variants = {
 	maximized: {
 		borderRadius: '0px',
-		transform: 'scale(1)',
+		scale: 1,
 	},
 	minimized: {
 		opacity: 1,
-		transform: 'scale(1)',
+		scale: 1,
 	},
 };
 
@@ -89,33 +92,16 @@ function DraggableWindow({
 		DraggableWindowContext.windowPriorityState;
 	const [lastPos, setLastPos] = DraggableWindowContext.lastPosState;
 
-	const handlePriority = (e: MouseEvent, window: string) => {
-		const target = e.target as HTMLElement;
-		if (target.className === 'no_click') return;
+	const handlePriority = async (e: MouseEvent, window: string) => {
+		const newPriority = await handleWindowPriority({
+			e,
+			windowName: window,
+			windowPriority,
+		});
 
-		// Get all priority values for all windows and sort them
-		const priorityValues = Object.values(windowPriority).sort(
-			(a, b) => a - b
-		);
-		// Get the highest priority value
-		const highestPriority = priorityValues[priorityValues.length - 1];
-
-		// If the window has highest priority then return
-		if (windowPriority[window] === highestPriority) return;
-
-		// Reduce all priority values by 1. Keep the keys same
-		const newPriority = Object.fromEntries(
-			Object.entries(windowPriority).map(([key, value]) => [
-				key,
-				value - 1,
-			])
-		);
-
-		// Set highest priority value to the current window
-		newPriority[window] = highestPriority;
-
-		// Set the new priority values
-		setWindowPriority(newPriority);
+		if (newPriority) {
+			setWindowPriority(newPriority);
+		}
 	};
 
 	const handleMaximize = () => {
@@ -127,11 +113,15 @@ function DraggableWindow({
 		setIsClosing(true);
 		setMaximized({ ...maximized, [windowName]: null });
 
-		if (windowName === 'fileExplorer') {
-			setHistory([]);
-		}
+		if (windowName === 'fileExplorer') setHistory([]);
 		if (windowName === 'mediaPlayer') {
-			if (close) return close(null);
+			if (close) close(null);
+			const newPriority = Object.fromEntries(
+				Object.entries(windowPriority).filter(
+					([key]) => key !== 'mediaPlayer'
+				)
+			);
+			return setWindowPriority(newPriority);
 		}
 
 		setTimeout(() => {
@@ -144,50 +134,48 @@ function DraggableWindow({
 	};
 
 	useEffect(() => {
-		const getCenter = () => {
-			let width = window.innerWidth;
-			let height = window.innerHeight;
+		(async () => {
+			const getCenter = async () => {
+				let width = window.innerWidth;
+				let height = window.innerHeight;
 
-			let x;
-			let y;
-			if (width !== position[windowName].width) {
-				x = width / 2 - position[windowName].width / 2;
+				let x;
+				let y;
+				if (width !== position[windowName].width) {
+					x = width / 2 - position[windowName].width / 2;
+				} else {
+					x = width / 2 - 880 / 2;
+				}
+
+				if (height !== position[windowName].height - 50) {
+					y = height / 2 - position[windowName].height / 2;
+				} else {
+					y = height / 2 - 550 / 2;
+				}
+
+				setPosition({
+					...position,
+					[windowName]: {
+						x: x,
+						y: y,
+						width: 880,
+						height: 550,
+					},
+				});
+			};
+
+			if (
+				position[windowName].x === 0 &&
+				position[windowName].y === 0 &&
+				!maximized[windowName]
+			) {
+				await getCenter();
+				setLoading(false);
 			} else {
-				x = width / 2 - 880 / 2;
+				setLoading(false);
 			}
-
-			if (height !== position[windowName].height - 50) {
-				y = height / 2 - position[windowName].height / 2;
-			} else {
-				y = height / 2 - 550 / 2;
-			}
-
-			setPosition({
-				...position,
-				[windowName]: {
-					x: x,
-					y: y,
-					width: 880,
-					height: 550,
-				},
-			});
-		};
-
-		if (
-			position[windowName]?.x === 0 &&
-			position[windowName]?.y === 0 &&
-			!maximized[windowName]
-		) {
-			getCenter();
-		}
-
-		//TODO: Better solution for this
-		// wait .5 sec before setting loading to false
-		setTimeout(() => {
-			setLoading(false);
-		}, 500);
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+		})();
+	}, [maximized, position, setPosition, windowName]);
 
 	useEffect(() => {
 		if (loading) return;
@@ -224,7 +212,7 @@ function DraggableWindow({
 
 	return (
 		<AnimatePresence>
-			{!isClosing && (
+			{!isClosing && !loading && (
 				<Rnd
 					dragHandleClassName={'draggable'}
 					cancel={'.not_draggable'}
@@ -260,7 +248,7 @@ function DraggableWindow({
 							},
 						});
 					}}
-					onResizeStop={(e, direction, ref, delta, pos) => {
+					onResizeStop={() => {
 						setIsResizing(false);
 					}}
 					size={{
@@ -273,12 +261,16 @@ function DraggableWindow({
 					}}
 					minWidth={880}
 					minHeight={550}
+					className={`${
+						isDragging || isResizing || loading
+							? ''
+							: styles.animatedWindow
+					}`}
 					style={
 						isDragging || isResizing || loading
 							? { zIndex: 997 }
 							: {
 									zIndex: windowPriority[windowName] || 10,
-									transition: 'all 0.2s ease-in-out',
 							  }
 					}
 					resizeHandleStyles={handleStyles}
@@ -292,11 +284,11 @@ function DraggableWindow({
 							maximized[windowName] ? 'maximized' : 'minimized'
 						}
 						initial={
-							history.length >= 1 && windowName === 'fileExplorer'
-								? { transform: 'scale(1)' }
-								: { transform: 'scale(0)' }
+							history.length > 1 && windowName === 'fileExplorer'
+								? { scale: 1 }
+								: { scale: 0 }
 						}
-						exit={{ transform: 'scale(0)' }}
+						exit={{ scale: 0 }}
 						transition={{ duration: 0.15 }}
 						style={
 							windowName === 'terminal'

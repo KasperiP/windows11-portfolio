@@ -40,7 +40,6 @@ type ContextType = {
 // React-selecto uses z-index 100 so these values must be higher than
 const initialPriority = {
 	fileExplorer: 101,
-	mediaPlayer: 102,
 };
 
 const initialMaximized = {

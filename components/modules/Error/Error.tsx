@@ -25,7 +25,6 @@ function Error({ errors, index, setError, error }: Props) {
 	}, []);
 
 	return (
-		//TODO: Figure out better solution for this instead of using fixed values.
 		<Draggable
 			cancel="button"
 			positionOffset={

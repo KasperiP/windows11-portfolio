@@ -10,7 +10,6 @@ import WindowsMenu from './WindowsMenu';
 
 function Footer() {
 	const [winMenu, setWinMenu] = useState(false);
-	const [isClosed, setIsClosed] = useState(true);
 	const [errors, setError] = useState([] as ErrorType[]);
 
 	const handleError = (err: string) => {
@@ -18,19 +17,7 @@ function Footer() {
 	};
 
 	const handleWinMenu = () => {
-		if (winMenu) {
-			setWinMenu(false);
-			setTimeout(() => {
-				setIsClosed(true);
-			}, 500);
-		} else {
-			setIsClosed(false);
-
-			//TODO: Wtf is this? Must be a better solution for this
-			setTimeout(() => {
-				setWinMenu(true);
-			}, 1);
-		}
+		setWinMenu(!winMenu);
 	};
 
 	const [hourStr, setHourStr] = useState('00:00 PM');
@@ -165,9 +152,6 @@ function Footer() {
 					</Link>
 				</section>
 				<section className={styles.toolbarContainer}>
-					{/* 					<dir className={styles.icon}>
-						<IoIosArrowUp />
-					</dir> */}
 					<div className={styles.language}>
 						<p>ENG</p>
 					</div>
@@ -181,11 +165,7 @@ function Footer() {
 					</div>
 				</section>
 			</div>
-			<WindowsMenu
-				isClosed={isClosed}
-				winMenu={winMenu}
-				handleWinMenu={handleWinMenu}
-			/>
+			<WindowsMenu winMenu={winMenu} handleWinMenu={handleWinMenu} />
 		</>
 	);
 }
