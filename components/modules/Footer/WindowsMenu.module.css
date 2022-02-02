@@ -1,12 +1,13 @@
 .overflow {
 	position: absolute;
-	bottom: 0;
-	left: 50%;
-	z-index: 1000;
+	right: 0;
+	bottom: 50px;
+	left: 0;
+	z-index: 997;
 	overflow: hidden;
 	width: 35rem;
 	height: 35rem;
-	transform: translate(-50%, -50px);
+	margin: auto;
 }
 
 .winMenu {
@@ -179,12 +180,4 @@
 
 .winMenuFooter img {
 	border-radius: 50%;
-}
-
-.open {
-	transform: translateY(0);
-}
-
-.closed {
-	transform: translateY(200%);
 }

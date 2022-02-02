@@ -1,18 +1,37 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { AiOutlinePoweroff } from 'react-icons/ai';
 import { IoIosArrowForward } from 'react-icons/io';
 import { VscSearch } from 'react-icons/vsc';
 import styles from './WindowsMenu.module.css';
+import { motion } from 'framer-motion';
 
 type Props = {
-	isClosed: boolean;
 	winMenu: boolean;
 	handleWinMenu: () => void;
 };
 
-function WindowsMenu({ isClosed, winMenu, handleWinMenu }: Props) {
+const slideVerticalAnimation = {
+	open: {
+		y: 0,
+		transition: {
+			duration: 0.3,
+		},
+		display: 'block',
+	},
+	close: {
+		y: 550,
+		transition: {
+			duration: 0.3,
+		},
+		transitionEnd: {
+			display: 'none',
+		},
+	},
+};
+
+function WindowsMenu({ winMenu, handleWinMenu }: Props) {
 	const node = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
@@ -41,13 +60,13 @@ function WindowsMenu({ isClosed, winMenu, handleWinMenu }: Props) {
 	}, [handleWinMenu, winMenu]);
 
 	return (
-		<div className={styles.overflow}>
-			<div
-				ref={node}
-				className={`${styles.winMenu} ${
-					winMenu ? styles.open : styles.closed
-				}`}
-			>
+		<motion.div
+			initial="close"
+			animate={winMenu ? 'open' : 'close'}
+			variants={slideVerticalAnimation}
+			className={styles.overflow}
+		>
+			<div className={styles.winMenu} ref={node}>
 				<div className={styles.winMenuContainer}>
 					<div className={styles.winMenuSearch}>
 						<div className={styles.inputWithIcon}>
@@ -182,7 +201,7 @@ function WindowsMenu({ isClosed, winMenu, handleWinMenu }: Props) {
 				</div>
 				<div className={styles.winMenuBg} />
 			</div>
-		</div>
+		</motion.div>
 	);
 }
 

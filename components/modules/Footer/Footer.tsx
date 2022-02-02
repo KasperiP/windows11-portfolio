@@ -10,7 +10,6 @@ import WindowsMenu from './WindowsMenu';
 
 function Footer() {
 	const [winMenu, setWinMenu] = useState(false);
-	const [isClosed, setIsClosed] = useState(true);
 	const [errors, setError] = useState([] as ErrorType[]);
 
 	const handleError = (err: string) => {
@@ -18,15 +17,7 @@ function Footer() {
 	};
 
 	const handleWinMenu = () => {
-		(async () => {
-			if (winMenu) {
-				setWinMenu(false);
-				setIsClosed(true);
-			} else {
-				setIsClosed(false);
-				setWinMenu(true);
-			}
-		})();
+		setWinMenu(!winMenu);
 	};
 
 	const [hourStr, setHourStr] = useState('00:00 PM');
@@ -174,11 +165,7 @@ function Footer() {
 					</div>
 				</section>
 			</div>
-			<WindowsMenu
-				isClosed={isClosed}
-				winMenu={winMenu}
-				handleWinMenu={handleWinMenu}
-			/>
+			<WindowsMenu winMenu={winMenu} handleWinMenu={handleWinMenu} />
 		</>
 	);
 }
