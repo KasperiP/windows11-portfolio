@@ -9,7 +9,6 @@ import {
 	useState,
 } from 'react';
 import { AiOutlinePlus } from 'react-icons/ai';
-import { MdOutlineSelfImprovement } from 'react-icons/md';
 import { RiArrowDropDownLine } from 'react-icons/ri';
 import {
 	VscChromeClose,
@@ -18,7 +17,6 @@ import {
 } from 'react-icons/vsc';
 import { Rnd } from 'react-rnd';
 import { Context } from '../../../context/ContextProvider';
-import { MediaType } from '../../../typings';
 import { handleWindowPriority } from '../WindowPriority/WindowPriority';
 import styles from './DraggableWindow.module.css';
 
@@ -105,14 +103,7 @@ function DraggableWindow({
 	};
 
 	const handleMaximize = () => {
-		if (maximized[windowName] === true) {
-			setMaximized({ ...maximized, [windowName]: null });
-		} else {
-			setMaximized({
-				...maximized,
-				[windowName]: true,
-			});
-		}
+		setMaximized({ ...maximized, [windowName]: !maximized[windowName] });
 	};
 
 	const handleClose = () => {
@@ -174,7 +165,7 @@ function DraggableWindow({
 			if (
 				position[windowName].x === 0 &&
 				position[windowName].y === 0 &&
-				!maximized[windowName]
+				maximized[windowName] === null
 			) {
 				await getCenter();
 				setLoading(false);
@@ -215,7 +206,7 @@ function DraggableWindow({
 			});
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [maximized]);
+	}, [maximized[windowName]]);
 
 	return (
 		<AnimatePresence>
