@@ -42,7 +42,7 @@ export default function Document() {
 				{/* OpenGraph */}
 				<meta
 					property="og:site_name"
-					content="Windows > Linux on desktop environment"
+					content="Average Windows enjoyer"
 				/>
 				<meta property="og:title" content="Kassq" />
 				<meta property="og:type" content="website" />
