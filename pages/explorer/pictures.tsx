@@ -11,6 +11,7 @@ import { MediaType } from '../../typings';
 
 function Pictures({ data }: { data: MediaType[] }) {
 	const [openImage, setOpenImage] = useState<MediaType | null>(null);
+
 	const DraggableWindowContext = useContext(Context);
 	const [windowState, setWindowState] =
 		DraggableWindowContext.windowPriorityState;
