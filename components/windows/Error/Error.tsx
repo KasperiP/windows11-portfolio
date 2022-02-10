@@ -14,7 +14,6 @@ type Props = {
 
 function Error({ errors, index, setError, error }: Props) {
 	const handleClose = async () => {
-		// Take props.errors array and remove props.error from it
 		const newErrors = await errors.filter((err) => err.index !== index);
 		setError(newErrors);
 	};

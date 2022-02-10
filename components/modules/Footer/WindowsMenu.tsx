@@ -123,7 +123,6 @@ function WindowsMenu({ winMenu, handleWinMenu }: Props) {
 							</div>
 						</div>
 						<div className={styles.winMenuPinnedContainer}>
-							{' '}
 							<div className={styles.winMenuPinnedTop}>
 								<h2>Recommended</h2>
 								<div>

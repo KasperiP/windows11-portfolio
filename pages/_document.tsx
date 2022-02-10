@@ -18,7 +18,7 @@ export default function Document() {
 					rel="stylesheet"
 				/>
 
-				{/* SEO */}
+				{/* SEO & Open Graph meta tags */}
 				<meta name="theme-color" content="#55FFFF" />
 				<meta charSet="utf-8" />
 				<meta name="language" content="english" />
