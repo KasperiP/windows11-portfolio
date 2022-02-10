@@ -1,8 +1,8 @@
 import Head from 'next/head';
 import Icons from '../components/modules/Icons/Icons';
-import Terminal from '../components/windows/Terminal/Terminal';
+import { default as TerminalComponent } from '../components/windows/Terminal/Terminal';
 
-function Main() {
+function Terminal() {
 	return (
 		<>
 			<Head>
@@ -10,11 +10,11 @@ function Main() {
 				<link rel="canonical" href="https://www.kassq.dev/terminal" />
 			</Head>
 			<div style={{ height: '100%' }}>
-				<Terminal />
+				<TerminalComponent />
 				<Icons />
 			</div>
 		</>
 	);
 }
 
-export default Main;
+export default Terminal;
