@@ -189,7 +189,7 @@ export async function getStaticProps() {
 				koodiapinnanallaTime,
 			},
 		},
-		revalidate: 10, // In seconds
+		revalidate: 30, // In seconds
 	};
 }
 

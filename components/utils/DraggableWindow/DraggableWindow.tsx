@@ -107,13 +107,14 @@ function DraggableWindow({
 	};
 
 	const handleClose = () => {
-		// Setclosed(!closed) then wait for animation to finish then redirect
 		setIsClosing(true);
 		setMaximized({ ...maximized, [windowName]: null });
 
 		if (windowName === 'fileExplorer') setHistory([]);
 		if (windowName === 'mediaPlayer') {
-			if (close) close(null);
+			setTimeout(() => {
+				if (close) close(null);
+			}, 500);
 			const newPriority = Object.fromEntries(
 				Object.entries(windowPriority).filter(
 					([key]) => key !== 'mediaPlayer'

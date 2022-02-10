@@ -51,7 +51,7 @@ function Icons() {
 						el.classList.remove(`selected`);
 					});
 				}}
-			></Selecto>
+			/>
 			<div className={`elements ${styles.container}`}>
 				<div className={`selecto-area ${styles.wrapper}`} id="selecto1">
 					<Link href={'/notepad/about'} passHref>

@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { AiOutlineWifi } from 'react-icons/ai';
 import { FiVolume2 } from 'react-icons/fi';
 import { ErrorType } from '../../../typings';
-import Error from '../Error/Error';
+import Error from '../../windows/Error/Error';
 import styles from './Footer.module.css';
 import WindowsMenu from './WindowsMenu';
 
