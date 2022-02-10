@@ -1,0 +1,34 @@
+{
+	"cacheDirectories": [
+		".next/cache"
+	],
+	"name": "personal",
+	"version": "0.0.0",
+	"private": true,
+	"scripts": {
+		"dev": "next dev",
+		"build": "next build",
+		"start": "next start",
+		"lint": "next lint"
+	},
+	"dependencies": {
+		"framer-motion": "^5.5.6",
+		"next": "12.0.9",
+		"react": "17.0.2",
+		"react-dom": "17.0.2",
+		"react-icons": "^4.3.1",
+		"react-rnd": "^10.3.5",
+		"react-selecto": "^1.13.2",
+		"sharp": "^0.29.3"
+	},
+	"devDependencies": {
+		"@types/node": "^17.0.9",
+		"@types/react": "^17.0.38",
+		"eslint": "8.5.0",
+		"eslint-config-next": "12.0.7",
+		"stylelint": "^14.2.0",
+		"stylelint-config-standard": "^24.0.0",
+		"stylelint-order": "^5.0.0",
+		"typescript": "^4.5.5"
+	}
+}

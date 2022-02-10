@@ -1,0 +1,185 @@
+.main {
+	width: 100%;
+	height: 100%;
+}
+
+.main nav {
+	height: 4.8rem;
+	border-bottom: 1px solid #1d1d1d;
+	border-radius: 10px 10px 0 0;
+	background-color: #202020;
+}
+
+@keyframes fadeIn {
+	0% {
+		transform: translate(-50%, calc(-50% - 25px)) scale(0);
+	}
+
+	100% {
+		transform: translate(-50%, calc(-50% - 25px)) scale(1);
+	}
+}
+
+@keyframes fadeIn {
+	0% {
+		transform: translate(-50%, calc(-50% - 25px)) scale(0);
+	}
+
+	100% {
+		transform: translate(-50%, calc(-50% - 25px)) scale(1);
+	}
+}
+
+.top {
+	background-color: #202020;
+}
+
+.navButton {
+	border-radius: 5px;
+}
+
+.navButton:hover .navButtonsDropdown {
+	display: block;
+}
+
+.navButton:hover:first-child {
+	background-color: #2e2e2e;
+}
+
+.navButtons {
+	display: flex;
+	align-items: center;
+	height: 2.5rem;
+}
+
+.navButtons p {
+	padding: 10px;
+	border-radius: 5px;
+	font-weight: 300;
+	font-size: 0.9rem;
+	cursor: pointer;
+}
+
+.navButtons .navButtonsDropdown {
+	position: absolute;
+	display: none;
+	width: 15rem;
+	border: 1px solid #1d1d1d;
+	border-radius: 10px;
+	background-color: #272727;
+	transform-origin: top center;
+	animation: growDown 300ms ease-in-out forwards;
+	animation: growDown 300ms ease-in-out forwards;
+}
+
+.navButtons .navButtonsDropdown p {
+	color: gray;
+}
+
+.navButtons .navButtonsItem {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	border-radius: 5px;
+}
+
+.navButtons .navButtonsItem p {
+	padding: 5px 10px;
+}
+
+.navButtons .navButtonsItem p:first-child {
+	width: 50%;
+}
+
+.navButtons .navButtonsItem p:nth-child(2) {
+	width: 50%;
+	font-size: 0.7rem;
+}
+
+.navButtons .navButtonsItem:hover {
+	background-color: #2e2e2e;
+}
+
+@keyframes fadeIn {
+	0% {
+		transform: translate(-50%, calc(-50% - 25px)) scale(0);
+	}
+
+	100% {
+		transform: translate(-50%, calc(-50% - 25px)) scale(1);
+	}
+}
+
+@keyframes growDown {
+	0% {
+		transform: scaleY(0);
+	}
+
+	80% {
+		transform: scaleY(1.1);
+	}
+
+	100% {
+		transform: scaleY(1);
+	}
+}
+
+@keyframes growDown {
+	0% {
+		transform: scaleY(0);
+	}
+
+	80% {
+		transform: scaleY(1.1);
+	}
+
+	100% {
+		transform: scaleY(1);
+	}
+}
+
+.textarea {
+	height: calc(100% - 32px - 32px - 40px);
+	padding: 10px;
+}
+
+.textarea textarea {
+	width: 100%;
+	height: 100%;
+	border: none;
+	background-color: transparent;
+	color: #fff;
+	outline: none;
+	resize: none;
+	user-select: auto;
+}
+
+.footer {
+	position: absolute;
+	bottom: 0;
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	height: 2rem;
+	border-top: 1px solid #1d1d1d;
+	border-radius: 0 0 10px 10px;
+	background-color: #202020;
+}
+
+.footer p {
+	display: flex;
+	align-items: center;
+	margin: 5px 0;
+	padding: 5px 10px;
+	color: gray;
+	font-size: 0.8rem;
+}
+
+.footer > div {
+	display: flex;
+	gap: 15px;
+}
+
+.footer > div:nth-child(2) p {
+	border-left: 1px solid gray;
+}
