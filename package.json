@@ -12,14 +12,14 @@
 		"lint": "next lint"
 	},
 	"dependencies": {
-		"framer-motion": "^5.5.6",
-		"next": "12.0.9",
+		"framer-motion": "^6.2.6",
+		"next": "^12.0.10",
 		"react": "17.0.2",
 		"react-dom": "17.0.2",
 		"react-icons": "^4.3.1",
 		"react-rnd": "^10.3.5",
 		"react-selecto": "^1.13.2",
-		"sharp": "^0.29.3"
+		"sharp": "^0.30.1"
 	},
 	"devDependencies": {
 		"@types/node": "^17.0.9",

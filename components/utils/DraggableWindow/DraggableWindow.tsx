@@ -113,7 +113,11 @@ function DraggableWindow({
 		if (windowName === 'fileExplorer') setHistory([]);
 		if (windowName === 'mediaPlayer') {
 			setTimeout(() => {
-				if (close) close(null);
+				if (close) {
+					setTimeout(() => {
+						close(null);
+					}, 500);
+				}
 			}, 500);
 			const newPriority = Object.fromEntries(
 				Object.entries(windowPriority).filter(
