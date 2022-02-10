@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import Icons from '../../components/modules/Icons/Icons';
 import Notepad from '../../components/windows/Notepad/Notepad';
-function about() {
+function About() {
 	const getAge = () => {
 		const dateString = '2002-01-30';
 		var today = new Date();
@@ -35,4 +35,4 @@ function about() {
 	);
 }
 
-export default about;
+export default About;

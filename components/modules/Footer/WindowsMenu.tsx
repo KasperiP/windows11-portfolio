@@ -1,11 +1,11 @@
+import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { AiOutlinePoweroff } from 'react-icons/ai';
 import { IoIosArrowForward } from 'react-icons/io';
 import { VscSearch } from 'react-icons/vsc';
 import styles from './WindowsMenu.module.css';
-import { motion } from 'framer-motion';
 
 type Props = {
 	winMenu: boolean;
