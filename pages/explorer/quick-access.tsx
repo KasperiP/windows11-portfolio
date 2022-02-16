@@ -167,6 +167,23 @@ function QuickAccess() {
 					rel="canonical"
 					href="https://www.kassq.dev/explorer/quick-access"
 				/>
+
+				{/* Description */}
+				<meta
+					name="description"
+					content="Want to go fast? Here's a quick access to my files and folders."
+				/>
+
+				{/* OpenGraph */}
+				<meta property="og:title" content="Kassq - Quick access" />
+				<meta
+					property="og:url"
+					content="https://www.kassq.dev/explorer/quick-access"
+				/>
+				<meta
+					property="og:description"
+					content="Want to go fast? Here's a quick access to my files and folders."
+				/>
 			</Head>
 			<div style={{ height: '100%' }}>
 				<FileExplorer

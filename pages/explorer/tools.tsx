@@ -117,6 +117,23 @@ function Tools() {
 					rel="canonical"
 					href="https://www.kassq.dev/explorer/tools"
 				/>
+
+				{/* Description */}
+				<meta
+					name="description"
+					content="The toolbox I use daily for my stuff. Mostly nerdy coding related tools, but some UI related tools too!"
+				/>
+
+				{/* OpenGraph */}
+				<meta property="og:title" content="Kassq - Tools" />
+				<meta
+					property="og:url"
+					content="https://www.kassq.dev/explorer/tools"
+				/>
+				<meta
+					property="og:description"
+					content="The toolbox I use daily for my stuff. Mostly nerdy coding related tools, but some UI related tools too!"
+				/>
 			</Head>
 			<div style={{ height: '100%' }}>
 				<FileExplorer
