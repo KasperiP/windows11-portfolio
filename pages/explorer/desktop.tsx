@@ -151,6 +151,23 @@ function Desktop() {
 					rel="canonical"
 					href="https://www.kassq.dev/explorer/desktop"
 				/>
+
+				{/* Description */}
+				<meta
+					name="description"
+					content="My desktop is beautiful until I start some project and then my desktop is full of temporary files and folders. I don't want to see them."
+				/>
+
+				{/* OpenGraph */}
+				<meta property="og:title" content="Kassq - Desktop" />
+				<meta
+					property="og:url"
+					content="https://www.kassq.dev/explorer/desktop"
+				/>
+				<meta
+					property="og:description"
+					content="My desktop is beautiful until I start some project and then my desktop is full of temporary files and folders. I don't want to see them."
+				/>
 			</Head>
 			<div style={{ height: '100%' }}>
 				<FileExplorer

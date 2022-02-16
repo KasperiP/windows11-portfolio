@@ -70,6 +70,23 @@ function Projects({ data }: { data: ProjectType[] }) {
 					rel="canonical"
 					href="https://www.kassq.dev/explorer/projects"
 				/>
+
+				{/* Description */}
+				<meta
+					name="description"
+					content="Too lazy to go to my GitHub page? Here's a list of my open source projects. No forks, no private repos, only my public repos."
+				/>
+
+				{/* OpenGraph */}
+				<meta property="og:title" content="Kassq - Quick access" />
+				<meta
+					property="og:url"
+					content="https://www.kassq.dev/explorer/projects"
+				/>
+				<meta
+					property="og:description"
+					content="Too lazy to go to my GitHub page? Here's a list of my open source projects. No forks, no private repos, only my public repos."
+				/>
 			</Head>
 			<div style={{ height: '100%' }}>
 				<FileExplorer

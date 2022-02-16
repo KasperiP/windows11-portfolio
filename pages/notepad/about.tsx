@@ -26,6 +26,23 @@ function About() {
 					rel="canonical"
 					href="https://www.kassq.dev/notepad/about"
 				/>
+
+				{/* Description */}
+				<meta
+					name="description"
+					content="Who am I? I guess you will find out after reading this."
+				/>
+
+				{/* OpenGraph */}
+				<meta property="og:title" content="Kassq - About me" />
+				<meta
+					property="og:url"
+					content="https://www.kassq.dev/notepad/about"
+				/>
+				<meta
+					property="og:description"
+					content="Who am I? I guess you will find out after reading this."
+				/>
 			</Head>
 			<div style={{ height: '100%' }}>
 				<Notepad initialText={textContent()} />

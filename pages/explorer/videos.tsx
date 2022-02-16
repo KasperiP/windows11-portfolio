@@ -62,6 +62,23 @@ function Videos({ data }: { data: MediaType[] }) {
 					rel="canonical"
 					href="https://www.kassq.dev/explorer/videos"
 				/>
+
+				{/* Description */}
+				<meta
+					name="description"
+					content="Here you can find funny dog and cat videos I randomly post sometimes. Maybe horses too."
+				/>
+
+				{/* OpenGraph */}
+				<meta property="og:title" content="Kassq - Videos" />
+				<meta
+					property="og:url"
+					content="https://www.kassq.dev/explorer/videos"
+				/>
+				<meta
+					property="og:description"
+					content="Here you can find funny dog and cat videos I randomly post sometimes. Maybe horses too."
+				/>
 			</Head>
 			<div style={{ height: '100%' }}>
 				{openVideo && (

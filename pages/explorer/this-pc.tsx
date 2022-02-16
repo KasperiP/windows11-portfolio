@@ -174,6 +174,23 @@ function ThisPC() {
 					rel="canonical"
 					href="https://www.kassq.dev/explorer/this-pc"
 				/>
+
+				{/* Description */}
+				<meta
+					name="description"
+					content="Yeah, this is the file explorer's this PC page. Nothing interesting here."
+				/>
+
+				{/* OpenGraph */}
+				<meta property="og:title" content="Kassq - This PC" />
+				<meta
+					property="og:url"
+					content="https://www.kassq.dev/explorer/this-pc"
+				/>
+				<meta
+					property="og:description"
+					content="Yeah, this is the file explorer's this PC page. Nothing interesting here."
+				/>
 			</Head>
 			<div style={{ height: '100%' }}>
 				<FileExplorer

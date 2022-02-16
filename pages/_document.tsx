@@ -28,10 +28,6 @@ export default function Document() {
 				<meta name="publisher" content="kassq" />
 
 				<meta
-					name="description"
-					content="Kassq's personal website. A place to share my projects and learn about me. I do some coding sometimes."
-				/>
-				<meta
 					name="keywords"
 					content="kassq, kasperi, coding, development"
 				/>
@@ -39,21 +35,16 @@ export default function Document() {
 				<meta name="robots" content="index, follow" />
 				<meta name="subject" content="Personal" />
 
-				{/* OpenGraph */}
+				{/* Global OpenGraph tags */}
 				<meta
 					property="og:site_name"
 					content="Average Windows enjoyer"
 				/>
-				<meta property="og:title" content="Kassq" />
 				<meta property="og:type" content="website" />
 				<meta property="og:url" content="https://www.kassq.dev" />
 				<meta
 					property="og:image"
 					content="https://www.kassq.dev/logo.webp"
-				/>
-				<meta
-					property="og:description"
-					content="Kassq's personal website. A place to share my projects and learn about me. I do some coding sometimes."
 				/>
 
 				{/* Global Site Tag (gtag.js) - Google Analytics */}

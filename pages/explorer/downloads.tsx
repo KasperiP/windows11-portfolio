@@ -11,6 +11,23 @@ function Downloads() {
 					rel="canonical"
 					href="https://www.kassq.dev/explorer/downloads"
 				/>
+
+				{/* Description */}
+				<meta
+					name="description"
+					content="I have an obsession to keep this folder empty."
+				/>
+
+				{/* OpenGraph */}
+				<meta property="og:title" content="Kassq - Downloads" />
+				<meta
+					property="og:url"
+					content="https://www.kassq.dev/explorer/downloads"
+				/>
+				<meta
+					property="og:description"
+					content="I have an obsession to keep this folder empty."
+				/>
 			</Head>
 			<div style={{ height: '100%' }}>
 				<FileExplorer

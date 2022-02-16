@@ -62,6 +62,23 @@ function Pictures({ data }: { data: MediaType[] }) {
 					rel="canonical"
 					href="https://www.kassq.dev/explorer/pictures"
 				/>
+
+				{/* Description */}
+				<meta
+					name="description"
+					content="Funny memes and pictures from the internet."
+				/>
+
+				{/* OpenGraph */}
+				<meta property="og:title" content="Kassq - Pictures" />
+				<meta
+					property="og:url"
+					content="https://www.kassq.dev/explorer/pictures"
+				/>
+				<meta
+					property="og:description"
+					content="Funny memes and pictures from the internet."
+				/>
 			</Head>
 			<div style={{ height: '100%' }}>
 				{openImage && (

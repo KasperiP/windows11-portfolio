@@ -110,6 +110,23 @@ function Links() {
 					rel="canonical"
 					href="https://www.kassq.dev/explorer/links"
 				/>
+
+				{/* Description */}
+				<meta
+					name="description"
+					content="All my social media links combined in one place. How cool is that?"
+				/>
+
+				{/* OpenGraph */}
+				<meta property="og:title" content="Kassq - Links" />
+				<meta
+					property="og:url"
+					content="https://www.kassq.dev/explorer/links"
+				/>
+				<meta
+					property="og:description"
+					content="All my social media links combined in one place. How cool is that?"
+				/>
 			</Head>
 			<div style={{ height: '100%' }}>
 				<FileExplorer

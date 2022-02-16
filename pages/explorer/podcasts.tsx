@@ -102,6 +102,23 @@ function Podcasts({ data }: { data: Props }) {
 					rel="canonical"
 					href="https://www.kassq.dev/explorer/favorites"
 				/>
+
+				{/* Description */}
+				<meta
+					name="description"
+					content="I like to listen podcasts. Here you can find some of my favorites."
+				/>
+
+				{/* OpenGraph */}
+				<meta property="og:title" content="Kassq - Podcasts" />
+				<meta
+					property="og:url"
+					content="https://www.kassq.dev/explorer/podcasts"
+				/>
+				<meta
+					property="og:description"
+					content="I like to listen podcasts. Here you can find some of my favorites."
+				/>
 			</Head>
 			<div style={{ height: '100%' }}>
 				<FileExplorer
