@@ -23,7 +23,7 @@ function Links() {
 									<p>Twitter</p>
 								</div>
 								<p className={styles.listItemDateModified}>
-									30.12.2021 02:02
+									30/12/2021 02:02
 								</p>
 								<p className={styles.listItemType}>Shortcut</p>
 								<p className={styles.listItemSize}>2kt</p>
@@ -46,42 +46,13 @@ function Links() {
 									<p>Discord</p>
 								</div>
 								<p className={styles.listItemDateModified}>
-									30.01.2022 12:44
+									30/01/2022 12:44
 								</p>
 								<p className={styles.listItemType}>Shortcut</p>
 								<p className={styles.listItemSize}>2kt</p>
 							</div>
 						</a>
 					</Link>
-					{/* 	
-									
-					<Link
-						href={
-							'https://fi.linkedin.com/in/kasperi-pohtinen-41273a204'
-						}
-						passHref
-					>
-						<a target="_blank">
-							<div className={styles.listItem}>
-								<div className={styles.listItemName}>
-									<Image
-										src="/svg/linkedin.svg"
-										alt="icon"
-										width={18}
-										height={18}
-									></Image>
-									<p>Linkedin</p>
-								</div>
-								<p className={styles.listItemDateModified}>
-									12.12.2021 01:02
-								</p>
-								<p className={styles.listItemType}>Shortcut</p>
-								<p className={styles.listItemSize}>2kt</p>
-							</div>
-						</a>
-					</Link> 
-
-					*/}
 					<Link href={'https://github.com/KasperiP/'} passHref>
 						<a target="_blank">
 							<div className={styles.listItem}>
@@ -95,7 +66,7 @@ function Links() {
 									<p>Github</p>
 								</div>
 								<p className={styles.listItemDateModified}>
-									1.8.2022 08:00
+									01/08/2022 08:00
 								</p>
 								<p className={styles.listItemType}>Shortcut</p>
 								<p className={styles.listItemSize}>2kt</p>
@@ -120,7 +91,7 @@ function Links() {
 									<p>Spotify</p>
 								</div>
 								<p className={styles.listItemDateModified}>
-									1.1.2024 04:20
+									01/01/2024 04:20
 								</p>
 								<p className={styles.listItemType}>Shortcut</p>
 								<p className={styles.listItemSize}>2kt</p>
