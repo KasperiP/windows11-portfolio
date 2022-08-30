@@ -98,6 +98,29 @@ function Links() {
 							</div>
 						</a>
 					</Link>
+					<Link
+						href={'https://steamcommunity.com/id/kassqu'}
+						passHref
+					>
+						<a target="_blank">
+							<div className={styles.listItem}>
+								<div className={styles.listItemName}>
+									<Image
+										src="/svg/steam.svg"
+										alt="icon"
+										width={18}
+										height={18}
+									></Image>
+									<p>Steam</p>
+								</div>
+								<p className={styles.listItemDateModified}>
+									20/12/2021 12:20
+								</p>
+								<p className={styles.listItemType}>Shortcut</p>
+								<p className={styles.listItemSize}>2kt</p>
+							</div>
+						</a>
+					</Link>
 				</div>
 			</>
 		);
