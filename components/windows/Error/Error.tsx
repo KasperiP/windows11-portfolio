@@ -61,7 +61,7 @@ function Error({ errors, index, setError, error }: Props) {
 					</div>
 					<div>
 						<p>
-							The insturction at 0x0000000088000000 referenced
+							The instruction at 0x0000000088000000 referenced
 							memory at 0x0000000088000000. The memory could not
 							be written.
 							<br />
