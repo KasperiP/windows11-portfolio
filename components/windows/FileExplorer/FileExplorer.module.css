@@ -188,6 +188,8 @@
 .content {
 	width: 100%;
 	border-radius: 0 0 15px;
+	display: flex;
+	flex-direction: column;
 }
 
 .child {
