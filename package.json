@@ -19,7 +19,7 @@
 		"react-icons": "^4.3.1",
 		"react-rnd": "^10.3.5",
 		"react-selecto": "^1.13.2",
-		"sharp": "^0.30.5"
+		"sharp": "^0.32.6"
 	},
 	"devDependencies": {
 		"@types/node": "^17.0.9",
