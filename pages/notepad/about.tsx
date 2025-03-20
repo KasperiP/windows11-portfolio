@@ -14,7 +14,7 @@ function About() {
 		return age;
 	};
 	const textContent = () => {
-		return `Hello, my name is Kasperi! 👋\n\nI am a ${getAge()}-year-old Computer Science student from Tampere, Finland. I am interested on all kinds of tech related topics such as web development! Open the Links folder to follow me on social media! 🤠\n\nBtw this website is built with Next.js and React and is recreation of my windows desktop :D\n\nMessy source code available on GitHub: https://github.com/KasperiP/windows11-portfolio
+		return `Hello, my name is Kasperi! 👋\n\nI am a ${getAge()}-year-old Computer Science student from Naantali, Finland. I am interested on all kinds of tech related topics such as web development! Open the Links folder to follow me on social media! 🤠\n\nBtw this website is built with Next.js and React and is recreation of my windows desktop :D\n\nMessy source code available on GitHub: https://github.com/KasperiP/windows11-portfolio
 		`;
 	};
 
