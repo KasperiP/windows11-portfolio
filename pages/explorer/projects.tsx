@@ -43,6 +43,7 @@ function Projects({ data }: { data: ProjectType[] }) {
 							<div className={styles.listItemName}>
 								<Image
 									src="/svg/github.svg"
+									unoptimized
 									alt="icon"
 									width={16}
 									height={16}

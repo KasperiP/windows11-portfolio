@@ -1,11 +1,10 @@
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'motion/react';
 import { useRouter } from 'next/router';
 import {
 	MouseEvent,
 	ReactNode,
 	useContext,
 	useEffect,
-	useRef,
 	useState,
 } from 'react';
 import { AiOutlinePlus } from 'react-icons/ai';
@@ -48,13 +47,24 @@ const handleStyles = {
 };
 
 const variants = {
+	// .container carries border-radius: 10px; the maximized window squares off.
+	// Both variants must name borderRadius or Motion cannot animate back.
 	maximized: {
 		borderRadius: '0px',
 		scale: 1,
+		opacity: 1,
 	},
 	minimized: {
-		opacity: 1,
+		borderRadius: '10px',
 		scale: 1,
+		opacity: 1,
+	},
+	// Opening straight into an already-open file explorer should not re-zoom.
+	enterFromHistory: {
+		scale: 1,
+	},
+	enterFresh: {
+		scale: 0,
 	},
 };
 
@@ -74,7 +84,6 @@ function DraggableWindow({
 	close,
 }: Props) {
 	const router = useRouter();
-	const nodeRef = useRef(null);
 
 	const [isDragging, setIsDragging] = useState(false);
 	const [isResizing, setIsResizing] = useState(false);
@@ -217,6 +226,7 @@ function DraggableWindow({
 		<AnimatePresence>
 			{!isClosing && !loading && (
 				<Rnd
+					key={windowName}
 					dragHandleClassName={'draggable'}
 					cancel={'.not_draggable'}
 					onDragStart={() => {
@@ -281,15 +291,14 @@ function DraggableWindow({
 					<motion.div
 						onClick={(e) => handleClick(e, windowName)}
 						className={styles.container}
-						ref={nodeRef}
 						variants={variants}
 						animate={
 							maximized[windowName] ? 'maximized' : 'minimized'
 						}
 						initial={
 							history.length > 1 && windowName === 'fileExplorer'
-								? { scale: 1 }
-								: { scale: 0 }
+								? 'enterFromHistory'
+								: 'enterFresh'
 						}
 						exit={{ scale: 0 }}
 						transition={{ duration: 0.15 }}

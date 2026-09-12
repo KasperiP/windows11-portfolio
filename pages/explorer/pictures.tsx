@@ -39,10 +39,13 @@ function Pictures({ data }: { data: MediaType[] }) {
 								className="no_click"
 								src={image.url}
 								alt="icon"
-								width="100%"
-								height="100%"
-								layout="responsive"
-								objectFit="contain"
+								width={100}
+								height={100}
+								style={{
+									width: '100%',
+									height: '100%',
+									objectFit: 'contain',
+								}}
 							/>
 						</div>
 						<p className="no_click">
@@ -89,8 +92,9 @@ function Pictures({ data }: { data: MediaType[] }) {
 							<Image
 								src={openImage.url}
 								alt="icon"
-								layout="fill"
-								objectFit="contain"
+								fill
+								sizes="860px"
+								style={{ objectFit: 'contain' }}
 							/>
 						}
 					/>

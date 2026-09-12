@@ -53,7 +53,7 @@
 	font-size: 0.6em;
 }
 
-.icon:not(:active) span {
+.icon:not(:active) img {
 	transition: all 0.1s ease-in-out;
 }
 
@@ -64,7 +64,7 @@
 	background-color: #2e2e2e;
 }
 
-.icon:active span {
+.icon:active img {
 	transform: scale(0.8);
 }
 

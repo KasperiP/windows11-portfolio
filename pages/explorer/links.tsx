@@ -16,6 +16,7 @@ function Links() {
 								<div className={styles.listItemName}>
 									<Image
 										src="/svg/twitter.svg"
+										unoptimized
 										alt="icon"
 										width={18}
 										height={18}
@@ -39,6 +40,7 @@ function Links() {
 								<div className={styles.listItemName}>
 									<Image
 										src="/svg/discord.svg"
+										unoptimized
 										alt="icon"
 										width={18}
 										height={18}
@@ -59,6 +61,7 @@ function Links() {
 								<div className={styles.listItemName}>
 									<Image
 										src="/svg/github.svg"
+										unoptimized
 										alt="icon"
 										width={18}
 										height={18}
@@ -84,6 +87,7 @@ function Links() {
 								<div className={styles.listItemName}>
 									<Image
 										src="/svg/spotify.svg"
+										unoptimized
 										alt="icon"
 										width={18}
 										height={18}
@@ -107,6 +111,7 @@ function Links() {
 								<div className={styles.listItemName}>
 									<Image
 										src="/svg/steam.svg"
+										unoptimized
 										alt="icon"
 										width={18}
 										height={18}
