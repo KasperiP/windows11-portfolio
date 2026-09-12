@@ -1,8 +1,8 @@
 import Image from 'next/image';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import Draggable from 'react-draggable';
 import { VscChromeClose } from 'react-icons/vsc';
-import { ErrorType } from '../../../typings';
+import type { ErrorType } from '../../../types';
 import styles from './Error.module.css';
 
 type Props = {
@@ -13,18 +13,26 @@ type Props = {
 };
 
 function Error({ errors, index, setError, error }: Props) {
+	// react-draggable needs an explicit nodeRef; without one it falls back to
+	// ReactDOM.findDOMNode, which is gone in React 19.
+	const nodeRef = useRef<HTMLDivElement>(null);
+
 	const handleClose = async () => {
 		const newErrors = await errors.filter((err) => err.index !== index);
 		setError(newErrors);
 	};
 
 	useEffect(() => {
-		let audio = new Audio('/sounds/error.mp3');
+		const audio = new Audio('/sounds/error.mp3');
 		audio.play();
+		return () => {
+			audio.pause();
+		};
 	}, []);
 
 	return (
 		<Draggable
+			nodeRef={nodeRef}
 			cancel="button"
 			positionOffset={
 				index && index > 0
@@ -35,7 +43,7 @@ function Error({ errors, index, setError, error }: Props) {
 					: { x: '-50%', y: '-50%' }
 			}
 		>
-			<div className={styles.errorContainer}>
+			<div ref={nodeRef} className={styles.errorContainer}>
 				<div className={styles.errorTop}>
 					<div>
 						<Image

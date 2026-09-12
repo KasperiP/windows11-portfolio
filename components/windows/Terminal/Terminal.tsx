@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { useCallback, useEffect, useState } from 'react';
-import { HistoryType } from '../../../typings';
+import type { HistoryType } from '../../../types';
 import DraggableWindow from '../../utils/DraggableWindow/DraggableWindow';
 import styles from './Terminal.module.css';
 
@@ -8,7 +8,7 @@ function Terminal() {
 	const [history, setHistory] = useState<HistoryType[] | []>([]);
 
 	const executeCommand = useCallback(
-		(input) => {
+		(input: string) => {
 			const command = input.split(' ')[0];
 
 			switch (command) {

@@ -9,7 +9,7 @@ import '../styles/globals.css';
 const useMediaQuery = (width: number) => {
 	const [targetReached, setTargetReached] = useState(false);
 
-	const updateTarget = useCallback((e) => {
+	const updateTarget = useCallback((e: MediaQueryListEvent) => {
 		if (e.matches) {
 			setTargetReached(true);
 		} else {
@@ -42,7 +42,9 @@ function MyApp({ Component, pageProps }: AppProps) {
 
 	const router = useRouter();
 
-	useEffect(() => storePathValues, [router.asPath]);
+	useEffect(() => {
+		storePathValues();
+	}, [router.asPath]);
 
 	function storePathValues() {
 		const storage = globalThis?.sessionStorage;

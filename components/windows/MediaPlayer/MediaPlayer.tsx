@@ -1,10 +1,11 @@
-import { MediaType } from '../../../typings';
+import type { ReactNode } from 'react';
+import type { MediaType } from '../../../types';
 import DraggableWindow from '../../utils/DraggableWindow/DraggableWindow';
 import styles from './MediaPlayer.module.css';
 
 type Props = {
 	media: MediaType;
-	component: JSX.Element;
+	component: ReactNode;
 	closeMedia: (newMedia: MediaType | null) => void;
 };
 

@@ -16,6 +16,7 @@
 		"next": "^12.1.0",
 		"react": "17.0.2",
 		"react-dom": "17.0.2",
+		"react-draggable": "^4.7.1",
 		"react-icons": "^4.3.1",
 		"react-rnd": "^10.3.5",
 		"react-selecto": "^1.13.2",

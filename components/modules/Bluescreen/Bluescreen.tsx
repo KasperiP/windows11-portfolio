@@ -11,22 +11,12 @@ function Bluescreen({ errorCode }: Props) {
 	const [progress, setProgress] = useState(0);
 
 	useEffect(() => {
-		let isMounted = true;
-		let interval = setTimeout(() => {
-			if (progress <= 100) {
-				let currentProgress = progress;
-				let newProgress = (currentProgress += Math.floor(
-					Math.random() * 10
-				));
-				if (newProgress > 100) newProgress = 100;
-				if (isMounted) setProgress(newProgress);
-			} else {
-				if (isMounted) setProgress(100);
-				clearTimeout(interval);
-			}
+		if (progress >= 100) return;
+		const timeout = setTimeout(() => {
+			setProgress(Math.min(progress + Math.floor(Math.random() * 10), 100));
 		}, 1000);
 		return () => {
-			isMounted = false;
+			clearTimeout(timeout);
 		};
 	}, [progress]);
 

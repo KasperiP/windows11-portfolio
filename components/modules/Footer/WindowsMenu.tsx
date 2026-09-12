@@ -36,11 +36,11 @@ function WindowsMenu({ winMenu, handleWinMenu }: Props) {
 
 	useEffect(() => {
 		const handleClickOutside = (event: MouseEvent) => {
-			const target = event.target as HTMLElement;
+			const target = event.target as Element;
 			if (null === node.current) return;
 			if (
 				node.current.contains(target) ||
-				target.className.includes('windowsIcon')
+				target.classList.contains('windowsIcon')
 			)
 				return;
 			if (winMenu) {

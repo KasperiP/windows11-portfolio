@@ -7,8 +7,8 @@ export const handleWindowPriority = async (params: {
 }) => {
 	const { e, windowName, windowPriority } = params;
 	if (e) {
-		const target = e.target as HTMLElement;
-		if (target.className === 'no_click') return;
+		const target = e.target as Element;
+		if (target.classList.contains('no_click')) return;
 	}
 	const priorityValues = Object.values(windowPriority).sort((a, b) => a - b);
 

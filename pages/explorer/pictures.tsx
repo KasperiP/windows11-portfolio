@@ -7,7 +7,7 @@ import FileExplorer from '../../components/windows/FileExplorer/FileExplorer';
 import MediaPlayer from '../../components/windows/MediaPlayer/MediaPlayer';
 import { Context } from '../../context/ContextProvider';
 import styles from '../../styles/utils/MediaGrid.module.css';
-import { MediaType } from '../../typings';
+import type { MediaType } from '../../types';
 
 function Pictures({ data }: { data: MediaType[] }) {
 	const [openImage, setOpenImage] = useState<MediaType | null>(null);

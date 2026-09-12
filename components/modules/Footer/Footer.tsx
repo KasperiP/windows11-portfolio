@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { AiOutlineWifi } from 'react-icons/ai';
 import { FiVolume2 } from 'react-icons/fi';
-import { ErrorType } from '../../../typings';
+import type { ErrorType } from '../../../types';
 import Error from '../../windows/Error/Error';
 import styles from './Footer.module.css';
 import WindowsMenu from './WindowsMenu';
@@ -24,24 +24,17 @@ function Footer() {
 	const [dateStr, setDateStr] = useState('1/1/1970');
 
 	useEffect(() => {
-		let isMounted = true;
-		setInterval(() => {
-			if (typeof navigator !== 'undefined') {
-				if (isMounted)
-					setHourStr(
-						new Date().toLocaleTimeString(navigator.language, {
-							hour: '2-digit',
-							minute: '2-digit',
-						})
-					);
-				if (isMounted)
-					setDateStr(
-						new Date().toLocaleDateString(navigator.language)
-					);
-			}
+		const interval = setInterval(() => {
+			setHourStr(
+				new Date().toLocaleTimeString(navigator.language, {
+					hour: '2-digit',
+					minute: '2-digit',
+				})
+			);
+			setDateStr(new Date().toLocaleDateString(navigator.language));
 		}, 1000);
 		return () => {
-			isMounted = false;
+			clearInterval(interval);
 		};
 	}, []);
 

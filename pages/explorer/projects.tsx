@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Icons from '../../components/modules/Icons/Icons';
 import FileExplorer from '../../components/windows/FileExplorer/FileExplorer';
 import styles from '../../styles/utils/List.module.css';
-import { ProjectType } from '../../typings';
+import type { ProjectType } from '../../types';
 
 function Projects({ data }: { data: ProjectType[] }) {
 	const content = () => {
