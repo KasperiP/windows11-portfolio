@@ -116,12 +116,19 @@ export async function getStaticProps() {
 					process.env.CLOUDINARY_API_KEY +
 						':' +
 						process.env.CLOUDINARY_API_SECRET
-				).toString('base64')}}`,
+				).toString('base64')}`,
 			},
 		}
 	).then((res) => res.json());
 
-	const data = res.resources.map((image: MediaType) => {
+	// Cloudinary returns an error object instead of `resources` when the
+	// credentials are missing or rejected; degrade to an empty folder rather
+	// than failing the whole build.
+	const resources: MediaType[] = Array.isArray(res?.resources)
+		? res.resources
+		: [];
+
+	const data = resources.map((image: MediaType) => {
 		return {
 			url: image.secure_url.replace('/upload/', '/upload/q_auto:low/'),
 			secure_url: image.secure_url,
@@ -132,12 +139,6 @@ export async function getStaticProps() {
 			format: image.format,
 		};
 	});
-
-	if (!data) {
-		return {
-			notFound: true,
-		};
-	}
 
 	return {
 		props: {

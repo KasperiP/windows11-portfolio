@@ -116,12 +116,17 @@ export async function getStaticProps() {
 					process.env.CLOUDINARY_API_KEY +
 						':' +
 						process.env.CLOUDINARY_API_SECRET
-				).toString('base64')}}`,
+				).toString('base64')}`,
 			},
 		}
 	).then((res) => res.json());
 
-	const data = res.resources.map((video: MediaType) => {
+	// See the note in pictures.tsx: guard against an error response.
+	const resources: MediaType[] = Array.isArray(res?.resources)
+		? res.resources
+		: [];
+
+	const data = resources.map((video: MediaType) => {
 		return {
 			thumbnail: (
 				video.secure_url.split('.').slice(0, -1).join('.') + '.webp'
@@ -134,12 +139,6 @@ export async function getStaticProps() {
 			format: video.format,
 		};
 	});
-
-	if (!data) {
-		return {
-			notFound: true,
-		};
-	}
 
 	return {
 		props: {

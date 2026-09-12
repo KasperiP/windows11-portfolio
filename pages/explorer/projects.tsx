@@ -103,16 +103,15 @@ function Projects({ data }: { data: ProjectType[] }) {
 
 export async function getStaticProps() {
 	const res = await fetch(`https://api.github.com/users/KasperiP/repos`);
-	const data = (await res.json()).filter(
+	const json = await res.json();
+
+	// GitHub answers with an object (not an array) when rate-limited.
+	const repos: ProjectType[] = Array.isArray(json) ? json : [];
+
+	const data = repos.filter(
 		(project: ProjectType) =>
 			project.fork === false && project.full_name !== 'KasperiP/KasperiP'
 	);
-
-	if (!data) {
-		return {
-			notFound: true,
-		};
-	}
 
 	return {
 		props: { data },

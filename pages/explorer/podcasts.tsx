@@ -139,42 +139,59 @@ export async function getStaticProps() {
 	).toString('base64');
 	const TOKEN_ENDPOINT = `https://accounts.spotify.com/api/token`;
 
-	const getAccessToken = async () => {
-		const response = await fetch(TOKEN_ENDPOINT, {
-			method: 'POST',
-			headers: {
-				Authorization: `Basic ${basic}`,
-				'Content-Type': 'application/x-www-form-urlencoded',
-			},
-			body: `grant_type=refresh_token&refresh_token=${process.env.SPOTIFY_REFRESH_TOKEN}`,
-		});
+	// These three podcast feeds are nice-to-have metadata. None of them should
+	// be able to fail the whole build, so every request degrades to a fallback
+	// on a network error, a missing credential, or a rate limit.
+	const EPOCH = '1970-01-01';
 
-		return response.json();
+	const getAccessToken = async () => {
+		try {
+			const response = await fetch(TOKEN_ENDPOINT, {
+				method: 'POST',
+				headers: {
+					Authorization: `Basic ${basic}`,
+					'Content-Type': 'application/x-www-form-urlencoded',
+				},
+				body: `grant_type=refresh_token&refresh_token=${process.env.SPOTIFY_REFRESH_TOKEN}`,
+			});
+
+			const json: { access_token?: string } = await response.json();
+			return json.access_token;
+		} catch {
+			return undefined;
+		}
 	};
 
-	const { access_token }: { access_token: string } = await getAccessToken();
+	const access_token = await getAccessToken();
 
-	const koodikrapulaRes: { items: [{ release_date: string }] } = await fetch(
-		'https://api.spotify.com/v1/shows/1st4zWhHxzXn345vqdTfk8/episodes',
-		{
-			headers: new Headers({
-				Authorization: `Bearer ${access_token}`,
-			}),
+	const latestEpisode = async (showId: string) => {
+		if (!access_token) return EPOCH;
+
+		try {
+			const res: { items?: { release_date: string }[] } = await fetch(
+				`https://api.spotify.com/v1/shows/${showId}/episodes`,
+				{
+					headers: new Headers({
+						Authorization: `Bearer ${access_token}`,
+					}),
+				}
+			).then((r) => r.json());
+
+			if (!Array.isArray(res.items)) return EPOCH;
+
+			return (
+				res.items
+					.map((x) => x.release_date)
+					.sort((a, b) => +new Date(b) - +new Date(a))[0] ?? EPOCH
+			);
+		} catch {
+			return EPOCH;
 		}
-	).then((res) => res.json());
-	const webbidevausRes = await (
-		await fetch('https://webbidevaus.fi/')
-	).text();
+	};
 
-	const koodiapinnanallaRes: { items: [{ release_date: string }] } =
-		await fetch(
-			'https://api.spotify.com/v1/shows/3wKj2ZpdPi4eO3a2nSNwxy/episodes',
-			{
-				headers: new Headers({
-					Authorization: `Bearer ${access_token}`,
-				}),
-			}
-		).then((res) => res.json());
+	const webbidevausRes = await fetch('https://webbidevaus.fi/')
+		.then((res) => res.text())
+		.catch(() => '');
 
 	// Webbidevaus (not on spotify so using this hacky way)
 	const webbidevausTimeElement = webbidevausRes.match(
@@ -189,14 +206,10 @@ export async function getStaticProps() {
 				.join('-')
 		: '01.01.1970 00:00';
 
-	// koodiapinnanallaRes has key release_date so we can use that to get the latest episode
-	const koodiapinnanallaTime = koodiapinnanallaRes.items
-		.map((x: { release_date: string }) => x.release_date)
-		.sort((a: string, b: string) => +new Date(b) - +new Date(a))[0];
-
-	const koodikrapulaTime = koodikrapulaRes.items
-		.map((x: { release_date: string }) => x.release_date)
-		.sort((a: string, b: string) => +new Date(b) - +new Date(a))[0];
+	const koodiapinnanallaTime = await latestEpisode(
+		'3wKj2ZpdPi4eO3a2nSNwxy'
+	);
+	const koodikrapulaTime = await latestEpisode('1st4zWhHxzXn345vqdTfk8');
 
 	return {
 		props: {
