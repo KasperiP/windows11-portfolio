@@ -39,7 +39,7 @@ function Error({ errors, index, setError, error }: Props) {
 					? {
 							x: `calc(-50% +  ${index * 20}px)`,
 							y: `calc(-50% -  ${index * 20}px)`,
-					  }
+						}
 					: { x: '-50%', y: '-50%' }
 			}
 		>

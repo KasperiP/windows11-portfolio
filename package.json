@@ -10,7 +10,13 @@
 		"dev": "next dev",
 		"build": "next build",
 		"start": "next start",
-		"lint": "next lint"
+		"lint": "eslint .",
+		"lint:fix": "eslint . --fix",
+		"lint:css": "stylelint \"**/*.css\"",
+		"lint:css:fix": "stylelint \"**/*.css\" --fix",
+		"format": "prettier --write .",
+		"format:check": "prettier --check .",
+		"typecheck": "tsc --noEmit"
 	},
 	"dependencies": {
 		"@next/third-parties": "16.3.5",
@@ -27,7 +33,7 @@
 		"@types/node": "^22.20.2",
 		"@types/react": "^19.3.0",
 		"@types/react-dom": "19.3.0",
-		"eslint": "10.10.0",
+		"eslint": "9.39.5",
 		"eslint-config-next": "16.3.5",
 		"eslint-config-prettier": "10.1.8",
 		"prettier": "3.9.6",

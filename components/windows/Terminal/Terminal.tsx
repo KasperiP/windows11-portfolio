@@ -72,13 +72,13 @@ function Terminal() {
 					break;
 			}
 		},
-		[history]
+		[history],
 	);
 
 	useEffect(() => {
 		const handleFocus = () => {
 			const terminal = document.getElementsByClassName(
-				'prompt'
+				'prompt',
 			)[0] as HTMLInputElement;
 			terminal?.focus();
 			terminal?.scrollIntoView();

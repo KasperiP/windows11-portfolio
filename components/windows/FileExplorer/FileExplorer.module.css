@@ -186,15 +186,14 @@
 }
 
 .content {
-	width: 100%;
-	border-radius: 0 0 15px;
 	display: flex;
 	flex-direction: column;
+	width: 100%;
+	border-radius: 0 0 15px;
 }
 
 .child {
-	overflow-x: hidden;
-	overflow-y: auto;
+	overflow: hidden auto;
 	max-width: 100%;
 	max-height: 100%;
 	margin: 0 10px;
@@ -218,7 +217,9 @@
 	font-size: 1.6rem;
 }
 
-.navigationDropdown div {
+/* The label is a <Link>, so Next renders it as <a>; the sibling arrow toggle
+   is an svg and is styled above. */
+.navigationDropdown > a {
 	display: flex;
 	gap: 5px;
 	align-items: center;

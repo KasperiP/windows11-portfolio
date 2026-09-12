@@ -16,7 +16,7 @@ function Videos({ data }: { data: MediaType[] }) {
 	const [windowState, setWindowState] =
 		DraggableWindowContext.windowPriorityState;
 
-	const VideoContent = () => {
+	const content = () => {
 		return (
 			<div className={styles.wrapper}>
 				{data.map((video) => (
@@ -102,7 +102,7 @@ function Videos({ data }: { data: MediaType[] }) {
 					folder="Videos"
 					topNav={false}
 					icon="videos"
-					component={<VideoContent />}
+					component={content()}
 				/>
 				<Icons />
 			</div>
@@ -118,10 +118,10 @@ export async function getStaticProps() {
 				Authorization: `Basic ${Buffer.from(
 					process.env.CLOUDINARY_API_KEY +
 						':' +
-						process.env.CLOUDINARY_API_SECRET
+						process.env.CLOUDINARY_API_SECRET,
 				).toString('base64')}`,
 			},
-		}
+		},
 	).then((res) => res.json());
 
 	// See the note in pictures.tsx: guard against an error response.

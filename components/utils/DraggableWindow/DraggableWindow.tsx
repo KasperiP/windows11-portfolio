@@ -1,12 +1,6 @@
 import { AnimatePresence, motion } from 'motion/react';
 import { useRouter } from 'next/router';
-import {
-	MouseEvent,
-	ReactNode,
-	useContext,
-	useEffect,
-	useState,
-} from 'react';
+import { MouseEvent, ReactNode, useContext, useEffect, useState } from 'react';
 import { AiOutlinePlus } from 'react-icons/ai';
 import { RiArrowDropDownLine } from 'react-icons/ri';
 import {
@@ -130,8 +124,8 @@ function DraggableWindow({
 			}, 500);
 			const newPriority = Object.fromEntries(
 				Object.entries(windowPriority).filter(
-					([key]) => key !== 'mediaPlayer'
-				)
+					([key]) => key !== 'mediaPlayer',
+				),
 			);
 			return setWindowPriority(newPriority);
 		}
@@ -284,7 +278,7 @@ function DraggableWindow({
 							? { zIndex: 997 }
 							: {
 									zIndex: windowPriority[windowName] || 10,
-							  }
+								}
 					}
 					resizeHandleStyles={handleStyles}
 				>

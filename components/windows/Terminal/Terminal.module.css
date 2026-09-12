@@ -49,7 +49,7 @@
 	outline: none;
 	font-weight: 600;
 	font-size: 0.9rem;
-	word-wrap: break-word;
+	overflow-wrap: break-word;
 }
 
 .historyItem {

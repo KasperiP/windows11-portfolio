@@ -32,7 +32,7 @@ type ContextType = {
 	positionState: [PositionState, (newPosition: PositionState) => void];
 	windowPriorityState: [
 		WindowPriority,
-		(newPriority: WindowPriority) => void
+		(newPriority: WindowPriority) => void,
 	];
 	lastPosState: [LastPos, (newLastPos: LastPos) => void];
 };

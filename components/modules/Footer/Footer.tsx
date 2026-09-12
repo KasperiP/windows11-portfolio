@@ -29,7 +29,7 @@ function Footer() {
 				new Date().toLocaleTimeString(navigator.language, {
 					hour: '2-digit',
 					minute: '2-digit',
-				})
+				}),
 			);
 			setDateStr(new Date().toLocaleDateString(navigator.language));
 		}, 1000);
@@ -66,15 +66,17 @@ function Footer() {
 							className="windowsIcon"
 						/>
 					</div>
-					<Link href="/explorer/quick-access" passHref>
-						<div className={styles.icon}>
-							<Image
-								src={'/icons/explorer/explorer.png'}
-								width={25}
-								height={25}
-								alt="logo"
-							/>
-						</div>
+					<Link
+						href="/explorer/quick-access"
+						className={styles.icon}
+						draggable={false}
+					>
+						<Image
+							src={'/icons/explorer/explorer.png'}
+							width={25}
+							height={25}
+							alt="logo"
+						/>
 					</Link>
 					<div
 						className={styles.icon}
@@ -133,15 +135,17 @@ function Footer() {
 							alt="logo"
 						/>
 					</div>
-					<Link href="/terminal" passHref>
-						<div className={styles.icon}>
-							<Image
-								src={'/icons/terminal/terminal.png'}
-								width={25}
-								height={25}
-								alt="logo"
-							/>
-						</div>
+					<Link
+						href="/terminal"
+						className={styles.icon}
+						draggable={false}
+					>
+						<Image
+							src={'/icons/terminal/terminal.png'}
+							width={25}
+							height={25}
+							alt="logo"
+						/>
 					</Link>
 				</section>
 				<section className={styles.toolbarContainer}>

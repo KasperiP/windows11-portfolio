@@ -16,7 +16,7 @@ function Pictures({ data }: { data: MediaType[] }) {
 	const [windowState, setWindowState] =
 		DraggableWindowContext.windowPriorityState;
 
-	const ImageContent = () => {
+	const content = () => {
 		return (
 			<div className={styles.wrapper}>
 				{data.map((image) => (
@@ -103,7 +103,7 @@ function Pictures({ data }: { data: MediaType[] }) {
 					folder="Pictures"
 					topNav={false}
 					icon="pictures"
-					component={<ImageContent />}
+					component={content()}
 				/>
 				<Icons />
 			</div>
@@ -119,10 +119,10 @@ export async function getStaticProps() {
 				Authorization: `Basic ${Buffer.from(
 					process.env.CLOUDINARY_API_KEY +
 						':' +
-						process.env.CLOUDINARY_API_SECRET
+						process.env.CLOUDINARY_API_SECRET,
 				).toString('base64')}`,
 			},
-		}
+		},
 	).then((res) => res.json());
 
 	// Cloudinary returns an error object instead of `resources` when the

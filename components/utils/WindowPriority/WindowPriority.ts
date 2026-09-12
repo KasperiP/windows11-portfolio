@@ -17,7 +17,7 @@ export const handleWindowPriority = async (params: {
 	if (windowPriority[windowName] === highestPriority) return;
 
 	const newPriority = Object.fromEntries(
-		Object.entries(windowPriority).map(([key, value]) => [key, value - 1])
+		Object.entries(windowPriority).map(([key, value]) => [key, value - 1]),
 	);
 
 	newPriority[windowName] = highestPriority;

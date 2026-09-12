@@ -346,7 +346,7 @@ function FileExplorer(props: Props) {
 							router.pathname == '/explorer/quick-access'
 								? {
 										backgroundColor: '#2e2e2e',
-								  }
+									}
 								: {}
 						}
 					>
@@ -357,107 +357,105 @@ function FileExplorer(props: Props) {
 									? {}
 									: {
 											transform: 'rotate(-90deg)',
-									  }
+										}
 							}
 						/>
-						<Link href="/explorer/quick-access" passHref>
-							<div>
-								<Image
-									src="/icons/quickaccess/quickaccess.png"
-									alt="ico"
-									width={16}
-									height={16}
-								/>
-								<p>Quick access</p>
-							</div>
+						<Link href="/explorer/quick-access" draggable={false}>
+							<Image
+								src="/icons/quickaccess/quickaccess.png"
+								alt="ico"
+								width={16}
+								height={16}
+							/>
+							<p>Quick access</p>
 						</Link>
 					</div>
 					{quickaccess && (
 						<>
-							<Link href="/explorer/desktop?top=true" passHref>
-								<div
-									className={styles.navigationItem}
-									style={
-										router.asPath ==
-										'/explorer/desktop?top=true'
-											? {
-													backgroundColor: '#2e2e2e',
-											  }
-											: {}
-									}
-								>
-									<Image
-										src="/icons/desktop/desktop.png"
-										alt="ico"
-										width={16}
-										height={16}
-									/>
-									<p>Desktop</p>
-								</div>
+							<Link
+								href="/explorer/desktop?top=true"
+								className={styles.navigationItem}
+								style={
+									router.asPath ==
+									'/explorer/desktop?top=true'
+										? {
+												backgroundColor: '#2e2e2e',
+											}
+										: {}
+								}
+								draggable={false}
+							>
+								<Image
+									src="/icons/desktop/desktop.png"
+									alt="ico"
+									width={16}
+									height={16}
+								/>
+								<p>Desktop</p>
 							</Link>
-							<Link href="/explorer/downloads?top=true" passHref>
-								<div
-									className={styles.navigationItem}
-									style={
-										router.asPath ==
-										'/explorer/downloads?top=true'
-											? {
-													backgroundColor: '#2e2e2e',
-											  }
-											: {}
-									}
-								>
-									<Image
-										src="/icons/downloads/downloads_small.png"
-										alt="ico"
-										width={16}
-										height={16}
-										unoptimized
-									/>
-									<p>Downloads</p>
-								</div>
+							<Link
+								href="/explorer/downloads?top=true"
+								className={styles.navigationItem}
+								style={
+									router.asPath ==
+									'/explorer/downloads?top=true'
+										? {
+												backgroundColor: '#2e2e2e',
+											}
+										: {}
+								}
+								draggable={false}
+							>
+								<Image
+									src="/icons/downloads/downloads_small.png"
+									alt="ico"
+									width={16}
+									height={16}
+									unoptimized
+								/>
+								<p>Downloads</p>
 							</Link>
-							<Link href="/explorer/documents?top=true" passHref>
-								<div
-									className={styles.navigationItem}
-									style={
-										router.asPath ==
-										'/explorer/documents?top=true'
-											? {
-													backgroundColor: '#2e2e2e',
-											  }
-											: {}
-									}
-								>
-									<Image
-										src="/icons/documents/documents_small.png"
-										alt="ico"
-										width={16}
-										height={16}
-									/>
-									<p>Documents</p>
-								</div>
+							<Link
+								href="/explorer/documents?top=true"
+								className={styles.navigationItem}
+								style={
+									router.asPath ==
+									'/explorer/documents?top=true'
+										? {
+												backgroundColor: '#2e2e2e',
+											}
+										: {}
+								}
+								draggable={false}
+							>
+								<Image
+									src="/icons/documents/documents_small.png"
+									alt="ico"
+									width={16}
+									height={16}
+								/>
+								<p>Documents</p>
 							</Link>
-							<Link href="/explorer/pictures?top=true" passHref>
-								<div
-									className={styles.navigationItem}
-									style={
-										router.asPath ==
-										'/explorer/pictures?top=true'
-											? {
-													backgroundColor: '#2e2e2e',
-											  }
-											: {}
-									}
-								>
-									<Image
-										src="/icons/pictures/pictures_small.png"
-										alt="ico"
-										width={16}
-										height={16}
-									/>
-									<p>Pictures</p>
-								</div>
+							<Link
+								href="/explorer/pictures?top=true"
+								className={styles.navigationItem}
+								style={
+									router.asPath ==
+									'/explorer/pictures?top=true'
+										? {
+												backgroundColor: '#2e2e2e',
+											}
+										: {}
+								}
+								draggable={false}
+							>
+								<Image
+									src="/icons/pictures/pictures_small.png"
+									alt="ico"
+									width={16}
+									height={16}
+								/>
+								<p>Pictures</p>
 							</Link>
 						</>
 					)}
@@ -467,7 +465,7 @@ function FileExplorer(props: Props) {
 							router.pathname == '/explorer/this-pc'
 								? {
 										backgroundColor: '#2e2e2e',
-								  }
+									}
 								: {}
 						}
 					>
@@ -478,188 +476,186 @@ function FileExplorer(props: Props) {
 									? {}
 									: {
 											transform: 'rotate(-90deg)',
-									  }
+										}
 							}
 						/>
-						<Link href="/explorer/this-pc" passHref>
-							<div>
-								<Image
-									src="/icons/this-pc/this-pc.png"
-									alt="ico"
-									width={16}
-									height={16}
-								/>
-								<p>This PC</p>
-							</div>
+						<Link href="/explorer/this-pc" draggable={false}>
+							<Image
+								src="/icons/this-pc/this-pc.png"
+								alt="ico"
+								width={16}
+								height={16}
+							/>
+							<p>This PC</p>
 						</Link>
 					</div>
 					{thisPC && (
 						<>
-							<Link href="/explorer/desktop" passHref>
-								<div
-									className={styles.navigationItem}
-									style={
-										router.asPath == '/explorer/desktop'
-											? {
-													backgroundColor: '#2e2e2e',
-											  }
-											: {}
-									}
-								>
-									<Image
-										src="/icons/desktop/desktop.png"
-										alt="ico"
-										width={16}
-										height={16}
-									/>
-									<p>Desktop</p>
-								</div>
+							<Link
+								href="/explorer/desktop"
+								className={styles.navigationItem}
+								style={
+									router.asPath == '/explorer/desktop'
+										? {
+												backgroundColor: '#2e2e2e',
+											}
+										: {}
+								}
+								draggable={false}
+							>
+								<Image
+									src="/icons/desktop/desktop.png"
+									alt="ico"
+									width={16}
+									height={16}
+								/>
+								<p>Desktop</p>
 							</Link>
-							<Link href="/explorer/downloads" passHref>
-								<div
-									className={styles.navigationItem}
-									style={
-										router.asPath == '/explorer/downloads'
-											? {
-													backgroundColor: '#2e2e2e',
-											  }
-											: {}
-									}
-								>
-									<Image
-										src="/icons/downloads/downloads_small.png"
-										alt="ico"
-										width={16}
-										height={16}
-										unoptimized
-									/>
-									<p>Downloads</p>
-								</div>
+							<Link
+								href="/explorer/downloads"
+								className={styles.navigationItem}
+								style={
+									router.asPath == '/explorer/downloads'
+										? {
+												backgroundColor: '#2e2e2e',
+											}
+										: {}
+								}
+								draggable={false}
+							>
+								<Image
+									src="/icons/downloads/downloads_small.png"
+									alt="ico"
+									width={16}
+									height={16}
+									unoptimized
+								/>
+								<p>Downloads</p>
 							</Link>
-							<Link href="/explorer/documents" passHref>
-								<div
-									className={styles.navigationItem}
-									style={
-										router.asPath == '/explorer/documents'
-											? {
-													backgroundColor: '#2e2e2e',
-											  }
-											: {}
-									}
-								>
-									<Image
-										src="/icons/documents/documents_small.png"
-										alt="ico"
-										width={16}
-										height={16}
-									/>
-									<p>Documents</p>
-								</div>
-							</Link>
-
-							<Link href="/explorer/pictures" passHref>
-								<div
-									className={styles.navigationItem}
-									style={
-										router.asPath == '/explorer/pictures'
-											? {
-													backgroundColor: '#2e2e2e',
-											  }
-											: {}
-									}
-								>
-									<Image
-										src="/icons/pictures/pictures_small.png"
-										alt="ico"
-										width={16}
-										height={16}
-									/>
-									<p>Pictures</p>
-								</div>
+							<Link
+								href="/explorer/documents"
+								className={styles.navigationItem}
+								style={
+									router.asPath == '/explorer/documents'
+										? {
+												backgroundColor: '#2e2e2e',
+											}
+										: {}
+								}
+								draggable={false}
+							>
+								<Image
+									src="/icons/documents/documents_small.png"
+									alt="ico"
+									width={16}
+									height={16}
+								/>
+								<p>Documents</p>
 							</Link>
 
-							<Link href="/explorer/videos" passHref>
-								<div
-									className={styles.navigationItem}
-									style={
-										router.asPath == '/explorer/videos'
-											? {
-													backgroundColor: '#2e2e2e',
-											  }
-											: {}
-									}
-								>
-									<Image
-										src="/icons/videos/videos_small.png"
-										alt="ico"
-										width={16}
-										height={16}
-									/>
-									<p>Videos</p>
-								</div>
+							<Link
+								href="/explorer/pictures"
+								className={styles.navigationItem}
+								style={
+									router.asPath == '/explorer/pictures'
+										? {
+												backgroundColor: '#2e2e2e',
+											}
+										: {}
+								}
+								draggable={false}
+							>
+								<Image
+									src="/icons/pictures/pictures_small.png"
+									alt="ico"
+									width={16}
+									height={16}
+								/>
+								<p>Pictures</p>
 							</Link>
 
-							<Link href="/explorer/music" passHref>
-								<div
-									className={styles.navigationItem}
-									style={
-										router.asPath == '/explorer/music'
-											? {
-													backgroundColor: '#2e2e2e',
-											  }
-											: {}
-									}
-								>
-									<Image
-										src="/icons/music/music_small.png"
-										alt="ico"
-										width={16}
-										height={16}
-									/>
-									<p>Music</p>
-								</div>
+							<Link
+								href="/explorer/videos"
+								className={styles.navigationItem}
+								style={
+									router.asPath == '/explorer/videos'
+										? {
+												backgroundColor: '#2e2e2e',
+											}
+										: {}
+								}
+								draggable={false}
+							>
+								<Image
+									src="/icons/videos/videos_small.png"
+									alt="ico"
+									width={16}
+									height={16}
+								/>
+								<p>Videos</p>
 							</Link>
 
-							<Link href="/explorer/drives/C" passHref>
-								<div
-									className={styles.navigationItem}
-									style={
-										router.asPath == '/explorer/drives/C'
-											? {
-													backgroundColor: '#2e2e2e',
-											  }
-											: {}
-									}
-								>
-									<Image
-										src="/icons/drives/c.png"
-										alt="ico"
-										width={16}
-										height={16}
-									/>
-									<p>250GB SSD</p>
-								</div>
+							<Link
+								href="/explorer/music"
+								className={styles.navigationItem}
+								style={
+									router.asPath == '/explorer/music'
+										? {
+												backgroundColor: '#2e2e2e',
+											}
+										: {}
+								}
+								draggable={false}
+							>
+								<Image
+									src="/icons/music/music_small.png"
+									alt="ico"
+									width={16}
+									height={16}
+								/>
+								<p>Music</p>
 							</Link>
 
-							<Link href="/explorer/drives/D" passHref>
-								<div
-									className={styles.navigationItem}
-									style={
-										router.asPath == '/explorer/ssd2'
-											? {
-													backgroundColor: '#2e2e2e',
-											  }
-											: {}
-									}
-								>
-									<Image
-										src="/icons/drives/d.png"
-										alt="ico"
-										width={16}
-										height={16}
-									/>
-									<p>1TB SSD</p>
-								</div>
+							<Link
+								href="/explorer/drives/C"
+								className={styles.navigationItem}
+								style={
+									router.asPath == '/explorer/drives/C'
+										? {
+												backgroundColor: '#2e2e2e',
+											}
+										: {}
+								}
+								draggable={false}
+							>
+								<Image
+									src="/icons/drives/c.png"
+									alt="ico"
+									width={16}
+									height={16}
+								/>
+								<p>250GB SSD</p>
+							</Link>
+
+							<Link
+								href="/explorer/drives/D"
+								className={styles.navigationItem}
+								style={
+									router.asPath == '/explorer/ssd2'
+										? {
+												backgroundColor: '#2e2e2e',
+											}
+										: {}
+								}
+								draggable={false}
+							>
+								<Image
+									src="/icons/drives/d.png"
+									alt="ico"
+									width={16}
+									height={16}
+								/>
+								<p>1TB SSD</p>
 							</Link>
 						</>
 					)}

@@ -87,38 +87,44 @@ function WindowsMenu({ winMenu, handleWinMenu }: Props) {
 								</div>
 							</div>
 							<div className={styles.winMenuPinnedBottom}>
-								<Link href="/explorer/quick-access" passHref>
-									<div onClick={() => handleWinMenu()}>
-										<Image
-											src="/icons/explorer/explorer.png"
-											alt="img"
-											width={30}
-											height={30}
-										></Image>
-										<p>File Explorer</p>
-									</div>
+								<Link
+									href="/explorer/quick-access"
+									onClick={() => handleWinMenu()}
+									draggable={false}
+								>
+									<Image
+										src="/icons/explorer/explorer.png"
+										alt="img"
+										width={30}
+										height={30}
+									></Image>
+									<p>File Explorer</p>
 								</Link>
-								<Link href="/explorer/pictures" passHref>
-									<div onClick={() => handleWinMenu()}>
-										<Image
-											src="/icons/pictures/pictures.png"
-											alt="img"
-											width={30}
-											height={30}
-										></Image>
-										<p>Photos</p>
-									</div>
+								<Link
+									href="/explorer/pictures"
+									onClick={() => handleWinMenu()}
+									draggable={false}
+								>
+									<Image
+										src="/icons/pictures/pictures.png"
+										alt="img"
+										width={30}
+										height={30}
+									></Image>
+									<p>Photos</p>
 								</Link>
-								<Link href="/explorer/videos" passHref>
-									<div onClick={() => handleWinMenu()}>
-										<Image
-											src="/icons/videos/videos.png"
-											alt="img"
-											width={30}
-											height={30}
-										></Image>
-										<p>Videos</p>
-									</div>
+								<Link
+									href="/explorer/videos"
+									onClick={() => handleWinMenu()}
+									draggable={false}
+								>
+									<Image
+										src="/icons/videos/videos.png"
+										alt="img"
+										width={30}
+										height={30}
+									></Image>
+									<p>Videos</p>
 								</Link>
 							</div>
 						</div>
@@ -134,41 +140,44 @@ function WindowsMenu({ winMenu, handleWinMenu }: Props) {
 								<div className={styles.winMenuRecommendedItem}>
 									<Link
 										href="/explorer/quick-access"
-										passHref
+										onClick={() => handleWinMenu()}
+										draggable={false}
 									>
-										<div onClick={() => handleWinMenu()}>
-											<Image
-												src="/icons/explorer/explorer.png"
-												alt="img"
-												width={30}
-												height={30}
-											></Image>
-											<p>File Explorer</p>
-										</div>
+										<Image
+											src="/icons/explorer/explorer.png"
+											alt="img"
+											width={30}
+											height={30}
+										></Image>
+										<p>File Explorer</p>
 									</Link>
-									<Link href="/explorer/pictures" passHref>
-										<div onClick={() => handleWinMenu()}>
-											<Image
-												src="/icons/pictures/pictures.png"
-												alt="img"
-												width={30}
-												height={30}
-											></Image>
-											<p>Photos</p>
-										</div>
+									<Link
+										href="/explorer/pictures"
+										onClick={() => handleWinMenu()}
+										draggable={false}
+									>
+										<Image
+											src="/icons/pictures/pictures.png"
+											alt="img"
+											width={30}
+											height={30}
+										></Image>
+										<p>Photos</p>
 									</Link>
 								</div>
 								<div className={styles.winMenuRecommendedItem}>
-									<Link href="/explorer/videos" passHref>
-										<div onClick={() => handleWinMenu()}>
-											<Image
-												src="/icons/videos/videos.png"
-												alt="img"
-												width={30}
-												height={30}
-											></Image>
-											<p>Videos</p>
-										</div>
+									<Link
+										href="/explorer/videos"
+										onClick={() => handleWinMenu()}
+										draggable={false}
+									>
+										<Image
+											src="/icons/videos/videos.png"
+											alt="img"
+											width={30}
+											height={30}
+										></Image>
+										<p>Videos</p>
 									</Link>
 									<div>
 										<Image

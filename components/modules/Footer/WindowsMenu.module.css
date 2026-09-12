@@ -111,7 +111,9 @@
 	width: 100%;
 }
 
-.winMenuRecommendedItem div {
+/* Direct child, not `div`: these tiles are <Link>s, so Next renders them as
+   <a>, while the Firefox tile is still a plain <div>. */
+.winMenuRecommendedItem > * {
 	display: flex;
 	gap: 5px;
 	align-items: center;
@@ -120,7 +122,7 @@
 	border-radius: 5px;
 }
 
-.winMenuRecommendedItem div:hover {
+.winMenuRecommendedItem > *:hover {
 	background-color: #2e2e2e;
 }
 
@@ -131,7 +133,7 @@
 	text-align: center;
 }
 
-.winMenuPinnedBottom div {
+.winMenuPinnedBottom > * {
 	display: flex;
 	flex-direction: column;
 	gap: 3px;
@@ -142,7 +144,7 @@
 	border-radius: 5px;
 }
 
-.winMenuPinnedBottom div:hover {
+.winMenuPinnedBottom > *:hover {
 	background-color: #353636;
 }
 

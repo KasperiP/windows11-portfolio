@@ -27,68 +27,71 @@ function Podcasts({ data }: { data: Props }) {
 		return (
 			<>
 				<div className={styles.listItemContainer}>
-					<Link href="https://webbidevaus.fi/" passHref>
-						<a target="_blank">
-							<div className={styles.listItem}>
-								<div className={styles.listItemName}>
-									<Image
-										src="/icons/podcasts/webbidevaus.png"
-										alt="icon"
-										width={16}
-										quality={100}
-										height={16}
-									></Image>
-									<p>Webbidevaus.fi</p>
-								</div>
-								<p className={styles.listItemDateModified}>
-									{getDate(data.webbidevausTime)}
-								</p>
-								<p className={styles.listItemType}>Shortcut</p>
-								<p className={styles.listItemSize}>2kt</p>
-							</div>
-						</a>
+					<Link
+						href="https://webbidevaus.fi/"
+						className={styles.listItem}
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						<div className={styles.listItemName}>
+							<Image
+								src="/icons/podcasts/webbidevaus.png"
+								alt="icon"
+								width={16}
+								quality={100}
+								height={16}
+							></Image>
+							<p>Webbidevaus.fi</p>
+						</div>
+						<p className={styles.listItemDateModified}>
+							{getDate(data.webbidevausTime)}
+						</p>
+						<p className={styles.listItemType}>Shortcut</p>
+						<p className={styles.listItemSize}>2kt</p>
 					</Link>
-					<Link href="https://koodiapinnanalla.fi/" passHref>
-						<a target="_blank">
-							<div className={styles.listItem}>
-								<div className={styles.listItemName}>
-									<Image
-										src="/icons/podcasts/koodiapinnanalla.png"
-										alt="icon"
-										width={16}
-										quality={100}
-										height={16}
-									></Image>
-									<p>Koodia pinnan alla</p>
-								</div>
-								<p className={styles.listItemDateModified}>
-									{getDate(data.koodiapinnanallaTime)}
-								</p>
-								<p className={styles.listItemType}>Shortcut</p>
-								<p className={styles.listItemSize}>2kt</p>
-							</div>
-						</a>
+					<Link
+						href="https://koodiapinnanalla.fi/"
+						className={styles.listItem}
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						<div className={styles.listItemName}>
+							<Image
+								src="/icons/podcasts/koodiapinnanalla.png"
+								alt="icon"
+								width={16}
+								quality={100}
+								height={16}
+							></Image>
+							<p>Koodia pinnan alla</p>
+						</div>
+						<p className={styles.listItemDateModified}>
+							{getDate(data.koodiapinnanallaTime)}
+						</p>
+						<p className={styles.listItemType}>Shortcut</p>
+						<p className={styles.listItemSize}>2kt</p>
 					</Link>
-					<Link href="https://koodikrapula.fi/" passHref>
-						<a target="_blank">
-							<div className={styles.listItem}>
-								<div className={styles.listItemName}>
-									<Image
-										src="/icons/podcasts/koodikrapula.png"
-										alt="icon"
-										width={16}
-										quality={100}
-										height={16}
-									></Image>
-									<p>Koodikrapula</p>
-								</div>
-								<p className={styles.listItemDateModified}>
-									{getDate(data.koodikrapulaTime)}
-								</p>
-								<p className={styles.listItemType}>Shortcut</p>
-								<p className={styles.listItemSize}>2kt</p>
-							</div>
-						</a>
+					<Link
+						href="https://koodikrapula.fi/"
+						className={styles.listItem}
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						<div className={styles.listItemName}>
+							<Image
+								src="/icons/podcasts/koodikrapula.png"
+								alt="icon"
+								width={16}
+								quality={100}
+								height={16}
+							></Image>
+							<p>Koodikrapula</p>
+						</div>
+						<p className={styles.listItemDateModified}>
+							{getDate(data.koodikrapulaTime)}
+						</p>
+						<p className={styles.listItemType}>Shortcut</p>
+						<p className={styles.listItemSize}>2kt</p>
 					</Link>
 				</div>
 			</>
@@ -135,7 +138,7 @@ function Podcasts({ data }: { data: Props }) {
 
 export async function getStaticProps() {
 	const basic = Buffer.from(
-		`${process.env.SPOTIFY_CLIENT_ID}:${process.env.SPOTIFY_CLIENT_SECRET}`
+		`${process.env.SPOTIFY_CLIENT_ID}:${process.env.SPOTIFY_CLIENT_SECRET}`,
 	).toString('base64');
 	const TOKEN_ENDPOINT = `https://accounts.spotify.com/api/token`;
 
@@ -146,13 +149,15 @@ export async function getStaticProps() {
 
 	const getAccessToken = async () => {
 		try {
+			// Only public catalog data is read, so the client-credentials
+			// grant is enough -- no user token to obtain or refresh.
 			const response = await fetch(TOKEN_ENDPOINT, {
 				method: 'POST',
 				headers: {
 					Authorization: `Basic ${basic}`,
 					'Content-Type': 'application/x-www-form-urlencoded',
 				},
-				body: `grant_type=refresh_token&refresh_token=${process.env.SPOTIFY_REFRESH_TOKEN}`,
+				body: 'grant_type=client_credentials',
 			});
 
 			const json: { access_token?: string } = await response.json();
@@ -174,7 +179,7 @@ export async function getStaticProps() {
 					headers: new Headers({
 						Authorization: `Bearer ${access_token}`,
 					}),
-				}
+				},
 			).then((r) => r.json());
 
 			if (!Array.isArray(res.items)) return EPOCH;
@@ -195,7 +200,7 @@ export async function getStaticProps() {
 
 	// Webbidevaus (not on spotify so using this hacky way)
 	const webbidevausTimeElement = webbidevausRes.match(
-		/<span class="meta__section-title meta__section-title--light">(.*?)"/
+		/<span class="meta__section-title meta__section-title--light">(.*?)"/,
 	);
 	const webbidevausTime = webbidevausTimeElement
 		? webbidevausTimeElement[1]
@@ -206,9 +211,7 @@ export async function getStaticProps() {
 				.join('-')
 		: '01.01.1970 00:00';
 
-	const koodiapinnanallaTime = await latestEpisode(
-		'3wKj2ZpdPi4eO3a2nSNwxy'
-	);
+	const koodiapinnanallaTime = await latestEpisode('3wKj2ZpdPi4eO3a2nSNwxy');
 	const koodikrapulaTime = await latestEpisode('1st4zWhHxzXn345vqdTfk8');
 
 	return {

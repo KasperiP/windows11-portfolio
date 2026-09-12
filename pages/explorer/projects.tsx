@@ -36,7 +36,7 @@ function Projects({ data }: { data: ProjectType[] }) {
 								window.open(
 									project.html_url,
 									'_blank',
-									'noopener,noreferrer'
+									'noopener,noreferrer',
 								)
 							}
 						>
@@ -111,7 +111,7 @@ export async function getStaticProps() {
 
 	const data = repos.filter(
 		(project: ProjectType) =>
-			project.fork === false && project.full_name !== 'KasperiP/KasperiP'
+			project.fork === false && project.full_name !== 'KasperiP/KasperiP',
 	);
 
 	return {

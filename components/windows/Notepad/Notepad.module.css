@@ -69,7 +69,6 @@
 	background-color: #272727;
 	transform-origin: top center;
 	animation: growDown 300ms ease-in-out forwards;
-	animation: growDown 300ms ease-in-out forwards;
 }
 
 .navButtons .navButtonsDropdown p {

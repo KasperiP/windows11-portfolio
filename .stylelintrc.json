@@ -2,11 +2,9 @@
 	"extends": "stylelint-config-standard",
 	"plugins": ["stylelint-order"],
 	"rules": {
-		"indentation": "tab",
 		"selector-class-pattern": "^[a-z][a-zA-Z0-9]+$",
 		"keyframes-name-pattern": "^[a-z][a-zA-Z0-9]+$",
 		"no-descending-specificity": null,
-		"string-quotes": "single",
 		"order/order": [
 			[
 				"dollar-variables",

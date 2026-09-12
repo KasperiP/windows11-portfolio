@@ -28,7 +28,7 @@
 	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 	grid-auto-rows: minmax(auto, auto);
 	grid-auto-flow: dense;
-	grid-gap: 10px;
+	gap: 10px;
 	margin: 0 20px;
 }
 

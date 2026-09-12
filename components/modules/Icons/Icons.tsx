@@ -54,83 +54,97 @@ function Icons() {
 			/>
 			<div className={`elements ${styles.container}`}>
 				<div className={`selecto-area ${styles.wrapper}`} id="selecto1">
-					<Link href={'/notepad/about'} passHref>
-						<div className={`${styles.item} selectoItem`}>
-							<Image
-								src="/icons/notes/notes.png"
-								alt="icon"
-								width={40}
-								height={40}
-							></Image>
-							<p>About me</p>
-						</div>
+					<Link
+						href={'/notepad/about'}
+						className={`${styles.item} selectoItem`}
+						draggable={false}
+					>
+						<Image
+							src="/icons/notes/notes.png"
+							alt="icon"
+							width={40}
+							height={40}
+						></Image>
+						<p>About me</p>
 					</Link>
-					<Link href={'/explorer/projects'} passHref>
-						<div className={`${styles.item} selectoItem`}>
-							<Image
-								src="/icons/folder/folder.png"
-								alt="icon"
-								width={40}
-								height={40}
-							></Image>
-							<p>Projects</p>
-						</div>
+					<Link
+						href={'/explorer/projects'}
+						className={`${styles.item} selectoItem`}
+						draggable={false}
+					>
+						<Image
+							src="/icons/folder/folder.png"
+							alt="icon"
+							width={40}
+							height={40}
+						></Image>
+						<p>Projects</p>
 					</Link>
-					<Link href={'/explorer/tools'} passHref>
-						<div className={`${styles.item} selectoItem`}>
-							<Image
-								src="/icons/folder/folder.png"
-								alt="icon"
-								width={40}
-								height={40}
-							></Image>
-							<p>Tools</p>
-						</div>
+					<Link
+						href={'/explorer/tools'}
+						className={`${styles.item} selectoItem`}
+						draggable={false}
+					>
+						<Image
+							src="/icons/folder/folder.png"
+							alt="icon"
+							width={40}
+							height={40}
+						></Image>
+						<p>Tools</p>
 					</Link>
-					<Link href={'/explorer/podcasts'} passHref>
-						<div className={`${styles.item} selectoItem`}>
-							<Image
-								src="/icons/folder/folder.png"
-								alt="icon"
-								width={40}
-								height={40}
-							></Image>
-							<p>Podcasts I listen to</p>
-						</div>
+					<Link
+						href={'/explorer/podcasts'}
+						className={`${styles.item} selectoItem`}
+						draggable={false}
+					>
+						<Image
+							src="/icons/folder/folder.png"
+							alt="icon"
+							width={40}
+							height={40}
+						></Image>
+						<p>Podcasts I listen to</p>
 					</Link>
-					<Link href={'/explorer/links'} passHref>
-						<div className={`${styles.item} selectoItem`}>
-							<Image
-								src="/icons/links/links.png"
-								alt="icon"
-								width={40}
-								height={40}
-							></Image>
-							<p>Links</p>
-						</div>
+					<Link
+						href={'/explorer/links'}
+						className={`${styles.item} selectoItem`}
+						draggable={false}
+					>
+						<Image
+							src="/icons/links/links.png"
+							alt="icon"
+							width={40}
+							height={40}
+						></Image>
+						<p>Links</p>
 					</Link>
-					<Link href={'/explorer/pictures'} passHref>
-						<div className={`${styles.item} selectoItem`}>
-							<Image
-								src="/icons/pictures/pictures.png"
-								alt="icon"
-								width={40}
-								height={40}
-							></Image>
-							<p>Pictures</p>
-						</div>
+					<Link
+						href={'/explorer/pictures'}
+						className={`${styles.item} selectoItem`}
+						draggable={false}
+					>
+						<Image
+							src="/icons/pictures/pictures.png"
+							alt="icon"
+							width={40}
+							height={40}
+						></Image>
+						<p>Pictures</p>
 					</Link>
-					<Link href={'/explorer/videos'} passHref>
-						<div className={`${styles.item} selectoItem`}>
-							<Image
-								src="/icons/videos/videos.png"
-								alt="icon"
-								width={40}
-								height={40}
-								quality={100}
-							></Image>
-							<p>Videos</p>
-						</div>
+					<Link
+						href={'/explorer/videos'}
+						className={`${styles.item} selectoItem`}
+						draggable={false}
+					>
+						<Image
+							src="/icons/videos/videos.png"
+							alt="icon"
+							width={40}
+							height={40}
+							quality={100}
+						></Image>
+						<p>Videos</p>
 					</Link>
 
 					<div className={`${styles.item} selectoItem recycleBin`}>

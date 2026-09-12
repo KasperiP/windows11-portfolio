@@ -13,7 +13,9 @@ function Bluescreen({ errorCode }: Props) {
 	useEffect(() => {
 		if (progress >= 100) return;
 		const timeout = setTimeout(() => {
-			setProgress(Math.min(progress + Math.floor(Math.random() * 10), 100));
+			setProgress(
+				Math.min(progress + Math.floor(Math.random() * 10), 100),
+			);
 		}, 1000);
 		return () => {
 			clearTimeout(timeout);
