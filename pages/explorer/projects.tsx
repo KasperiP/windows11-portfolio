@@ -93,7 +93,9 @@ function Projects({ data }: { data: ProjectType[] }) {
 				<FileExplorer
 					icon="folder"
 					folder="Projects"
-					component={content()}
+					// Falsy lets FileExplorer render its own
+					// "This folder is empty." message.
+					component={data.length ? content() : undefined}
 					topNav={true}
 				/>
 				<Icons />

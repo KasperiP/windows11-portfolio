@@ -102,7 +102,9 @@ function Videos({ data }: { data: MediaType[] }) {
 					folder="Videos"
 					topNav={false}
 					icon="videos"
-					component={content()}
+					// Falsy lets FileExplorer render its own
+					// "This folder is empty." message.
+					component={data.length ? content() : undefined}
 				/>
 				<Icons />
 			</div>

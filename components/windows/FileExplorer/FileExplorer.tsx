@@ -663,32 +663,28 @@ function FileExplorer(props: Props) {
 
 				<div className={styles.content}>
 					{props.topNav && (
-						<>
-							<div className={styles.topNav}>
-								<div className={styles.name}>
-									<p>Name</p>
-								</div>
-
-								<div className={styles.dateModified}>
-									<p>Date modified</p>
-								</div>
-								<div className={styles.type}>
-									<p>Type</p>
-								</div>
-								<div className={styles.size}>
-									<p>Size</p>
-								</div>
+						<div className={styles.topNav}>
+							<div className={styles.name}>
+								<p>Name</p>
 							</div>
-						</>
+
+							<div className={styles.dateModified}>
+								<p>Date modified</p>
+							</div>
+							<div className={styles.type}>
+								<p>Type</p>
+							</div>
+							<div className={styles.size}>
+								<p>Size</p>
+							</div>
+						</div>
 					)}
 
 					<div className={`${styles.child} not_clickable`}>
 						{props.component || (
-							<>
-								<p className={styles.emptyFolder}>
-									This folder is empty.
-								</p>
-							</>
+							<p className={styles.emptyFolder}>
+								This folder is empty.
+							</p>
 						)}
 					</div>
 				</div>
