@@ -2,7 +2,7 @@
 
 [![Open in Visual Studio Code](https://img.shields.io/badge/Open%20In%20Visual%20Studio%20Code-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white)](https://open.vscode.dev/KasperiP/windows11-portfolio)
 
-Windows 11 inspired personal portfolio website built using Next.js & deployed on Vercel. Feel free to clean up my messy code and teach me how to write better typescript. Im noob 😩.
+Windows 11 inspired personal portfolio website built using Next.js & deployed on Vercel.
 
 ![windows11-banner](https://i.imgur.com/muQyeAG.png)
 
