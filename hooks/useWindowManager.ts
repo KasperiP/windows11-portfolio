@@ -1,7 +1,7 @@
 'use client';
 
 import { usePathname, useRouter } from 'next/navigation';
-import { type MouseEvent, useEffect, useMemo } from 'react';
+import { type MouseEvent, useCallback, useEffect, useMemo } from 'react';
 import { WINDOWS, windowForPath, type WindowId } from '../lib/windows';
 import { useWindowStore } from '../store/windows';
 
@@ -22,19 +22,36 @@ export function useRouteSync() {
 	}, [pathname]);
 }
 
+/** Opens and focuses the window for a route the URL already points at. */
+const reopenRoute = (pathname: string) => {
+	const id = windowForPath(pathname);
+	if (id) useWindowStore.getState().open(id, pathname);
+};
+
 /**
  * A link to the route that is already showing does not change the pathname,
  * so useRouteSync never sees it. Use as onClickCapture on containers of links
- * that live outside their window (desktop icons, start menu) so clicking one
- * still restores and focuses a minimized or unfocused window.
+ * that live outside their window (the start menu) so clicking one still
+ * restores and focuses a minimized or unfocused window.
  */
 export function reopenIfCurrentRoute(e: MouseEvent) {
 	const anchor = (e.target as Element).closest('a');
 	if (!anchor) return;
 	const { pathname } = new URL(anchor.href);
-	if (pathname !== window.location.pathname) return;
-	const id = windowForPath(pathname);
-	if (id) useWindowStore.getState().open(id, pathname);
+	if (pathname === window.location.pathname) reopenRoute(pathname);
+}
+
+/** Navigates like a link click, for things opened by double-click. */
+export function useOpenRoute() {
+	const router = useRouter();
+	return useCallback(
+		(href: string) => {
+			const { pathname } = new URL(href, window.location.href);
+			if (pathname === window.location.pathname) reopenRoute(pathname);
+			else router.push(href);
+		},
+		[router],
+	);
 }
 
 /**
