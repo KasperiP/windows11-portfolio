@@ -19,28 +19,29 @@
 		"typecheck": "tsc --noEmit"
 	},
 	"dependencies": {
-		"@next/third-parties": "16.3.5",
-		"motion": "13.2.0",
-		"next": "^16.4.1",
-		"react": "19.3.0",
-		"react-dom": "19.3.0",
-		"react-draggable": "4.7.1",
+		"@next/third-parties": "16.4.6",
+		"motion": "14.14.0",
+		"next": "^16.4.6",
+		"react": "19.3.1",
+		"react-dom": "19.3.1",
+		"react-draggable": "4.7.2",
 		"react-icons": "^5.7.0",
 		"react-rnd": "10.5.3",
 		"react-selecto": "1.26.3"
 	},
 	"devDependencies": {
-		"@types/node": "^22.20.2",
+		"@types/node": "^24.19.2",
 		"@types/react": "^19.3.0",
 		"@types/react-dom": "19.3.0",
-		"eslint": "9.39.5",
-		"eslint-config-next": "16.3.5",
+		"@typescript/native": "npm:typescript@^7.0.2",
+		"eslint": "10.15.0",
+		"eslint-config-next": "16.4.6",
 		"eslint-config-prettier": "10.1.8",
-		"prettier": "3.9.6",
-		"stylelint": "^17.15.0",
-		"stylelint-config-standard": "^40.0.0",
-		"stylelint-order": "^8.1.1",
-		"typescript": "^6.0.3"
+		"prettier": "3.10.1",
+		"stylelint": "^18.1.0",
+		"stylelint-config-standard": "^41.1.0",
+		"stylelint-order": "^8.1.3",
+		"typescript": "npm:@typescript/typescript6@^6.0.2"
 	},
 	"pnpm": {
 		"onlyBuiltDependencies": [
