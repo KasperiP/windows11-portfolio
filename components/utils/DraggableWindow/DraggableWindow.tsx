@@ -1,13 +1,7 @@
 'use client';
 
 import { AnimatePresence, motion, type Variants } from 'motion/react';
-import {
-	type MouseEvent,
-	type ReactNode,
-	useEffect,
-	useState,
-	useSyncExternalStore,
-} from 'react';
+import { type MouseEvent, type ReactNode, useEffect, useState } from 'react';
 import { LuChevronDown, LuPlus, LuX } from 'react-icons/lu';
 import {
 	VscChromeClose,
@@ -16,6 +10,7 @@ import {
 	VscChromeRestore,
 } from 'react-icons/vsc';
 import { Rnd } from 'react-rnd';
+import { useViewport } from '../../../hooks/useViewport';
 import { useWindowActions } from '../../../hooks/useWindowManager';
 import {
 	DEFAULT_HEIGHT,
@@ -92,30 +87,6 @@ const variants: Variants = {
 	},
 };
 
-const subscribeResize = (onChange: () => void) => {
-	window.addEventListener('resize', onChange);
-	return () => window.removeEventListener('resize', onChange);
-};
-
-/**
- * Live viewport size, so a maximized window keeps filling the screen when the
- * browser is resized. Numbers rather than CSS strings: react-rnd appends "px"
- * to any size string it doesn't recognise, which breaks calc().
- */
-const useViewport = () => {
-	const width = useSyncExternalStore(
-		subscribeResize,
-		() => window.innerWidth,
-		() => DEFAULT_WIDTH,
-	);
-	const height = useSyncExternalStore(
-		subscribeResize,
-		() => window.innerHeight,
-		() => DEFAULT_HEIGHT,
-	);
-	return { width, height };
-};
-
 type Props = {
 	children: ReactNode;
 	windowId: WindowId;
@@ -143,6 +114,9 @@ function DraggableWindow({
 	const setMaximized = useWindowStore((s) => s.setMaximized);
 	const setTitle = useWindowStore((s) => s.setTitle);
 	const { activate, minimizeWindow, closeWindow } = useWindowActions();
+	// Maximized windows are sized in pixels from the live viewport, not CSS
+	// strings: react-rnd appends "px" to sizes it doesn't recognise, which
+	// breaks calc().
 	const viewport = useViewport();
 
 	useEffect(() => {
