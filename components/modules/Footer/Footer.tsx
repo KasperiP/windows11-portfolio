@@ -124,12 +124,10 @@ function Footer() {
 					</div>
 					<div
 						className={styles.icon}
-						onClick={() =>
-							handleError('Visual Studio Code - Insiders')
-						}
+						onClick={() => handleError('Visual Studio Code')}
 					>
 						<Image
-							src={'/icons/vscode/vscode.png'}
+							src={'/icons/visualstudiocode/visualstudiocode.png'}
 							width={25}
 							height={25}
 							alt="logo"

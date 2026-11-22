@@ -4,107 +4,48 @@ import Icons from '../../components/modules/Icons/Icons';
 import FileExplorer from '../../components/windows/FileExplorer/FileExplorer';
 import styles from '../../styles/utils/List.module.css';
 
+const TOOLS = [
+	{
+		name: 'Visual Studio Code',
+		icon: 'visualstudiocode',
+		modified: '30/12/2021 03:32',
+	},
+	{
+		name: 'Github Desktop',
+		icon: 'githubdesktop',
+		modified: '30/12/2021 05:10',
+	},
+	{ name: 'DataGrip', icon: 'datagrip', modified: '22/11/2026 20:58' },
+	{ name: 'Claude', icon: 'claude', modified: '22/11/2026 20:58' },
+	{ name: 'FileZilla', icon: 'filezilla', modified: '22/11/2026 20:58' },
+	{ name: 'Postman', icon: 'postman', modified: '30/12/2021 01:35' },
+	{ name: 'Photoshop', icon: 'photoshop', modified: '30/12/2021 02:11' },
+	{ name: 'Illustrator', icon: 'illustrator', modified: '30/12/2021 05:59' },
+];
+
 function Tools() {
 	const content = () => {
 		return (
 			<>
 				<div className={styles.listItemContainer}>
-					<div className={styles.listItem}>
-						<div className={styles.listItemName}>
-							<Image
-								src="/icons/vscode/vscode.png"
-								alt="icon"
-								width={16}
-								height={16}
-							></Image>
-							<p>Visual Studio Code - Insiders</p>
+					{TOOLS.map((tool) => (
+						<div key={tool.name} className={styles.listItem}>
+							<div className={styles.listItemName}>
+								<Image
+									src={`/icons/${tool.icon}/${tool.icon}.png`}
+									alt="icon"
+									width={16}
+									height={16}
+								></Image>
+								<p>{tool.name}</p>
+							</div>
+							<p className={styles.listItemDateModified}>
+								{tool.modified}
+							</p>
+							<p className={styles.listItemType}>Shortcut</p>
+							<p className={styles.listItemSize}>2kt</p>
 						</div>
-						<p className={styles.listItemDateModified}>
-							30/12/2021 03:32
-						</p>
-						<p className={styles.listItemType}>Shortcut</p>
-						<p className={styles.listItemSize}>2kt</p>
-					</div>
-					<div className={styles.listItem}>
-						<div className={styles.listItemName}>
-							<Image
-								src="/icons/githubdesktop/githubdesktop.png"
-								alt="icon"
-								width={16}
-								height={16}
-							></Image>
-							<p>Github Desktop</p>
-						</div>
-						<p className={styles.listItemDateModified}>
-							30/12/2021 05:10
-						</p>
-						<p className={styles.listItemType}>Shortcut</p>
-						<p className={styles.listItemSize}>2kt</p>
-					</div>
-					<div className={styles.listItem}>
-						<div className={styles.listItemName}>
-							<Image
-								src="/icons/mongodbcompass/mongodbcompass.png"
-								alt="icon"
-								width={16}
-								height={16}
-							></Image>
-							<p>MongoDBCompass</p>
-						</div>
-						<p className={styles.listItemDateModified}>
-							30/12/2021 05:01
-						</p>
-						<p className={styles.listItemType}>Shortcut</p>
-						<p className={styles.listItemSize}>2kt</p>
-					</div>
-					<div className={styles.listItem}>
-						<div className={styles.listItemName}>
-							<Image
-								src="/icons/postman/postman.png"
-								alt="icon"
-								width={16}
-								height={16}
-							></Image>
-							<p>Postman</p>
-						</div>
-						<p className={styles.listItemDateModified}>
-							30/12/2021 01:35
-						</p>
-						<p className={styles.listItemType}>Shortcut</p>
-						<p className={styles.listItemSize}>2kt</p>
-					</div>
-					<div className={styles.listItem}>
-						<div className={styles.listItemName}>
-							<Image
-								src="/icons/photoshop/photoshop.png"
-								alt="icon"
-								width={16}
-								height={16}
-							></Image>
-							<p>Photoshop</p>
-						</div>
-						<p className={styles.listItemDateModified}>
-							30/12/2021 02:11
-						</p>
-						<p className={styles.listItemType}>Shortcut</p>
-						<p className={styles.listItemSize}>2kt</p>
-					</div>
-					<div className={styles.listItem}>
-						<div className={styles.listItemName}>
-							<Image
-								src="/icons/illustrator/illustrator.png"
-								alt="icon"
-								width={16}
-								height={16}
-							></Image>
-							<p>Illustrator</p>
-						</div>
-						<p className={styles.listItemDateModified}>
-							30/12/2021 05:59
-						</p>
-						<p className={styles.listItemType}>Shortcut</p>
-						<p className={styles.listItemSize}>2kt</p>
-					</div>
+					))}
 				</div>
 			</>
 		);
