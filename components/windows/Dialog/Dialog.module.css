@@ -1,0 +1,98 @@
+.dialog {
+	width: 26rem;
+	border: 1px solid #3a3a3a;
+	border-radius: 8px;
+	background-color: #202020;
+	color: #fff;
+	box-shadow: 0 8px 32px rgb(0 0 0 / 50%);
+}
+
+.titleBar {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	height: 32px;
+	padding-left: 12px;
+}
+
+.titleBar p {
+	overflow: hidden;
+	font-size: 0.75rem;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.close {
+	display: flex;
+	flex-shrink: 0;
+	align-items: center;
+	justify-content: center;
+	width: 46px;
+	height: 100%;
+	border: none;
+	border-radius: 0 8px 0 0;
+	background: none;
+	color: #fff;
+	cursor: pointer;
+}
+
+.close:hover {
+	background-color: #c42b1c;
+}
+
+.content {
+	display: flex;
+	gap: 16px;
+	align-items: flex-start;
+	padding: 16px 24px 28px;
+}
+
+.content img {
+	flex-shrink: 0;
+}
+
+.message p {
+	font-size: 0.8rem;
+	line-height: 1.5;
+}
+
+.message p + p {
+	margin-top: 10px;
+}
+
+.buttons {
+	display: flex;
+	gap: 8px;
+	justify-content: flex-end;
+	padding: 16px 24px;
+	border-top: 1px solid #2b2b2b;
+	border-radius: 0 0 8px 8px;
+	background-color: #1b1b1b;
+}
+
+.buttons button {
+	min-width: 96px;
+	height: 32px;
+	padding: 0 12px;
+	border: 1px solid #3a3a3a;
+	border-radius: 4px;
+	background-color: #2d2d2d;
+	color: #fff;
+	font: inherit;
+	font-size: 0.75rem;
+	cursor: pointer;
+}
+
+.buttons button:hover {
+	background-color: #323232;
+}
+
+.buttons .primary {
+	border-color: #4cc2ff;
+	background-color: #4cc2ff;
+	color: #000;
+}
+
+.buttons .primary:hover {
+	background-color: #47b1e8;
+}

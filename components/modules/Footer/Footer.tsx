@@ -1,14 +1,13 @@
 'use client';
 
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { AiOutlineWifi } from 'react-icons/ai';
 import { FiVolume2 } from 'react-icons/fi';
 import { useWindowActions } from '../../../hooks/useWindowManager';
 import { WINDOWS, type WindowId } from '../../../lib/windows';
 import { useWindowStore } from '../../../store/windows';
-import type { ErrorType } from '../../../types';
-import Error from '../../windows/Error/Error';
+import ErrorDialog from '../../windows/ErrorDialog/ErrorDialog';
 import { mediaIcon } from '../../windows/MediaPlayer/MediaPlayer';
 import styles from './Footer.module.css';
 import TaskbarItem from './TaskbarItem';
@@ -40,7 +39,9 @@ const PINNED: PinnedApp[] = [
 
 function Footer() {
 	const [winMenu, setWinMenu] = useState(false);
-	const [errors, setError] = useState([] as ErrorType[]);
+	// Open "Application Error" dialogs, one per click on a decorative app.
+	const [errors, setErrors] = useState<{ id: number; app: string }[]>([]);
+	const nextErrorId = useRef(0);
 	const { taskbarClick } = useWindowActions();
 
 	// Running apps that aren't pinned get a button after the pinned ones,
@@ -49,8 +50,9 @@ function Footer() {
 	const mediaKind = useWindowStore((s) => s.media?.kind);
 	const unpinned = taskbarOrder.filter((id) => !WINDOWS[id].pinned);
 
-	const handleError = (err: string) => {
-		setError([...errors, { error: err, index: errors.length }]);
+	const handleError = (app: string) => {
+		const id = nextErrorId.current++;
+		setErrors((prev) => [...prev, { id, app }]);
 	};
 
 	const handleWinMenu = () => {
@@ -77,18 +79,16 @@ function Footer() {
 
 	return (
 		<>
-			{errors &&
-				errors.map((err, index) => {
-					return (
-						<Error
-							key={err.index}
-							error={err.error}
-							errors={errors}
-							setError={setError}
-							index={err.index}
-						/>
-					);
-				})}
+			{errors.map((err, i) => (
+				<ErrorDialog
+					key={err.id}
+					app={err.app}
+					offset={i}
+					onClose={() =>
+						setErrors((prev) => prev.filter((e) => e.id !== err.id))
+					}
+				/>
+			))}
 			<div className={styles.container}>
 				<section className={styles.iconContainer}>
 					<div

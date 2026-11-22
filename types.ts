@@ -16,11 +16,6 @@ export type PictureType = MediaType & { url: string };
 
 export type VideoType = MediaType & { thumbnail: string };
 
-export type ErrorType = {
-	error: string;
-	index: number;
-};
-
 export type HistoryType = {
 	input: string;
 	response: string | null;
