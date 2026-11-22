@@ -26,7 +26,11 @@ function Error({ errors, index, setError, error }: Props) {
 
 	useEffect(() => {
 		const audio = new Audio('/sounds/error.mp3');
-		audio.play();
+		// play() rejects with AbortError when the cleanup pauses it before
+		// playback starts (Strict Mode's remount, or closing the popup fast),
+		// and with NotAllowedError if autoplay is blocked. The sound is
+		// decorative, so ignore both.
+		audio.play().catch(() => {});
 		return () => {
 			audio.pause();
 		};
