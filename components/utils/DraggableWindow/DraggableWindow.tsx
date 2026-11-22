@@ -8,12 +8,12 @@ import {
 	useState,
 	useSyncExternalStore,
 } from 'react';
-import { AiOutlinePlus } from 'react-icons/ai';
-import { RiArrowDropDownLine } from 'react-icons/ri';
+import { LuChevronDown, LuPlus, LuX } from 'react-icons/lu';
 import {
 	VscChromeClose,
 	VscChromeMaximize,
 	VscChromeMinimize,
+	VscChromeRestore,
 } from 'react-icons/vsc';
 import { Rnd } from 'react-rnd';
 import { useWindowActions } from '../../../hooks/useWindowManager';
@@ -60,7 +60,7 @@ type MinimizeTarget = { x: number; y: number; scale: number };
 const restoreTransition = { duration: 0.2, ease: 'easeOut' } as const;
 
 const variants: Variants = {
-	// .container carries border-radius: 10px; the maximized window squares off.
+	// .container carries border-radius: 8px; the maximized window squares off.
 	// Every visible variant names borderRadius so Motion can animate back.
 	maximized: {
 		borderRadius: '0px',
@@ -71,7 +71,7 @@ const variants: Variants = {
 		transition: restoreTransition,
 	},
 	restored: {
-		borderRadius: '10px',
+		borderRadius: '8px',
 		scale: 1,
 		opacity: 1,
 		x: 0,
@@ -121,9 +121,20 @@ type Props = {
 	windowId: WindowId;
 	topTitle: string;
 	topIcon?: ReactNode;
+	/** Windows 11 tab strip title bar (File Explorer, Terminal). */
+	tabbed?: boolean;
+	/** Adds the Terminal's new-tab dropdown arrow to the tab strip. */
+	tabMenu?: boolean;
 };
 
-function DraggableWindow({ children, windowId, topTitle, topIcon }: Props) {
+function DraggableWindow({
+	children,
+	windowId,
+	topTitle,
+	topIcon,
+	tabbed,
+	tabMenu,
+}: Props) {
 	const [isDragging, setIsDragging] = useState(false);
 	const [isResizing, setIsResizing] = useState(false);
 
@@ -250,71 +261,92 @@ function DraggableWindow({ children, windowId, topTitle, topIcon }: Props) {
 								: {}
 						}
 					>
-						<div className={styles.main}>
-							<nav>
+						<div
+							className={`${styles.main} ${tabbed ? styles.tabbedMain : ''}`}
+						>
+							<nav className={styles.titleBar}>
 								<section
-									className={`${styles.top} draggable`}
+									className={`${styles.top} ${tabbed ? styles.tabStrip : ''} draggable`}
 									onDoubleClick={toggleMaximize}
 								>
-									{windowId === 'terminal' ? (
-										<>
-											<div
-												className={
-													styles.terminalContainer
-												}
-											>
-												<div>
-													<div>
-														{topIcon}
-														<p>{topTitle}</p>
-													</div>
-													<VscChromeClose />
-												</div>
-												<div
-													className={
-														styles.manageButtons
-													}
-												>
-													<AiOutlinePlus />
-													<RiArrowDropDownLine />
-												</div>
-											</div>
-										</>
-									) : (
-										<>
-											<div
-												className={styles.topContainer}
-											>
+									{tabbed ? (
+										// Windows 11 tab strip. There is only ever one tab, so
+										// its close button closes the window.
+										<div className={styles.tabs}>
+											<div className={styles.tab}>
 												{topIcon}
 												<p>{topTitle}</p>
+												<button
+													type="button"
+													className={`${styles.tabButton} not_draggable`}
+													onClick={() =>
+														closeWindow(windowId)
+													}
+													aria-label="Close tab"
+												>
+													<LuX />
+												</button>
 											</div>
-										</>
+											<button
+												type="button"
+												className={`${styles.tabButton} not_draggable`}
+												aria-label="New tab"
+											>
+												<LuPlus />
+											</button>
+											{tabMenu && (
+												<button
+													type="button"
+													className={`${styles.tabButton} not_draggable`}
+													aria-label="Open a new tab"
+												>
+													<LuChevronDown />
+												</button>
+											)}
+										</div>
+									) : (
+										<div className={styles.topContainer}>
+											{topIcon}
+											<p>{topTitle}</p>
+										</div>
 									)}
 									<div
-										className={`${styles.iconContainer} not_draggable`}
+										className={`${styles.controls} not_draggable`}
 									>
-										<div
-											className={styles.icon}
+										<button
+											type="button"
 											onClick={() =>
 												minimizeWindow(windowId)
 											}
+											aria-label="Minimize"
 										>
 											<VscChromeMinimize />
-										</div>
-										<div
-											className={styles.icon}
+										</button>
+										<button
+											type="button"
 											onClick={toggleMaximize}
+											aria-label={
+												maximized
+													? 'Restore'
+													: 'Maximize'
+											}
 										>
-											<VscChromeMaximize />
-										</div>
-										<div
-											className={styles.iconClose}
+											{maximized ? (
+												<VscChromeRestore />
+											) : (
+												<VscChromeMaximize />
+											)}
+										</button>
+										<button
+											type="button"
+											className={styles.close}
 											onClick={() =>
 												closeWindow(windowId)
 											}
+											aria-label="Close"
 										>
 											<VscChromeClose />
-										</div>
+										</button>
 									</div>
 								</section>
 							</nav>

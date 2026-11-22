@@ -61,6 +61,7 @@ function Tools() {
 			icon="folder"
 			folder="Tools"
 			topNav={true}
+			itemCount={TOOLS.length}
 			component={content()}
 		/>
 	);

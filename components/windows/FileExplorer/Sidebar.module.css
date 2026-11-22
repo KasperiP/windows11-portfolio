@@ -1,0 +1,95 @@
+.sidebar {
+	flex-shrink: 0;
+	overflow: hidden auto;
+	width: 13rem;
+	padding: 6px 6px 6px 4px;
+	border-right: 1px solid #2b2b2b;
+
+	/* Like Windows, the pane's scrollbar only shows while hovering it. */
+	scrollbar-color: transparent transparent;
+}
+
+.sidebar:hover {
+	scrollbar-color: #9f9f9f transparent;
+}
+
+.sidebar ul {
+	list-style: none;
+}
+
+.sidebar hr {
+	margin: 8px 8px 8px 12px;
+	border: none;
+	border-top: 1px solid #333;
+}
+
+.item {
+	display: flex;
+	align-items: center;
+	height: 30px;
+	border-radius: 4px;
+}
+
+.item:hover {
+	background-color: #2d2d2d;
+}
+
+.item.selected {
+	background-color: #2d2d2d;
+}
+
+.item a {
+	display: flex;
+	flex: 1;
+	gap: 8px;
+	align-items: center;
+	min-width: 0;
+	height: 100%;
+	color: #fff;
+	font-size: 0.75rem;
+}
+
+.item a span {
+	flex: 1;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.expander {
+	display: flex;
+	flex-shrink: 0;
+	width: 20px;
+}
+
+.expander button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 20px;
+	height: 20px;
+	border: none;
+	border-radius: 4px;
+	background: none;
+	color: #cfcfcf;
+	cursor: pointer;
+}
+
+.expander button:hover {
+	background-color: #3a3a3a;
+}
+
+.expander svg {
+	transition: transform 0.1s ease-in-out;
+}
+
+.expander svg.open {
+	transform: rotate(90deg);
+}
+
+.pin {
+	flex-shrink: 0;
+	margin-right: 6px;
+	color: #cfcfcf;
+	font-size: 0.75rem;
+}

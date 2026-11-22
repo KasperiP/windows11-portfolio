@@ -11,7 +11,7 @@
 	z-index: 1;
 	overflow-y: auto;
 	width: 100%;
-	height: calc(100% - 32px);
+	height: calc(100% - var(--titlebar-height));
 	padding: 10px;
 	font-weight: 600;
 	font-family: 'Lucida Console', sans-serif;
@@ -58,8 +58,8 @@
 }
 
 .background {
-	height: calc(100% - 32px);
-	border-radius: 0 0 10px 10px;
+	height: calc(100% - var(--titlebar-height));
+	border-radius: 0 0 8px 8px;
 	background-image: url('/images/darknoice.png');
 	opacity: 0.9;
 }

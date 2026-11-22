@@ -5,7 +5,13 @@ import { ChangeEvent, useState } from 'react';
 import { useWindowStore } from '../../../store/windows';
 import DraggableWindow from '../../utils/DraggableWindow/DraggableWindow';
 import styles from './Notepad.module.css';
-function Notepad({ initialText }: { initialText: string }) {
+type Props = {
+	/** Shown on the tab, like Windows 11 Notepad. */
+	fileName: string;
+	initialText: string;
+};
+
+function Notepad({ fileName, initialText }: Props) {
 	// Keyed on the window session so a relaunched Notepad shows the file
 	// again instead of the edits from before it was closed.
 	const session = useWindowStore((s) => s.windows.notepad.session);
@@ -19,7 +25,8 @@ function Notepad({ initialText }: { initialText: string }) {
 	return (
 		<DraggableWindow
 			windowId="notepad"
-			topTitle="Notepad"
+			tabbed
+			topTitle={fileName}
 			topIcon={
 				<Image
 					src={`/icons/notepad/notepad.png`}

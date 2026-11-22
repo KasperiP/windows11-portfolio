@@ -27,7 +27,7 @@ function About() {
 		`;
 	};
 
-	return <Notepad initialText={textContent()} />;
+	return <Notepad fileName="About me.txt" initialText={textContent()} />;
 }
 
 export default About;

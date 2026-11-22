@@ -46,6 +46,7 @@ function VideoGrid({ data }: { data: VideoType[] }) {
 		<FileExplorer
 			folder="Videos"
 			topNav={false}
+			itemCount={data.length}
 			icon="videos"
 			// Falsy lets FileExplorer render its own
 			// "This folder is empty." message.

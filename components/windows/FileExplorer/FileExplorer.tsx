@@ -1,47 +1,134 @@
 'use client';
 
 import Image from 'next/image';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { ChangeEvent, FocusEvent, useState } from 'react';
+import type { ReactNode } from 'react';
 import {
-	AiFillCaretRight,
-	AiOutlinePlusCircle,
-	AiOutlineUndo,
-} from 'react-icons/ai';
-import { BiRename, BiSelection, BiShowAlt, BiSortAlt2 } from 'react-icons/bi';
-import { BsPinAngle, BsScissors, BsTrash } from 'react-icons/bs';
-import { FaList, FaRegShareSquare } from 'react-icons/fa';
-import { FiMoreHorizontal } from 'react-icons/fi';
-import { GiHamburgerMenu } from 'react-icons/gi';
-import {
-	HiArrowLeft,
-	HiArrowRight,
-	HiArrowUp,
-	HiOutlineDesktopComputer,
-	HiOutlineViewList,
-} from 'react-icons/hi';
-import { IoMdOptions, IoMdRefresh } from 'react-icons/io';
-import {
-	MdContentCopy,
-	MdContentPaste,
-	MdOutlineListAlt,
-	MdOutlineSelectAll,
-	MdOutlineViewCompact,
-	MdTabUnselected,
-} from 'react-icons/md';
-import { RiArrowDropDownLine, RiComputerLine } from 'react-icons/ri';
-import { SiMaterialdesignicons } from 'react-icons/si';
-import { VscSearch, VscSymbolProperty } from 'react-icons/vsc';
+	LuArrowLeft,
+	LuArrowRight,
+	LuArrowUp,
+	LuArrowUpDown,
+	LuCirclePlus,
+	LuClipboard,
+	LuCopy,
+	LuEllipsis,
+	LuGrid2X2,
+	LuLayoutDashboard,
+	LuLayoutList,
+	LuList,
+	LuMonitor,
+	LuPanelRight,
+	LuRotateCw,
+	LuScissors,
+	LuSearch,
+	LuShare,
+	LuSquare,
+	LuSquareSplitHorizontal,
+	LuTableProperties,
+	LuTextCursorInput,
+	LuTrash2,
+} from 'react-icons/lu';
+import { parentOf } from '../../../lib/explorer';
 import { useWindowStore } from '../../../store/windows';
 import DraggableWindow from '../../utils/DraggableWindow/DraggableWindow';
+import AddressBar from './AddressBar';
+import CommandMenu, { type MenuEntry } from './CommandMenu';
 import styles from './FileExplorer.module.css';
+import Sidebar from './Sidebar';
+
+export type Column = { label: string; width: string; align?: 'right' };
+
+/** Folder-specific commands, shown after View like Windows does. */
+export type ToolbarAction = {
+	label: string;
+	icon: ReactNode;
+	onClick: () => void;
+	disabled?: boolean;
+};
+
+// Matches the widths of the list rows in styles/utils/List.module.css.
+const DEFAULT_COLUMNS: Column[] = [
+	{ label: 'Name', width: '40%' },
+	{ label: 'Date modified', width: '25%' },
+	{ label: 'Type', width: '25%' },
+	{ label: 'Size', width: '10%' },
+];
+
+const menuImage = (src: string) => (
+	<Image src={src} alt="" width={16} height={16} />
+);
+
+const NEW_MENU: MenuEntry[] = [
+	{ label: 'Folder', icon: menuImage('/icons/folder/folder.png') },
+	'separator',
+	{ label: 'Shortcut', icon: menuImage('/icons/shortcut/shortcut.png') },
+	{ label: 'Text Document', icon: menuImage('/icons/notes/notes.png') },
+];
+
+const SORT_MENU: MenuEntry[] = [
+	{ label: 'Name', checked: true },
+	{ label: 'Date modified' },
+	{ label: 'Type' },
+	{ label: 'Size' },
+	'separator',
+	{ label: 'Ascending', checked: true },
+	{ label: 'Descending' },
+	'separator',
+	{ label: 'Group by', submenu: true },
+];
+
+const viewMenu = (details: boolean): MenuEntry[] => [
+	{ label: 'Extra large icons', icon: <LuSquare /> },
+	{ label: 'Large icons', icon: <LuSquare />, checked: !details },
+	{ label: 'Medium icons', icon: <LuSquare /> },
+	{ label: 'Small icons', icon: <LuGrid2X2 /> },
+	{ label: 'List', icon: <LuList /> },
+	{ label: 'Details', icon: <LuTableProperties />, checked: details },
+	{ label: 'Tiles', icon: <LuLayoutList /> },
+	{ label: 'Content', icon: <LuLayoutDashboard /> },
+	'separator',
+	{ label: 'Details pane', icon: <LuPanelRight /> },
+	{ label: 'Preview pane', icon: <LuSquareSplitHorizontal /> },
+	'separator',
+	{ label: 'Show', submenu: true },
+];
+
+const MORE_MENU: MenuEntry[] = [
+	{ label: 'Undo' },
+	{ label: 'Pin to Home' },
+	'separator',
+	{ label: 'Select all' },
+	{ label: 'Select none' },
+	{ label: 'Invert selection' },
+	'separator',
+	{ label: 'Properties' },
+	{ label: 'Options' },
+];
+
+// Clipboard and file commands; greyed out because nothing is ever selected.
+const EDIT_COMMANDS = [
+	{ label: 'Cut', icon: <LuScissors /> },
+	{ label: 'Copy', icon: <LuCopy /> },
+	{ label: 'Paste', icon: <LuClipboard /> },
+	{ label: 'Rename', icon: <LuTextCursorInput /> },
+	{ label: 'Share', icon: <LuShare /> },
+	{ label: 'Delete', icon: <LuTrash2 /> },
+];
 
 type Props = {
 	folder: string;
+	/** Icon folder name under /icons, or a full path starting with "/". */
 	icon: string;
+	/** Details view: column headers above a list. Otherwise an icon view. */
 	topNav: boolean;
-	component?: React.ReactNode;
+	/** Header columns when topNav is on; defaults to the usual file columns. */
+	columns?: Column[];
+	toolbarActions?: ToolbarAction[];
+	/** Folders like the Recycle Bin where "New" is unavailable. */
+	readOnly?: boolean;
+	/** Shown in the status bar; omit when the count isn't meaningful. */
+	itemCount?: number;
+	component?: ReactNode;
 };
 
 function FileExplorer(props: Props) {
@@ -55,613 +142,185 @@ function FileExplorer(props: Props) {
 	const { entries, index } = useWindowStore((s) => s.explorerHistory);
 	const explorerGo = useWindowStore((s) => s.explorerGo);
 
-	const [path, setPath] = useState(props.folder);
-	const [quickaccess, setQuickaccess] = useState(true);
-	const [thisPC, setThisPC] = useState(true);
-
-	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-		setPath(e.target.value);
-	};
-
-	const handleFocus = (e: FocusEvent<HTMLInputElement>) => e.target.select();
-
-	const handleBlur = () => setPath(props.folder);
+	const iconSrc = props.icon.startsWith('/')
+		? props.icon
+		: `/icons/${props.icon}/${props.icon}.png`;
 
 	const go = (delta: -1 | 1) => {
 		const target = explorerGo(delta);
 		if (target) router.push(target);
 	};
+	const parent = parentOf(explorerPath);
+
+	const itemCount = props.itemCount ?? (props.component ? undefined : 0);
 
 	return (
 		<DraggableWindow
 			windowId="fileExplorer"
 			topTitle={props.folder}
-			topIcon={
-				<Image
-					src={`/icons/${props.icon}/${props.icon}.png`}
-					alt="ico"
-					width={20}
-					height={20}
-				/>
-			}
+			topIcon={<Image src={iconSrc} alt="" width={16} height={16} />}
+			tabbed
 		>
-			<div className={styles.top}>
-				<section className={styles.manage}>
-					<div className={styles.manageNew}>
-						<div className={styles.icon}>
-							<AiOutlinePlusCircle />
-							<p>New</p>
-							<RiArrowDropDownLine />
-							<div className={styles.manageDropdown}>
-								<div>
-									<Image
-										src="/icons/folder/folder.png"
-										height={20}
-										width={20}
-										alt="ico"
-									/>
-									<p>Folder</p>
-								</div>
-								<div>
-									<Image
-										src="/icons/shortcut/shortcut.png"
-										height={20}
-										width={20}
-										alt="ico"
-									/>
-									<p>Shortcut</p>
-								</div>
-								<div>
-									<Image
-										src="/icons/notes/notes.png"
-										height={20}
-										width={20}
-										alt="ico"
-									/>
-									<p>Text Document</p>
-								</div>
-							</div>
-						</div>
+			<div className={styles.explorer}>
+				<div className={styles.addressRow}>
+					<div className={styles.navButtons}>
+						<button
+							type="button"
+							onClick={() => go(-1)}
+							disabled={entries[index - 1] === undefined}
+							aria-label="Back"
+						>
+							<LuArrowLeft />
+						</button>
+						<button
+							type="button"
+							onClick={() => go(1)}
+							disabled={entries[index + 1] === undefined}
+							aria-label="Forward"
+						>
+							<LuArrowRight />
+						</button>
+						<button
+							type="button"
+							onClick={() => parent && router.push(parent)}
+							disabled={!parent}
+							aria-label="Up"
+						>
+							<LuArrowUp />
+						</button>
+						<button
+							type="button"
+							onClick={() => router.refresh()}
+							aria-label="Refresh"
+						>
+							<LuRotateCw />
+						</button>
 					</div>
-					<div className={styles.manageActions}>
-						<div className={styles.icon}>
-							<BsScissors />
-						</div>
-						<div className={styles.icon}>
-							<MdContentCopy />
-						</div>
-						<div className={styles.icon}>
-							<MdContentPaste />
-						</div>
-						<div className={styles.icon}>
-							<BiRename />
-						</div>
-						<div className={styles.icon}>
-							<FaRegShareSquare />
-						</div>
-						<div className={styles.icon}>
-							<BsTrash />
-						</div>
-					</div>
-					<div className={styles.manageSort}>
-						<div className={styles.icon}>
-							{' '}
-							<BiSortAlt2 />
-							<p>Sort</p>
-							<RiArrowDropDownLine />
-							<div className={styles.manageDropdown}>
-								<div>
-									<p>Name</p>
-								</div>
-								<div>
-									<p>Status</p>
-								</div>
-								<div>
-									<p>Date modified</p>
-								</div>
-								<div>
-									<p>More</p>
-								</div>
-								<div>
-									<p>Ascending</p>
-								</div>
-								<div>
-									<p>Descending</p>
-								</div>
-								<div>
-									<p>Group by</p>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div className={styles.manageView}>
-						<div className={styles.icon}>
-							{' '}
-							<GiHamburgerMenu />
-							<p>View</p>
-							<RiArrowDropDownLine />
-							<div className={styles.manageDropdown}>
-								<div>
-									<RiComputerLine />
-									<p>Extra large icons</p>
-								</div>
-								<div>
-									<HiOutlineDesktopComputer />
-									<p>Large icons</p>
-								</div>
-								<div>
-									<HiOutlineDesktopComputer />
-									<p>Medium icons</p>
-								</div>
-								<div>
-									<SiMaterialdesignicons />
-									<p>Small icons</p>
-								</div>
-								<div>
-									<FaList />
-									<p>List</p>
-								</div>
-								<div>
-									<HiOutlineViewList />
-									<p>Details</p>
-								</div>
-								<div>
-									<MdOutlineListAlt />
-									<p>Tiles</p>
-								</div>
-								<div>
-									<MdOutlineListAlt />
-									<p>Content</p>
-								</div>
-								<div>
-									<MdOutlineViewCompact />
-									<p>Compact view</p>
-								</div>
-								<div>
-									<BiShowAlt />
-									<p>Show</p>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div className={styles.manageMore}>
-						<div className={styles.icon}>
-							<FiMoreHorizontal />
-							<div className={styles.manageDropdown}>
-								<div>
-									<AiOutlineUndo />
-									<p>Undo</p>
-								</div>
-								<div>
-									<BsPinAngle />
-									<p>Pin to Quick access</p>
-								</div>
-								<div>
-									<MdOutlineSelectAll />
-									<p>Select all</p>
-								</div>
-								<div>
-									<MdTabUnselected />
-									<p>Select none</p>
-								</div>
-								<div>
-									<BiSelection />
-									<p>Invert selection</p>
-								</div>
-								<div>
-									<VscSymbolProperty />
-									<p>Properties</p>
-								</div>
-								<div>
-									<IoMdOptions />
-									<p>Options</p>
-								</div>
-							</div>
-						</div>
-					</div>
-				</section>
-			</div>
-			<section className={styles.navigate}>
-				<div className={styles.arrows}>
-					<HiArrowLeft
-						onClick={() => go(-1)}
-						style={
-							entries[index - 1] === undefined
-								? {}
-								: { color: 'white' }
-						}
-					/>
-					<HiArrowRight
-						onClick={() => go(1)}
-						style={
-							entries[index + 1] === undefined
-								? {}
-								: { color: 'white' }
-						}
-					/>
-					<RiArrowDropDownLine />
-					<HiArrowUp />
-				</div>
-				<div className={styles.navigatePath}>
-					<div className={styles.left}>
-						<Image
-							src={`/icons/${props.icon}/${props.icon}.png`}
-							alt="ico"
-							width={20}
-							height={20}
-						/>
-						<AiFillCaretRight />
+					{/* Remount on folder change so an open edit resets. */}
+					<AddressBar key={props.folder} folder={props.folder} />
+					<label className={styles.search}>
 						<input
-							value={`${path}`}
-							onChange={handleChange}
-							onFocus={handleFocus}
-							onBlur={handleBlur}
-						></input>
-					</div>
-					<div className={styles.right}>
-						<div>
-							<RiArrowDropDownLine />
-						</div>
-						<div>
-							<IoMdRefresh />
-						</div>
-					</div>
-				</div>
-				<div className={styles.navigateSearch}>
-					<VscSearch />
-					<input placeholder={`Search: ${props.folder}`} />
-				</div>
-			</section>
-			<section className={styles.contentArea}>
-				<div className={styles.sidebar}>
-					<div
-						className={styles.navigationDropdown}
-						style={
-							explorerPath == '/explorer/quick-access'
-								? {
-										backgroundColor: '#2e2e2e',
-									}
-								: {}
-						}
-					>
-						<RiArrowDropDownLine
-							onClick={() => setQuickaccess(!quickaccess)}
-							style={
-								quickaccess
-									? {}
-									: {
-											transform: 'rotate(-90deg)',
-										}
-							}
+							placeholder={`Search ${props.folder}`}
+							aria-label={`Search ${props.folder}`}
 						/>
-						<Link href="/explorer/quick-access" draggable={false}>
-							<Image
-								src="/icons/quickaccess/quickaccess.png"
-								alt="ico"
-								width={16}
-								height={16}
-							/>
-							<p>Quick access</p>
-						</Link>
-					</div>
-					{quickaccess && (
+						<LuSearch />
+					</label>
+				</div>
+
+				<div className={styles.commandBar}>
+					<CommandMenu
+						icon={<LuCirclePlus />}
+						label="New"
+						items={NEW_MENU}
+						disabled={props.readOnly}
+					/>
+					<span className={styles.divider} />
+					{EDIT_COMMANDS.map((command) => (
+						<button
+							key={command.label}
+							type="button"
+							className={styles.iconCommand}
+							aria-label={command.label}
+							title={command.label}
+							disabled
+						>
+							{command.icon}
+						</button>
+					))}
+					<span className={styles.divider} />
+					<CommandMenu
+						icon={<LuArrowUpDown />}
+						label="Sort"
+						items={SORT_MENU}
+					/>
+					<CommandMenu
+						icon={<LuMonitor />}
+						label="View"
+						items={viewMenu(props.topNav)}
+					/>
+					{props.toolbarActions && (
 						<>
-							<Link
-								href="/explorer/desktop?top=true"
-								className={styles.navigationItem}
-								style={
-									explorerPath == '/explorer/desktop?top=true'
-										? {
-												backgroundColor: '#2e2e2e',
-											}
-										: {}
-								}
-								draggable={false}
-							>
-								<Image
-									src="/icons/desktop/desktop.png"
-									alt="ico"
-									width={16}
-									height={16}
-								/>
-								<p>Desktop</p>
-							</Link>
-							<Link
-								href="/explorer/downloads?top=true"
-								className={styles.navigationItem}
-								style={
-									explorerPath ==
-									'/explorer/downloads?top=true'
-										? {
-												backgroundColor: '#2e2e2e',
-											}
-										: {}
-								}
-								draggable={false}
-							>
-								<Image
-									src="/icons/downloads/downloads_small.png"
-									alt="ico"
-									width={16}
-									height={16}
-									unoptimized
-								/>
-								<p>Downloads</p>
-							</Link>
-							<Link
-								href="/explorer/documents?top=true"
-								className={styles.navigationItem}
-								style={
-									explorerPath ==
-									'/explorer/documents?top=true'
-										? {
-												backgroundColor: '#2e2e2e',
-											}
-										: {}
-								}
-								draggable={false}
-							>
-								<Image
-									src="/icons/documents/documents_small.png"
-									alt="ico"
-									width={16}
-									height={16}
-								/>
-								<p>Documents</p>
-							</Link>
-							<Link
-								href="/explorer/pictures?top=true"
-								className={styles.navigationItem}
-								style={
-									explorerPath ==
-									'/explorer/pictures?top=true'
-										? {
-												backgroundColor: '#2e2e2e',
-											}
-										: {}
-								}
-								draggable={false}
-							>
-								<Image
-									src="/icons/pictures/pictures_small.png"
-									alt="ico"
-									width={16}
-									height={16}
-								/>
-								<p>Pictures</p>
-							</Link>
+							<span className={styles.divider} />
+							{props.toolbarActions.map((action) => (
+								<button
+									key={action.label}
+									type="button"
+									className={styles.textCommand}
+									onClick={action.onClick}
+									disabled={action.disabled}
+								>
+									{action.icon}
+									<span>{action.label}</span>
+								</button>
+							))}
 						</>
 					)}
-					<div
-						className={styles.navigationDropdown}
-						style={
-							explorerPath == '/explorer/this-pc'
-								? {
-										backgroundColor: '#2e2e2e',
-									}
-								: {}
-						}
+					<span className={styles.divider} />
+					<CommandMenu
+						icon={<LuEllipsis />}
+						ariaLabel="See more"
+						items={MORE_MENU}
+					/>
+					<button
+						type="button"
+						className={`${styles.textCommand} ${styles.details}`}
 					>
-						<RiArrowDropDownLine
-							onClick={() => setThisPC(!thisPC)}
-							style={
-								thisPC
-									? {}
-									: {
-											transform: 'rotate(-90deg)',
-										}
-							}
-						/>
-						<Link href="/explorer/this-pc" draggable={false}>
-							<Image
-								src="/icons/this-pc/this-pc.png"
-								alt="ico"
-								width={16}
-								height={16}
-							/>
-							<p>This PC</p>
-						</Link>
-					</div>
-					{thisPC && (
-						<>
-							<Link
-								href="/explorer/desktop"
-								className={styles.navigationItem}
-								style={
-									explorerPath == '/explorer/desktop'
-										? {
-												backgroundColor: '#2e2e2e',
-											}
-										: {}
-								}
-								draggable={false}
-							>
-								<Image
-									src="/icons/desktop/desktop.png"
-									alt="ico"
-									width={16}
-									height={16}
-								/>
-								<p>Desktop</p>
-							</Link>
-							<Link
-								href="/explorer/downloads"
-								className={styles.navigationItem}
-								style={
-									explorerPath == '/explorer/downloads'
-										? {
-												backgroundColor: '#2e2e2e',
-											}
-										: {}
-								}
-								draggable={false}
-							>
-								<Image
-									src="/icons/downloads/downloads_small.png"
-									alt="ico"
-									width={16}
-									height={16}
-									unoptimized
-								/>
-								<p>Downloads</p>
-							</Link>
-							<Link
-								href="/explorer/documents"
-								className={styles.navigationItem}
-								style={
-									explorerPath == '/explorer/documents'
-										? {
-												backgroundColor: '#2e2e2e',
-											}
-										: {}
-								}
-								draggable={false}
-							>
-								<Image
-									src="/icons/documents/documents_small.png"
-									alt="ico"
-									width={16}
-									height={16}
-								/>
-								<p>Documents</p>
-							</Link>
-
-							<Link
-								href="/explorer/pictures"
-								className={styles.navigationItem}
-								style={
-									explorerPath == '/explorer/pictures'
-										? {
-												backgroundColor: '#2e2e2e',
-											}
-										: {}
-								}
-								draggable={false}
-							>
-								<Image
-									src="/icons/pictures/pictures_small.png"
-									alt="ico"
-									width={16}
-									height={16}
-								/>
-								<p>Pictures</p>
-							</Link>
-
-							<Link
-								href="/explorer/videos"
-								className={styles.navigationItem}
-								style={
-									explorerPath == '/explorer/videos'
-										? {
-												backgroundColor: '#2e2e2e',
-											}
-										: {}
-								}
-								draggable={false}
-							>
-								<Image
-									src="/icons/videos/videos_small.png"
-									alt="ico"
-									width={16}
-									height={16}
-								/>
-								<p>Videos</p>
-							</Link>
-
-							<Link
-								href="/explorer/music"
-								className={styles.navigationItem}
-								style={
-									explorerPath == '/explorer/music'
-										? {
-												backgroundColor: '#2e2e2e',
-											}
-										: {}
-								}
-								draggable={false}
-							>
-								<Image
-									src="/icons/music/music_small.png"
-									alt="ico"
-									width={16}
-									height={16}
-								/>
-								<p>Music</p>
-							</Link>
-
-							<Link
-								href="/explorer/drives/C"
-								className={styles.navigationItem}
-								style={
-									explorerPath == '/explorer/drives/C'
-										? {
-												backgroundColor: '#2e2e2e',
-											}
-										: {}
-								}
-								draggable={false}
-							>
-								<Image
-									src="/icons/drives/c.png"
-									alt="ico"
-									width={16}
-									height={16}
-								/>
-								<p>250GB SSD</p>
-							</Link>
-
-							<Link
-								href="/explorer/drives/D"
-								className={styles.navigationItem}
-								style={
-									explorerPath == '/explorer/ssd2'
-										? {
-												backgroundColor: '#2e2e2e',
-											}
-										: {}
-								}
-								draggable={false}
-							>
-								<Image
-									src="/icons/drives/d.png"
-									alt="ico"
-									width={16}
-									height={16}
-								/>
-								<p>1TB SSD</p>
-							</Link>
-						</>
-					)}
+						<LuPanelRight />
+						<span>Details</span>
+					</button>
 				</div>
 
-				<div className={styles.content}>
-					{props.topNav && (
-						<div className={styles.topNav}>
-							<div className={styles.name}>
-								<p>Name</p>
+				<div className={styles.body}>
+					<Sidebar currentPath={explorerPath} />
+					<main className={styles.content}>
+						{props.topNav && (
+							<div className={styles.columns}>
+								{(props.columns ?? DEFAULT_COLUMNS).map(
+									(column) => (
+										<div
+											key={column.label}
+											style={{
+												width: column.width,
+												textAlign: column.align,
+											}}
+										>
+											<p>{column.label}</p>
+										</div>
+									),
+								)}
 							</div>
-
-							<div className={styles.dateModified}>
-								<p>Date modified</p>
-							</div>
-							<div className={styles.type}>
-								<p>Type</p>
-							</div>
-							<div className={styles.size}>
-								<p>Size</p>
-							</div>
-						</div>
-					)}
-
-					<div className={`${styles.child} not_clickable`}>
-						{props.component || (
-							<p className={styles.emptyFolder}>
-								This folder is empty.
-							</p>
 						)}
-					</div>
+						<div className={styles.child}>
+							{props.component || (
+								<p className={styles.emptyFolder}>
+									This folder is empty.
+								</p>
+							)}
+						</div>
+					</main>
 				</div>
-			</section>
+
+				<footer className={styles.statusBar}>
+					<p>
+						{itemCount !== undefined &&
+							`${itemCount} ${itemCount === 1 ? 'item' : 'items'}`}
+					</p>
+					<div className={styles.viewToggles}>
+						<span
+							className={props.topNav ? styles.activeView : ''}
+							title="Details"
+						>
+							<LuTableProperties />
+						</span>
+						<span
+							className={props.topNav ? '' : styles.activeView}
+							title="Large icons"
+						>
+							<LuSquare />
+						</span>
+					</div>
+				</footer>
+			</div>
 		</DraggableWindow>
 	);
 }

@@ -1,334 +1,205 @@
-.top {
-	border-bottom: 1px solid #8585851c;
+/* Windows 11 File Explorer: tab strip (from DraggableWindow), address row,
+   command bar, navigation pane + content, status bar. */
+.explorer {
+	display: flex;
+	flex-direction: column;
+	height: calc(100% - var(--titlebar-height));
+	color: #fff;
+}
+
+/* Same colour as the selected tab so the two read as one surface. */
+.addressRow {
+	display: flex;
+	flex-shrink: 0;
+	gap: 8px;
+	align-items: center;
+	height: 48px;
+	padding: 0 8px;
+	border-bottom: 1px solid #2b2b2b;
 	background-color: #202020;
 }
 
-.manage {
+.navButtons {
 	display: flex;
-	gap: 5px;
-	align-items: center;
-	height: 3.2rem;
-	padding-bottom: 5px;
-	padding-left: 10px;
-	color: #fff;
+	gap: 2px;
 }
 
-.manage .icon {
+.navButtons button,
+.iconCommand {
 	display: flex;
-	gap: 5px;
 	align-items: center;
 	justify-content: center;
-	padding: 10px;
-	border-radius: 5px;
+	width: 36px;
+	height: 32px;
+	border: none;
+	border-radius: 4px;
+	background: none;
+	color: #fff;
+	font-size: 1rem;
 	cursor: pointer;
 }
 
-.manage .icon:hover {
-	background-color: #2e2e2e;
+.navButtons button:hover:not(:disabled),
+.iconCommand:hover:not(:disabled) {
+	background-color: #2d2d2d;
 }
 
-.manage .icon:hover .manageDropdown {
-	display: block;
-}
-
-.manageNew,
-.manageSort,
-.manageView {
-	display: flex;
-	gap: 10px;
-	align-items: center;
-	height: 100%;
-	padding-right: 10px;
-}
-
-.manageNew,
-.manageView {
-	border-right: 1px solid #32323285;
-}
-
-.manageSort {
-	padding-left: 10px;
-	border-left: 1px solid #32323285;
-}
-
-.manageActions {
-	display: flex;
-	gap: 5px;
-	margin-right: 10px;
-	margin-left: 10px;
-	opacity: 0.5;
-}
-
-.manageActions div:hover {
-	background-color: transparent !important;
-	cursor: auto;
-}
-
-.manageMore {
-	margin-left: 10px;
-}
-
-.navigate {
-	display: flex;
-	justify-content: space-between;
-	height: 30px;
-	margin-top: 8px;
-	margin-bottom: 8px;
-}
-
-.navigatePath {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	width: calc(100% - 20rem - 7rem);
-	height: 100%;
-	border: 1px solid #85858585;
-	color: #fff;
-}
-
-.navigatePath input {
-	color: #fff;
-}
-
-.navigatePath .left {
-	display: flex;
-	align-items: center;
-	padding-left: 5px;
-}
-
-.navigatePath .left svg {
-	font-size: 0.8rem;
-}
-
-.navigatePath .right {
-	display: flex;
-	height: 100%;
-}
-
-.navigatePath .right:first-child {
-	color: gray;
-}
-
-.navigatePath .right:first-child:hover {
-	background-color: transparent;
+.navButtons button:disabled,
+.iconCommand:disabled {
+	opacity: 0.4;
 	cursor: default;
 }
 
-.navigatePath .right div {
+.search {
 	display: flex;
+	flex-shrink: 0;
+	gap: 8px;
 	align-items: center;
-	padding: 10px;
+	width: 30%;
+	max-width: 22rem;
+	height: 32px;
+	padding: 0 10px 0 12px;
+	border-radius: 4px;
+	background-color: #2d2d2d;
+	color: #cfcfcf;
+	cursor: text;
 }
 
-.navigatePath .right div:hover {
-	background-color: #2e2e2e;
+.search input {
+	flex: 1;
+	min-width: 0;
+	background: none;
+	color: #fff;
+	font: inherit;
+	font-size: 0.8rem;
+	user-select: text;
+}
+
+.search input::placeholder {
+	color: #cfcfcf;
+}
+
+.commandBar {
+	display: flex;
+	flex-shrink: 0;
+	gap: 2px;
+	align-items: center;
+	height: 48px;
+	padding: 0 8px;
+	border-bottom: 1px solid #2b2b2b;
+}
+
+.divider {
+	flex-shrink: 0;
+	width: 1px;
+	height: 24px;
+	margin: 0 6px;
+	background-color: #3a3a3a;
+}
+
+.textCommand {
+	display: flex;
+	gap: 8px;
+	align-items: center;
+	height: 32px;
+	padding: 0 10px;
+	border: none;
+	border-radius: 4px;
+	background: none;
+	color: #fff;
+	font: inherit;
+	font-size: 0.75rem;
+	white-space: nowrap;
 	cursor: pointer;
 }
 
-.navigateSearch {
+.textCommand svg {
+	flex-shrink: 0;
+	font-size: 1rem;
+}
+
+.textCommand:hover:not(:disabled) {
+	background-color: #2d2d2d;
+}
+
+.textCommand:disabled {
+	opacity: 0.4;
+	cursor: default;
+}
+
+.details {
+	margin-left: auto;
+}
+
+.body {
 	display: flex;
-	gap: 10px;
-	align-items: center;
-	justify-content: flex-start;
-	width: 20rem;
-	height: 100%;
-	margin-right: 10px;
-	margin-left: 10px;
-	padding-left: 5px;
-	border: 1px solid #85858585;
-	color: #fff;
-}
-
-.navigateSearch input {
-	color: gray;
-}
-
-.navigateSearch svg,
-.navigateSearch p {
-	color: gray;
-}
-
-.navigatePath input,
-.navigateSearch input {
-	width: 100%;
-	height: 100%;
-	padding: 5px;
-	border: none;
-	background-color: transparent;
-	outline: none;
-	font-size: 0.7rem;
-	user-select: auto;
-}
-
-.arrows {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	width: 7rem;
-	padding: 0 10px;
-	color: gray;
-}
-
-.contentArea {
-	display: flex;
-	height: calc(100% - 5.2rem - 46px);
-	border-radius: 0 0 15px 15px;
-}
-
-.sidebar {
-	display: flex;
-	flex-direction: column;
-	gap: 2px;
-	width: 13rem;
-	height: 100%;
-	border-right: 2px solid #32323285;
-	border-radius: 0 0 0 15px;
+	flex: 1;
+	min-height: 0;
 }
 
 .content {
 	display: flex;
+	flex: 1;
 	flex-direction: column;
-	width: 100%;
-	border-radius: 0 0 15px;
+	min-width: 0;
+}
+
+.columns {
+	display: flex;
+	flex-shrink: 0;
+	padding: 0 10px;
+}
+
+.columns > * {
+	padding: 6px 5px 6px 10px;
+	border-right: 1px solid #2b2b2b;
+}
+
+.columns > *:hover {
+	background-color: #2d2d2d;
+}
+
+.columns p {
+	font-size: 0.75rem;
 }
 
 .child {
+	flex: 1;
 	overflow: hidden auto;
-	max-width: 100%;
-	max-height: 100%;
 	margin: 0 10px;
 }
 
-.navigationDropdown {
-	display: flex;
-	gap: 5px;
-	align-items: center;
-	margin: 0 2px;
-	border-radius: 2px;
-	cursor: pointer;
-}
-
-.navigationDropdown:hover {
-	background-color: #2e2e2e;
-}
-
-.navigationDropdown svg {
-	color: gray;
-	font-size: 1.6rem;
-}
-
-/* The label is a <Link>, so Next renders it as <a>; the sibling arrow toggle
-   is an svg and is styled above. */
-.navigationDropdown > a {
-	display: flex;
-	gap: 5px;
-	align-items: center;
-	width: 100%;
-	height: 100%;
-}
-
-@keyframes growDown {
-	0% {
-		transform: scaleY(0);
-	}
-
-	80% {
-		transform: scaleY(1.1);
-	}
-
-	100% {
-		transform: scaleY(1);
-	}
-}
-
-.navigationItem {
-	display: flex;
-	gap: 5px;
-	align-items: center;
-	margin: 0 2px;
-	padding-top: 6px;
-	padding-bottom: 6px;
-	padding-left: 40px;
-	border-radius: 2px;
-	cursor: pointer;
-}
-
-.navigationItem:hover {
-	background-color: #2e2e2e;
-}
-
-.topNav {
-	display: flex;
-	width: 100%;
-	padding-right: 10px;
-	padding-left: 10px;
-}
-
-.topNav > * {
-	padding: 5px;
-	border-right: 1px solid #32323285;
-}
-
-.topNav > *:hover {
-	background-color: #2e2e2e;
-}
-
-.topNav .name {
-	width: 40%;
-	padding-left: 10px;
-}
-
-.topNav .dateModified {
-	width: 25%;
-	padding-left: 10px;
-}
-
-.topNav .type {
-	width: 25%;
-	padding-left: 10px;
-}
-
-.topNav .size {
-	width: 10%;
-	padding-left: 10px;
-}
-
-.manageDropdown {
-	position: absolute;
-	top: 73px;
-	z-index: 1000;
-	display: none;
-	flex-direction: column;
-	border: 1px solid #1d1d1d;
-	border-radius: 10px;
-	background-color: #272727e0;
-	transform-origin: top center;
-	animation: growDown 300ms ease-in-out forwards;
-}
-
-.manageDropdown div {
-	display: flex;
-	gap: 5px;
-	align-items: center;
-	margin-right: 5px;
-	margin-left: 5px;
-	padding: 5px 40px 5px 10px;
-	border-radius: 5px;
-}
-
-.manageDropdown div:hover {
-	background-color: #2e2e2e;
-}
-
-.manageDropdown div:first-child {
-	margin-top: 5px;
-}
-
-.manageDropdown div:last-child {
-	margin-bottom: 5px;
-}
-
 .emptyFolder {
-	margin-top: 5px;
+	margin-top: 10px;
 	text-align: center;
+}
+
+.statusBar {
+	display: flex;
+	flex-shrink: 0;
+	align-items: center;
+	justify-content: space-between;
+	height: 30px;
+	padding: 0 8px 0 16px;
+	border-radius: 0 0 8px 8px;
+}
+
+.viewToggles {
+	display: flex;
+	gap: 2px;
+}
+
+.viewToggles span {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 26px;
+	height: 22px;
+	border-radius: 4px;
+	color: #cfcfcf;
+}
+
+.viewToggles .activeView {
+	background-color: #2d2d2d;
+	color: #fff;
 }

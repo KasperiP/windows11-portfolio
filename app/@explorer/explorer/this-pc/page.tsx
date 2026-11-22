@@ -188,6 +188,7 @@ function ThisPC() {
 		<FileExplorer
 			folder="This PC"
 			topNav={false}
+			itemCount={8}
 			icon="this-pc"
 			component={content()}
 		/>

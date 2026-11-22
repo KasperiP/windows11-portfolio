@@ -133,6 +133,8 @@ function Terminal() {
 	return (
 		<DraggableWindow
 			windowId="terminal"
+			tabbed
+			tabMenu
 			topTitle={'MINGW64:/c/Users/kassq'}
 			topIcon={
 				<Image

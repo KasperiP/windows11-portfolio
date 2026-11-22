@@ -1,0 +1,17 @@
+/* List.module.css makes row cells flex containers, so long text is clipped
+   rather than ellipsized. */
+.cell {
+	overflow: hidden;
+	padding-left: 10px;
+	white-space: nowrap;
+}
+
+.right {
+	justify-content: flex-end;
+	padding-right: 10px;
+}
+
+.selected,
+.selected:hover {
+	background-color: rgb(76 194 255 / 18%);
+}

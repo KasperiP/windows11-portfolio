@@ -8,7 +8,7 @@ import listItemStyles from '../../../../styles/utils/List.module.css';
 import { pageMetadata } from '../../../../lib/metadata';
 
 export const metadata = pageMetadata({
-	title: 'Quick access',
+	title: 'Home',
 	description:
 		"Want to go fast? Here's a quick access to my files and folders.",
 	path: '/explorer/quick-access',
@@ -181,8 +181,9 @@ function QuickAccess() {
 
 	return (
 		<FileExplorer
-			folder="Quick access"
+			folder="Home"
 			topNav={false}
+			itemCount={7}
 			icon="quickaccess"
 			component={content()}
 		/>

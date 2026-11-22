@@ -2,44 +2,64 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import Selecto from 'react-selecto';
 import { reopenIfCurrentRoute } from '../../../hooks/useWindowManager';
+import { RECYCLE_BIN_PATH, recycleBinIcon } from '../../../lib/desktop';
+import {
+	useDesktopStore,
+	useVisibleDesktopItems,
+} from '../../../store/desktop';
 import { useWindowStore } from '../../../store/windows';
 import styles from './Icons.module.css';
 
-const ESCAPE_KEYS = ['46', 'Delete'];
+const RECYCLE_BIN_ID = 'recycle-bin';
 
 function Icons() {
-	const [deleted, setDeleted] = useState(false);
-	const clearFocus = useWindowStore((s) => s.clearFocus);
+	const selectoRef = useRef<Selecto>(null);
+	const [selected, setSelected] = useState<string[]>([]);
 
-	const handleDelete = () => {
-		const selected = document.querySelectorAll(`.selected`);
-		selected.forEach((element) => {
-			if (!element.classList.contains('recycleBin')) {
-				element.classList.add(`${styles.deleted}`);
-				element.classList.add('deleted');
-				setDeleted(true);
-			}
-		});
-	};
+	const clearFocus = useWindowStore((s) => s.clearFocus);
+	const items = useVisibleDesktopItems();
+	const binFull = useDesktopStore((s) => s.recycled.length > 0);
+	const hydrated = useDesktopStore((s) => s.hydrated);
+	const recycle = useDesktopStore((s) => s.recycle);
+
+	// The desktop store persists to localStorage, which only exists here.
+	useEffect(() => {
+		void useDesktopStore.persist.rehydrate();
+	}, []);
+
+	const deleteSelected = useCallback(() => {
+		const ids = selected.filter((id) => id !== RECYCLE_BIN_ID);
+		if (!ids.length) return;
+		recycle(ids);
+		setSelected([]);
+		selectoRef.current?.setSelectedTargets([]);
+	}, [recycle, selected]);
 
 	useEffect(() => {
-		const eventListener = (e: KeyboardEvent) => {
-			if (ESCAPE_KEYS.includes(String(e.key))) {
-				handleDelete();
+		const onKeyDown = (e: KeyboardEvent) => {
+			if (e.key !== 'Delete') return;
+			// Only when the desktop has focus, not while typing in a window.
+			if (useWindowStore.getState().focused !== null) return;
+			const target = e.target as Element;
+			if (target.closest('input, textarea, [contenteditable="true"]')) {
+				return;
 			}
+			deleteSelected();
 		};
-		document.addEventListener('keydown', eventListener);
-		return () => {
-			document.removeEventListener('keydown', eventListener);
-		};
-	}, []);
+		document.addEventListener('keydown', onKeyDown);
+		return () => document.removeEventListener('keydown', onKeyDown);
+	}, [deleteSelected]);
+
+	const itemClass = (id: string) =>
+		`${styles.item} selectoItem ${selected.includes(id) ? styles.selected : ''}`;
 
 	return (
 		<>
 			<Selecto
+				ref={selectoRef}
 				dragContainer={'.elements'}
 				selectableTargets={[`.selecto-area .selectoItem`]}
 				hitRate={0}
@@ -47,14 +67,11 @@ function Icons() {
 				selectFromInside={true}
 				ratio={0}
 				onSelect={(e) => {
-					e.added.forEach((el) => {
-						el.classList.add(`${styles.selected}`);
-						el.classList.add(`selected`);
-					});
-					e.removed.forEach((el) => {
-						el.classList.remove(`${styles.selected}`);
-						el.classList.remove(`selected`);
-					});
+					setSelected(
+						e.selected
+							.map((el) => (el as HTMLElement).dataset.desktopId)
+							.filter((id): id is string => !!id),
+					);
 				}}
 			/>
 			{/* Clicking the desktop takes focus away from every window. */}
@@ -63,118 +80,46 @@ function Icons() {
 				onMouseDown={() => clearFocus()}
 				onClickCapture={reopenIfCurrentRoute}
 			>
-				<div className={`selecto-area ${styles.wrapper}`} id="selecto1">
-					<Link
-						href={'/notepad/about'}
-						className={`${styles.item} selectoItem`}
-						draggable={false}
-					>
-						<Image
-							src="/icons/notes/notes.png"
-							alt="icon"
-							width={40}
-							height={40}
-						></Image>
-						<p>About me</p>
-					</Link>
-					<Link
-						href={'/explorer/projects'}
-						className={`${styles.item} selectoItem`}
-						draggable={false}
-					>
-						<Image
-							src="/icons/folder/folder.png"
-							alt="icon"
-							width={40}
-							height={40}
-						></Image>
-						<p>Projects</p>
-					</Link>
-					<Link
-						href={'/explorer/tools'}
-						className={`${styles.item} selectoItem`}
-						draggable={false}
-					>
-						<Image
-							src="/icons/folder/folder.png"
-							alt="icon"
-							width={40}
-							height={40}
-						></Image>
-						<p>Tools</p>
-					</Link>
-					<Link
-						href={'/explorer/podcasts'}
-						className={`${styles.item} selectoItem`}
-						draggable={false}
-					>
-						<Image
-							src="/icons/folder/folder.png"
-							alt="icon"
-							width={40}
-							height={40}
-						></Image>
-						<p>Podcasts I listen to</p>
-					</Link>
-					<Link
-						href={'/explorer/links'}
-						className={`${styles.item} selectoItem`}
-						draggable={false}
-					>
-						<Image
-							src="/icons/links/links.png"
-							alt="icon"
-							width={40}
-							height={40}
-						></Image>
-						<p>Links</p>
-					</Link>
-					<Link
-						href={'/explorer/pictures'}
-						className={`${styles.item} selectoItem`}
-						draggable={false}
-					>
-						<Image
-							src="/icons/pictures/pictures.png"
-							alt="icon"
-							width={40}
-							height={40}
-						></Image>
-						<p>Pictures</p>
-					</Link>
-					<Link
-						href={'/explorer/videos'}
-						className={`${styles.item} selectoItem`}
-						draggable={false}
-					>
-						<Image
-							src="/icons/videos/videos.png"
-							alt="icon"
-							width={40}
-							height={40}
-							quality={100}
-						></Image>
-						<p>Videos</p>
-					</Link>
-
-					<div className={`${styles.item} selectoItem recycleBin`}>
-						{deleted ? (
+				<div
+					className={`selecto-area ${styles.wrapper}`}
+					id="selecto1"
+					// Hidden until the saved desktop loads, so icons that are
+					// in the Recycle Bin don't flash in. Still server-rendered
+					// so the links stay crawlable.
+					style={{ visibility: hydrated ? undefined : 'hidden' }}
+				>
+					{items.map((item) => (
+						<Link
+							key={item.id}
+							href={item.href}
+							className={itemClass(item.id)}
+							data-desktop-id={item.id}
+							draggable={false}
+						>
 							<Image
-								src="/icons/trash/trash_full.png"
+								src={item.icon}
 								alt="icon"
 								width={40}
 								height={40}
-							></Image>
-						) : (
-							<Image
-								src="/icons/trash/trash_empty.png"
-								alt="icon"
-								width={40}
-								height={40}
-							></Image>
-						)}
+								quality={item.quality}
+							/>
+							<p>{item.name}</p>
+						</Link>
+					))}
+					<Link
+						href={RECYCLE_BIN_PATH}
+						className={itemClass(RECYCLE_BIN_ID)}
+						data-desktop-id={RECYCLE_BIN_ID}
+						draggable={false}
+					>
+						<Image
+							src={recycleBinIcon(binFull)}
+							alt="icon"
+							width={40}
+							height={40}
+						/>
 						<p>Recycle Bin</p>
-					</div>
+					</Link>
 				</div>
 			</div>
 		</>

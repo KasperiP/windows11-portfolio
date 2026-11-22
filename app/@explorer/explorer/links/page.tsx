@@ -159,6 +159,7 @@ function Links() {
 			icon="folder"
 			folder="Links"
 			topNav={true}
+			itemCount={6}
 			component={content()}
 		/>
 	);

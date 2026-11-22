@@ -1,0 +1,49 @@
+.bar {
+	display: flex;
+	flex: 1;
+	gap: 2px;
+	align-items: center;
+	min-width: 0;
+	height: 32px;
+	padding: 0 6px;
+	border-radius: 4px;
+	background-color: #2d2d2d;
+	color: #fff;
+	font-size: 0.8rem;
+	cursor: text;
+}
+
+.crumb {
+	display: flex;
+	align-items: center;
+	height: 24px;
+	padding: 0 6px;
+	border-radius: 4px;
+	color: #fff;
+	white-space: nowrap;
+	cursor: default;
+}
+
+.crumb:hover {
+	background-color: #3a3a3a;
+}
+
+.crumb svg {
+	font-size: 1.05rem;
+}
+
+.separator {
+	flex-shrink: 0;
+	color: #cfcfcf;
+	font-size: 0.8rem;
+}
+
+.input {
+	width: 100%;
+	height: 100%;
+	padding: 0 6px;
+	background: none;
+	color: #fff;
+	font: inherit;
+	user-select: text;
+}

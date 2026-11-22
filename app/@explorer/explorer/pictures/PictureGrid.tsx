@@ -46,6 +46,7 @@ function PictureGrid({ data }: { data: PictureType[] }) {
 		<FileExplorer
 			folder="Pictures"
 			topNav={false}
+			itemCount={data.length}
 			icon="pictures"
 			// Falsy lets FileExplorer render its own
 			// "This folder is empty." message.

@@ -80,6 +80,7 @@ async function Projects() {
 			// "This folder is empty." message.
 			component={data.length ? content() : undefined}
 			topNav={true}
+			itemCount={data.length}
 		/>
 	);
 }

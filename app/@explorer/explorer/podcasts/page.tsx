@@ -100,6 +100,7 @@ async function Podcasts() {
 			icon="folder"
 			folder="Podcasts I listen to"
 			topNav={true}
+			itemCount={PODCASTS.length}
 			component={content()}
 		/>
 	);

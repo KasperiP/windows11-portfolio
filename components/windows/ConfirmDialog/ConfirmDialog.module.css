@@ -1,0 +1,9 @@
+/* Centred over the desktop (above the taskbar's 50px), above every window
+   (windows stay below 900, dragged ones use 997) but under the taskbar. */
+.position {
+	position: fixed;
+	top: calc(50% - 25px);
+	left: 50%;
+	z-index: 950;
+	transform: translate(-50%, -50%);
+}
