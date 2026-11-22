@@ -1,11 +1,20 @@
-export type MediaType = {
-	filename: string;
-	thumbnail: string;
+// A resource as returned by the Cloudinary Admin API (only the fields used).
+export type CloudinaryResource = {
+	public_id: string;
 	secure_url: string;
 	format: string;
-	public_id: string;
-	url: string;
 };
+
+// What the media folders pass from the server page to the client grid.
+export type MediaType = {
+	filename: string;
+	secure_url: string;
+	format: string;
+};
+
+export type PictureType = MediaType & { url: string };
+
+export type VideoType = MediaType & { thumbnail: string };
 
 export type ErrorType = {
 	error: string;

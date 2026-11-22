@@ -1,11 +1,23 @@
-import Head from 'next/head';
 import Image from 'next/image';
-import Icons from '../../components/modules/Icons/Icons';
-import FileExplorer from '../../components/windows/FileExplorer/FileExplorer';
-import styles from '../../styles/utils/List.module.css';
-import type { ProjectType } from '../../types';
+import Link from 'next/link';
+import Icons from '../../../components/modules/Icons/Icons';
+import FileExplorer from '../../../components/windows/FileExplorer/FileExplorer';
+import styles from '../../../styles/utils/List.module.css';
+import type { ProjectType } from '../../../types';
+import { pageMetadata } from '../../../lib/metadata';
 
-function Projects({ data }: { data: ProjectType[] }) {
+export const metadata = pageMetadata({
+	title: 'Projects',
+	description:
+		"Too lazy to go to my GitHub page? Here's a list of my open source projects. No forks, no private repos, only my public repos.",
+	path: '/explorer/projects',
+});
+
+export const revalidate = 10;
+
+async function Projects() {
+	const data = await getProjects();
+
 	const content = () => {
 		const getDate = (date: string) => {
 			const dateString = new Date(date).toLocaleDateString('en-GB', {
@@ -14,6 +26,8 @@ function Projects({ data }: { data: ProjectType[] }) {
 				day: '2-digit',
 				hour: '2-digit',
 				minute: '2-digit',
+				// Rendered on the server only; pin the zone so it isn't UTC.
+				timeZone: 'Europe/Helsinki',
 			});
 			return dateString.replace(',', '');
 		};
@@ -29,16 +43,12 @@ function Projects({ data }: { data: ProjectType[] }) {
 			<>
 				<div className={styles.listItemContainer}>
 					{data.map((project) => (
-						<div
+						<Link
+							href={project.html_url}
 							className={styles.listItem}
 							key={project.id}
-							onClick={() =>
-								window.open(
-									project.html_url,
-									'_blank',
-									'noopener,noreferrer',
-								)
-							}
+							target="_blank"
+							rel="noopener noreferrer"
 						>
 							<div className={styles.listItemName}>
 								<Image
@@ -57,54 +67,28 @@ function Projects({ data }: { data: ProjectType[] }) {
 							<p className={styles.listItemSize}>
 								{formatSize(project.size)}
 							</p>
-						</div>
+						</Link>
 					))}
 				</div>
 			</>
 		);
 	};
 	return (
-		<>
-			<Head>
-				<title>kassq - Projects</title>
-				<link
-					rel="canonical"
-					href="https://www.kassq.dev/explorer/projects"
-				/>
-
-				{/* Description */}
-				<meta
-					name="description"
-					content="Too lazy to go to my GitHub page? Here's a list of my open source projects. No forks, no private repos, only my public repos."
-				/>
-
-				{/* OpenGraph */}
-				<meta property="og:title" content="Kassq - Quick access" />
-				<meta
-					property="og:url"
-					content="https://www.kassq.dev/explorer/projects"
-				/>
-				<meta
-					property="og:description"
-					content="Too lazy to go to my GitHub page? Here's a list of my open source projects. No forks, no private repos, only my public repos."
-				/>
-			</Head>
-			<div style={{ height: '100%' }}>
-				<FileExplorer
-					icon="folder"
-					folder="Projects"
-					// Falsy lets FileExplorer render its own
-					// "This folder is empty." message.
-					component={data.length ? content() : undefined}
-					topNav={true}
-				/>
-				<Icons />
-			</div>
-		</>
+		<div style={{ height: '100%' }}>
+			<FileExplorer
+				icon="folder"
+				folder="Projects"
+				// Falsy lets FileExplorer render its own
+				// "This folder is empty." message.
+				component={data.length ? content() : undefined}
+				topNav={true}
+			/>
+			<Icons />
+		</div>
 	);
 }
 
-export async function getStaticProps() {
+async function getProjects(): Promise<ProjectType[]> {
 	// The default page size is 30, which would silently drop repos.
 	const res = await fetch(
 		`https://api.github.com/users/KasperiP/repos?per_page=100`,
@@ -122,7 +106,7 @@ export async function getStaticProps() {
 				project.full_name !== 'KasperiP/KasperiP',
 		)
 		.sort((a, b) => Date.parse(b.updated_at) - Date.parse(a.updated_at))
-		// GitHub returns ~100 fields per repo; only ship what the page uses.
+		// GitHub returns ~100 fields per repo; keep only what the page uses.
 		.map(({ fork, full_name, id, html_url, name, updated_at, size }) => ({
 			fork,
 			full_name,
@@ -133,10 +117,7 @@ export async function getStaticProps() {
 			size,
 		}));
 
-	return {
-		props: { data },
-		revalidate: 10,
-	};
+	return data;
 }
 
 export default Projects;

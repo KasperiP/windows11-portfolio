@@ -1,5 +1,7 @@
+'use client';
+
 import { AnimatePresence, motion } from 'motion/react';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { MouseEvent, ReactNode, useContext, useEffect, useState } from 'react';
 import { AiOutlinePlus } from 'react-icons/ai';
 import { RiArrowDropDownLine } from 'react-icons/ri';

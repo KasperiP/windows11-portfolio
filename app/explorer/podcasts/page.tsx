@@ -1,9 +1,16 @@
-import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
-import Icons from '../../components/modules/Icons/Icons';
-import FileExplorer from '../../components/windows/FileExplorer/FileExplorer';
-import styles from '../../styles/utils/List.module.css';
+import Icons from '../../../components/modules/Icons/Icons';
+import FileExplorer from '../../../components/windows/FileExplorer/FileExplorer';
+import styles from '../../../styles/utils/List.module.css';
+import { pageMetadata } from '../../../lib/metadata';
+
+export const metadata = pageMetadata({
+	title: 'Podcasts',
+	description:
+		'I like to listen podcasts. Here you can find some of my favorites.',
+	path: '/explorer/podcasts',
+});
 
 // Every podcast is on Spotify: the link opens the show page and the
 // "Date modified" column is its latest episode's release date.
@@ -36,6 +43,8 @@ const PODCASTS = [
 	},
 ] as const;
 
+export const revalidate = 30;
+
 type Props = Record<string, string>;
 
 const getDate = (date: string) => {
@@ -45,11 +54,15 @@ const getDate = (date: string) => {
 		day: '2-digit',
 		hour: '2-digit',
 		minute: '2-digit',
+		// Rendered on the server only; pin the zone so it isn't UTC.
+		timeZone: 'Europe/Helsinki',
 	});
 	return dateString.replace(',', '');
 };
 
-function Podcasts({ data }: { data: Props }) {
+async function Podcasts() {
+	const data = await getLatestEpisodes();
+
 	const content = () => {
 		return (
 			<>
@@ -84,45 +97,19 @@ function Podcasts({ data }: { data: Props }) {
 		);
 	};
 	return (
-		<>
-			<Head>
-				<title>kassq - Podcasts</title>
-				<link
-					rel="canonical"
-					href="https://www.kassq.dev/explorer/favorites"
-				/>
-
-				{/* Description */}
-				<meta
-					name="description"
-					content="I like to listen podcasts. Here you can find some of my favorites."
-				/>
-
-				{/* OpenGraph */}
-				<meta property="og:title" content="Kassq - Podcasts" />
-				<meta
-					property="og:url"
-					content="https://www.kassq.dev/explorer/podcasts"
-				/>
-				<meta
-					property="og:description"
-					content="I like to listen podcasts. Here you can find some of my favorites."
-				/>
-			</Head>
-			<div style={{ height: '100%' }}>
-				<FileExplorer
-					icon="folder"
-					folder="Podcasts I listen to"
-					topNav={true}
-					component={content()}
-				/>
-				<Icons />
-			</div>
-		</>
+		<div style={{ height: '100%' }}>
+			<FileExplorer
+				icon="folder"
+				folder="Podcasts I listen to"
+				topNav={true}
+				component={content()}
+			/>
+			<Icons />
+		</div>
 	);
 }
 
-export async function getStaticProps() {
+async function getLatestEpisodes(): Promise<Props> {
 	const basic = Buffer.from(
 		`${process.env.SPOTIFY_CLIENT_ID}:${process.env.SPOTIFY_CLIENT_SECRET}`,
 	).toString('base64');
@@ -190,12 +177,7 @@ export async function getStaticProps() {
 		]),
 	);
 
-	return {
-		props: {
-			data: Object.fromEntries(latest),
-		},
-		revalidate: 30, // In seconds
-	};
+	return Object.fromEntries(latest);
 }
 
 export default Podcasts;

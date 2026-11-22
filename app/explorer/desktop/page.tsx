@@ -1,9 +1,16 @@
-import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
-import Icons from '../../components/modules/Icons/Icons';
-import FileExplorer from '../../components/windows/FileExplorer/FileExplorer';
-import styles from '../../styles/utils/List.module.css';
+import Icons from '../../../components/modules/Icons/Icons';
+import FileExplorer from '../../../components/windows/FileExplorer/FileExplorer';
+import styles from '../../../styles/utils/List.module.css';
+import { pageMetadata } from '../../../lib/metadata';
+
+export const metadata = pageMetadata({
+	title: 'Desktop',
+	description:
+		"My desktop is beautiful until I start some project and then my desktop is full of temporary files and folders. I don't want to see them.",
+	path: '/explorer/desktop',
+});
 
 function Desktop() {
 	const content = () => {
@@ -158,41 +165,15 @@ function Desktop() {
 	};
 
 	return (
-		<>
-			<Head>
-				<title>kassq - Desktop</title>
-				<link
-					rel="canonical"
-					href="https://www.kassq.dev/explorer/desktop"
-				/>
-
-				{/* Description */}
-				<meta
-					name="description"
-					content="My desktop is beautiful until I start some project and then my desktop is full of temporary files and folders. I don't want to see them."
-				/>
-
-				{/* OpenGraph */}
-				<meta property="og:title" content="Kassq - Desktop" />
-				<meta
-					property="og:url"
-					content="https://www.kassq.dev/explorer/desktop"
-				/>
-				<meta
-					property="og:description"
-					content="My desktop is beautiful until I start some project and then my desktop is full of temporary files and folders. I don't want to see them."
-				/>
-			</Head>
-			<div style={{ height: '100%' }}>
-				<FileExplorer
-					icon="desktop"
-					folder="Desktop"
-					topNav={true}
-					component={content()}
-				/>
-				<Icons />
-			</div>
-		</>
+		<div style={{ height: '100%' }}>
+			<FileExplorer
+				icon="desktop"
+				folder="Desktop"
+				topNav={true}
+				component={content()}
+			/>
+			<Icons />
+		</div>
 	);
 }
 

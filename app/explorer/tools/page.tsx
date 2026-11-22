@@ -1,8 +1,15 @@
-import Head from 'next/head';
 import Image from 'next/image';
-import Icons from '../../components/modules/Icons/Icons';
-import FileExplorer from '../../components/windows/FileExplorer/FileExplorer';
-import styles from '../../styles/utils/List.module.css';
+import Icons from '../../../components/modules/Icons/Icons';
+import FileExplorer from '../../../components/windows/FileExplorer/FileExplorer';
+import styles from '../../../styles/utils/List.module.css';
+import { pageMetadata } from '../../../lib/metadata';
+
+export const metadata = pageMetadata({
+	title: 'Tools',
+	description:
+		'The toolbox I use daily for my stuff. Mostly nerdy coding related tools, but some UI related tools too!',
+	path: '/explorer/tools',
+});
 
 const TOOLS = [
 	{
@@ -51,41 +58,15 @@ function Tools() {
 		);
 	};
 	return (
-		<>
-			<Head>
-				<title>kassq - Tools</title>
-				<link
-					rel="canonical"
-					href="https://www.kassq.dev/explorer/tools"
-				/>
-
-				{/* Description */}
-				<meta
-					name="description"
-					content="The toolbox I use daily for my stuff. Mostly nerdy coding related tools, but some UI related tools too!"
-				/>
-
-				{/* OpenGraph */}
-				<meta property="og:title" content="Kassq - Tools" />
-				<meta
-					property="og:url"
-					content="https://www.kassq.dev/explorer/tools"
-				/>
-				<meta
-					property="og:description"
-					content="The toolbox I use daily for my stuff. Mostly nerdy coding related tools, but some UI related tools too!"
-				/>
-			</Head>
-			<div style={{ height: '100%' }}>
-				<FileExplorer
-					icon="folder"
-					folder="Tools"
-					topNav={true}
-					component={content()}
-				/>
-				<Icons />
-			</div>
-		</>
+		<div style={{ height: '100%' }}>
+			<FileExplorer
+				icon="folder"
+				folder="Tools"
+				topNav={true}
+				component={content()}
+			/>
+			<Icons />
+		</div>
 	);
 }
 

@@ -1,3 +1,5 @@
+'use client';
+
 import Image from 'next/image';
 import { ChangeEvent, useState } from 'react';
 import DraggableWindow from '../../utils/DraggableWindow/DraggableWindow';

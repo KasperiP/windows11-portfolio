@@ -1,6 +1,8 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
+import { usePathname, useRouter } from 'next/navigation';
 import {
 	ChangeEvent,
 	useContext,
@@ -50,7 +52,7 @@ type Props = {
 
 function FileExplorer(props: Props) {
 	const router = useRouter();
-	const { asPath } = router;
+	const pathname = usePathname();
 
 	const { explorerHistoryState, indexState, wasManualState } =
 		useContext(Context);
@@ -71,15 +73,15 @@ function FileExplorer(props: Props) {
 	const handleBlur = () => setPath(props.folder);
 
 	useEffect(() => {
-		if (asPath.includes('/explorer/') && !wasManual) {
+		if (pathname.includes('/explorer/') && !wasManual) {
 			const newHistory = history.slice(0, index + 1);
-			newHistory.push(asPath);
+			newHistory.push(pathname);
 			setHistory(newHistory);
 			setIndex(newHistory.length - 1);
 		}
 		setWasManual(false);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [asPath]);
+	}, [pathname]);
 
 	const handleBack = () => {
 		if (index > 0 && history.length > 0) {
@@ -343,7 +345,7 @@ function FileExplorer(props: Props) {
 					<div
 						className={styles.navigationDropdown}
 						style={
-							router.pathname == '/explorer/quick-access'
+							pathname == '/explorer/quick-access'
 								? {
 										backgroundColor: '#2e2e2e',
 									}
@@ -376,8 +378,7 @@ function FileExplorer(props: Props) {
 								href="/explorer/desktop?top=true"
 								className={styles.navigationItem}
 								style={
-									router.asPath ==
-									'/explorer/desktop?top=true'
+									pathname == '/explorer/desktop?top=true'
 										? {
 												backgroundColor: '#2e2e2e',
 											}
@@ -397,8 +398,7 @@ function FileExplorer(props: Props) {
 								href="/explorer/downloads?top=true"
 								className={styles.navigationItem}
 								style={
-									router.asPath ==
-									'/explorer/downloads?top=true'
+									pathname == '/explorer/downloads?top=true'
 										? {
 												backgroundColor: '#2e2e2e',
 											}
@@ -419,8 +419,7 @@ function FileExplorer(props: Props) {
 								href="/explorer/documents?top=true"
 								className={styles.navigationItem}
 								style={
-									router.asPath ==
-									'/explorer/documents?top=true'
+									pathname == '/explorer/documents?top=true'
 										? {
 												backgroundColor: '#2e2e2e',
 											}
@@ -440,8 +439,7 @@ function FileExplorer(props: Props) {
 								href="/explorer/pictures?top=true"
 								className={styles.navigationItem}
 								style={
-									router.asPath ==
-									'/explorer/pictures?top=true'
+									pathname == '/explorer/pictures?top=true'
 										? {
 												backgroundColor: '#2e2e2e',
 											}
@@ -462,7 +460,7 @@ function FileExplorer(props: Props) {
 					<div
 						className={styles.navigationDropdown}
 						style={
-							router.pathname == '/explorer/this-pc'
+							pathname == '/explorer/this-pc'
 								? {
 										backgroundColor: '#2e2e2e',
 									}
@@ -495,7 +493,7 @@ function FileExplorer(props: Props) {
 								href="/explorer/desktop"
 								className={styles.navigationItem}
 								style={
-									router.asPath == '/explorer/desktop'
+									pathname == '/explorer/desktop'
 										? {
 												backgroundColor: '#2e2e2e',
 											}
@@ -515,7 +513,7 @@ function FileExplorer(props: Props) {
 								href="/explorer/downloads"
 								className={styles.navigationItem}
 								style={
-									router.asPath == '/explorer/downloads'
+									pathname == '/explorer/downloads'
 										? {
 												backgroundColor: '#2e2e2e',
 											}
@@ -536,7 +534,7 @@ function FileExplorer(props: Props) {
 								href="/explorer/documents"
 								className={styles.navigationItem}
 								style={
-									router.asPath == '/explorer/documents'
+									pathname == '/explorer/documents'
 										? {
 												backgroundColor: '#2e2e2e',
 											}
@@ -557,7 +555,7 @@ function FileExplorer(props: Props) {
 								href="/explorer/pictures"
 								className={styles.navigationItem}
 								style={
-									router.asPath == '/explorer/pictures'
+									pathname == '/explorer/pictures'
 										? {
 												backgroundColor: '#2e2e2e',
 											}
@@ -578,7 +576,7 @@ function FileExplorer(props: Props) {
 								href="/explorer/videos"
 								className={styles.navigationItem}
 								style={
-									router.asPath == '/explorer/videos'
+									pathname == '/explorer/videos'
 										? {
 												backgroundColor: '#2e2e2e',
 											}
@@ -599,7 +597,7 @@ function FileExplorer(props: Props) {
 								href="/explorer/music"
 								className={styles.navigationItem}
 								style={
-									router.asPath == '/explorer/music'
+									pathname == '/explorer/music'
 										? {
 												backgroundColor: '#2e2e2e',
 											}
@@ -620,7 +618,7 @@ function FileExplorer(props: Props) {
 								href="/explorer/drives/C"
 								className={styles.navigationItem}
 								style={
-									router.asPath == '/explorer/drives/C'
+									pathname == '/explorer/drives/C'
 										? {
 												backgroundColor: '#2e2e2e',
 											}
@@ -641,7 +639,7 @@ function FileExplorer(props: Props) {
 								href="/explorer/drives/D"
 								className={styles.navigationItem}
 								style={
-									router.asPath == '/explorer/ssd2'
+									pathname == '/explorer/ssd2'
 										? {
 												backgroundColor: '#2e2e2e',
 											}

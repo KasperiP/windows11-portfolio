@@ -1,6 +1,16 @@
-import Head from 'next/head';
-import Icons from '../../components/modules/Icons/Icons';
-import Notepad from '../../components/windows/Notepad/Notepad';
+import Icons from '../../../components/modules/Icons/Icons';
+import Notepad from '../../../components/windows/Notepad/Notepad';
+import { pageMetadata } from '../../../lib/metadata';
+
+export const metadata = pageMetadata({
+	title: 'About me',
+	description: 'Who am I? I guess you will find out after reading this.',
+	path: '/notepad/about',
+});
+
+// getAge() now only runs on the server, so rebuild daily to keep it current.
+export const revalidate = 86400;
+
 function About() {
 	const getAge = () => {
 		const dateString = '2002-01-30';
@@ -19,36 +29,10 @@ function About() {
 	};
 
 	return (
-		<>
-			<Head>
-				<title>kassq - About me</title>
-				<link
-					rel="canonical"
-					href="https://www.kassq.dev/notepad/about"
-				/>
-
-				{/* Description */}
-				<meta
-					name="description"
-					content="Who am I? I guess you will find out after reading this."
-				/>
-
-				{/* OpenGraph */}
-				<meta property="og:title" content="Kassq - About me" />
-				<meta
-					property="og:url"
-					content="https://www.kassq.dev/notepad/about"
-				/>
-				<meta
-					property="og:description"
-					content="Who am I? I guess you will find out after reading this."
-				/>
-			</Head>
-			<div style={{ height: '100%' }}>
-				<Notepad initialText={textContent()} />
-				<Icons />
-			</div>
-		</>
+		<div style={{ height: '100%' }}>
+			<Notepad initialText={textContent()} />
+			<Icons />
+		</div>
 	);
 }
 

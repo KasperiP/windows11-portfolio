@@ -1,9 +1,16 @@
-import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
-import Icons from '../../components/modules/Icons/Icons';
-import FileExplorer from '../../components/windows/FileExplorer/FileExplorer';
-import styles from '../../styles/utils/List.module.css';
+import Icons from '../../../components/modules/Icons/Icons';
+import FileExplorer from '../../../components/windows/FileExplorer/FileExplorer';
+import styles from '../../../styles/utils/List.module.css';
+import { pageMetadata } from '../../../lib/metadata';
+
+export const metadata = pageMetadata({
+	title: 'Links',
+	description:
+		'All my social media links combined in one place. How cool is that?',
+	path: '/explorer/links',
+});
 
 function Links() {
 	const content = () => {
@@ -149,41 +156,15 @@ function Links() {
 		);
 	};
 	return (
-		<>
-			<Head>
-				<title>kassq - Links</title>
-				<link
-					rel="canonical"
-					href="https://www.kassq.dev/explorer/links"
-				/>
-
-				{/* Description */}
-				<meta
-					name="description"
-					content="All my social media links combined in one place. How cool is that?"
-				/>
-
-				{/* OpenGraph */}
-				<meta property="og:title" content="Kassq - Links" />
-				<meta
-					property="og:url"
-					content="https://www.kassq.dev/explorer/links"
-				/>
-				<meta
-					property="og:description"
-					content="All my social media links combined in one place. How cool is that?"
-				/>
-			</Head>
-			<div style={{ height: '100%' }}>
-				<FileExplorer
-					icon="folder"
-					folder="Links"
-					topNav={true}
-					component={content()}
-				/>
-				<Icons />
-			</div>
-		</>
+		<div style={{ height: '100%' }}>
+			<FileExplorer
+				icon="folder"
+				folder="Links"
+				topNav={true}
+				component={content()}
+			/>
+			<Icons />
+		</div>
 	);
 }
 

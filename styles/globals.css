@@ -2,7 +2,7 @@
 	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
-	font-family: 'Open Sans', sans-serif;
+	font-family: var(--font-open-sans), sans-serif;
 	user-select: none;
 	scrollbar-color: #9f9f9f #2c2c2c;
 	scrollbar-width: thin;

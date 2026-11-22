@@ -1,14 +1,20 @@
-import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import { BsFillPinAngleFill } from 'react-icons/bs';
 import { RiArrowDropDownLine } from 'react-icons/ri';
-import Icons from '../../components/modules/Icons/Icons';
-import FileExplorer from '../../components/windows/FileExplorer/FileExplorer';
-import styles from '../../styles/utils/GridList.module.css';
-import listItemStyles from '../../styles/utils/List.module.css';
+import Icons from '../../../components/modules/Icons/Icons';
+import FileExplorer from '../../../components/windows/FileExplorer/FileExplorer';
+import styles from '../../../styles/utils/GridList.module.css';
+import { pageMetadata } from '../../../lib/metadata';
 
-function QuickAccess() {
+export const metadata = pageMetadata({
+	title: 'This PC',
+	description:
+		"Yeah, this is the file explorer's this PC page. Nothing interesting here.",
+	path: '/explorer/this-pc',
+});
+
+function ThisPC() {
 	const content = () => {
 		return (
 			<>
@@ -139,77 +145,57 @@ function QuickAccess() {
 				</div>
 				<div className={styles.dropdownNav}>
 					<RiArrowDropDownLine />
-					<h2>Recent files (1)</h2>
+					<h2>Devices and drives (2)</h2>
 					<div />
 				</div>
 
-				<div
-					className={listItemStyles.listItemContainer}
-					style={{ margin: '0 20px 0 20px' }}
-				>
-					<Link
-						href="/notepad/about"
-						className={listItemStyles.listItem}
-						draggable={false}
-					>
-						<div className={listItemStyles.listItemName}>
+				<div className={styles.wrapper}>
+					<div className={`${styles.item} ${styles.disk}`}>
+						<div>
 							<Image
-								src="/icons/notes/notes.png"
+								src="/icons/drives/c.png"
 								alt="icon"
-								width={16}
-								height={16}
-							></Image>
-							<p>About me</p>
+								width={50}
+								height={50}
+							/>
 						</div>
-						<p
-							className={listItemStyles.listItemType}
-							style={{ width: '100%' }}
-						>
-							This PC/Desktop/About me.txt
-						</p>
-					</Link>
+						<div>
+							<p>250GB SSD (C:)</p>
+							<span className={styles.progressBar} />
+							<p>85.8 GB free of 222 GB</p>
+						</div>
+					</div>
+					<div className={`${styles.item} ${styles.disk}`}>
+						<div>
+							<Image
+								src="/icons/drives/d.png"
+								alt="icon"
+								width={50}
+								height={50}
+							/>
+						</div>
+						<div>
+							<p>1TB SSD (D:)</p>
+							<span className={styles.progressBar} />
+							<p>393 GB free of 465 GB</p>
+						</div>
+					</div>
 				</div>
 			</>
 		);
 	};
 
 	return (
-		<>
-			<Head>
-				<title>kassq - Quick access</title>
-				<link
-					rel="canonical"
-					href="https://www.kassq.dev/explorer/quick-access"
-				/>
-
-				{/* Description */}
-				<meta
-					name="description"
-					content="Want to go fast? Here's a quick access to my files and folders."
-				/>
-
-				{/* OpenGraph */}
-				<meta property="og:title" content="Kassq - Quick access" />
-				<meta
-					property="og:url"
-					content="https://www.kassq.dev/explorer/quick-access"
-				/>
-				<meta
-					property="og:description"
-					content="Want to go fast? Here's a quick access to my files and folders."
-				/>
-			</Head>
-			<div style={{ height: '100%' }}>
-				<FileExplorer
-					folder="Quick access"
-					topNav={false}
-					icon="quickaccess"
-					component={content()}
-				/>
-				<Icons />
-			</div>
-		</>
+		<div style={{ height: '100%' }}>
+			<FileExplorer
+				folder="This PC"
+				topNav={false}
+				icon="this-pc"
+				component={content()}
+			/>
+			<Icons />
+		</div>
 	);
 }
 
-export default QuickAccess;
+export default ThisPC;

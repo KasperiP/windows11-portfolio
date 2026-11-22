@@ -38,6 +38,6 @@ empty instead of failing the build.
 
 ## Stack
 
-Next.js 16 (Pages Router, Turbopack), React 19, TypeScript 6, CSS Modules,
+Next.js 16 (App Router, Turbopack), React 19, TypeScript 6, CSS Modules,
 [motion](https://motion.dev) for animation, and `react-rnd` + `react-selecto`
 for the window manager. Deployed on Vercel.
