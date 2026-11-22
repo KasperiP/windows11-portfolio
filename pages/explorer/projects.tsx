@@ -105,16 +105,33 @@ function Projects({ data }: { data: ProjectType[] }) {
 }
 
 export async function getStaticProps() {
-	const res = await fetch(`https://api.github.com/users/KasperiP/repos`);
+	// The default page size is 30, which would silently drop repos.
+	const res = await fetch(
+		`https://api.github.com/users/KasperiP/repos?per_page=100`,
+	);
 	const json = await res.json();
 
 	// GitHub answers with an object (not an array) when rate-limited.
 	const repos: ProjectType[] = Array.isArray(json) ? json : [];
 
-	const data = repos.filter(
-		(project: ProjectType) =>
-			project.fork === false && project.full_name !== 'KasperiP/KasperiP',
-	);
+	// Newest first, by the same date shown in the "Date modified" column.
+	const data = repos
+		.filter(
+			(project: ProjectType) =>
+				project.fork === false &&
+				project.full_name !== 'KasperiP/KasperiP',
+		)
+		.sort((a, b) => Date.parse(b.updated_at) - Date.parse(a.updated_at))
+		// GitHub returns ~100 fields per repo; only ship what the page uses.
+		.map(({ fork, full_name, id, html_url, name, updated_at, size }) => ({
+			fork,
+			full_name,
+			id,
+			html_url,
+			name,
+			updated_at,
+			size,
+		}));
 
 	return {
 		props: { data },
