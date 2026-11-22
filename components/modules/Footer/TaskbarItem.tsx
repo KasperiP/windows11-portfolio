@@ -47,6 +47,8 @@ function TaskbarItem({ name, icon, windowId, onClick }: Props) {
 			onClick={onClick}
 			aria-label={tooltip}
 			aria-pressed={windowId ? focused : undefined}
+			// DraggableWindow aims its minimize animation at this button.
+			data-taskbar-window={windowId}
 		>
 			<Image src={icon} width={25} height={25} alt="" draggable={false} />
 			<span className={styles.indicator} />

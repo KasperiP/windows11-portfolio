@@ -1,6 +1,6 @@
 'use client';
 
-import { AnimatePresence, motion } from 'motion/react';
+import { AnimatePresence, motion, type Variants } from 'motion/react';
 import {
 	type MouseEvent,
 	type ReactNode,
@@ -53,28 +53,40 @@ const handleStyles = {
 	},
 };
 
-const variants = {
+type MinimizeTarget = { x: number; y: number; scale: number };
+
+// Restoring and minimizing use a longer curve than maximizing, which only
+// changes the corners.
+const restoreTransition = { duration: 0.2, ease: 'easeOut' } as const;
+
+const variants: Variants = {
 	// .container carries border-radius: 10px; the maximized window squares off.
 	// Every visible variant names borderRadius so Motion can animate back.
 	maximized: {
 		borderRadius: '0px',
 		scale: 1,
 		opacity: 1,
+		x: 0,
 		y: 0,
+		transition: restoreTransition,
 	},
 	restored: {
 		borderRadius: '10px',
 		scale: 1,
 		opacity: 1,
+		x: 0,
 		y: 0,
+		transition: restoreTransition,
 	},
-	// Minimized: shrink down towards the taskbar but stay mounted, so the
-	// window keeps its state (Notepad text, Terminal history, playing video).
-	hidden: {
-		scale: 0.6,
+	// Minimized: shrink into the app's taskbar button, like Windows 11. The
+	// target is measured when the animation starts (passed in as `custom`).
+	// The window stays mounted, so it keeps its state (Notepad text, Terminal
+	// history, a playing video).
+	hidden: (getTarget: () => MinimizeTarget) => ({
+		...getTarget(),
 		opacity: 0,
-		y: 150,
-	},
+		transition: { duration: 0.25, ease: 'easeIn' },
+	}),
 	enterFresh: {
 		scale: 0,
 	},
@@ -136,6 +148,33 @@ function DraggableWindow({ children, windowId, topTitle, topIcon }: Props) {
 
 	const toggleMaximize = () => setMaximized(windowId, !maximized);
 
+	// Offset that moves the window's centre onto its taskbar button (or the
+	// middle of the taskbar if it has none) and shrinks it to about icon size.
+	const getMinimizeTarget = (): MinimizeTarget => {
+		const box = maximized
+			? {
+					x: 0,
+					y: 0,
+					width: viewport.width,
+					height: viewport.height - TASKBAR_HEIGHT,
+				}
+			: rect!;
+		const button = document
+			.querySelector(`[data-taskbar-window="${windowId}"]`)
+			?.getBoundingClientRect();
+		const targetX = button
+			? button.left + button.width / 2
+			: window.innerWidth / 2;
+		const targetY = button
+			? button.top + button.height / 2
+			: window.innerHeight - TASKBAR_HEIGHT / 2;
+		return {
+			x: targetX - (box.x + box.width / 2),
+			y: targetY - (box.y + box.height / 2),
+			scale: 0.1,
+		};
+	};
+
 	const isMoving = isDragging || isResizing;
 
 	return (
@@ -194,6 +233,7 @@ function DraggableWindow({ children, windowId, topTitle, topIcon }: Props) {
 						onMouseDown={handleFocus}
 						className={styles.container}
 						variants={variants}
+						custom={getMinimizeTarget}
 						animate={
 							minimized
 								? 'hidden'
