@@ -188,12 +188,12 @@ function WindowsMenu({ winMenu, handleWinMenu }: Props) {
 									</Link>
 									<div>
 										<Image
-											src="/icons/firefox/firefox.png"
+											src="/icons/chrome/chrome.png"
 											alt="img"
 											width={30}
 											height={30}
 										></Image>
-										<p>Firefox</p>
+										<p>Chrome</p>
 									</div>
 								</div>
 							</div>

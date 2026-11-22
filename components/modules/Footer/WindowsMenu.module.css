@@ -112,7 +112,7 @@
 }
 
 /* Direct child, not `div`: these tiles are <Link>s, so Next renders them as
-   <a>, while the Firefox tile is still a plain <div>. */
+   <a>, while the Chrome tile is still a plain <div>. */
 .winMenuRecommendedItem > * {
 	display: flex;
 	gap: 5px;

@@ -23,7 +23,7 @@ const PINNED: PinnedApp[] = [
 		icon: WINDOWS.fileExplorer.icon,
 		windowId: 'fileExplorer',
 	},
-	{ name: 'Firefox', icon: '/icons/firefox/firefox.png' },
+	{ name: 'Chrome', icon: '/icons/chrome/chrome.png' },
 	{ name: 'Spotify', icon: '/icons/spotify/spotify.png' },
 	{ name: 'Steam', icon: '/icons/steam/steam.png' },
 	{ name: 'Discord', icon: '/icons/discord/discord.png' },
