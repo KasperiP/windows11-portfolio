@@ -27,7 +27,8 @@
 		"react-draggable": "4.7.2",
 		"react-icons": "^5.7.0",
 		"react-rnd": "10.5.3",
-		"react-selecto": "1.26.3"
+		"react-selecto": "1.26.3",
+		"zustand": "^5.1.0"
 	},
 	"devDependencies": {
 		"@types/node": "^24.19.2",

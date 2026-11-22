@@ -4,12 +4,15 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import Selecto from 'react-selecto';
+import { reopenIfCurrentRoute } from '../../../hooks/useWindowManager';
+import { useWindowStore } from '../../../store/windows';
 import styles from './Icons.module.css';
 
 const ESCAPE_KEYS = ['46', 'Delete'];
 
 function Icons() {
 	const [deleted, setDeleted] = useState(false);
+	const clearFocus = useWindowStore((s) => s.clearFocus);
 
 	const handleDelete = () => {
 		const selected = document.querySelectorAll(`.selected`);
@@ -54,7 +57,12 @@ function Icons() {
 					});
 				}}
 			/>
-			<div className={`elements ${styles.container}`}>
+			{/* Clicking the desktop takes focus away from every window. */}
+			<div
+				className={`elements ${styles.container}`}
+				onMouseDown={() => clearFocus()}
+				onClickCapture={reopenIfCurrentRoute}
+			>
 				<div className={`selecto-area ${styles.wrapper}`} id="selecto1">
 					<Link
 						href={'/notepad/about'}

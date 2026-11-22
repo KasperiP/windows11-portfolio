@@ -2,14 +2,8 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
-import {
-	ChangeEvent,
-	useContext,
-	useEffect,
-	useState,
-	FocusEvent,
-} from 'react';
+import { useRouter } from 'next/navigation';
+import { ChangeEvent, FocusEvent, useState } from 'react';
 import {
 	AiFillCaretRight,
 	AiOutlinePlusCircle,
@@ -39,7 +33,7 @@ import {
 import { RiArrowDropDownLine, RiComputerLine } from 'react-icons/ri';
 import { SiMaterialdesignicons } from 'react-icons/si';
 import { VscSearch, VscSymbolProperty } from 'react-icons/vsc';
-import { Context } from '../../../context/ContextProvider';
+import { useWindowStore } from '../../../store/windows';
 import DraggableWindow from '../../utils/DraggableWindow/DraggableWindow';
 import styles from './FileExplorer.module.css';
 
@@ -52,13 +46,14 @@ type Props = {
 
 function FileExplorer(props: Props) {
 	const router = useRouter();
-	const pathname = usePathname();
+	// The explorer's own route, not the URL: the URL follows whichever window
+	// is focused, but the sidebar should keep highlighting this folder.
+	const explorerPath =
+		useWindowStore((s) => s.windows.fileExplorer.path) ?? '';
 
-	const { explorerHistoryState, indexState, wasManualState } =
-		useContext(Context);
-	const [history, setHistory] = explorerHistoryState;
-	const [index, setIndex] = indexState;
-	const [wasManual, setWasManual] = wasManualState;
+	// History is recorded by useRouteSync on every explorer navigation.
+	const { entries, index } = useWindowStore((s) => s.explorerHistory);
+	const explorerGo = useWindowStore((s) => s.explorerGo);
 
 	const [path, setPath] = useState(props.folder);
 	const [quickaccess, setQuickaccess] = useState(true);
@@ -72,37 +67,14 @@ function FileExplorer(props: Props) {
 
 	const handleBlur = () => setPath(props.folder);
 
-	useEffect(() => {
-		if (pathname.includes('/explorer/') && !wasManual) {
-			const newHistory = history.slice(0, index + 1);
-			newHistory.push(pathname);
-			setHistory(newHistory);
-			setIndex(newHistory.length - 1);
-		}
-		setWasManual(false);
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [pathname]);
-
-	const handleBack = () => {
-		if (index > 0 && history.length > 0) {
-			setWasManual(true);
-			let i = index - 1;
-			setIndex(i);
-			router.push(history[i]);
-		}
-	};
-	const handleNext = () => {
-		if (index < history.length - 1) {
-			setWasManual(true);
-			let i = index + 1;
-			setIndex(i);
-			router.push(history[i]);
-		}
+	const go = (delta: -1 | 1) => {
+		const target = explorerGo(delta);
+		if (target) router.push(target);
 	};
 
 	return (
 		<DraggableWindow
-			windowName={'fileExplorer'}
+			windowId="fileExplorer"
 			topTitle={props.folder}
 			topIcon={
 				<Image
@@ -292,17 +264,17 @@ function FileExplorer(props: Props) {
 			<section className={styles.navigate}>
 				<div className={styles.arrows}>
 					<HiArrowLeft
-						onClick={handleBack}
+						onClick={() => go(-1)}
 						style={
-							typeof history[index - 1] === 'undefined'
+							entries[index - 1] === undefined
 								? {}
 								: { color: 'white' }
 						}
 					/>
 					<HiArrowRight
-						onClick={handleNext}
+						onClick={() => go(1)}
 						style={
-							typeof history[index + 1] === 'undefined'
+							entries[index + 1] === undefined
 								? {}
 								: { color: 'white' }
 						}
@@ -345,7 +317,7 @@ function FileExplorer(props: Props) {
 					<div
 						className={styles.navigationDropdown}
 						style={
-							pathname == '/explorer/quick-access'
+							explorerPath == '/explorer/quick-access'
 								? {
 										backgroundColor: '#2e2e2e',
 									}
@@ -378,7 +350,7 @@ function FileExplorer(props: Props) {
 								href="/explorer/desktop?top=true"
 								className={styles.navigationItem}
 								style={
-									pathname == '/explorer/desktop?top=true'
+									explorerPath == '/explorer/desktop?top=true'
 										? {
 												backgroundColor: '#2e2e2e',
 											}
@@ -398,7 +370,8 @@ function FileExplorer(props: Props) {
 								href="/explorer/downloads?top=true"
 								className={styles.navigationItem}
 								style={
-									pathname == '/explorer/downloads?top=true'
+									explorerPath ==
+									'/explorer/downloads?top=true'
 										? {
 												backgroundColor: '#2e2e2e',
 											}
@@ -419,7 +392,8 @@ function FileExplorer(props: Props) {
 								href="/explorer/documents?top=true"
 								className={styles.navigationItem}
 								style={
-									pathname == '/explorer/documents?top=true'
+									explorerPath ==
+									'/explorer/documents?top=true'
 										? {
 												backgroundColor: '#2e2e2e',
 											}
@@ -439,7 +413,8 @@ function FileExplorer(props: Props) {
 								href="/explorer/pictures?top=true"
 								className={styles.navigationItem}
 								style={
-									pathname == '/explorer/pictures?top=true'
+									explorerPath ==
+									'/explorer/pictures?top=true'
 										? {
 												backgroundColor: '#2e2e2e',
 											}
@@ -460,7 +435,7 @@ function FileExplorer(props: Props) {
 					<div
 						className={styles.navigationDropdown}
 						style={
-							pathname == '/explorer/this-pc'
+							explorerPath == '/explorer/this-pc'
 								? {
 										backgroundColor: '#2e2e2e',
 									}
@@ -493,7 +468,7 @@ function FileExplorer(props: Props) {
 								href="/explorer/desktop"
 								className={styles.navigationItem}
 								style={
-									pathname == '/explorer/desktop'
+									explorerPath == '/explorer/desktop'
 										? {
 												backgroundColor: '#2e2e2e',
 											}
@@ -513,7 +488,7 @@ function FileExplorer(props: Props) {
 								href="/explorer/downloads"
 								className={styles.navigationItem}
 								style={
-									pathname == '/explorer/downloads'
+									explorerPath == '/explorer/downloads'
 										? {
 												backgroundColor: '#2e2e2e',
 											}
@@ -534,7 +509,7 @@ function FileExplorer(props: Props) {
 								href="/explorer/documents"
 								className={styles.navigationItem}
 								style={
-									pathname == '/explorer/documents'
+									explorerPath == '/explorer/documents'
 										? {
 												backgroundColor: '#2e2e2e',
 											}
@@ -555,7 +530,7 @@ function FileExplorer(props: Props) {
 								href="/explorer/pictures"
 								className={styles.navigationItem}
 								style={
-									pathname == '/explorer/pictures'
+									explorerPath == '/explorer/pictures'
 										? {
 												backgroundColor: '#2e2e2e',
 											}
@@ -576,7 +551,7 @@ function FileExplorer(props: Props) {
 								href="/explorer/videos"
 								className={styles.navigationItem}
 								style={
-									pathname == '/explorer/videos'
+									explorerPath == '/explorer/videos'
 										? {
 												backgroundColor: '#2e2e2e',
 											}
@@ -597,7 +572,7 @@ function FileExplorer(props: Props) {
 								href="/explorer/music"
 								className={styles.navigationItem}
 								style={
-									pathname == '/explorer/music'
+									explorerPath == '/explorer/music'
 										? {
 												backgroundColor: '#2e2e2e',
 											}
@@ -618,7 +593,7 @@ function FileExplorer(props: Props) {
 								href="/explorer/drives/C"
 								className={styles.navigationItem}
 								style={
-									pathname == '/explorer/drives/C'
+									explorerPath == '/explorer/drives/C'
 										? {
 												backgroundColor: '#2e2e2e',
 											}
@@ -639,7 +614,7 @@ function FileExplorer(props: Props) {
 								href="/explorer/drives/D"
 								className={styles.navigationItem}
 								style={
-									pathname == '/explorer/ssd2'
+									explorerPath == '/explorer/ssd2'
 										? {
 												backgroundColor: '#2e2e2e',
 											}

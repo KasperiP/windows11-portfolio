@@ -2,12 +2,26 @@
 
 import Image from 'next/image';
 import { useCallback, useEffect, useState } from 'react';
+import { useWindowStore } from '../../../store/windows';
 import type { HistoryType } from '../../../types';
 import DraggableWindow from '../../utils/DraggableWindow/DraggableWindow';
 import styles from './Terminal.module.css';
 
+// Stable empty value so the callbacks below don't change every render.
+const NO_HISTORY: HistoryType[] = [];
+
 function Terminal() {
-	const [history, setHistory] = useState<HistoryType[] | []>([]);
+	// Keyed on the window session so a relaunched terminal starts empty.
+	const session = useWindowStore((s) => s.windows.terminal.session);
+	const [saved, setSaved] = useState<{
+		session: number;
+		items: HistoryType[];
+	}>({ session, items: [] });
+	const history = saved.session === session ? saved.items : NO_HISTORY;
+	const setHistory = useCallback(
+		(items: HistoryType[]) => setSaved({ session, items }),
+		[session],
+	);
 
 	const executeCommand = useCallback(
 		(input: string) => {
@@ -74,11 +88,19 @@ function Terminal() {
 					break;
 			}
 		},
-		[history],
+		[history, setHistory],
 	);
 
 	useEffect(() => {
+		// These listeners are on the whole document, and other windows are
+		// open alongside the terminal, so only act while it has focus.
+		const isActive = () => {
+			const { focused, windows } = useWindowStore.getState();
+			return focused === 'terminal' && !windows.terminal.minimized;
+		};
+
 		const handleFocus = () => {
+			if (!isActive()) return;
 			const terminal = document.getElementsByClassName(
 				'prompt',
 			)[0] as HTMLInputElement;
@@ -87,8 +109,8 @@ function Terminal() {
 		};
 
 		const handleKeyUp = async (e: KeyboardEvent) => {
-			if (e.key == 'Enter') {
-				const target = e.target as HTMLInputElement;
+			const target = e.target as HTMLInputElement;
+			if (e.key == 'Enter' && target.classList.contains('prompt')) {
 				let input = target.value;
 
 				await executeCommand(input);
@@ -110,7 +132,7 @@ function Terminal() {
 
 	return (
 		<DraggableWindow
-			windowName={'terminal'}
+			windowId="terminal"
 			topTitle={'MINGW64:/c/Users/kassq'}
 			topIcon={
 				<Image

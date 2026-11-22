@@ -1,8 +1,13 @@
 'use client';
 
 import { AnimatePresence, motion } from 'motion/react';
-import { useRouter } from 'next/navigation';
-import { MouseEvent, ReactNode, useContext, useEffect, useState } from 'react';
+import {
+	type MouseEvent,
+	type ReactNode,
+	useEffect,
+	useState,
+	useSyncExternalStore,
+} from 'react';
 import { AiOutlinePlus } from 'react-icons/ai';
 import { RiArrowDropDownLine } from 'react-icons/ri';
 import {
@@ -11,8 +16,14 @@ import {
 	VscChromeMinimize,
 } from 'react-icons/vsc';
 import { Rnd } from 'react-rnd';
-import { Context } from '../../../context/ContextProvider';
-import { handleWindowPriority } from '../WindowPriority/WindowPriority';
+import { useWindowActions } from '../../../hooks/useWindowManager';
+import {
+	DEFAULT_HEIGHT,
+	DEFAULT_WIDTH,
+	TASKBAR_HEIGHT,
+	type WindowId,
+} from '../../../lib/windows';
+import { useWindowStore } from '../../../store/windows';
 import styles from './DraggableWindow.module.css';
 
 const handleStyles = {
@@ -44,270 +55,168 @@ const handleStyles = {
 
 const variants = {
 	// .container carries border-radius: 10px; the maximized window squares off.
-	// Both variants must name borderRadius or Motion cannot animate back.
+	// Every visible variant names borderRadius so Motion can animate back.
 	maximized: {
 		borderRadius: '0px',
 		scale: 1,
 		opacity: 1,
+		y: 0,
 	},
-	minimized: {
+	restored: {
 		borderRadius: '10px',
 		scale: 1,
 		opacity: 1,
+		y: 0,
 	},
-	// Opening straight into an already-open file explorer should not re-zoom.
-	enterFromHistory: {
-		scale: 1,
+	// Minimized: shrink down towards the taskbar but stay mounted, so the
+	// window keeps its state (Notepad text, Terminal history, playing video).
+	hidden: {
+		scale: 0.6,
+		opacity: 0,
+		y: 150,
 	},
 	enterFresh: {
 		scale: 0,
 	},
 };
 
-type Props = {
-	children: ReactNode;
-	windowName: string;
-	topTitle: string;
-	topIcon?: ReactNode;
-	close?: (newMedia: null) => void;
+const subscribeResize = (onChange: () => void) => {
+	window.addEventListener('resize', onChange);
+	return () => window.removeEventListener('resize', onChange);
 };
 
-function DraggableWindow({
-	children,
-	windowName,
-	topTitle,
-	topIcon,
-	close,
-}: Props) {
-	const router = useRouter();
+/**
+ * Live viewport size, so a maximized window keeps filling the screen when the
+ * browser is resized. Numbers rather than CSS strings: react-rnd appends "px"
+ * to any size string it doesn't recognise, which breaks calc().
+ */
+const useViewport = () => {
+	const width = useSyncExternalStore(
+		subscribeResize,
+		() => window.innerWidth,
+		() => DEFAULT_WIDTH,
+	);
+	const height = useSyncExternalStore(
+		subscribeResize,
+		() => window.innerHeight,
+		() => DEFAULT_HEIGHT,
+	);
+	return { width, height };
+};
 
+type Props = {
+	children: ReactNode;
+	windowId: WindowId;
+	topTitle: string;
+	topIcon?: ReactNode;
+};
+
+function DraggableWindow({ children, windowId, topTitle, topIcon }: Props) {
 	const [isDragging, setIsDragging] = useState(false);
 	const [isResizing, setIsResizing] = useState(false);
-	const [loading, setLoading] = useState(true);
-	const [isClosing, setIsClosing] = useState(false);
 
-	const DraggableWindowContext = useContext(Context);
-
-	const [maximized, setMaximized] = DraggableWindowContext.maximizedState;
-	const [history, setHistory] = DraggableWindowContext.explorerHistoryState;
-	const [position, setPosition] = DraggableWindowContext.positionState;
-	const [windowPriority, setWindowPriority] =
-		DraggableWindowContext.windowPriorityState;
-	const [lastPos, setLastPos] = DraggableWindowContext.lastPosState;
-
-	const handlePriority = async (e: MouseEvent, window: string) => {
-		const newPriority = await handleWindowPriority({
-			e,
-			windowName: window,
-			windowPriority,
-		});
-
-		if (newPriority) {
-			setWindowPriority(newPriority);
-		}
-	};
-
-	const handleMaximize = () => {
-		setMaximized({ ...maximized, [windowName]: !maximized[windowName] });
-	};
-
-	const handleClose = () => {
-		setIsClosing(true);
-		setMaximized({ ...maximized, [windowName]: null });
-
-		if (windowName === 'fileExplorer') setHistory([]);
-		if (windowName === 'mediaPlayer') {
-			setTimeout(() => {
-				if (close) {
-					setTimeout(() => {
-						close(null);
-					}, 500);
-				}
-			}, 500);
-			const newPriority = Object.fromEntries(
-				Object.entries(windowPriority).filter(
-					([key]) => key !== 'mediaPlayer',
-				),
-			);
-			return setWindowPriority(newPriority);
-		}
-
-		setTimeout(() => {
-			router.push('/');
-		}, 500);
-	};
-
-	const handleClick = (e: MouseEvent<HTMLDivElement>, window: string) => {
-		handlePriority(e, window);
-	};
+	const win = useWindowStore((s) => s.windows[windowId]);
+	const setRect = useWindowStore((s) => s.setRect);
+	const setMaximized = useWindowStore((s) => s.setMaximized);
+	const setTitle = useWindowStore((s) => s.setTitle);
+	const { activate, minimizeWindow, closeWindow } = useWindowActions();
+	const viewport = useViewport();
 
 	useEffect(() => {
-		(async () => {
-			const getCenter = async () => {
-				let width = window.innerWidth;
-				let height = window.innerHeight;
+		setTitle(windowId, topTitle);
+	}, [setTitle, topTitle, windowId]);
 
-				let x;
-				let y;
-				if (width !== position[windowName].width) {
-					x = width / 2 - position[windowName].width / 2;
-				} else {
-					x = width / 2 - 880 / 2;
-				}
+	const { open, minimized, maximized, rect } = win;
 
-				if (height !== position[windowName].height - 50) {
-					y = height / 2 - position[windowName].height / 2;
-				} else {
-					y = height / 2 - 550 / 2;
-				}
+	const handleFocus = (e: MouseEvent) => {
+		// The title bar buttons act on the window themselves.
+		if ((e.target as Element).closest('.not_draggable')) return;
+		activate(windowId);
+	};
 
-				setPosition({
-					...position,
-					[windowName]: {
-						x: x,
-						y: y,
-						width: 880,
-						height: 550,
-					},
-				});
-			};
+	const toggleMaximize = () => setMaximized(windowId, !maximized);
 
-			if (
-				position[windowName].x === 0 &&
-				position[windowName].y === 0 &&
-				maximized[windowName] === null
-			) {
-				await getCenter();
-				setLoading(false);
-			} else {
-				setLoading(false);
-			}
-		})();
-	}, [maximized, position, setPosition, windowName]);
-
-	useEffect(() => {
-		if (loading) return;
-		if (maximized[windowName] === true) {
-			setLastPos({
-				x: position[windowName].x,
-				y: position[windowName].y,
-				width: position[windowName].width,
-				height: position[windowName].height,
-			});
-
-			setPosition({
-				...position,
-				[windowName]: {
-					x: 0,
-					y: 0,
-					width: window.innerWidth,
-					height: window.innerHeight - 50,
-				},
-			});
-		} else if (maximized[windowName] === false) {
-			setPosition({
-				...position,
-				[windowName]: {
-					x: lastPos.x,
-					y: lastPos.y,
-					width: lastPos.width,
-					height: lastPos.height,
-				},
-			});
-		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [maximized[windowName]]);
+	const isMoving = isDragging || isResizing;
 
 	return (
-		<AnimatePresence>
-			{!isClosing && !loading && (
+		// initial={false}: a window that is already open when this mounts
+		// (e.g. navigating between explorer folders) should not zoom in again.
+		<AnimatePresence initial={false}>
+			{open && rect && (
 				<Rnd
-					key={windowName}
+					key={windowId}
 					dragHandleClassName={'draggable'}
 					cancel={'.not_draggable'}
 					onDragStart={() => {
-						if (maximized[windowName]) {
-							setMaximized({ ...maximized, [windowName]: false });
-						}
+						if (maximized) setMaximized(windowId, false);
 						setIsDragging(true);
 					}}
 					onDragStop={(e, d) => {
-						setPosition({
-							...position,
-							[windowName]: {
-								...position[windowName],
-								x: d.x,
-								y: d.y,
-							},
-						});
+						setRect(windowId, { ...rect, x: d.x, y: d.y });
 						setIsDragging(false);
 					}}
-					onResize={(e, direction, ref, delta, pos) => {
-						if (maximized[windowName]) {
-							setMaximized({ ...maximized, [windowName]: false });
-						}
+					onResizeStart={() => {
+						if (maximized) setMaximized(windowId, false);
 						setIsResizing(true);
-						setPosition({
-							...position,
-							[windowName]: {
-								x: pos.x,
-								y: pos.y,
-								width: ref.offsetWidth,
-								height: ref.offsetHeight,
-							},
+					}}
+					onResize={(e, direction, ref, delta, pos) => {
+						setRect(windowId, {
+							x: pos.x,
+							y: pos.y,
+							width: ref.offsetWidth,
+							height: ref.offsetHeight,
 						});
 					}}
 					onResizeStop={() => {
 						setIsResizing(false);
 					}}
-					size={{
-						width: position[windowName].width || 880,
-						height: position[windowName].height || 550,
-					}}
-					position={{
-						x: position[windowName].x,
-						y: position[windowName].y,
-					}}
-					minWidth={880}
-					minHeight={550}
-					className={`${
-						isDragging || isResizing || loading
-							? ''
-							: styles.animatedWindow
-					}`}
-					style={
-						isDragging || isResizing || loading
-							? { zIndex: 997 }
-							: {
-									zIndex: windowPriority[windowName] || 10,
+					size={
+						maximized
+							? {
+									width: viewport.width,
+									height: viewport.height - TASKBAR_HEIGHT,
 								}
+							: { width: rect.width, height: rect.height }
 					}
+					position={
+						maximized ? { x: 0, y: 0 } : { x: rect.x, y: rect.y }
+					}
+					minWidth={DEFAULT_WIDTH}
+					minHeight={DEFAULT_HEIGHT}
+					className={isMoving ? '' : styles.animatedWindow}
+					style={{
+						zIndex: isMoving ? 997 : win.z,
+						pointerEvents: minimized ? 'none' : undefined,
+					}}
 					resizeHandleStyles={handleStyles}
 				>
 					<motion.div
-						onClick={(e) => handleClick(e, windowName)}
+						onMouseDown={handleFocus}
 						className={styles.container}
 						variants={variants}
 						animate={
-							maximized[windowName] ? 'maximized' : 'minimized'
+							minimized
+								? 'hidden'
+								: maximized
+									? 'maximized'
+									: 'restored'
 						}
-						initial={
-							history.length > 1 && windowName === 'fileExplorer'
-								? 'enterFromHistory'
-								: 'enterFresh'
-						}
+						initial="enterFresh"
 						exit={{ scale: 0 }}
 						transition={{ duration: 0.15 }}
 						style={
-							windowName === 'terminal'
+							windowId === 'terminal'
 								? { backgroundColor: 'transparent' }
 								: {}
 						}
 					>
 						<div className={styles.main}>
 							<nav>
-								<section className={`${styles.top} draggable`}>
-									{windowName === 'terminal' ? (
+								<section
+									className={`${styles.top} draggable`}
+									onDoubleClick={toggleMaximize}
+								>
+									{windowId === 'terminal' ? (
 										<>
 											<div
 												className={
@@ -344,18 +253,25 @@ function DraggableWindow({
 									<div
 										className={`${styles.iconContainer} not_draggable`}
 									>
-										<div className={styles.icon}>
+										<div
+											className={styles.icon}
+											onClick={() =>
+												minimizeWindow(windowId)
+											}
+										>
 											<VscChromeMinimize />
 										</div>
 										<div
 											className={styles.icon}
-											onClick={handleMaximize}
+											onClick={toggleMaximize}
 										>
 											<VscChromeMaximize />
 										</div>
 										<div
 											className={styles.iconClose}
-											onClick={handleClose}
+											onClick={() =>
+												closeWindow(windowId)
+											}
 										>
 											<VscChromeClose />
 										</div>

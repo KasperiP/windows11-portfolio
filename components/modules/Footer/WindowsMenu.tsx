@@ -7,6 +7,7 @@ import { useEffect, useRef } from 'react';
 import { AiOutlinePoweroff } from 'react-icons/ai';
 import { IoIosArrowForward } from 'react-icons/io';
 import { VscSearch } from 'react-icons/vsc';
+import { reopenIfCurrentRoute } from '../../../hooks/useWindowManager';
 import styles from './WindowsMenu.module.css';
 
 type Props = {
@@ -68,7 +69,11 @@ function WindowsMenu({ winMenu, handleWinMenu }: Props) {
 			variants={slideVerticalAnimation}
 			className={styles.overflow}
 		>
-			<div className={styles.winMenu} ref={node}>
+			<div
+				className={styles.winMenu}
+				ref={node}
+				onClickCapture={reopenIfCurrentRoute}
+			>
 				<div className={styles.winMenuContainer}>
 					<div className={styles.winMenuSearch}>
 						<div className={styles.inputWithIcon}>

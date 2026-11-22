@@ -2,18 +2,23 @@
 
 import Image from 'next/image';
 import { ChangeEvent, useState } from 'react';
+import { useWindowStore } from '../../../store/windows';
 import DraggableWindow from '../../utils/DraggableWindow/DraggableWindow';
 import styles from './Notepad.module.css';
 function Notepad({ initialText }: { initialText: string }) {
-	const [text, setText] = useState(initialText);
+	// Keyed on the window session so a relaunched Notepad shows the file
+	// again instead of the edits from before it was closed.
+	const session = useWindowStore((s) => s.windows.notepad.session);
+	const [edited, setEdited] = useState<{ session: number; text: string }>();
+	const text = edited?.session === session ? edited.text : initialText;
 
 	const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-		setText(e.target.value);
+		setEdited({ session, text: e.target.value });
 	};
 
 	return (
 		<DraggableWindow
-			windowName="notepad"
+			windowId="notepad"
 			topTitle="Notepad"
 			topIcon={
 				<Image

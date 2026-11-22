@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import Icons from '../components/modules/Icons/Icons';
 import { siteOpenGraph } from '../lib/metadata';
 
 const description =
@@ -17,10 +16,8 @@ export const metadata: Metadata = {
 	},
 };
 
+// The desktop itself (icons, taskbar) lives in the root Layout so it stays
+// mounted under every window; this route only carries the metadata for /.
 export default function Home() {
-	return (
-		<div style={{ height: '100%' }}>
-			<Icons />
-		</div>
-	);
+	return null;
 }

@@ -2,7 +2,6 @@ import { GoogleAnalytics } from '@next/third-parties/google';
 import type { Metadata, Viewport } from 'next';
 import { Open_Sans } from 'next/font/google';
 import Layout from '../components/layouts/Layout/Layout';
-import ContextProvider from '../context/ContextProvider';
 import { SITE_URL, siteOpenGraph } from '../lib/metadata';
 import '../styles/globals.css';
 
@@ -35,17 +34,29 @@ export const viewport: Viewport = {
 	themeColor: '#55FFFF',
 };
 
+// Each app is a parallel-route slot so its window stays mounted while another
+// app's route is active (see components/layouts/Layout).
 export default function RootLayout({
 	children,
+	explorer,
+	notepad,
+	terminal,
 }: {
 	children: React.ReactNode;
+	explorer: React.ReactNode;
+	notepad: React.ReactNode;
+	terminal: React.ReactNode;
 }) {
 	return (
 		<html lang="en" className={openSans.variable}>
 			<body>
-				<ContextProvider>
-					<Layout>{children}</Layout>
-				</ContextProvider>
+				<Layout
+					explorer={explorer}
+					notepad={notepad}
+					terminal={terminal}
+				>
+					{children}
+				</Layout>
 				{GA_ID && <GoogleAnalytics gaId={GA_ID} />}
 			</body>
 		</html>
