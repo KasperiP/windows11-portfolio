@@ -1,18 +1,53 @@
 'use client';
 
 import Image from 'next/image';
-import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { AiOutlineWifi } from 'react-icons/ai';
 import { FiVolume2 } from 'react-icons/fi';
+import { useWindowActions } from '../../../hooks/useWindowManager';
+import { WINDOWS, type WindowId } from '../../../lib/windows';
+import { useWindowStore } from '../../../store/windows';
 import type { ErrorType } from '../../../types';
 import Error from '../../windows/Error/Error';
+import { mediaIcon } from '../../windows/MediaPlayer/MediaPlayer';
 import styles from './Footer.module.css';
+import TaskbarItem from './TaskbarItem';
 import WindowsMenu from './WindowsMenu';
+
+type PinnedApp = { name: string; icon: string; windowId?: WindowId };
+
+// Apps without a windowId are decorative and open the "not found" error.
+const PINNED: PinnedApp[] = [
+	{
+		name: WINDOWS.fileExplorer.name,
+		icon: WINDOWS.fileExplorer.icon,
+		windowId: 'fileExplorer',
+	},
+	{ name: 'Firefox', icon: '/icons/firefox/firefox.png' },
+	{ name: 'Spotify', icon: '/icons/spotify/spotify.png' },
+	{ name: 'Steam', icon: '/icons/steam/steam.png' },
+	{ name: 'Discord', icon: '/icons/discord/discord.png' },
+	{
+		name: 'Visual Studio Code',
+		icon: '/icons/visualstudiocode/visualstudiocode.png',
+	},
+	{
+		name: WINDOWS.terminal.name,
+		icon: WINDOWS.terminal.icon,
+		windowId: 'terminal',
+	},
+];
 
 function Footer() {
 	const [winMenu, setWinMenu] = useState(false);
 	const [errors, setError] = useState([] as ErrorType[]);
+	const { taskbarClick } = useWindowActions();
+
+	// Running apps that aren't pinned get a button after the pinned ones,
+	// in the order they were opened.
+	const taskbarOrder = useWindowStore((s) => s.taskbarOrder);
+	const mediaKind = useWindowStore((s) => s.media?.kind);
+	const unpinned = taskbarOrder.filter((id) => !WINDOWS[id].pinned);
 
 	const handleError = (err: string) => {
 		setError([...errors, { error: err, index: errors.length }]);
@@ -68,85 +103,32 @@ function Footer() {
 							className="windowsIcon"
 						/>
 					</div>
-					<Link
-						href="/explorer/quick-access"
-						className={styles.icon}
-						draggable={false}
-					>
-						<Image
-							src={'/icons/explorer/explorer.png'}
-							width={25}
-							height={25}
-							alt="logo"
+					{PINNED.map((app) => (
+						<TaskbarItem
+							key={app.name}
+							name={app.name}
+							icon={app.icon}
+							windowId={app.windowId}
+							onClick={() =>
+								app.windowId
+									? taskbarClick(app.windowId)
+									: handleError(app.name)
+							}
 						/>
-					</Link>
-					<div
-						className={styles.icon}
-						onClick={() => handleError('Firefox')}
-					>
-						<Image
-							src={'/icons/firefox/firefox.png'}
-							width={25}
-							height={25}
-							alt="logo"
+					))}
+					{unpinned.map((id) => (
+						<TaskbarItem
+							key={id}
+							name={WINDOWS[id].name}
+							icon={
+								id === 'mediaPlayer' && mediaKind
+									? mediaIcon(mediaKind)
+									: WINDOWS[id].icon
+							}
+							windowId={id}
+							onClick={() => taskbarClick(id)}
 						/>
-					</div>
-					<div
-						className={styles.icon}
-						onClick={() => handleError('Spotify')}
-					>
-						<Image
-							src={'/icons/spotify/spotify.png'}
-							width={25}
-							height={25}
-							alt="logo"
-						/>
-					</div>
-					<div
-						className={styles.icon}
-						onClick={() => handleError('Steam')}
-					>
-						<Image
-							src={'/icons/steam/steam.png'}
-							width={25}
-							height={25}
-							alt="logo"
-						/>
-					</div>
-					<div
-						className={styles.icon}
-						onClick={() => handleError('Discord')}
-					>
-						<Image
-							src={'/icons/discord/discord.png'}
-							width={25}
-							height={25}
-							alt="logo"
-						/>
-					</div>
-					<div
-						className={styles.icon}
-						onClick={() => handleError('Visual Studio Code')}
-					>
-						<Image
-							src={'/icons/visualstudiocode/visualstudiocode.png'}
-							width={25}
-							height={25}
-							alt="logo"
-						/>
-					</div>
-					<Link
-						href="/terminal"
-						className={styles.icon}
-						draggable={false}
-					>
-						<Image
-							src={'/icons/terminal/terminal.png'}
-							width={25}
-							height={25}
-							alt="logo"
-						/>
-					</Link>
+					))}
 				</section>
 				<section className={styles.toolbarContainer}>
 					<div className={styles.language}>
