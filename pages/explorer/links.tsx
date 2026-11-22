@@ -122,6 +122,28 @@ function Links() {
 						<p className={styles.listItemType}>Shortcut</p>
 						<p className={styles.listItemSize}>2kt</p>
 					</Link>
+					<Link
+						href={'https://www.strava.com/athletes/113973880'}
+						className={styles.listItem}
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						<div className={styles.listItemName}>
+							<Image
+								src="/svg/strava.svg"
+								unoptimized
+								alt="icon"
+								width={18}
+								height={18}
+							></Image>
+							<p>Strava</p>
+						</div>
+						<p className={styles.listItemDateModified}>
+							22/11/2026 21:00
+						</p>
+						<p className={styles.listItemType}>Shortcut</p>
+						<p className={styles.listItemSize}>2kt</p>
+					</Link>
 				</div>
 			</>
 		);
